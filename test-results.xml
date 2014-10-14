@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<testsuites>
+  <testsuite name="PhantomJS 1.9.7 (Mac OS X)" package="" timestamp="2014-10-09T04:52:56" id="0" hostname="usegivesall-lm" tests="42" errors="1" failures="0" time="0">
+    <properties>
+      <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.7 Safari/534.34"/>
+    </properties>
+    <system-out><![CDATA[PhantomJS 1.9.7 (Mac OS X) DEBUG: 'DEBUG: -------------------------------'
+,PhantomJS 1.9.7 (Mac OS X) DEBUG: 'DEBUG: Ember      : 1.8.0-beta.1'
+,PhantomJS 1.9.7 (Mac OS X) DEBUG: 'DEBUG: Ember Data : 1.0.0-beta.9'
+,PhantomJS 1.9.7 (Mac OS X) DEBUG: 'DEBUG: Handlebars : 1.1.2'
+,PhantomJS 1.9.7 (Mac OS X) DEBUG: 'DEBUG: jQuery     : 2.1.1'
+,PhantomJS 1.9.7 (Mac OS X) DEBUG: 'DEBUG: -------------------------------'
+,PhantomJS 1.9.7 (Mac OS X) ERROR
+  Error: Called start() while already started (QUnit.config.semaphore was 0 already)
+  at /Users/adityash/Git/ember-utils/src/lib/qunit.js:166
+,PhantomJS 1.9.7 (Mac OS X) ERROR
+  Error: Called start() while already started (QUnit.config.semaphore was 0 already)
+  at /Users/adityash/Git/ember-utils/src/lib/qunit.js:166
+
+]]></system-out>
+    <system-err/>
+  </testsuite>
+</testsuites>

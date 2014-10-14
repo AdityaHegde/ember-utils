@@ -6,7 +6,8 @@ module.exports = {
       },
     },
     files: {
-      'prod/ember-utils.min.js': ['prod/ember-utils.js'],
+      'dist/ember-utils.min.js': ['dist/ember-utils.js'],
+      'build/templates.min.js' : 'build/templates.js',
     }
   }
 };

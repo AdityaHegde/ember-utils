@@ -1,0 +1,39 @@
+.lazy-display {
+  min-height:100px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height:calc(100% - 80px);
+}
+.lazy-display-height-wrapper {
+}
+.lazy-display-scroll-view {
+}
+.lazy-display-main {
+}
+
+.lazy-display-dummy-row {
+  height:30px;
+}
+.lazy-display-row {
+  height:30px;
+}
+
+.tree-node-leftbar {
+  display:inline-block;
+  vertical-align:top;
+  font-size: 10px;
+  margin: 14px 10px 0 10px;
+}
+.tree-node-leftbar.leaf-node {
+  margin-right: 20px;
+}
+.tree-node-leftbar a {
+}
+.tree-node-leftbar a:hover {
+  text-decoration:none;
+}
+.tree-node-main {
+  width:calc(100% - 32px);
+  display:inline-block;
+  vertical-align:top;
+}

@@ -1,3 +1,9 @@
 default:
-  - 'concat'
+  - 'concat:dist'
+  - 'emberTemplates:compile'
   - 'uglify'
+
+build_test:
+  - 'concat:dist'
+  - 'concat:test'
+  - 'emberTemplates:compile_dev'

@@ -1,6 +1,10 @@
 module.exports = {
   dist : {
-    src : ["src/main/ember-utils.js", "src/main/async-que.js", "src/main/lazy-display.js", "src/main/alerts.js", "src/main/panels.js", "src/main/form.js", "src/main/collapsibles.js", "src/main/listgroups.js", "src/main/tooltips.js", "src/main/carousel.js", "src/main/dragdrop.js", "src/main/array-modifier.js", "src/main/column-data.js", "src/main/progress-bars.js", "src/main/fileupload.js", "src/main/modal.js", "src/main/crud-adapter.js", "src/main/model-wrapper.js", "src/main/popover.js", "src/main/panels.js"],
-    dest : "prod/ember-utils.js",
+    src : ["src/js/main/ember-utils.js", "src/js/main/async-que.js", "src/js/main/lazy-display.js", "src/js/main/alerts.js", "src/js/main/alerts.js", "src/js/main/panels.js", "src/js/main/form.js", "src/js/main/collapsibles.js", "src/js/main/listgroups.js", "src/js/main/tooltips.js", "src/js/main/carousel.js", "src/js/main/dragdrop.js", "src/js/main/array-modifier.js", "src/js/main/column-data.js", "src/js/main/progress-bars.js", "src/js/main/fileupload.js", "src/js/main/modal.js", "src/js/main/crud-adapter.js", "src/js/main/model-wrapper.js", "src/js/main/popover.js"],
+    dest : "dist/ember-utils.js",
+  },
+  test : {
+    src : ["test/mockapis.js", "test/test-utils.js", "test/test-init.js", "test/async-que-unit-test.js", "test/array-modifier-unit-test.js", "test/columndata-unit-test.js", "test/form-unit-test.js", "test/modal-unit-test.js", "test/crud-adaptor-unit-test.js"],
+    dest : "test/tests-merged.js",
   },
 };
