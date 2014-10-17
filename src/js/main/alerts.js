@@ -1,3 +1,10 @@
+/**
+ * Alert module for all stuff related to alerts.
+ *
+ * @module alerts
+ */
+
+
 Alerts = Ember.Namespace.create();
 Alerts.AlertTypeMap = {
   info : {
@@ -17,14 +24,39 @@ Alerts.AlertTypeMap = {
     glyphiconClass : 'glyphicon-exclamation-sign',
   },
 };
+
+/**
+ * Component for alert message.
+ * Usage : 
+ *
+ *     {{alert-message type="info" title="Title" message="Message"}}
+ *
+ * @class Alerts.AlertMessage
+ */
 Alerts.AlertMessage = Ember.Component.extend({
+  /**
+   * Type of alert message. Possible values are "success", "warning", "info", "error"
+   *
+   * @property type
+   * @type String
+   * @default "error"
+   */
   type : 'error',
-  typeData : function() {
-    var type = this.get("type");
-    return Alerts.AlertTypeMap[type] || Alerts.AlertTypeMap.error;
-  }.property('type'),
+
+  /**
+   * Title of the alert message.
+   *
+   * @property title
+   * @type String
+   */
   title : "",
-  classNameBindings : ["view.showAlert:hidden"],
+
+  /**
+   * Alert message.
+   *
+   * @property message
+   * @type String
+   */
   message : function(key, value) {
     if(arguments.length > 1) {
       if(!Ember.isEmply(value)) {
@@ -36,6 +68,14 @@ Alerts.AlertMessage = Ember.Component.extend({
       return value;
     }
   },
+
+  typeData : function() {
+    var type = this.get("type");
+    return Alerts.AlertTypeMap[type] || Alerts.AlertTypeMap.error;
+  }.property('type'),
+
+  classNameBindings : ["view.showAlert:hidden"],
+
   showAlert : false,
 
   click : function(event) {

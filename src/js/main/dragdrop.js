@@ -1,9 +1,19 @@
+/**
+ * A drag drop module for all operations related to drag and drop. Uses html5 drag drop feature.
+ *
+ * @module drag-drop
+ */
 DragDrop = Ember.Namespace.create();
 //temp solution for chrome's buggy event.dataTransfer, v31.x.x
 DragDrop.VIEW_ID = "";
 DragDrop.MOVE_THRESHOLD = 2;
 
-DragDrop.DragableMixin = Ember.Mixin.create({
+/**
+ * A draggable mixin when included enables the view to be dragged.
+ *
+ * @class DragDrop.DraggableMixin
+ */
+DragDrop.DraggableMixin = Ember.Mixin.create({
   classNames : ['dragdrop-draggable'],
 
   attributeBindings : 'draggable',
@@ -17,12 +27,30 @@ DragDrop.DragableMixin = Ember.Mixin.create({
     event.stopPropagation();
   },
 
+  /**
+   * A callback method that is called when a drag starts.
+   *
+   * @method dragStartCallback
+   * @param {Object} event The event object of the dragStart event.
+   */
   dragStartCallback : function(event) {
   },
 
+  /**
+   * Targets that are allowed to be dropped on. Can be a selector or an array of selectors.
+   *
+   * @property allowedDropTargets
+   * @type String|Array
+   * @default '.dragdrop-droppable'
+   */
   allowedDropTargets : '.dragdrop-droppable',
 });
 
+/**
+ * A droppable mixin when included enables the view to be dropped on.
+ *
+ * @class DragDrop.DroppableMixin
+ */
 DragDrop.DroppableMixin = Ember.Mixin.create({
   classNames : ['dragdrop-droppable'],
 
@@ -74,22 +102,72 @@ DragDrop.DroppableMixin = Ember.Mixin.create({
     event.preventDefault();
   },
 
+  /**
+   * A callback method that is called when the view being dragged enters this view.
+   *
+   * @method dragEnterCallback
+   * @param {Object} event The event object of the dragStart event.
+   * @param {Class} dragView The view being dragged.
+   * @param {Class} dragEle The element being dragged.
+   * @param {Class} dropView The view being dropped on.
+   * @param {Class} dropEle The element being dropped on.
+   */
   dragEnterCallback : function(event, dragView, dragEle, dropView, dropEle) {
   },
+
+  /**
+   * A callback method that is called when the view being dragged is over this view.
+   *
+   * @method dragOverCallback
+   * @param {Object} event The event object of the dragStart event.
+   * @param {Class} dragView The view being dragged.
+   * @param {Class} dragEle The element being dragged.
+   * @param {Class} dropView The view being dropped on.
+   * @param {Class} dropEle The element being dropped on.
+   */
   dragOverCallback : function(event, dragView, dragEle, dropView, dropEle) {
   },
+
+  /**
+   * A callback method that is called when the view being dragged leaves this view.
+   *
+   * @method dragLeaveCallback
+   * @param {Object} event The event object of the dragStart event.
+   * @param {Class} dragView The view being dragged.
+   * @param {Class} dragEle The element being dragged.
+   * @param {Class} dropView The view being dropped on.
+   * @param {Class} dropEle The element being dropped on.
+   */
   dragLeaveCallback : function(event, dragView, dragEle, dropView, dropEle) {
   },
+
+  /**
+   * A callback method that is called when the view being dragged is dropped on this view.
+   *
+   * @method dropCallback
+   * @param {Object} event The event object of the dragStart event.
+   * @param {Class} dragView The view being dragged.
+   * @param {Class} dragEle The element being dragged.
+   * @param {Class} dropView The view being dropped on.
+   * @param {Class} dropEle The element being dropped on.
+   */
   dropCallback : function(event, dragView, dragEle, dropView, dropEle) {
   },
 
+  /**
+   * Accept drops from elements passing the selectors. Can be a single selectors or an array of it.
+   *
+   * @property acceptDropFrom
+   * @type String|Array
+   * @default '.dragdrop-draggable'
+   */
   acceptDropFrom : '.dragdrop-draggable',
 });
 
 
 /***   Sortable Module   ***/
 
-DragDrop.SortableDraggableMixin = Ember.Mixin.create(DragDrop.DragableMixin, DragDrop.DroppableMixin, {
+DragDrop.SortableDraggableMixin = Ember.Mixin.create(DragDrop.DraggableMixin, DragDrop.DroppableMixin, {
   init : function() {
     this._super();
     this.set("lastXY", [0, 0]);
@@ -313,7 +391,7 @@ DragDrop.SortableDroppableMixin = Ember.Mixin.create(DragDrop.DroppableMixin, {
   isPlaceholder : false,
 });
 
-DragDrop.SortablePlaceholderMixin = Ember.Mixin.create(DragDrop.DragableMixin, DragDrop.DroppableMixin, {
+DragDrop.SortablePlaceholderMixin = Ember.Mixin.create(DragDrop.DraggableMixin, DragDrop.DroppableMixin, {
   init : function() {
     this._super();
   },

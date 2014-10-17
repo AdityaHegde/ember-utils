@@ -1,5 +1,34 @@
 DemoApp.ColumnData = [
   {
+    columns : [
+      {
+        name : "vara",
+        list : {
+          moduleType : "title",
+          viewType : "displayText",
+        },
+      },
+      {
+        name : "varb",
+        list : {
+          moduleType : "desc",
+          viewType : "displayText",
+        },
+      },
+      {
+        name : "varc",
+        list : {
+          moduleType : "rightBlock",
+          viewType : "displayText",
+        },
+      },
+    ],
+    list : {
+      viewType : "base",
+    },
+    name : "listTest",
+  },
+  {
     name : "formTest",
     columns : [
       {
@@ -123,19 +152,29 @@ DemoApp.ColumnData = [
       {
         name : "name",
         panel : {
-          type : "heading",
+          moduleType : "heading",
+          viewType : "displayTextCollapsible",
         },
       },
       {
         name : "desc",
         panel : {
-          type : "body",
+          moduleType : "body",
+          viewType : "displayText",
         },
       },
     ],
     panel : {
-      type : "collapsible",
-      headingType : "collapsible",
+      viewType : "collapsible",
+      headingType : "displayTextCollapsible",
+    },
+  },
+  {
+    name : "lazyDisplayTest",
+    columns : [],
+    lazyDisplay : {
+      lazyDisplayMainClass : "DemoApp.LazyDisplayMain",
+      rowHeight : 30,
     },
   },
 ];

@@ -200,7 +200,7 @@ Form.TextInputView = Ember.View.extend({
       var that = this;
       //The delay is added cos destroy on the view of removed record is called before it is actually removed from array
       //TODO : find a better way to do this check
-      AsyncQue.addToQue("duplicateCheck-"+Utils.getEmberId(this), 100).then(function() {
+      Timer.addToQue("duplicateCheck-"+Utils.getEmberId(this), 100).then(function() {
         if(!that.get("isDestroyed")) {
           that.validateValue(that.get("val"));
         }
@@ -798,7 +798,7 @@ Form.CSVDataInputView = Form.FileUploadView.extend(Form.MultipleValueMixin, {
                                         '{{view.fileName}} ({{view.valuesCount}} {{view.col.form.entityPlural}})' +
                                         '<button class="btn btn-link" {{action "remove" target="view"}}>Remove</button> | ' +
                                         '<button class="btn btn-link" {{action "replace" target="view"}}>Replace</button>' +
-                                        '{{view LazyDisplay.LazyDisplay classNameBindings=":form-sm :csv-values-wrapper" lazyDisplayConfig=view.lazyDisplayConfig rows=view.valuesTransformed}}' +
+                                        '{{view "lazyDisplay/lazyDisplay" classNameBindings=":form-sm :csv-values-wrapper" columnDataGroup=view.columnDataGroup rows=view.valuesTransformed}}' +
                                       '{{else}}' +
                                         '{{textarea class="form-control" autofocus="view.col.form.autofocus" value=view.csvVal rows=view.col.rows cols=view.col.cols ' +
                                                                         'placeholder=view.col.form.placeholderActual maxlength=view.col.form.maxlength ' +
@@ -810,10 +810,10 @@ Form.CSVDataInputView = Form.FileUploadView.extend(Form.MultipleValueMixin, {
                                       '<input class="hidden" type="file" name="files[]" {{bind-attr accept="view.col.form.accept"}}>' +
                                       ''),
 
-  lazyDisplayConfig : LazyDisplay.LazyDisplayConfig.create({
+  /*lazyDisplayConfig : LazyDisplay.LazyDisplayConfig.create({
     rowHeight : 28,
     lazyDisplayMainClass : "Form.CSVDateValues",
-  }),
+  }),*/
   hasFile : false,
 
   values : Utils.hasMany(Form.CSVEntry),
@@ -842,7 +842,7 @@ Form.CSVDataInputView = Form.FileUploadView.extend(Form.MultipleValueMixin, {
     var col = this.get("col"), that = this;
     if(arguments.length > 1) {
       //calculate 'values' after a delay to avoid multiple calcuations for every keystroke
-      AsyncQue.addToQue("csvvalues-"+col.get("name"), 1500).then(function() {
+      Timer.addToQue("csvvalues-"+col.get("name"), 1500).then(function() {
         if(!that.get("isDestroyed")) {
           that.setToValues(value);
         }

@@ -114,6 +114,41 @@ Utils.belongsTo = function(modelClass, modelClassMap, modelClassKey) {
   });
 };
 
+Utils.belongsToWithMixin = function(modelClass, modelClassMap, modelClassKey, mixinMap, mixinKey, defaultMixin) {
+  modelClass = modelClass || Ember.Object;
+  var hasInheritance = modelClassMap && modelClassKey,
+      hasMixin = mixinMap && mixinKey;
+  return Ember.computed(function(key, newval) {
+    if(Ember.typeOf(modelClass) == 'string') {
+      modelClass = Ember.get(modelClass);
+    }
+    if(Ember.typeOf(modelClassMap) == 'string') {
+      modelClassMap = Ember.get(modelClassMap);
+    }
+    if(Ember.typeOf(mixinMap) == 'string') {
+      mixinMap = Ember.get(mixinMap);
+    }
+    if(Ember.typeOf(defaultMixin) == 'string') {
+      defaultMixin = Ember.get(defaultMixin);
+    }
+    if(arguments.length > 1) {
+      if(newval) {
+        if(hasInheritance) modelClass = modelClassMap[newval[modelClassKey]];
+        if(!(newval instanceof modelClass)) {
+          if(hasMixin) {
+            newval = modelClass.createWithMixins(newval, mixinMap[newval[mixinKey]] || defaultMixin);
+          }
+          else {
+            newval = modelClass.create(newval);
+          }
+          newval.set("parentObj", this);
+        }
+      }
+      return newval;
+    }
+  });
+};
+
 Utils.HashMapArrayComputed = function(elementClass, keyForKey, keyForVal, dontBind) {
   return Ember.computed(function(key, newval) {
     if(arguments.length > 1) {

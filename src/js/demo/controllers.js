@@ -1,63 +1,26 @@
 DemoApp.IndexController = Ember.Controller.extend({
 });
 
-DemoApp.FormController = Ember.Controller.extend({
+DemoApp.DemoAppController = Ember.Controller.extend({
   init : function() {
     this._super();
-    this.set("columnDataGroup", ColumnData.Registry.retrieve("formTest", "columnDataGroup"));
+    this.set("columnDataGroup", ColumnData.Registry.retrieve(this.get("columnDataGroupName"), "columnDataGroup"));
   },
 
   columnDataGroup : null,
+  columnDataGroupName : "",
 });
 
-DemoApp.LazydisplayController = Ember.Controller.extend({
-  lazyDisplayConfig : LazyDisplay.LazyDisplayConfig.create({
-    lazyDisplayMainClass : Ember.ContainerView.extend(LazyDisplay.LazyDisplayMainMixin, {
-      getRowView : function(row) {
-        return Ember.View.createWithMixins(LazyDisplay.LazyDisplayRow, {
-          row : row,
-          template : Ember.Handlebars.compile('' +
-            '{{view.row.id}} : {{view.row.vara}} - {{view.row.varb}}' +
-          ''),
-        });
-      },
-      getDummyView : function(row) {
-        return Ember.View.createWithMixins(LazyDisplay.LazyDisplayDummyRow, {
-          row : row,
-          template : Ember.Handlebars.compile(''),
-        });
-      },
-    }),
-    rowHeight : 30,
-  }),
+DemoApp.FormController = DemoApp.DemoAppController.extend({
+  columnDataGroupName : "formTest",
 });
 
-DemoApp.ListgroupController = Ember.Controller.extend({
-  columnDataGroup : ColumnData.ColumnDataGroup.create({
-    columns : [
-      {
-        name : "vara",
-        list : {
-          type : "title",
-        },
-      },
-      {
-        name : "varb",
-        list : {
-          type : "desc",
-        },
-      },
-      {
-        name : "varc",
-        list : {
-          type : "rightBlock",
-        },
-      },
-    ],
-    list : {
-    },
-    name : "listTest",
-  }),
+DemoApp.LazydisplayController = DemoApp.DemoAppController.extend({
+  columnDataGroupName : "lazyDisplayTest",
+});
+
+DemoApp.ListgroupController = DemoApp.DemoAppController.extend({
+  columnDataGroupName : "listTest",
 });
 
 DemoApp.TreeController = Ember.Controller.extend({
@@ -69,13 +32,22 @@ DemoApp.TreeController = Ember.Controller.extend({
         {
           name : "name",
           tree : {
-            type : "label",
+            moduleType : "label",
+            viewType : "displayText",
           },
         },
         {
           name : "nodeType",
           tree : {
-            type : "node",
+            moduleType : "node",
+            viewType : "leaf",
+          },
+        },
+        {
+          name : "leftBar",
+          tree : {
+            moduleType : "leftBar",
+            viewType : "displayTextCollapsibleGlypicon",
           },
         },
       ],
@@ -89,38 +61,39 @@ DemoApp.TreeController = Ember.Controller.extend({
       {
         name : "name",
         tree : {
-          type : "label",
+          moduleType : "label",
+          viewType : "displayText",
         },
       },
       {
         name : "nodeType",
         tree : {
-          type : "node",
+          moduleType : "node",
+          viewType : "node",
+        },
+      },
+      {
+        name : "leftBar",
+        tree : {
+          moduleType : "leftBar",
+          viewType : "displayTextCollapsibleGlypicon",
         },
       },
     ],
     tree : {
+      nodeType : "node",
+      leftBarType : "displayTextCollapsibleGlypicon",
     },
     name : "treeTestNode",
   }),
 });
 
-DemoApp.DragdropController = Ember.Controller.extend({
-  init : function() {
-    this._super();
-    this.set("columnDataGroup", ColumnData.Registry.retrieve("sortTest", "columnDataGroup"));
-  },
-
-  columnDataGroup : null
+DemoApp.DragdropController = DemoApp.DemoAppController.extend({
+  columnDataGroupName : "sortTest",
 });
 
-DemoApp.PanelsController = Ember.Controller.extend({
-  init : function() {
-    this._super();
-    this.set("columnDataGroup", ColumnData.Registry.retrieve("panelTest", "columnDataGroup"));
-  },
-
-  columnDataGroup : null,
+DemoApp.PanelsController = DemoApp.DemoAppController.extend({
+  columnDataGroupName : "panelTest",
 
   standAlonePanel : Ember.Object.create({
     name : "Stand Alone",

@@ -37,7 +37,7 @@ Ember.TEMPLATES["form"] = Ember.Handlebars.compile('' +
 '');
 
 Ember.TEMPLATES["lazydisplay"] = Ember.Handlebars.compile('' +
-  '{{view "lazyDisplay/lazyDisplay" class="col-md-4" lazyDisplayConfig=lazyDisplayConfig rows=model}} ' +
+  '{{view "lazyDisplay/lazyDisplay" class="col-md-4" columnDataGroup=columnDataGroup rows=model}} ' +
 '');
 
 Ember.TEMPLATES["listgroup"] = Ember.Handlebars.compile('' +

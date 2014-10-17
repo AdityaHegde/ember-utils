@@ -1,0 +1,1824 @@
+{
+    "project": {},
+    "files": {
+        "src/js/main/alerts.js": {
+            "name": "src/js/main/alerts.js",
+            "modules": {
+                "alerts": 1
+            },
+            "classes": {
+                "Alerts.AlertMessage": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/main/app-wrapper.js": {
+            "name": "src/js/main/app-wrapper.js",
+            "modules": {
+                "app-wrapper": 1
+            },
+            "classes": {
+                "AppWrapper.AppWrapper": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/main/column-data.js": {
+            "name": "src/js/main/column-data.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/main/dragdrop.js": {
+            "name": "src/js/main/dragdrop.js",
+            "modules": {
+                "drag-drop": 1
+            },
+            "classes": {
+                "DragDrop.DraggableMixin": 1,
+                "DragDrop.DroppableMixin": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/main/form.js": {
+            "name": "src/js/main/form.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/main/global-module.js": {
+            "name": "src/js/main/global-module.js",
+            "modules": {
+                "global-module": 1,
+                "global-module-view": 1,
+                "global-module-column-data": 1
+            },
+            "classes": {
+                "GlobalModules.DisplayTextView": 1,
+                "GlobalModules.DisplayTextWithTooltipView": 1,
+                "GlobalModules.DisplayTextCollapsibleView": 1,
+                "GlobalModules.DisplayTextCollapsibleGlypiconView": 1,
+                "GlobalModules.GlobalModuleColumnDataGroupMixin": 1,
+                "GlobalModules.DisplayTextColumnDataMixin": 1,
+                "GlobalModules.DisplayTextWithTooltipColumnDataMixin": 1,
+                "GlobalModules.DisplayTextCollapsibleColumnDataMixin": 1,
+                "GlobalModules.DisplayTextCollapsibleGlypiconColumnDataMixin": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/main/lazy-display.js": {
+            "name": "src/js/main/lazy-display.js",
+            "modules": {
+                "lazy-display": 1
+            },
+            "classes": {
+                "LazyDisplay.LazyDisplayColumnDataGroup": 1,
+                "LazyDisplay.LazyDisplayView": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/main/listgroups.js": {
+            "name": "src/js/main/listgroups.js",
+            "modules": {
+                "list-group": 1,
+                "list-item": 1,
+                "list-column-data": 1
+            },
+            "classes": {
+                "ListGroup.ListGroupView": 1,
+                "ListGroup.ListItemView": 1,
+                "ListGroup.ListColumnDataGroup": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/main/panels.js": {
+            "name": "src/js/main/panels.js",
+            "modules": {
+                "panels": 1,
+                "panel-views": 1,
+                "panel-column-data": 1
+            },
+            "classes": {
+                "ListGroup.ListColumnData": 1,
+                "Panels.PanelsView": 1,
+                "Panels.PanelView": 1,
+                "Panels.PanelCollapsibleView": 1,
+                "Panels.PanelColumnDataGroup": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/main/timer.js": {
+            "name": "src/js/main/timer.js",
+            "modules": {
+                "timer": 1
+            },
+            "classes": {
+                "Timer.AsyncQue": 1,
+                "Timer.Timer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/main/trees.js": {
+            "name": "src/js/main/trees.js",
+            "modules": {
+                "tree": 1,
+                "tree-nodes": 1,
+                "tree-column-data": 1
+            },
+            "classes": {
+                "Tree.NodeRecordMixin": 1,
+                "Tree.NodeView": 1,
+                "Tree.LeafView": 1,
+                "Tree.TreeColumnDataGroup": 1,
+                "Tree.TreeColumnData": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "alerts": {
+            "name": "alerts",
+            "submodules": {},
+            "classes": {
+                "Alerts.AlertMessage": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/js/main/alerts.js",
+            "line": 28,
+            "description": "Alert module for all stuff related to alerts."
+        },
+        "app-wrapper": {
+            "name": "app-wrapper",
+            "submodules": {},
+            "classes": {
+                "AppWrapper.AppWrapper": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/js/main/app-wrapper.js",
+            "line": 9,
+            "description": "A module for wrapper over Ember.Application which initializes a few things automatically"
+        },
+        "drag-drop": {
+            "name": "drag-drop",
+            "submodules": {},
+            "classes": {
+                "DragDrop.DraggableMixin": 1,
+                "DragDrop.DroppableMixin": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/js/main/dragdrop.js",
+            "line": 49,
+            "description": "A drag drop module for all operations related to drag and drop. Uses html5 drag drop feature."
+        },
+        "global-module": {
+            "name": "global-module",
+            "submodules": {
+                "global-module-view": 1,
+                "global-module-column-data": 1
+            },
+            "classes": {
+                "GlobalModules.DisplayTextView": 1,
+                "GlobalModules.DisplayTextWithTooltipView": 1,
+                "GlobalModules.DisplayTextCollapsibleView": 1,
+                "GlobalModules.DisplayTextCollapsibleGlypiconView": 1,
+                "GlobalModules.GlobalModuleColumnDataGroupMixin": 1,
+                "GlobalModules.DisplayTextColumnDataMixin": 1,
+                "GlobalModules.DisplayTextWithTooltipColumnDataMixin": 1,
+                "GlobalModules.DisplayTextCollapsibleColumnDataMixin": 1,
+                "GlobalModules.DisplayTextCollapsibleGlypiconColumnDataMixin": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/js/main/global-module.js",
+            "line": 266,
+            "description": "Global modules for certain tasks like displaying an attribute from the record."
+        },
+        "global-module-view": {
+            "name": "global-module-view",
+            "submodules": {},
+            "classes": {
+                "GlobalModules.DisplayTextView": 1,
+                "GlobalModules.DisplayTextWithTooltipView": 1,
+                "GlobalModules.DisplayTextCollapsibleView": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "global-module",
+            "namespace": "",
+            "file": "src/js/main/global-module.js",
+            "line": 62,
+            "description": "Views for the global modules."
+        },
+        "global-module-column-data": {
+            "name": "global-module-column-data",
+            "submodules": {},
+            "classes": {
+                "GlobalModules.DisplayTextCollapsibleGlypiconView": 1,
+                "GlobalModules.GlobalModuleColumnDataGroupMixin": 1,
+                "GlobalModules.DisplayTextColumnDataMixin": 1,
+                "GlobalModules.DisplayTextWithTooltipColumnDataMixin": 1,
+                "GlobalModules.DisplayTextCollapsibleColumnDataMixin": 1,
+                "GlobalModules.DisplayTextCollapsibleGlypiconColumnDataMixin": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "global-module",
+            "namespace": "",
+            "file": "src/js/main/global-module.js",
+            "line": 266,
+            "description": "Column Data Interface or the global modules."
+        },
+        "lazy-display": {
+            "name": "lazy-display",
+            "submodules": {},
+            "classes": {
+                "LazyDisplay.LazyDisplayColumnDataGroup": 1,
+                "LazyDisplay.LazyDisplayView": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/js/main/lazy-display.js",
+            "line": 71,
+            "description": "A module to selective load views for a very large set of records. Will load the views around the point of view."
+        },
+        "list-group": {
+            "name": "list-group",
+            "submodules": {
+                "list-item": 1,
+                "list-column-data": 1
+            },
+            "classes": {
+                "ListGroup.ListGroupView": 1,
+                "ListGroup.ListItemView": 1,
+                "ListGroup.ListColumnDataGroup": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/js/main/listgroups.js",
+            "line": 102,
+            "description": "An ember wrapper module for bootstrap's list group component."
+        },
+        "list-item": {
+            "name": "list-item",
+            "submodules": {},
+            "classes": {
+                "ListGroup.ListGroupView": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "list-group",
+            "namespace": "",
+            "file": "src/js/main/listgroups.js",
+            "line": 10,
+            "description": "Different list item views."
+        },
+        "list-column-data": {
+            "name": "list-column-data",
+            "submodules": {},
+            "classes": {
+                "ListGroup.ListItemView": 1,
+                "ListGroup.ListColumnDataGroup": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "list-group",
+            "namespace": "",
+            "file": "src/js/main/listgroups.js",
+            "line": 102,
+            "description": "Column data interface for list item views."
+        },
+        "panels": {
+            "name": "panels",
+            "submodules": {
+                "panel-views": 1,
+                "panel-column-data": 1
+            },
+            "classes": {
+                "ListGroup.ListColumnData": 1,
+                "Panels.PanelsView": 1,
+                "Panels.PanelView": 1,
+                "Panels.PanelCollapsibleView": 1,
+                "Panels.PanelColumnDataGroup": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/js/main/panels.js",
+            "line": 146,
+            "description": "An ember wrapper module for bootstrap's list group component."
+        },
+        "panel-views": {
+            "name": "panel-views",
+            "submodules": {},
+            "classes": {
+                "Panels.PanelsView": 1,
+                "Panels.PanelView": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "panels",
+            "namespace": "",
+            "file": "src/js/main/panels.js",
+            "line": 52,
+            "description": "Different panel views."
+        },
+        "panel-column-data": {
+            "name": "panel-column-data",
+            "submodules": {},
+            "classes": {
+                "ListGroup.ListColumnData": 1,
+                "Panels.PanelCollapsibleView": 1,
+                "Panels.PanelColumnDataGroup": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "panels",
+            "namespace": "",
+            "file": "src/js/main/panels.js",
+            "line": 146,
+            "description": "Column data interface for panels."
+        },
+        "timer": {
+            "name": "timer",
+            "submodules": {},
+            "classes": {
+                "Timer.AsyncQue": 1,
+                "Timer.Timer": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/js/main/timer.js",
+            "line": 131,
+            "description": "Timer module with stuff related to timers."
+        },
+        "tree": {
+            "name": "tree",
+            "submodules": {
+                "tree-nodes": 1,
+                "tree-column-data": 1
+            },
+            "classes": {
+                "Tree.NodeRecordMixin": 1,
+                "Tree.NodeView": 1,
+                "Tree.LeafView": 1,
+                "Tree.TreeColumnDataGroup": 1,
+                "Tree.TreeColumnData": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/js/main/trees.js",
+            "line": 175,
+            "description": "Module to show record in a tree format."
+        },
+        "tree-nodes": {
+            "name": "tree-nodes",
+            "submodules": {},
+            "classes": {
+                "Tree.NodeRecordMixin": 1,
+                "Tree.NodeView": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "tree",
+            "namespace": "",
+            "file": "src/js/main/trees.js",
+            "line": 41,
+            "description": "Different node views."
+        },
+        "tree-column-data": {
+            "name": "tree-column-data",
+            "submodules": {},
+            "classes": {
+                "Tree.LeafView": 1,
+                "Tree.TreeColumnDataGroup": 1,
+                "Tree.TreeColumnData": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "tree",
+            "namespace": "",
+            "file": "src/js/main/trees.js",
+            "line": 175,
+            "description": "Column data interface for tree."
+        }
+    },
+    "classes": {
+        "Alerts.AlertMessage": {
+            "name": "Alerts.AlertMessage",
+            "shortname": "Alerts.AlertMessage",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "alerts",
+            "namespace": "",
+            "file": "src/js/main/alerts.js",
+            "line": 28,
+            "description": "Component for alert message.\nUsage : \n\n    {{alert-message type=\"info\" title=\"Title\" message=\"Message\"}}"
+        },
+        "AppWrapper.AppWrapper": {
+            "name": "AppWrapper.AppWrapper",
+            "shortname": "AppWrapper.AppWrapper",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "app-wrapper",
+            "namespace": "",
+            "file": "src/js/main/app-wrapper.js",
+            "line": 9,
+            "description": "A wrapper class over Ember.Application which initializes CrudAdapter and ColumnData."
+        },
+        "DragDrop.DraggableMixin": {
+            "name": "DragDrop.DraggableMixin",
+            "shortname": "DragDrop.DraggableMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "drag-drop",
+            "namespace": "",
+            "file": "src/js/main/dragdrop.js",
+            "line": 11,
+            "description": "A draggable mixin when included enables the view to be dragged."
+        },
+        "DragDrop.DroppableMixin": {
+            "name": "DragDrop.DroppableMixin",
+            "shortname": "DragDrop.DroppableMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "drag-drop",
+            "namespace": "",
+            "file": "src/js/main/dragdrop.js",
+            "line": 49,
+            "description": "A droppable mixin when included enables the view to be dropped on."
+        },
+        "GlobalModules.DisplayTextView": {
+            "name": "GlobalModules.DisplayTextView",
+            "shortname": "GlobalModules.DisplayTextView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "global-module",
+            "submodule": "global-module-view",
+            "namespace": "",
+            "file": "src/js/main/global-module.js",
+            "line": 17,
+            "description": "Module for a simple display of text."
+        },
+        "GlobalModules.DisplayTextWithTooltipView": {
+            "name": "GlobalModules.DisplayTextWithTooltipView",
+            "shortname": "GlobalModules.DisplayTextWithTooltipView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "global-module",
+            "submodule": "global-module-view",
+            "namespace": "",
+            "file": "src/js/main/global-module.js",
+            "line": 47,
+            "description": "Module for a simple display of text with tooltip."
+        },
+        "GlobalModules.DisplayTextCollapsibleView": {
+            "name": "GlobalModules.DisplayTextCollapsibleView",
+            "shortname": "GlobalModules.DisplayTextCollapsibleView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "global-module",
+            "submodule": "global-module-view",
+            "namespace": "",
+            "file": "src/js/main/global-module.js",
+            "line": 62,
+            "description": "Module for a simple display of text with tooltip with connection to a collapsible module."
+        },
+        "GlobalModules.DisplayTextCollapsibleGlypiconView": {
+            "name": "GlobalModules.DisplayTextCollapsibleGlypiconView",
+            "shortname": "GlobalModules.DisplayTextCollapsibleGlypiconView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "global-module",
+            "submodule": "global-module-column-data",
+            "namespace": "",
+            "file": "src/js/main/global-module.js",
+            "line": 84,
+            "description": "Module for a simple display of text with tooltip with connection to a collapsible module."
+        },
+        "GlobalModules.GlobalModuleColumnDataGroupMixin": {
+            "name": "GlobalModules.GlobalModuleColumnDataGroupMixin",
+            "shortname": "GlobalModules.GlobalModuleColumnDataGroupMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "global-module",
+            "submodule": "global-module-column-data",
+            "namespace": "",
+            "file": "src/js/main/global-module.js",
+            "line": 125,
+            "description": "Column Data Group for global modules."
+        },
+        "GlobalModules.DisplayTextColumnDataMixin": {
+            "name": "GlobalModules.DisplayTextColumnDataMixin",
+            "shortname": "GlobalModules.DisplayTextColumnDataMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "global-module",
+            "submodule": "global-module-column-data",
+            "namespace": "",
+            "file": "src/js/main/global-module.js",
+            "line": 206,
+            "description": "Column Data for display text module."
+        },
+        "GlobalModules.DisplayTextWithTooltipColumnDataMixin": {
+            "name": "GlobalModules.DisplayTextWithTooltipColumnDataMixin",
+            "shortname": "GlobalModules.DisplayTextWithTooltipColumnDataMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "global-module",
+            "submodule": "global-module-column-data",
+            "namespace": "",
+            "file": "src/js/main/global-module.js",
+            "line": 232,
+            "description": "Column Data for display text with tooltip module."
+        },
+        "GlobalModules.DisplayTextCollapsibleColumnDataMixin": {
+            "name": "GlobalModules.DisplayTextCollapsibleColumnDataMixin",
+            "shortname": "GlobalModules.DisplayTextCollapsibleColumnDataMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "global-module",
+            "submodule": "global-module-column-data",
+            "namespace": "",
+            "file": "src/js/main/global-module.js",
+            "line": 257,
+            "description": "Column Data for display text collapsible module."
+        },
+        "GlobalModules.DisplayTextCollapsibleGlypiconColumnDataMixin": {
+            "name": "GlobalModules.DisplayTextCollapsibleGlypiconColumnDataMixin",
+            "shortname": "GlobalModules.DisplayTextCollapsibleGlypiconColumnDataMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "global-module",
+            "submodule": "global-module-column-data",
+            "namespace": "",
+            "file": "src/js/main/global-module.js",
+            "line": 266,
+            "description": "Column Data for display text collapsible module."
+        },
+        "LazyDisplay.LazyDisplayColumnDataGroup": {
+            "name": "LazyDisplay.LazyDisplayColumnDataGroup",
+            "shortname": "LazyDisplay.LazyDisplayColumnDataGroup",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "lazy-display",
+            "namespace": "",
+            "file": "src/js/main/lazy-display.js",
+            "line": 10,
+            "description": "A column data group for the lazy display module."
+        },
+        "LazyDisplay.LazyDisplayView": {
+            "name": "LazyDisplay.LazyDisplayView",
+            "shortname": "LazyDisplay.LazyDisplayView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "lazy-display",
+            "namespace": "",
+            "file": "src/js/main/lazy-display.js",
+            "line": 71,
+            "description": "Main view to be used in the templates."
+        },
+        "ListGroup.ListGroupView": {
+            "name": "ListGroup.ListGroupView",
+            "shortname": "ListGroup.ListGroupView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "list-group",
+            "namespace": "",
+            "file": "src/js/main/listgroups.js",
+            "line": 10,
+            "description": "A view for a list of records.",
+            "submodule": "list-item"
+        },
+        "ListGroup.ListItemView": {
+            "name": "ListGroup.ListItemView",
+            "shortname": "ListGroup.ListItemView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "list-group",
+            "submodule": "list-column-data",
+            "namespace": "",
+            "file": "src/js/main/listgroups.js",
+            "line": 51,
+            "description": "Basic list item view."
+        },
+        "ListGroup.ListColumnDataGroup": {
+            "name": "ListGroup.ListColumnDataGroup",
+            "shortname": "ListGroup.ListColumnDataGroup",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "list-group",
+            "submodule": "list-column-data",
+            "namespace": "",
+            "file": "src/js/main/listgroups.js",
+            "line": 102,
+            "description": "A column data group for the list group module."
+        },
+        "ListGroup.ListColumnData": {
+            "name": "ListGroup.ListColumnData",
+            "shortname": "ListGroup.ListColumnData",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "panels",
+            "submodule": "panel-column-data",
+            "namespace": "",
+            "file": "src/js/main/panels.js",
+            "line": 183,
+            "description": "Column data for the list group modules (title, rightBlock or desc based on 'type')"
+        },
+        "Panels.PanelsView": {
+            "name": "Panels.PanelsView",
+            "shortname": "Panels.PanelsView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "panels",
+            "namespace": "",
+            "file": "src/js/main/panels.js",
+            "line": 10,
+            "description": "A view for a set of panels.",
+            "submodule": "panel-views"
+        },
+        "Panels.PanelView": {
+            "name": "Panels.PanelView",
+            "shortname": "Panels.PanelView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "panels",
+            "submodule": "panel-views",
+            "namespace": "",
+            "file": "src/js/main/panels.js",
+            "line": 52,
+            "description": "Basic panel view."
+        },
+        "Panels.PanelCollapsibleView": {
+            "name": "Panels.PanelCollapsibleView",
+            "shortname": "Panels.PanelCollapsibleView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "panels",
+            "submodule": "panel-column-data",
+            "namespace": "",
+            "file": "src/js/main/panels.js",
+            "line": 93,
+            "description": "Panel view for a collapsible."
+        },
+        "Panels.PanelColumnDataGroup": {
+            "name": "Panels.PanelColumnDataGroup",
+            "shortname": "Panels.PanelColumnDataGroup",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "panels",
+            "submodule": "panel-column-data",
+            "namespace": "",
+            "file": "src/js/main/panels.js",
+            "line": 146,
+            "description": "A column data group for the panels module."
+        },
+        "Timer.AsyncQue": {
+            "name": "Timer.AsyncQue",
+            "shortname": "Timer.AsyncQue",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "timer",
+            "namespace": "",
+            "file": "src/js/main/timer.js",
+            "line": 32,
+            "access": "private",
+            "tagname": ""
+        },
+        "Timer.Timer": {
+            "name": "Timer.Timer",
+            "shortname": "Timer.Timer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "timer",
+            "namespace": "",
+            "file": "src/js/main/timer.js",
+            "line": 131,
+            "description": "A timer module which executes a job periodically."
+        },
+        "Tree.NodeRecordMixin": {
+            "name": "Tree.NodeRecordMixin",
+            "shortname": "Tree.NodeRecordMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "tree",
+            "namespace": "",
+            "file": "src/js/main/trees.js",
+            "line": 10,
+            "description": "Mixin to define behaviour of a record in the tree module.",
+            "submodule": "tree-nodes"
+        },
+        "Tree.NodeView": {
+            "name": "Tree.NodeView",
+            "shortname": "Tree.NodeView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "tree",
+            "submodule": "tree-nodes",
+            "namespace": "",
+            "file": "src/js/main/trees.js",
+            "line": 41,
+            "description": "Node view for a non leaf node."
+        },
+        "Tree.LeafView": {
+            "name": "Tree.LeafView",
+            "shortname": "Tree.LeafView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "tree",
+            "submodule": "tree-column-data",
+            "namespace": "",
+            "file": "src/js/main/trees.js",
+            "line": 103,
+            "description": "Node view for a leaf node."
+        },
+        "Tree.TreeColumnDataGroup": {
+            "name": "Tree.TreeColumnDataGroup",
+            "shortname": "Tree.TreeColumnDataGroup",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "tree",
+            "submodule": "tree-column-data",
+            "namespace": "",
+            "file": "src/js/main/trees.js",
+            "line": 137,
+            "description": "A column data group for the tree module."
+        },
+        "Tree.TreeColumnData": {
+            "name": "Tree.TreeColumnData",
+            "shortname": "Tree.TreeColumnData",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "tree",
+            "submodule": "tree-column-data",
+            "namespace": "",
+            "file": "src/js/main/trees.js",
+            "line": 175,
+            "description": "Column data for the tree modules (leftBar, label or node based on 'type')"
+        }
+    },
+    "classitems": [
+        {
+            "file": "src/js/main/alerts.js",
+            "line": 37,
+            "description": "Type of alert message. Possible values are \"success\", \"warning\", \"info\", \"error\"",
+            "itemtype": "property",
+            "name": "type",
+            "type": "String",
+            "default": "\"error\"",
+            "class": "Alerts.AlertMessage",
+            "module": "alerts"
+        },
+        {
+            "file": "src/js/main/alerts.js",
+            "line": 46,
+            "description": "Title of the alert message.",
+            "itemtype": "property",
+            "name": "title",
+            "type": "String",
+            "class": "Alerts.AlertMessage",
+            "module": "alerts"
+        },
+        {
+            "file": "src/js/main/alerts.js",
+            "line": 54,
+            "description": "Alert message.",
+            "itemtype": "property",
+            "name": "message",
+            "type": "String",
+            "class": "Alerts.AlertMessage",
+            "module": "alerts"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 37,
+            "class": "DragDrop.DraggableMixin",
+            "module": "app-wrapper"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 84,
+            "class": "DragDrop.DraggableMixin",
+            "module": "app-wrapper"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 114,
+            "class": "DragDrop.DraggableMixin",
+            "module": "app-wrapper"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 233,
+            "class": "DragDrop.DraggableMixin",
+            "module": "app-wrapper"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 350,
+            "class": "DragDrop.DraggableMixin",
+            "module": "app-wrapper"
+        },
+        {
+            "file": "src/js/main/dragdrop.js",
+            "line": 30,
+            "description": "A callback method that is called when a drag starts.",
+            "itemtype": "method",
+            "name": "dragStartCallback",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "The event object of the dragStart event.",
+                    "type": "Object"
+                }
+            ],
+            "class": "DragDrop.DraggableMixin",
+            "module": "drag-drop"
+        },
+        {
+            "file": "src/js/main/dragdrop.js",
+            "line": 39,
+            "description": "Targets that are allowed to be dropped on. Can be a selector or an array of selectors.",
+            "itemtype": "property",
+            "name": "allowedDropTargets",
+            "type": "String|Array",
+            "default": "'.dragdrop-droppable'",
+            "class": "DragDrop.DraggableMixin",
+            "module": "drag-drop"
+        },
+        {
+            "file": "src/js/main/dragdrop.js",
+            "line": 105,
+            "description": "A callback method that is called when the view being dragged enters this view.",
+            "itemtype": "method",
+            "name": "dragEnterCallback",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "The event object of the dragStart event.",
+                    "type": "Object"
+                },
+                {
+                    "name": "dragView",
+                    "description": "The view being dragged.",
+                    "type": "Class"
+                },
+                {
+                    "name": "dragEle",
+                    "description": "The element being dragged.",
+                    "type": "Class"
+                },
+                {
+                    "name": "dropView",
+                    "description": "The view being dropped on.",
+                    "type": "Class"
+                },
+                {
+                    "name": "dropEle",
+                    "description": "The element being dropped on.",
+                    "type": "Class"
+                }
+            ],
+            "class": "DragDrop.DroppableMixin",
+            "module": "drag-drop"
+        },
+        {
+            "file": "src/js/main/dragdrop.js",
+            "line": 118,
+            "description": "A callback method that is called when the view being dragged is over this view.",
+            "itemtype": "method",
+            "name": "dragOverCallback",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "The event object of the dragStart event.",
+                    "type": "Object"
+                },
+                {
+                    "name": "dragView",
+                    "description": "The view being dragged.",
+                    "type": "Class"
+                },
+                {
+                    "name": "dragEle",
+                    "description": "The element being dragged.",
+                    "type": "Class"
+                },
+                {
+                    "name": "dropView",
+                    "description": "The view being dropped on.",
+                    "type": "Class"
+                },
+                {
+                    "name": "dropEle",
+                    "description": "The element being dropped on.",
+                    "type": "Class"
+                }
+            ],
+            "class": "DragDrop.DroppableMixin",
+            "module": "drag-drop"
+        },
+        {
+            "file": "src/js/main/dragdrop.js",
+            "line": 131,
+            "description": "A callback method that is called when the view being dragged leaves this view.",
+            "itemtype": "method",
+            "name": "dragLeaveCallback",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "The event object of the dragStart event.",
+                    "type": "Object"
+                },
+                {
+                    "name": "dragView",
+                    "description": "The view being dragged.",
+                    "type": "Class"
+                },
+                {
+                    "name": "dragEle",
+                    "description": "The element being dragged.",
+                    "type": "Class"
+                },
+                {
+                    "name": "dropView",
+                    "description": "The view being dropped on.",
+                    "type": "Class"
+                },
+                {
+                    "name": "dropEle",
+                    "description": "The element being dropped on.",
+                    "type": "Class"
+                }
+            ],
+            "class": "DragDrop.DroppableMixin",
+            "module": "drag-drop"
+        },
+        {
+            "file": "src/js/main/dragdrop.js",
+            "line": 144,
+            "description": "A callback method that is called when the view being dragged is dropped on this view.",
+            "itemtype": "method",
+            "name": "dropCallback",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "The event object of the dragStart event.",
+                    "type": "Object"
+                },
+                {
+                    "name": "dragView",
+                    "description": "The view being dragged.",
+                    "type": "Class"
+                },
+                {
+                    "name": "dragEle",
+                    "description": "The element being dragged.",
+                    "type": "Class"
+                },
+                {
+                    "name": "dropView",
+                    "description": "The view being dropped on.",
+                    "type": "Class"
+                },
+                {
+                    "name": "dropEle",
+                    "description": "The element being dropped on.",
+                    "type": "Class"
+                }
+            ],
+            "class": "DragDrop.DroppableMixin",
+            "module": "drag-drop"
+        },
+        {
+            "file": "src/js/main/dragdrop.js",
+            "line": 157,
+            "description": "Accept drops from elements passing the selectors. Can be a single selectors or an array of it.",
+            "itemtype": "property",
+            "name": "acceptDropFrom",
+            "type": "String|Array",
+            "default": "'.dragdrop-draggable'",
+            "class": "DragDrop.DroppableMixin",
+            "module": "drag-drop"
+        },
+        {
+            "file": "src/js/main/dragdrop.js",
+            "line": 168,
+            "class": "DragDrop.DroppableMixin",
+            "module": "drag-drop"
+        },
+        {
+            "file": "src/js/main/dragdrop.js",
+            "line": 471,
+            "class": "DragDrop.DroppableMixin",
+            "module": "drag-drop"
+        },
+        {
+            "file": "src/js/main/form.js",
+            "line": 1101,
+            "class": "GlobalModules.DisplayTextView",
+            "module": "drag-drop"
+        },
+        {
+            "file": "src/js/main/global-module.js",
+            "line": 23,
+            "description": "Key for the configurations on columnData.",
+            "itemtype": "property",
+            "name": "columnDataKey",
+            "type": "String",
+            "class": "GlobalModules.DisplayTextView",
+            "module": "global-module",
+            "submodule": "global-module-view"
+        },
+        {
+            "file": "src/js/main/global-module.js",
+            "line": 139,
+            "description": "The type of base module.",
+            "itemtype": "property",
+            "name": "type",
+            "type": "String",
+            "class": "GlobalModules.GlobalModuleColumnDataGroupMixin",
+            "module": "global-module",
+            "submodule": "global-module-column-data"
+        },
+        {
+            "file": "src/js/main/global-module.js",
+            "line": 147,
+            "description": "The view type of base module.",
+            "itemtype": "property",
+            "name": "viewType",
+            "type": "String",
+            "default": "\"base\"",
+            "class": "GlobalModules.GlobalModuleColumnDataGroupMixin",
+            "module": "global-module",
+            "submodule": "global-module-column-data"
+        },
+        {
+            "file": "src/js/main/global-module.js",
+            "line": 156,
+            "description": "Lookup map for the base module type to view's path.",
+            "itemtype": "property",
+            "name": "modules",
+            "type": "Array",
+            "class": "GlobalModules.GlobalModuleColumnDataGroupMixin",
+            "module": "global-module",
+            "submodule": "global-module-column-data"
+        },
+        {
+            "file": "src/js/main/global-module.js",
+            "line": 170,
+            "description": "Modules base module supports.",
+            "itemtype": "property",
+            "name": "modules",
+            "type": "Array",
+            "class": "GlobalModules.GlobalModuleColumnDataGroupMixin",
+            "module": "global-module",
+            "submodule": "global-module-column-data"
+        },
+        {
+            "file": "src/js/main/global-module.js",
+            "line": 214,
+            "description": "Class names to use for the module.",
+            "itemtype": "property",
+            "name": "classNames",
+            "type": "String",
+            "class": "GlobalModules.DisplayTextColumnDataMixin",
+            "module": "global-module",
+            "submodule": "global-module-column-data"
+        },
+        {
+            "file": "src/js/main/global-module.js",
+            "line": 222,
+            "description": "Tag name used by the module.",
+            "itemtype": "property",
+            "name": "tagName",
+            "type": "String",
+            "default": "\"div\"",
+            "class": "GlobalModules.DisplayTextColumnDataMixin",
+            "module": "global-module",
+            "submodule": "global-module-column-data"
+        },
+        {
+            "file": "src/js/main/global-module.js",
+            "line": 240,
+            "description": "Static tooltip for the module.",
+            "itemtype": "property",
+            "name": "tooltip",
+            "type": "String",
+            "class": "GlobalModules.DisplayTextWithTooltipColumnDataMixin",
+            "module": "global-module",
+            "submodule": "global-module-column-data"
+        },
+        {
+            "file": "src/js/main/global-module.js",
+            "line": 248,
+            "description": "Key to the value on the record for dynamic tooltip.",
+            "itemtype": "property",
+            "name": "tooltipKey",
+            "type": "String",
+            "class": "GlobalModules.DisplayTextWithTooltipColumnDataMixin",
+            "module": "global-module",
+            "submodule": "global-module-column-data"
+        },
+        {
+            "file": "src/js/main/global-module.js",
+            "line": 274,
+            "description": "Glypicon class when open.",
+            "itemtype": "property",
+            "name": "glyphiconOpened",
+            "type": "String",
+            "default": "\"glyphicon-chevron-down\"",
+            "class": "GlobalModules.DisplayTextCollapsibleGlypiconColumnDataMixin",
+            "module": "global-module",
+            "submodule": "global-module-column-data"
+        },
+        {
+            "file": "src/js/main/global-module.js",
+            "line": 283,
+            "description": "Glypicon class when collapsed.",
+            "itemtype": "property",
+            "name": "glyphiconCollapsed",
+            "type": "String",
+            "default": "\"glyphicon-chevron-down\"",
+            "class": "GlobalModules.DisplayTextCollapsibleGlypiconColumnDataMixin",
+            "module": "global-module",
+            "submodule": "global-module-column-data"
+        },
+        {
+            "file": "src/js/main/lazy-display.js",
+            "line": 16,
+            "description": "Height of each row.",
+            "itemtype": "property",
+            "name": "rowHeight",
+            "type": "Number",
+            "default": "50",
+            "class": "LazyDisplay.LazyDisplayColumnDataGroup",
+            "module": "lazy-display"
+        },
+        {
+            "file": "src/js/main/lazy-display.js",
+            "line": 25,
+            "description": "Number of extra rows to load past the area of view.",
+            "itemtype": "property",
+            "name": "rowBuffer",
+            "type": "Number",
+            "default": "50",
+            "class": "LazyDisplay.LazyDisplayColumnDataGroup",
+            "module": "lazy-display"
+        },
+        {
+            "file": "src/js/main/lazy-display.js",
+            "line": 34,
+            "description": "Timeout after which the async-que job to load views past the area of view.",
+            "itemtype": "property",
+            "name": "rowLoadDelay",
+            "type": "Number",
+            "default": "150",
+            "class": "LazyDisplay.LazyDisplayColumnDataGroup",
+            "module": "lazy-display"
+        },
+        {
+            "file": "src/js/main/lazy-display.js",
+            "line": 46,
+            "description": "View for the lazy display main which has the rows.",
+            "itemtype": "property",
+            "name": "lazyDisplayMainClass",
+            "type": "String|Class",
+            "class": "LazyDisplay.LazyDisplayColumnDataGroup",
+            "module": "lazy-display"
+        },
+        {
+            "file": "src/js/main/lazy-display.js",
+            "line": 54,
+            "description": "Addtional class name for the lazyDisplayHeightWrapper view.",
+            "itemtype": "property",
+            "name": "lazyDisplayHeightWrapperClasses",
+            "type": "Array",
+            "class": "LazyDisplay.LazyDisplayColumnDataGroup",
+            "module": "lazy-display"
+        },
+        {
+            "file": "src/js/main/lazy-display.js",
+            "line": 62,
+            "description": "View for the lazy display main which has the rows.",
+            "itemtype": "property",
+            "name": "lazyDisplayScrollViewClasses",
+            "type": "Array",
+            "class": "LazyDisplay.LazyDisplayColumnDataGroup",
+            "module": "lazy-display"
+        },
+        {
+            "file": "src/js/main/lazy-display.js",
+            "line": 88,
+            "description": "The rows to be displayed lazily.",
+            "itemtype": "property",
+            "name": "rows",
+            "type": "Array",
+            "class": "LazyDisplay.LazyDisplayView",
+            "module": "lazy-display"
+        },
+        {
+            "file": "src/js/main/lazy-display.js",
+            "line": 99,
+            "description": "The column data group which will serve as a config for lazy display.",
+            "itemtype": "property",
+            "name": "rows",
+            "type": "Array",
+            "class": "LazyDisplay.LazyDisplayView",
+            "module": "lazy-display"
+        },
+        {
+            "file": "src/js/main/listgroups.js",
+            "line": 16,
+            "description": "The list of records.",
+            "itemtype": "property",
+            "name": "list",
+            "type": "Array",
+            "class": "ListGroup.ListGroupView",
+            "module": "list-group"
+        },
+        {
+            "file": "src/js/main/listgroups.js",
+            "line": 24,
+            "description": "Associated column data group to customize the view.",
+            "itemtype": "property",
+            "name": "columnDataGroup",
+            "type": "Class",
+            "class": "ListGroup.ListGroupView",
+            "module": "list-group"
+        },
+        {
+            "file": "src/js/main/listgroups.js",
+            "line": 57,
+            "description": "The record that holds all the data.",
+            "itemtype": "property",
+            "name": "record",
+            "type": "Class",
+            "class": "ListGroup.ListItemView",
+            "module": "list-group",
+            "submodule": "list-item"
+        },
+        {
+            "file": "src/js/main/listgroups.js",
+            "line": 65,
+            "description": "Associated column data group to customize the view.",
+            "itemtype": "property",
+            "name": "columnDataGroup",
+            "type": "Class",
+            "class": "ListGroup.ListItemView",
+            "module": "list-group",
+            "submodule": "list-item"
+        },
+        {
+            "file": "src/js/main/listgroups.js",
+            "line": 88,
+            "class": "ListGroup.ListItemView",
+            "module": "list-group",
+            "submodule": "list-item"
+        },
+        {
+            "file": "src/js/main/listgroups.js",
+            "line": 112,
+            "description": "Type of title view.",
+            "itemtype": "property",
+            "name": "titleType",
+            "type": "String",
+            "default": "\"displayText\"",
+            "class": "ListGroup.ListColumnDataGroup",
+            "module": "list-group",
+            "submodule": "list-column-data"
+        },
+        {
+            "file": "src/js/main/listgroups.js",
+            "line": 121,
+            "description": "Type of right block view.",
+            "itemtype": "property",
+            "name": "rightBlockType",
+            "type": "String",
+            "default": "\"displayText\"",
+            "class": "ListGroup.ListColumnDataGroup",
+            "module": "list-group",
+            "submodule": "list-column-data"
+        },
+        {
+            "file": "src/js/main/listgroups.js",
+            "line": 130,
+            "description": "Type of desc view.",
+            "itemtype": "property",
+            "name": "descType",
+            "type": "String",
+            "default": "\"displayText\"",
+            "class": "ListGroup.ListColumnDataGroup",
+            "module": "list-group",
+            "submodule": "list-column-data"
+        },
+        {
+            "file": "src/js/main/listgroups.js",
+            "line": 146,
+            "description": "Used to determine the type of the module.",
+            "itemtype": "property",
+            "name": "moduleType",
+            "type": "String",
+            "class": "ListGroup.ListColumnData",
+            "module": "list-group",
+            "submodule": "list-column-data"
+        },
+        {
+            "file": "src/js/main/panels.js",
+            "line": 16,
+            "description": "The list of records.",
+            "itemtype": "property",
+            "name": "panels",
+            "type": "Array",
+            "class": "Panels.PanelsView",
+            "module": "panels"
+        },
+        {
+            "file": "src/js/main/panels.js",
+            "line": 24,
+            "description": "Associated column data group to customize the view.",
+            "itemtype": "property",
+            "name": "columnDataGroup",
+            "type": "Class",
+            "class": "Panels.PanelsView",
+            "module": "panels"
+        },
+        {
+            "file": "src/js/main/panels.js",
+            "line": 58,
+            "description": "The record that holds all the data.",
+            "itemtype": "property",
+            "name": "record",
+            "type": "Class",
+            "class": "Panels.PanelView",
+            "module": "panels",
+            "submodule": "panel-views"
+        },
+        {
+            "file": "src/js/main/panels.js",
+            "line": 66,
+            "description": "Associated column data group to customize the view.",
+            "itemtype": "property",
+            "name": "columnDataGroup",
+            "type": "Class",
+            "class": "Panels.PanelView",
+            "module": "panels",
+            "submodule": "panel-views"
+        },
+        {
+            "file": "src/js/main/panels.js",
+            "line": 131,
+            "class": "Panels.PanelCollapsibleView",
+            "module": "panels",
+            "submodule": "panel-views"
+        },
+        {
+            "file": "src/js/main/panels.js",
+            "line": 156,
+            "description": "Type of heading view.",
+            "itemtype": "property",
+            "name": "headingType",
+            "type": "String",
+            "default": "\"displayText\"",
+            "class": "Panels.PanelColumnDataGroup",
+            "module": "panels",
+            "submodule": "panel-column-data"
+        },
+        {
+            "file": "src/js/main/panels.js",
+            "line": 165,
+            "description": "Type of body view.",
+            "itemtype": "property",
+            "name": "bodyType",
+            "type": "String",
+            "default": "\"displayText\"",
+            "class": "Panels.PanelColumnDataGroup",
+            "module": "panels",
+            "submodule": "panel-column-data"
+        },
+        {
+            "file": "src/js/main/panels.js",
+            "line": 174,
+            "description": "Type of footer view.",
+            "itemtype": "property",
+            "name": "footerType",
+            "type": "String",
+            "class": "Panels.PanelColumnDataGroup",
+            "module": "panels",
+            "submodule": "panel-column-data"
+        },
+        {
+            "file": "src/js/main/panels.js",
+            "line": 189,
+            "description": "Used to determine the type of the module.",
+            "itemtype": "property",
+            "name": "moduleType",
+            "type": "String",
+            "class": "ListGroup.ListColumnData",
+            "module": "panels",
+            "submodule": "panel-column-data"
+        },
+        {
+            "file": "src/js/main/timer.js",
+            "line": 12,
+            "description": "Default timeout for the asyncQue.",
+            "itemtype": "property",
+            "name": "TIMEOUT",
+            "type": "Number",
+            "default": "500",
+            "static": 1,
+            "class": "Timer.AsyncQue",
+            "module": "timer"
+        },
+        {
+            "file": "src/js/main/timer.js",
+            "line": 22,
+            "description": "Timer ticks.",
+            "itemtype": "property",
+            "name": "TIMERTIMEOUT",
+            "type": "Number",
+            "default": "250",
+            "static": 1,
+            "class": "Timer.AsyncQue",
+            "module": "timer"
+        },
+        {
+            "file": "src/js/main/timer.js",
+            "line": 56,
+            "description": "native timer",
+            "itemtype": "property",
+            "name": "timer",
+            "type": "Number",
+            "class": "Timer.AsyncQue",
+            "module": "timer"
+        },
+        {
+            "file": "src/js/main/timer.js",
+            "line": 64,
+            "description": "unique identifier for the associated task",
+            "itemtype": "property",
+            "name": "key",
+            "type": "String",
+            "class": "Timer.AsyncQue",
+            "module": "timer"
+        },
+        {
+            "file": "src/js/main/timer.js",
+            "line": 72,
+            "description": "resolve function of the associated promise",
+            "itemtype": "property",
+            "name": "resolve",
+            "type": "Function",
+            "class": "Timer.AsyncQue",
+            "module": "timer"
+        },
+        {
+            "file": "src/js/main/timer.js",
+            "line": 80,
+            "description": "reject function of the associated promise",
+            "itemtype": "property",
+            "name": "reject",
+            "type": "Function",
+            "class": "Timer.AsyncQue",
+            "module": "timer"
+        },
+        {
+            "file": "src/js/main/timer.js",
+            "line": 88,
+            "description": "boolean to indicate whether the associated promise has resolved",
+            "itemtype": "property",
+            "name": "resolved",
+            "type": "boolean",
+            "class": "Timer.AsyncQue",
+            "module": "timer"
+        },
+        {
+            "file": "src/js/main/timer.js",
+            "line": 96,
+            "description": "timeout after which the associated promise resolves",
+            "itemtype": "property",
+            "name": "reject",
+            "type": "Number",
+            "class": "Timer.AsyncQue",
+            "module": "timer"
+        },
+        {
+            "file": "src/js/main/timer.js",
+            "line": 105,
+            "description": "Public API to create a job into async que.",
+            "itemtype": "method",
+            "name": "addToQue",
+            "return": {
+                "description": "Promise created for the async-que.",
+                "type": "Class"
+            },
+            "params": [
+                {
+                    "name": "key",
+                    "description": "Unique identifier for the job.",
+                    "type": "String"
+                },
+                {
+                    "name": "timeout",
+                    "description": "timeout after which the job should be run.",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "Timer.TIMEOUT"
+                }
+            ],
+            "class": "Timer.AsyncQue",
+            "module": "timer"
+        },
+        {
+            "file": "src/js/main/timer.js",
+            "line": 146,
+            "description": "Periodic timeout after which the job should be executed.",
+            "itemtype": "property",
+            "name": "timeout",
+            "type": "boolean",
+            "default": "Timer.TIMERTIMEOUT",
+            "class": "Timer.Timer",
+            "module": "timer"
+        },
+        {
+            "file": "src/js/main/timer.js",
+            "line": 155,
+            "description": "Number of times of Timer.TIMERTIMEOUT per period.",
+            "itemtype": "property",
+            "name": "ticks",
+            "type": "Number",
+            "default": "1",
+            "access": "private",
+            "tagname": "",
+            "class": "Timer.Timer",
+            "module": "timer"
+        },
+        {
+            "file": "src/js/main/timer.js",
+            "line": 165,
+            "description": "Number of times to execute the job.",
+            "itemtype": "property",
+            "name": "count",
+            "type": "Number",
+            "default": "0",
+            "class": "Timer.Timer",
+            "module": "timer"
+        },
+        {
+            "file": "src/js/main/timer.js",
+            "line": 174,
+            "description": "Callback executed every period. The job goes here.",
+            "itemtype": "method",
+            "name": "timerCallback",
+            "class": "Timer.Timer",
+            "module": "timer"
+        },
+        {
+            "file": "src/js/main/timer.js",
+            "line": 183,
+            "description": "Callback executed after the end of timer.",
+            "itemtype": "method",
+            "name": "endCallback",
+            "class": "Timer.Timer",
+            "module": "timer"
+        },
+        {
+            "file": "src/js/main/trees.js",
+            "line": 16,
+            "description": "Array of children records.",
+            "itemtype": "property",
+            "name": "children",
+            "class": "Tree.NodeRecordMixin",
+            "module": "tree"
+        },
+        {
+            "file": "src/js/main/trees.js",
+            "line": 47,
+            "description": "Record for the node.",
+            "itemtype": "property",
+            "name": "record",
+            "type": "Class",
+            "class": "Tree.NodeView",
+            "module": "tree",
+            "submodule": "tree-nodes"
+        },
+        {
+            "file": "src/js/main/trees.js",
+            "line": 55,
+            "description": "Associated column data group to customize the view.",
+            "itemtype": "property",
+            "name": "columnDataGroup",
+            "type": "Class",
+            "class": "Tree.NodeView",
+            "module": "tree",
+            "submodule": "tree-nodes"
+        },
+        {
+            "file": "src/js/main/trees.js",
+            "line": 120,
+            "class": "Tree.LeafView",
+            "module": "tree",
+            "submodule": "tree-nodes"
+        },
+        {
+            "file": "src/js/main/trees.js",
+            "line": 147,
+            "description": "Type of left bar view.",
+            "itemtype": "property",
+            "name": "leftBarType",
+            "type": "String",
+            "default": "\"displayText\"",
+            "class": "Tree.TreeColumnDataGroup",
+            "module": "tree",
+            "submodule": "tree-column-data"
+        },
+        {
+            "file": "src/js/main/trees.js",
+            "line": 156,
+            "description": "Type of label view.",
+            "itemtype": "property",
+            "name": "labelType",
+            "type": "String",
+            "default": "\"displayText\"",
+            "class": "Tree.TreeColumnDataGroup",
+            "module": "tree",
+            "submodule": "tree-column-data"
+        },
+        {
+            "file": "src/js/main/trees.js",
+            "line": 165,
+            "description": "Type of node view.",
+            "itemtype": "property",
+            "name": "nodeType",
+            "type": "String",
+            "default": "\"displayText\"",
+            "class": "Tree.TreeColumnDataGroup",
+            "module": "tree",
+            "submodule": "tree-column-data"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type",
+            "line": " src/js/main/column-data.js:37"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/js/main/column-data.js:84"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/js/main/column-data.js:114"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/js/main/column-data.js:233"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/js/main/column-data.js:350"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/js/main/dragdrop.js:168"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/js/main/dragdrop.js:471"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/js/main/form.js:1101"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/js/main/listgroups.js:88"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/js/main/panels.js:131"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/js/main/trees.js:120"
+        }
+    ]
+}

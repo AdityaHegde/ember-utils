@@ -304,7 +304,7 @@ ArrayMod.ArrayModController = Ember.ArrayController.extend(Utils.ObjectWithArray
       }, {that : this, arrayMod : arrayMod, arrangedContent : arrangedContent});
       this.removeArrayModFromGroup(arrayMod);
     }
-    AsyncQue.addToQue(this.get("unique_id")+"__ArrayModChanged", 250).then(function() {
+    Timer.addToQue(this.get("unique_id")+"__ArrayModChanged", 250).then(function() {
       that.notifyPropertyChange("arrangedContent");
     });
   },
@@ -321,7 +321,7 @@ ArrayMod.ArrayModController = Ember.ArrayController.extend(Utils.ObjectWithArray
       }, {that : this, arrayMod : arrayMod, arrangedContent : arrangedContent});
       this.addArrayModToGroup(arrayMod);
     }
-    AsyncQue.addToQue(this.get("unique_id")+"__ArrayModChanged", 250).then(function() {
+    Timer.addToQue(this.get("unique_id")+"__ArrayModChanged", 250).then(function() {
       that.notifyPropertyChange("arrangedContent");
     });
   },
@@ -352,14 +352,14 @@ ArrayMod.ArrayModController = Ember.ArrayController.extend(Utils.ObjectWithArray
 
   arrayModsDidChange : function() {
     var that = this;
-    AsyncQue.addToQue(this.get("unique_id")+"__ArrayModChanged", 250).then(function() {
+    Timer.addToQue(this.get("unique_id")+"__ArrayModChanged", 250).then(function() {
       that.notifyPropertyChange("arrangedContent");
     });
   },
 
   arrayModsDidChange_each : function() {
     var that = this;
-    AsyncQue.addToQue(this.get("unique_id")+"__ArrayModChanged_Each", 500).then(function() {
+    Timer.addToQue(this.get("unique_id")+"__ArrayModChanged_Each", 500).then(function() {
       var content = that.get("content"), arrangedContent = that.get("arrangedContent"),
           arrayModGrps = that.get('arrayModGrps');
       //enclose the operation in a run loop to decrease the view render overhead

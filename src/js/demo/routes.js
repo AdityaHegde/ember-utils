@@ -12,7 +12,7 @@ DemoApp.FormRoute = Ember.Route.extend({
 
 DemoApp.TreeRoute = Ember.Route.extend({
   model : function() {
-    return Tree.NodeRecord.create({
+    return DemoApp.TreeRecord.create({
       name : "root",
       nodeType : "treeTestNode",
       columnDataGroup : ColumnData.Registry.retrieve("treeTestNode", "columnDataGroup"),
@@ -53,6 +53,7 @@ DemoApp.ListgroupRoute = Ember.Route.extend({
         id : i,
         vara : "VarA"+i,
         varb : "VarB"+Math.round(Math.random()*5),
+        varc : "VarC",
       }));
     }
     return rows;

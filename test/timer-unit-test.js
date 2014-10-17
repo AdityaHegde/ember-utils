@@ -1,4 +1,4 @@
-module("async-que.js", {
+module("timer.js", {
   setup: function() {
   },
   teardown : function() {
@@ -8,7 +8,7 @@ module("async-que.js", {
 
 test("Sanity test", function() {
   var run = false;
-  AsyncQue.addToQue("test-async").then(function() {
+  Timer.addToQue("test-async").then(function() {
     run = true;
   });
   andThen(function() {
@@ -22,14 +22,14 @@ test("Sanity test", function() {
 test("test async que with same keys", function() {
   var queRunCount1st = 0, queRunCountTotal = 0;
   for(var i = 0; i < 5; i++) {
-    AsyncQue.addToQue("test-async", 200).then(function() {
+    Timer.addToQue("test-async", 200).then(function() {
       queRunCount1st++;
       queRunCountTotal++;
     });
   }
   Ember.run.later(function() {
     for(var i = 0; i < 5; i++) {
-      AsyncQue.addToQue("test-async", 200).then(function() {
+      Timer.addToQue("test-async", 200).then(function() {
         queRunCountTotal++;
       });
     }
@@ -44,7 +44,7 @@ test("test async que with same keys", function() {
 test("test async que with different keys", function() {
   var queRunCount = 0;
   for(var i = 0; i < 5; i++) {
-    AsyncQue.addToQue("test-async-"+i, 200).then(function() {
+    Timer.addToQue("test-async-"+i, 200).then(function() {
       queRunCount++;
     });
   }

@@ -1,39 +1,100 @@
+/**
+ * An ember wrapper module for bootstrap's list group component.
+ *
+ * @module panels
+ */
+
+
 Panels = Ember.Namespace.create();
 
+/**
+ * A view for a set of panels.
+ *
+ * @class Panels.PanelsView
+ */
 Panels.PanelsView = Ember.View.extend({
-  classNames : ['panel-group'],
-  columnDataGroup : null,
+  /**
+   * The list of records.
+   *
+   * @property panels
+   * @type Array
+   */
   panels : null,
+
+  /**
+   * Associated column data group to customize the view.
+   *
+   * @property columnDataGroup
+   * @type Class
+   */
+  columnDataGroup : null,
+
+  classNames : ['panel-group'],
 
   template : Ember.Handlebars.compile('' +
     '{{#with view as thatView}}' +
       '{{#each thatView.panels}}' +
-        '{{view thatView.columnDataGroup.panel.typeLookup record=this columnDataGroup=thatView.columnDataGroup groupId=thatView.elementId}}' +
+        '{{view thatView.columnDataGroup.panel.viewLookup record=this columnDataGroup=thatView.columnDataGroup groupId=thatView.elementId}}' +
       '{{/each}}' +
     '{{/with}}' +
   ''),
 });
 
 
-/***    Panel Types   ***/
+/**
+ * Different panel views.
+ *
+ * @module panels
+ * @submodule panel-views
+ */
 
+
+/**
+ * Basic panel view.
+ *
+ * @class Panels.PanelView
+ */
 Panels.PanelView = Ember.View.extend({
-  classNames : ['panel', 'panel-default'],
+  /**
+   * The record that holds all the data.
+   *
+   * @property record
+   * @type Class
+   */
+  record : null,
+
+  /**
+   * Associated column data group to customize the view.
+   *
+   * @property columnDataGroup
+   * @type Class
+   */
   columnDataGroup : null,
+
+  classNames : ['panel', 'panel-default'],
 
   template : Ember.Handlebars.compile('' +
     '<div class="panel-heading">' +
-      '{{view view.columnDataGroup.panel.headingLookup record=view.record columnData=view.columnDataGroup.panel.headingColumnData}}' +
+      '{{view view.columnDataGroup.panel.headingLookup record=view.record columnData=view.columnDataGroup.panel.headingColumnData '+
+                                                      'tagName=view.columnDataGroup.panel.headingColumnData.list.tagName columnDataKey="panel"}}' +
     '</div>' +
     '<div class="panel-body">' +
-      '{{view view.columnDataGroup.panel.bodyLookup record=view.record columnData=view.columnDataGroup.panel.bodyColumnData}}' +
+      '{{view view.columnDataGroup.panel.bodyLookup record=view.record columnData=view.columnDataGroup.panel.bodyColumnData '+
+                                                   'tagName=view.columnDataGroup.panel.bodyColumnData.list.tagName columnDataKey="panel"}}' +
     '</div>' +
     '{{#if view.columnDataGroup.panel.footerColumnData}}<div class="panel-footer">' +
-      '{{view view.columnDataGroup.panel.footerLookup record=view.record columnData=view.columnDataGroup.panel.footerColumnData}}' +
+      '{{view view.columnDataGroup.panel.footerLookup record=view.record columnData=view.columnDataGroup.panel.footerColumnData '+
+                                                     'tagName=view.columnDataGroup.panel.footerColumnData.list.tagName columnDataKey="panel"}}' +
     '</div>{{/if}}' +
   ''),
 });
 
+
+/**
+ * Panel view for a collapsible.
+ *
+ * @class Panels.PanelCollapsibleView
+ */
 Panels.PanelCollapsibleView = Panels.PanelView.extend({
   groupId : null,
   collapseId : function() {
@@ -50,68 +111,19 @@ Panels.PanelCollapsibleView = Panels.PanelView.extend({
 
   template : Ember.Handlebars.compile('' +
     '<div class="panel-heading">' +
-      '{{view view.columnDataGroup.panel.headingLookup record=view.record columnData=view.columnDataGroup.panel.headingColumnData collapseId=view.collapseId groupId=view.groupId}}' +
+      '{{view view.columnDataGroup.panel.headingLookup record=view.record columnData=view.columnDataGroup.panel.headingColumnData collapseId=view.collapseId groupId=view.groupId '+
+                                                      'tagName=view.columnDataGroup.panel.headingColumnData.list.tagName columnDataKey="panel"}}' +
     '</div>' +
     '<div {{bind-attr id="view.collapseId" class=":panel-collapse :collapse view.isFirst:in"}}>' +
       '<div class="panel-body">' +
-        '{{view view.columnDataGroup.panel.bodyLookup record=view.record columnData=view.columnDataGroup.panel.bodyColumnData collapseId=view.collapseId groupId=view.groupId}}' +
+        '{{view view.columnDataGroup.panel.bodyLookup record=view.record columnData=view.columnDataGroup.panel.bodyColumnData collapseId=view.collapseId groupId=view.groupId '+
+                                                     'tagName=view.columnDataGroup.panel.bodyColumnData.list.tagName columnDataKey="panel"}}' +
       '</div>' +
       '{{#if view.columnDataGroup.panel.footerColumnData}}<div class="panel-footer">' +
-        '{{view view.columnDataGroup.panel.footerLookup record=view.record columnData=view.columnDataGroup.panel.footerColumnData collapseId=view.collapseId groupId=view.groupId}}' +
+        '{{view view.columnDataGroup.panel.footerLookup record=view.record columnData=view.columnDataGroup.panel.footerColumnData collapseId=view.collapseId groupId=view.groupId '+
+                                                       'tagName=view.columnDataGroup.panel.footerColumnData.list.tagName columnDataKey="panel"}}' +
       '</div>{{/if}}' +
     '</div>' +
-  ''),
-});
-
-
-/***   Panel Heading   ***/
-
-Panels.PanelHeadingView = Ember.View.extend(ColumnData.ColumnDataValueMixin, {
-  tagName : "h3",
-  classNames : ["panel-title"],
-  tooltip : function() {
-    return this.get("record"+this.get("columnData.panel.tooltipKey")) || "Panel Heading";
-  }.property("view.columnData.panel"),
-
-  template : Ember.Handlebars.compile('' +
-    '{{#tool-tip title=view.tooltip}}{{view.value}}{{/tool-tip}}' +
-  ''),
-});
-
-Panels.PanelCollapsibleHeadingView = Panels.PanelHeadingView.extend({
-  groupId : null,
-  groupIdHref : function() {
-    return "#"+this.get("groupId");
-  }.property('view.groupId'),
-  collapseId : null,
-  collapseIdHref : function() {
-    return "#"+this.get("collapseId");
-  }.property('view.collapseId'),
-
-  template : Ember.Handlebars.compile('' +
-    '<a class="group-item-name" data-toggle="collapse" {{bind-attr data-parent="view.groupIdHref" href="view.collapseIdHref"}}>' +
-      '{{#tool-tip title=view.tooltip}}{{view.value}}{{/tool-tip}}' +
-    '</a>' +
-  ''),
-});
-
-
-/*** Panel Body   ***/
-
-Panels.PanelBodyView = Ember.View.extend(ColumnData.ColumnDataValueMixin, {
-  tagName : '',
-  template : Ember.Handlebars.compile('' +
-    '{{view.value}}' +
-  ''),
-});
-
-
-/*** Panel Footer   ***/
-
-Panels.PanelFooterView = Ember.View.extend(ColumnData.ColumnDataValueMixin, {
-  tagName : '',
-  template : Ember.Handlebars.compile('' +
-    '{{view.value}}' +
   ''),
 });
 
@@ -119,38 +131,79 @@ Panels.PanelFooterView = Ember.View.extend(ColumnData.ColumnDataValueMixin, {
 /***   Name to Lookup map  ***/
 
 Panels.NameToLookupMap = {
-  panel : {
-    "base" : "panels/panel",
-    "collapsible" : "panels/panelCollapsible",
-  },
-  heading : {
-    "base" : "panels/panelHeading",
-    "collapsible" : "panels/panelCollapsibleHeading",
-  },
-  body : {
-    "base" : "panels/panelBody",
-  },
-  footer : {
-    "base" : "panels/panelFooter",
-  },
+  "base" : "panels/panel",
+  "collapsible" : "panels/panelCollapsible",
 };
 
 
-/***   Panel Column Data Interface   ***/
+/**
+ * Column data interface for panels.
+ *
+ * @module panels
+ * @submodule panel-column-data
+ */
 
-Panels.PanelColumnDataGroup = Ember.Object.extend(ColumnData.ColumnDataGroupPluginMixin, {
-  groupType : "panel",
+/**
+ * A column data group for the panels module.
+ *
+ * @class Panels.PanelColumnDataGroup
+ */
+Panels.PanelColumnDataGroup = Ember.Object.extend(GlobalModules.GlobalModuleColumnDataGroupMixin, {
+  type : "panel",
   modules : ["heading", "body", "footer"],
   lookupMap : Panels.NameToLookupMap,
+
+  /**
+   * Type of heading view.
+   *
+   * @property headingType
+   * @type String
+   * @default "displayText"
+   */
+  //headingType : "displayText",
+
+  /**
+   * Type of body view.
+   *
+   * @property bodyType
+   * @type String
+   * @default "displayText"
+   */
+  //bodyType : "displayText",
+
+  /**
+   * Type of footer view.
+   *
+   * @property footerType
+   * @type String
+   */
+  //footerType : "",
 });
 
-Panels.PanelHeadingColumnData = Ember.Object.extend({
+/**
+ * Column data for the list group modules (title, rightBlock or desc based on 'type')
+ *
+ * @class ListGroup.ListColumnData
+ */
+Panels.PanelColumnData = Ember.Object.extend({
+  /**
+   * Used to determine the type of the module.
+   *
+   * @property moduleType
+   * @type String
+   */
+  moduleType : "",
 });
 
-Panels.PanelBodyColumnData = Ember.Object.extend({
+Panels.PanelHeadingColumnData = Panels.PanelColumnData.extend({
+  tagName : "h3",
+  classNames : ["panel-title"],
 });
 
-Panels.PanelFooterColumnData = Ember.Object.extend({
+Panels.PanelBodyColumnData = Panels.PanelColumnData.extend({
+});
+
+Panels.PanelFooterColumnData = Panels.PanelColumnData.extend({
 });
 
 Panels.PanelColumnDataMap = {

@@ -6,7 +6,7 @@ module("columndata.js", {
   },
 });
 
-test("Sanity tests", function() {
+/*test("Sanity tests", function() {
   var columnData = ColumnData.ColumnData.create({
     name : "vara",
     keyName : "varb",
@@ -34,27 +34,30 @@ test("Sanity tests", function() {
     equal(columnData.get("placeholderActual"), "Vara", "Has proper 'placeholderActual' : 'Vara'");
     ok(!columnData.get("mandatory"), "Has proper 'mandatory' : 'false'");
   });
-});
+});*/
 
 test("Validation tests - simple", function() {
   var columnData = ColumnData.ColumnData.create({
     name : "vara",
     label : "Vara",
-    validations : [
-      {type : 0},
-      {type : 1, regex : "^([a-zA-Z0-9](?:[ \\t]*\\,[ \\t]*)?)+$", negate : true, invalidMessage : "Can only be alphanumeric"},
-      {type : 2, delimeter : ",", regex : "^[a-zA-Z0-9]*$", negate : true, invalidMessage : "Can only be alphanumeric"},
-      {type : 3, delimeter : ",", invalidMessage : "Cannot have duplicates"},
-    ],
+    validation : {
+      validations : [
+        {type : 0},
+        {type : 1, regex : "^([a-zA-Z0-9](?:[ \\t]*\\,[ \\t]*)?)+$", negate : true, invalidMessage : "Can only be alphanumeric"},
+        {type : 2, delimeter : ",", regex : "^[a-zA-Z0-9]*$", negate : true, invalidMessage : "Can only be alphanumeric"},
+        {type : 3, delimeter : ",", invalidMessage : "Cannot have duplicates"},
+      ],
+    },
   }), record = Ember.Object.create(),
+  validationObj = columnData.get("validation"),
   validation11, validation12, validation13, validation14, validation15;
   Ember.run(function() {
-    validation11 = columnData.validateValue("", record);
-    validation12 = columnData.validateValue("abc$", record);
-    validation13 = columnData.validateValue("a,a,b,c", record);
-    validation14 = columnData.validateValue("a,b,c", record);
-    validation15 = columnData.validateValue("a*b", record, [
-      ColumnData.ColumnValidation.create({
+    validation11 = validationObj.validateValue("", record);
+    validation12 = validationObj.validateValue("abc$", record);
+    validation13 = validationObj.validateValue("a,a,b,c", record);
+    validation14 = validationObj.validateValue("a,b,c", record);
+    validation15 = validationObj.validateValue("a*b", record, [
+      ColumnData.RegexValidation.create({
         type : 1,
         regex : "[a-zA-Z0-9\*]*",
         negate : true,
@@ -78,17 +81,20 @@ test("Validation tests - number", function() {
   columnDataNum = ColumnData.ColumnData.create({
     name : "varb",
     label : "Varb",
-    validations : [
-      {type : 1, regex : "^[0-9]*$", negate : true, invalidMessage : "Can only be number"},
-      {type : 5, minValue : 10, maxValue : 100, invalidMessage : "Should be between 10 and 100"},
-    ],
+    validation : {
+      validations : [
+        {type : 1, regex : "^[0-9]*$", negate : true, invalidMessage : "Can only be number"},
+        {type : 5, minValue : 10, maxValue : 100, invalidMessage : "Should be between 10 and 100"},
+      ],
+    },
   }),
+  validationObj = columnDataNum.get("validation"),
   validation21, validation22, validation23, validation24;
   Ember.run(function() {
-    validation21 = columnDataNum.validateValue(undefined, record);
-    validation22 = columnDataNum.validateValue("1", record);
-    validation23 = columnDataNum.validateValue("1000", record);
-    validation24 = columnDataNum.validateValue("50", record);
+    validation21 = validationObj.validateValue(undefined, record);
+    validation22 = validationObj.validateValue("1", record);
+    validation23 = validationObj.validateValue("1000", record);
+    validation24 = validationObj.validateValue("50", record);
   });
   andThen(function() {
     ok(!validation21[0], "Validation passed for empty value");
@@ -104,19 +110,25 @@ test("Validation tests - array", function() {
   var columnDataDup = ColumnData.ColumnData.create({
     name : "varc",
     label : "Varc",
-    validations : [
-      {type : 0},
-      {type : 1, regex : "^[a-zA-Z0-9]*$", negate : true, invalidMessage : "Can only be alphanumeric"},
-      {type : 4, duplicateCheckPath : "parentRecord.records", duplicateCheckKey : "varc", invalidMessage : "Should be unique across records"},
-    ],
+    validation : {
+      validations : [
+        {type : 0},
+        {type : 1, regex : "^[a-zA-Z0-9]*$", negate : true, invalidMessage : "Can only be alphanumeric"},
+        {type : 4, duplicateCheckPath : "parentRecord.records", duplicateCheckKey : "varc", invalidMessage : "Should be unique across records"},
+      ],
+    },
   }),
   columnDataArr = ColumnData.ColumnData.create({
     name : "records",
     label : "records",
-    validations : [
-      {type : 0},
-    ],
+    validation : {
+      validations : [
+        {type : 0},
+      ],
+    },
   }),
+  validationObjDup = columnDataDup.get("validation"),
+  validationObjArr = columnDataArr.get("validation"),
   rec1 = Ember.Object.create({varc : "a"}),
   rec2 = Ember.Object.create({varc : "b"}),
   rec3 = Ember.Object.create({varc : "c"}),
@@ -126,11 +138,11 @@ test("Validation tests - array", function() {
   rec2.set("parentRecord", parentRecord);
   rec3.set("parentRecord", parentRecord);
   Ember.run(function() {
-    validation31 = columnDataDup.validateValue("b", rec1);
-    validation32 = columnDataDup.validateValue("a", rec1);
+    validation31 = validationObjDup.validateValue("b", rec1);
+    validation32 = validationObjDup.validateValue("a", rec1);
 
-    validation33 = columnDataArr.validateValue([], parentRecord);
-    validation34 = columnDataArr.validateValue(parentRecord.get("records"), parentRecord);
+    validation33 = validationObjArr.validateValue([], parentRecord);
+    validation34 = validationObjArr.validateValue(parentRecord.get("records"), parentRecord);
   });
   andThen(function() {
     ok(validation31[0], "Validation failed for 'b' : already present in rec2");
@@ -144,12 +156,9 @@ test("Validation tests - array", function() {
 
 test("Deep columns", function() {
   var columnDataBack = ColumnData.ColumnDataMap;
-  ColumnData.ColumnDataMap = {
-    record : {
-      name : "vara",
-      childColsName : "record_main",
-    },
-    record_main : [
+  ColumnData.ColumnDataGroup.create({
+    name : "record",
+    columns : [
       {
         name : "varb",
         childColName : "doesnt-exist",
@@ -158,20 +167,22 @@ test("Deep columns", function() {
         name : "varc",
       },
     ],
-  };
+  });
+  ColumnData.ColumnData.create({
+    name : "vara",
+    childColGroupName : "record",
+  });
   var record = Ember.Object.create(),
   columnDataArr = ColumnData.ColumnData.create({
     name : "records",
     label : "records",
-    childColName : "record",
-    validations : [
-      {type : 0},
-    ],
+    childColName : "vara",
   });
   andThen(function() {
+    var deepChildColGroup = columnDataArr.get("childCol.childColGroup");
     equal(columnDataArr.get("childCol.name"), "vara", "Child col was successfully extracted");
-    equal(columnDataArr.get("childCol.childCols.length"), 2, "Child cols were successfully extracted");
-    ok(Ember.isEmpty(columnDataArr.get("childCol.childCols")[0].get("childCols.length")), "Child cols for childColsName that is not present is not extracted");
+    equal(deepChildColGroup.get("columns.length"), 2, "Child col group were successfully extracted");
+    ok(Ember.isEmpty(deepChildColGroup.get("columns")[0].get("childColGroup")), "Child col group for childColGroupName that is not present is not extracted");
     ColumnData.ColumnDataMap = columnDataBack;
   });
 });

@@ -13,9 +13,12 @@ ColumnData.ColumnDataGroup = Ember.Object.extend({
 
   list : Utils.belongsTo("ListGroup.ListColumnDataGroup"),
   tree : Utils.belongsTo("Tree.TreeColumnDataGroup"),
-  form : Utils.belongsTo("Form.FormColumnDataGroup"),
   sort : Utils.belongsTo("DragDrop.SortableColumnDataGroup"),
   panel : Utils.belongsTo("Panels.PanelColumnDataGroup"),
+
+  lazyDisplay : Utils.belongsTo("LazyDisplay.LazyDisplayColumnDataGroup"),
+
+  form : Utils.belongsTo("Form.FormColumnDataGroup"),
 });
 
 
@@ -48,19 +51,20 @@ ColumnData.ColumnData = Ember.Object.extend({
 
   validation : Utils.belongsTo("ColumnData.ColumnDataValidation"),
 
-  list : Utils.belongsTo(null, "ListGroup.ListColumnDataMap", "type"),
-  tree : Utils.belongsTo(null, "Tree.TreeColumnDataMap", "type"),
+  list : Utils.belongsToWithMixin(null, "ListGroup.ListColumnDataMap", "moduleType", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
+  tree : Utils.belongsToWithMixin(null, "Tree.TreeColumnDataMap", "moduleType", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
+  //sort : Utils.belongsToWithMixin(null, "DragDrop.SortableColumnDataMap", "moduleType", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
+  panel : Utils.belongsToWithMixin(null, "Panels.PanelColumnDataMap", "moduleType", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
+
   form : Utils.belongsTo(null, "Form.FormColumnDataMap", "type"),
-  sort : Utils.belongsTo(null, "DragDrop.SortableColumnDataMap", "type"),
-  panel : Utils.belongsTo(null, "Panels.PanelColumnDataMap", "type"),
 
   label : null,
 
   childCol : Utils.belongsTo("ColumnData.ColumnData"),
   childColName : function(key, value) {
     if(arguments.length > 1) {
-      if(value && ColumnData.ColumnDataMap[value]) {
-        this.set("childCol", ColumnData.ColumnDataMap[value]);
+      if(value) {
+        this.set("childCol", ColumnData.Registry.retrieve(value, "columnData"));
       }
       return value;
     }
@@ -69,7 +73,7 @@ ColumnData.ColumnData = Ember.Object.extend({
   childColGroupName : function(key, value) {
     if(arguments.length > 1) {
       if(value) {
-        this.set("childColData", ColumnData.Registry.retrieve(value, "columnDataGroup"));
+        this.set("childColGroup", ColumnData.Registry.retrieve(value, "columnDataGroup"));
       }
       return value;
     }
@@ -81,6 +85,11 @@ ColumnData.ColumnData = Ember.Object.extend({
 
 ColumnData.ColumnDataValidationsMap = {};
 ColumnData.ColumnDataValidation = Ember.Object.extend({
+  init : function() {
+    this._super();
+    this.canBeEmpty();
+  },
+
   validations : Utils.hasMany(null, ColumnData.ColumnDataValidationsMap, "type"),
   validate : Ember.computed.notEmpty('validations'),
   validateValue : function(value, record, validations) {
@@ -160,13 +169,18 @@ ColumnData.CSVRegexValidation = ColumnData.RegexValidation.extend({
 ColumnData.CSVDuplicateValidation = ColumnData.CSVRegexValidation.extend({
   validateValue : function(value, record) {
     var invalid = false, negate = this.get("negate"),
-        isEmpty, emptyBool;
+        isEmpty, emptyBool, valuesMap = {};
     if(value && value.trim) value = value.trim();
     isEmpty = Ember.isEmpty(value);
     if(!isEmpty) {
       value.split(this.get("delimeter")).some(function(item) { 
         item = item.trim();
-        invalid = this.get("regexObject").test(item); 
+        if(valuesMap[item]) {
+          invalid = true;
+        }
+        else {
+          valuesMap[item] = 1;
+        }
         return negate ? !invalid : invalid; 
       }, this); 
       invalid = (negate && !invalid) || (!negate && invalid);
@@ -208,11 +222,12 @@ ColumnData.NumberRangeValidation = ColumnData.EmptyValidation.extend({
   },
 });
 
-ColumnData.ColumnDataValidationsMap[0] = ColumnData.RegexValidation;
-ColumnData.ColumnDataValidationsMap[1] = ColumnData.CSVRegexValidation;
-ColumnData.ColumnDataValidationsMap[2] = ColumnData.CSVDuplicateValidation;
-ColumnData.ColumnDataValidationsMap[3] = ColumnData.DuplicateAcrossRecordsValidation;
-ColumnData.ColumnDataValidationsMap[4] = ColumnData.NumberRangeValidation;
+ColumnData.ColumnDataValidationsMap[0] = ColumnData.EmptyValidation;
+ColumnData.ColumnDataValidationsMap[1] = ColumnData.RegexValidation;
+ColumnData.ColumnDataValidationsMap[2] = ColumnData.CSVRegexValidation;
+ColumnData.ColumnDataValidationsMap[3] = ColumnData.CSVDuplicateValidation;
+ColumnData.ColumnDataValidationsMap[4] = ColumnData.DuplicateAcrossRecordsValidation;
+ColumnData.ColumnDataValidationsMap[5] = ColumnData.NumberRangeValidation;
 
 
 /***  MISC   ***/
@@ -261,6 +276,29 @@ ColumnData.ColumnDataValueMixin = Ember.Mixin.create({
       return val;
     }
   }.property('columnData', 'view.columnData'),
+
+  prevRecord : null,
+  recordDidChange : function() {
+    var record = this.get("record"), prevRecord = this.get("prevRecord"),
+        columnData = this.get("columnData");
+    if(prevRecord) {
+      Ember.removeObserver(prevRecord, columnData.get("name"), this, "notifyValChange");
+    }
+    if(record) {
+      this.recordChangeHook();
+      Ember.addObserver(record, columnData.get("name"), this, "notifyValChange");
+      this.set("prevRecord", record);
+      this.notifyPropertyChange("val");
+    }
+    else {
+      this.recordRemovedHook();
+    }
+  }.observes("view.record", "record"),
+  recordChangeHook : function() {
+    this.notifyPropertyChange('isDisabled');
+  },
+  recordRemovedHook : function(){
+  },
 });
 
 ColumnData.ColumnDataGroupPluginMixin = Ember.Mixin.create(Utils.ObjectWithArrayMixin, {

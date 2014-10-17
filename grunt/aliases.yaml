@@ -2,6 +2,7 @@ default:
   - 'concat:dist'
   - 'emberTemplates:compile'
   - 'uglify'
+  - 'yuidoc'
 
 build_test:
   - 'concat:dist'

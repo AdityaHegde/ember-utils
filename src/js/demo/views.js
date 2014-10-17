@@ -1,21 +1,3 @@
-DemoApp.DragView = Ember.View.extend(DragDrop.DragableMixin, {
-  template : Ember.Handlebars.compile('Drag - {{view.elementId}}'),
-});
-
-DemoApp.DropView = Ember.View.extend(DragDrop.DroppableMixin, {
-  template : Ember.Handlebars.compile('Drop - {{view.elementId}}'),
-
-  dragEnterCallback : function(event, dragView, dragEle, dropView, dropEle) {
-    dropEle.attr("style", "background-color:blue");
-  },
-  dragLeaveCallback : function(event, dragView, dragEle, dropView, dropEle) {
-    dropEle.attr("style", "");
-  },
-  dropCallback : function(event, dragView, dragEle, dropView, dropEle) {
-    dropEle.attr("style", "");
-  },
-});
-
 DemoApp.SortDraggableAView = Ember.View.extend(DragDrop.SortableDraggableMixin, {
   classNames : ["sort-demo-draggable-main"],
   template : Ember.Handlebars.compile('' +
@@ -41,3 +23,24 @@ DemoApp.SortableViewMap = {
   sorta : DemoApp.SortDraggableAView,
   sortb : DemoApp.SortDraggableBView,
 };
+
+DemoApp.LazyDisplayMain = Ember.ContainerView.extend(LazyDisplay.LazyDisplayMainMixin, {
+  getRowView : function(row) {
+    return Ember.View.createWithMixins(LazyDisplay.LazyDisplayRow, {
+      row : row,
+      template : Ember.Handlebars.compile('' +
+        '{{view.row.id}} : {{view.row.vara}} - {{view.row.varb}}' +
+      ''),
+    });
+  },
+  getDummyView : function(row) {
+    return Ember.View.createWithMixins(LazyDisplay.LazyDisplayDummyRow, {
+      row : row,
+      template : Ember.Handlebars.compile(''),
+    });
+  },
+});
+
+DemoApp.TreeRecord = Ember.Object.extend(Tree.NodeRecordMixin, {
+  children : Utils.hasMany("DemoApp.TreeRecord"),
+});
