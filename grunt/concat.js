@@ -33,9 +33,9 @@ module.exports = {
       "test/timer-unit-test.js",
       "test/array-modifier-unit-test.js",
       "test/columndata-unit-test.js",
-      "test/form-unit-test.js",
-      "test/modal-unit-test.js",
-      "test/crud-adaptor-unit-test.js"
+      //"test/form-unit-test.js",
+      //"test/modal-unit-test.js",
+      //"test/crud-adaptor-unit-test.js"
     ],
     dest : "test/tests-merged.js",
   },

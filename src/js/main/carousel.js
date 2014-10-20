@@ -1,3 +1,6 @@
+// Not updated to ember >= 1.8
+
+
 Carousel = Ember.Namespace.create()
 Carousel.Carousel = Ember.View.extend({
   classNames : ['carousel', 'slide'],

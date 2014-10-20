@@ -19,6 +19,7 @@ TestApp = Ember.Application.create({
 var attr = DS.attr, hasMany = DS.hasMany, belongsTo = DS.belongsTo;
 
 QUnit.config.reorder = false;
+QUnit.config.autostart = false;
 //workaroud for qunit not reporting toatal tests
 var testCount = 0;
 var qunitTest = QUnit.test;

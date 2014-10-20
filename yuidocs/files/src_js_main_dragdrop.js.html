@@ -79,6 +79,10 @@
             
                 <li><a href="../classes/ListGroup.ListItemView.html">ListGroup.ListItemView</a></li>
             
+                <li><a href="../classes/model-wrapper.html">model-wrapper</a></li>
+            
+                <li><a href="../classes/ModelWrapper.ModelWrapper.html">ModelWrapper.ModelWrapper</a></li>
+            
                 <li><a href="../classes/Panels.PanelCollapsibleView.html">Panels.PanelCollapsibleView</a></li>
             
                 <li><a href="../classes/Panels.PanelColumnDataGroup.html">Panels.PanelColumnDataGroup</a></li>
@@ -124,6 +128,8 @@
                 <li><a href="../modules/list-group.html">list-group</a></li>
             
                 <li><a href="../modules/list-item.html">list-item</a></li>
+            
+                <li><a href="../modules/model-wrapper.html">model-wrapper</a></li>
             
                 <li><a href="../modules/panel-column-data.html">panel-column-data</a></li>
             
@@ -198,11 +204,16 @@ DragDrop.DraggableMixin = Ember.Mixin.create({
 
   attributeBindings : &#x27;draggable&#x27;,
   draggable : &#x27;true&#x27;,
+  move : true,
   dragStart : function(event) {
     var dataTransfer = event.originalEvent.dataTransfer, viewid = this.get(&quot;elementId&quot;);
     dataTransfer.setData(&#x27;ViewId&#x27;, viewid);
     dataTransfer.dropEffect = &#x27;move&#x27;;
     DragDrop.VIEW_ID = viewid;
+    if(this.get(&quot;move&quot;)) {
+      var ele = this.get(&quot;element&quot;);
+      this.set(&quot;mouseOffset&quot;, { left : Utils.getOffset(ele, &quot;Left&quot;) - event.originalEvent.x, top : Utils.getOffset(ele, &quot;Top&quot;) - event.originalEvent.y });
+    }
     this.dragStartCallback(event);
     event.stopPropagation();
   },
@@ -277,6 +288,10 @@ DragDrop.DroppableMixin = Ember.Mixin.create({
     var dragView = Ember.View.views[DragDrop.VIEW_ID], dragEle = dragView &amp;&amp; $(dragView.get(&quot;element&quot;)),
         dropView = this, dropEle = $(event.target);
     if(dragView &amp;&amp; this.canInteract(dragView, dragEle, dropView, dropEle)) {
+      if(dragView.get(&quot;move&quot;)) {
+        var mouseOffset = dragView.get(&quot;mouseOffset&quot;);
+        dragEle.offset({ left : mouseOffset.left + event.originalEvent.x, top : mouseOffset.top + event.originalEvent.y });
+      }
       this.dropCallback(event, dragView, dragEle, dropView, dropEle);
     }
     event.preventDefault();
@@ -370,6 +385,7 @@ DragDrop.SortableDraggableMixin = Ember.Mixin.create(DragDrop.DraggableMixin, Dr
     return this.get(&quot;hierarchy&quot;)+&quot;_&quot;+this.get(&quot;groupId&quot;);
   }.property(&#x27;view.groupId&#x27;, &#x27;view.hierarchy&#x27;),
   isPlaceholder : false,
+  move : false,
   calcAppendPosition : function(xy) {
     var lxy = this.get(&quot;lastXY&quot;),
         dx = xy[0] - lxy[0], adx = Math.abs(dx),
@@ -577,6 +593,7 @@ DragDrop.SortablePlaceholderMixin = Ember.Mixin.create(DragDrop.DraggableMixin, 
   },
 
   isPlaceholder : true,
+  move : false,
 
   classNames : [&#x27;dragdrop-sortable-placeholder&#x27;],
   //classNameBindings : Ember.computed.alias(&#x27;columnDataGroup.sort.sortablePlaceholderClassNames&#x27;),

@@ -33,6 +33,7 @@ Ember.TEMPLATES["dragdrop"] = Ember.Handlebars.compile('' +
 '');
 
 Ember.TEMPLATES["form"] = Ember.Handlebars.compile('' +
+  '{{alert-message message=message collapseTimeout=collapseTimeout}} ' +
   '{{view "form/form" record=model columnDataGroup=columnDataGroup}} ' +
 '');
 

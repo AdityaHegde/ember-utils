@@ -34,7 +34,7 @@ Modal.ModalWindowView = Ember.View.extend({
           '<h5 class="custom-font">{{view.windowMessage}}</h5>'+
         '</div>' +
         '<div class="modal-body">' +
-          '{{alert-message message=view.message title=view.messageLabel type="error"}}' +
+          //'{{alert-message message=view.message title=view.messageLabel type="error"}}' +
           '{{yield}}' +
         '</div>' +
         '<div class="modal-footer">' +

@@ -478,6 +478,14 @@ Utils.getEmberId = function(obj) {
   return match && match[1];
 };
 
+Utils.getOffset = function(ele, type, parentSelector) {
+  parentSelector = parentSelector || "body";
+  if(!Ember.isEmpty($(ele).filter(parentSelector))) {
+    return 0;
+  }
+  return ele["offset"+type] + Utils.getOffset(ele.offsetParent, type, parentSelector);
+};
+
 /**
  * Timer module with stuff related to timers.
  *
@@ -621,6 +629,13 @@ Timer.Timer = Ember.Object.extend({
     if(!Timer.curTimer) {
       Timer.curTimer = setInterval(Timer.timerFunction, Timer.TIMERTIMEOUT);
     }
+    var that = this;
+    this.set("promise", new Ember.RSVP.Promise(function(resolve, reject) {
+      that.setProperties({
+        resolve : resolve,
+        reject : reject,
+      });
+    }));
   },
 
   /**
@@ -667,30 +682,37 @@ Timer.Timer = Ember.Object.extend({
    */
   endCallback : function() {
   },
+
+  promise : null,
+  resolve : null,
+  reject : null,
 });
 Timer.timerFunction = function() {
-  if(Timer.timers.length === 0) {
-    clearTimeout(Timer.curTimer);
-    Timer.curTimer = null;
-  }
-  else {
-    for(var i = 0; i < Timer.timers.length;) {
-      var timer = Timer.timers[i];
-      timer.decrementProperty("ticks");
-      if(timer.get("ticks") === 0) {
-        timer.set("ticks", Math.ceil(timer.get("timeout") / Timer.TIMERTIMEOUT));
-        timer.timerCallback();
-        timer.decrementProperty("count");
-      }
-      if(timer.get("count") <= 0) {
-        Timer.timers.removeAt(i);
-        timer.endCallback();
-      }
-      else {
-        i++;
+  Ember.run(function() {
+    if(Timer.timers.length === 0) {
+      clearTimeout(Timer.curTimer);
+      Timer.curTimer = null;
+    }
+    else {
+      for(var i = 0; i < Timer.timers.length;) {
+        var timer = Timer.timers[i];
+        timer.decrementProperty("ticks");
+        if(timer.get("ticks") === 0) {
+          timer.set("ticks", Math.ceil(timer.get("timeout") / Timer.TIMERTIMEOUT));
+          timer.timerCallback();
+          timer.decrementProperty("count");
+        }
+        if(timer.get("count") <= 0) {
+          Timer.timers.removeAt(i);
+          timer.endCallback();
+          timer.get("resolve")();
+        }
+        else {
+          i++;
+        }
       }
     }
-  }
+  });
 };
 
 ArrayMod = Ember.Namespace.create();
@@ -1165,64 +1187,6 @@ CrudAdapter.GlobalData = Ember.Object.create();
 CrudAdapter.endPoint = {
   find : "get",
 };
-CrudAdapter.allowedModelAttrs = [{
-  attr : "keys",
-  defaultValue : "emptyArray",
-}, {
-  attr : "apiName",
-  defaultValue : "value",
-  value : "data/generic",
-}, {
-  attr : "queryParams", 
-  defaultValue : "emptyArray",
-}, {
-  attr : "findParams", 
-  defaultValue : "emptyArray",
-}, {
-  attr : "extraAttrs", 
-  defaultValue : "emptyArray",
-}, {
-  attr : "ignoreFieldsOnCreateUpdate", 
-  defaultValue : "emptyArray",
-}, {
-  attr : "ignoreFieldsOnRetrieveBackup", 
-  defaultValue : "emptyArray",
-}, {
-  attr : "removeAttrsFromBackupOnFind", 
-  defaultValue : "emptyArray",
-}, {
-  attr : "retainId", 
-  defaultValue : "value",
-  value : false,
-}, {
-  attr : "useIdForBackup", 
-  defaultValue : "value",
-  value : false,
-}, {
-  attr : "paginatedAttribute", 
-  defaultValue : "value",
-  value : "id",
-}, {
-  attr : "normalizeFunction", 
-  defaultValue : "value",
-  value : function() {},
-}, {
-  attr : "preSerializeRelations", 
-  defaultValue : "value",
-  value : function() {},
-}, {
-  attr : "serializeFunction", 
-  defaultValue : "value",
-  value : function() {},
-}, {
-  attr : "backupData", 
-  defaultValue : "value",
-  value : function() {},
-}, {
-  attr : "retrieveBackup", 
-  defaultValue : "value",
-  value : function() {},
-}];
 CrudAdapter.ModelMap = {};
 
 CrudAdapter.ApplicationAdapter = DS.RESTAdapter.extend({
@@ -1782,8 +1746,20 @@ CrudAdapter.rollbackRecord = function(record) {
   });
 };
 
+/**
+ * Ember Data Model wrapper to support crud adaptor shipped with this util package.
+ *
+ * @module model-wrapper
+ */
+
 ModelWrapper = Ember.Namespace.create();
-ModelWrapper.AggregateFromChildrenMixin = Ember.Mixin.create({
+
+/**
+ * Model wrapper model class.
+ *
+ * @class ModelWrapper.ModelWrapper
+ */
+ModelWrapper.ModelWrapper = DS.Model.extend({
   init : function() {
     this._super();
     var arrayProps = this.get("arrayProps"), that = this;
@@ -1803,6 +1779,9 @@ ModelWrapper.AggregateFromChildrenMixin = Ember.Mixin.create({
       delete this._validation[propId];
       Ember.removeObserver(props[i], "validationFailed", this, "validationFailedDidChanged");
       Ember.removeObserver(props[i], "isDirty", this, "attributeDidChange");
+      Ember.removeObserver(props[i], "isLoading", this, "attributeDidChange");
+      Ember.removeObserver(props[i], "isReloading", this, "attributeDidChange");
+      Ember.removeObserver(props[i], "isSaving", this, "attributeDidChange");
     }
   },
 
@@ -1812,6 +1791,9 @@ ModelWrapper.AggregateFromChildrenMixin = Ember.Mixin.create({
       this.attributeDidChange(props[i], "isDirty");
       Ember.addObserver(props[i], "validationFailed", this, "validationFailedDidChanged");
       Ember.addObserver(props[i], "isDirty", this, "attributeDidChange");
+      Ember.addObserver(props[i], "isLoading", this, "attributeDidChange");
+      Ember.addObserver(props[i], "isReloading", this, "attributeDidChange");
+      Ember.addObserver(props[i], "isSaving", this, "attributeDidChange");
     }
   },
 
@@ -1830,28 +1812,264 @@ ModelWrapper.AggregateFromChildrenMixin = Ember.Mixin.create({
   attributeDidChange : function(obj, attr) {
     this.set(attr+"_alias", this.get(attr) || obj.get(attr));
   },
+
+  /**
+   * Boolean to denote validation failure. Poppulated by form module.
+   *
+   * @property validationFailed
+   * @type Boolean
+   */
+  validationFailed : false,
+
+  /**
+   * Bubbled isLoading boolean from child records.
+   *
+   * @property isLoading_alias
+   * @type Boolean
+   */
+  isLoading_alias : false,
+
+  /**
+   * Bubbled isReloading boolean from child records.
+   *
+   * @property isReloading_alias
+   * @type Boolean
+   */
+  isReloading_alias : Ember.computed.oneWay("isReloading"),
+
+  /**
+   * Bubbled isSaving boolean from child records.
+   *
+   * @property isSaving_alias
+   * @type Boolean
+   */
+  isSaving_alias : Ember.computed.oneWay("isSaving"),
+
+  /**
+   * Bubbled isDirty boolean from child records.
+   *
+   * @property isDirty_alias
+   * @type Boolean
+   */
+  isDirty_alias : Ember.computed.oneWay("isDirty"),
+  isNotDirty : Ember.computed.not("isDirty_alias"),
+
+  /**
+   * Boolean to denote disabling of save based on isDirty_alias, validationFailed, isLoading_alias, isReloading_alias, isSaving_alias.
+   *
+   * @property disableSave
+   * @type Boolean
+   */
+  disableSave : Ember.computed.or("isNotDirty", "validationFailed", "isLoading_alias", "isReloading_alias", "isSaving_alias"),
 });
 
-ModelWrapper.ModelWrapper = DS.Model.extend({
-  isDirty_alias : Ember.computed.oneWay("isDirty"),
-  disableSave : function() {
-    return this.get("validationFailed") || !this.get("isDirty_alias");
-  }.property("validationFailed", "isDirty_alias"),
-});
+ModelWrapper.allowedModelAttrs = [{
+  /**
+   * Array of primary keys for the model. The values of these keys will be joined with '__' and will be assigned to 'id'.
+   *
+   * @property keys
+   * @type Array
+   * @static
+   */
+  attr : "keys",
+  defaultValue : "emptyArray",
+}, {
+  /**
+   * API end point on server for transactions for this model.
+   *
+   * @property apiName
+   * @type String
+   * @default "data/generic"
+   * @static
+   */
+  attr : "apiName",
+  defaultValue : "value",
+  value : "data/generic",
+}, {
+  /**
+   * Keys needed to make delete calls. These values will be taken from either the record or 'CrudAdapter.GlobalData'
+   *
+   * @property queryParams
+   * @type Array
+   * @static
+   */
+  attr : "queryParams", 
+  defaultValue : "emptyArray",
+}, {
+  /**
+   * Keys needed to make find calls. These values will be taken from either the record or 'CrudAdapter.GlobalData'
+   *
+   * @property findParams
+   * @type Array
+   * @static
+   */
+  attr : "findParams", 
+  defaultValue : "emptyArray",
+}, {
+  /**
+   * Keys for extra attributes to be passed along with record attrs during create/update call. These values will be taken from either the record or 'CrudAdapter.GlobalData'
+   *
+   * @property extraAttrs
+   * @type Array
+   * @static
+   */
+  attr : "extraAttrs", 
+  defaultValue : "emptyArray",
+}, {
+  /**
+   * Keys from record to be deleted when making create/update call.
+   *
+   * @property ignoreFieldsOnCreateUpdate
+   * @type Array
+   * @static
+   */
+  attr : "ignoreFieldsOnCreateUpdate", 
+  defaultValue : "emptyArray",
+}, {
+  /**
+   * Keys from backup data to be deleted when data is recieved from server after a create/update call.
+   *
+   * @property ignoreFieldsOnRetrieveBackup
+   * @type Array
+   * @static
+   */
+  attr : "ignoreFieldsOnRetrieveBackup", 
+  defaultValue : "emptyArray",
+}, {
+  /**
+   * Keys from record data to be deleted when data is being backed up during a find call.
+   *
+   * @property removeAttrsFromBackupOnFind
+   * @type Array
+   * @static
+   */
+  attr : "removeAttrsFromBackupOnFind", 
+  defaultValue : "emptyArray",
+}, {
+  /**
+   * Retain id when backing up data.
+   *
+   * @property retainId
+   * @type Boolean
+   * @default false
+   * @static
+   */
+  attr : "retainId", 
+  defaultValue : "value",
+  value : false,
+}, {
+  /**
+   * Use id from record while backing up (default is to use "new" when creating record and id when updating). Used when records are child records and are not saved directly, in which case the child records must have an id and should be used when backing up.
+   *
+   * @property useIdForBackup
+   * @type Boolean
+   * @default false
+   * @static
+   */
+  attr : "useIdForBackup", 
+  defaultValue : "value",
+  value : false,
+}, {
+  /**
+   * Attribute that will be paginated. Applies during findNext calls.
+   *
+   * @property paginatedAttribute
+   * @type String
+   * @default "id"
+   * @static
+   */
+  attr : "paginatedAttribute", 
+  defaultValue : "value",
+  value : "id",
+}, {
+  /**
+   * Callback called when normalizing record.
+   *
+   * @property normalizeFunction
+   * @type Function
+   * @param {Object} [hash] JSON object of the data returned from server.
+   * @static
+   */
+  attr : "normalizeFunction", 
+  defaultValue : "value",
+  value : function() {},
+}, {
+  /**
+   * Callback called before serializing child records.
+   *
+   * @property preSerializeRelations
+   * @type Function
+   * @param {Object} [data] JSON object of the data returned from server.
+   * @static
+   */
+  attr : "preSerializeRelations", 
+  defaultValue : "value",
+  value : function() {},
+}, {
+  /**
+   * Callback called for serializing data being sent to server.
+   *
+   * @property serializeFunction
+   * @type Function
+   * @param {Class} [record] Record being sent to server.
+   * @param {Object} [json] JSON object of the data to be sent to server.
+   * @static
+   */
+  attr : "serializeFunction", 
+  defaultValue : "value",
+  value : function() {},
+}, {
+  /**
+   * Callback called after backing up data.
+   *
+   * @property backupData
+   * @type Function
+   * @param {Class} [record] Record being backed up.
+   * @param {String|Class} [type] Record type.
+   * @param {Object} [data] JSON object being backed up.
+   * @static
+   */
+  attr : "backupData", 
+  defaultValue : "value",
+  value : function() {},
+}, {
+  /**
+   * Callback called after retrieving backup data.
+   *
+   * @property retrieveBackup
+   * @type Function
+   * @param {Object} [hash] JSON object returned by server.
+   * @param {String|Class} [type] Record type.
+   * @param {Object} [data] JSON object stored in backup.
+   * @static
+   */
+  attr : "retrieveBackup", 
+  defaultValue : "value",
+  value : function() {},
+}];
+
+/**
+ * Function that returns an ember data model.
+ *
+ * @method createModelWrapper
+ * @param {Object} [object] JSON that are member attributes.
+ * @param {Object} [config] JSON that are static attributes.
+ * @param {Array} [mixins] Array of mixins to include.
+ */
 ModelWrapper.createModelWrapper = function(object, config, mixins) {
   var args = mixins || [];
   args.push(object);
   var model = ModelWrapper.ModelWrapper.extend.apply(ModelWrapper.ModelWrapper, args);
-  for(var i = 0; i < CrudAdapter.allowedModelAttrs.length; i++) {
-    if(config[CrudAdapter.allowedModelAttrs[i].attr]) {
-      model[CrudAdapter.allowedModelAttrs[i].attr] = config[CrudAdapter.allowedModelAttrs[i].attr];
+  for(var i = 0; i < ModelWrapper.allowedModelAttrs.length; i++) {
+    if(config[ModelWrapper.allowedModelAttrs[i].attr]) {
+      model[ModelWrapper.allowedModelAttrs[i].attr] = config[ModelWrapper.allowedModelAttrs[i].attr];
     }
     else {
-      if(CrudAdapter.allowedModelAttrs[i].defaultValue === "emptyArray") {
-        model[CrudAdapter.allowedModelAttrs[i].attr] = Ember.A();
+      if(ModelWrapper.allowedModelAttrs[i].defaultValue === "emptyArray") {
+        model[ModelWrapper.allowedModelAttrs[i].attr] = Ember.A();
       }
-      else if(CrudAdapter.allowedModelAttrs[i].defaultValue === "value") {
-        model[CrudAdapter.allowedModelAttrs[i].attr] = CrudAdapter.allowedModelAttrs[i].value;
+      else if(ModelWrapper.allowedModelAttrs[i].defaultValue === "value") {
+        model[ModelWrapper.allowedModelAttrs[i].attr] = ModelWrapper.allowedModelAttrs[i].value;
       }
     }
   }
@@ -1991,11 +2209,17 @@ ColumnData.ColumnDataValidation = Ember.Object.extend({
 
   canBeEmpty : function() {
     if(this.get("validations") && !this.get("validations").mapBy("type").contains(0)) {
+      this.set("mandatory", false);
       this.get("validations").forEach(function(item) {
         item.set('canBeEmpty', true);
       });
     }
+    else {
+      this.set("mandatory", true);
+    }
   }.observes('validations.@each'),
+
+  mandatory : false,
 });
 
 /** ColumnDataValidations **/
@@ -2153,6 +2377,10 @@ ColumnData.ColumnDataValueMixin = Ember.Mixin.create({
         //TODO : find a better way to fix value becoming null when selection changes
         if(val || !columnData.get("cantBeNull")) {
           record.set(columnData.get("key"), val);
+          this.valueDidChange(val);
+          if(record.valueDidChange) {
+            record.valueDidChange(columnData, val);
+          }
         }
       }
       return val;
@@ -2163,6 +2391,9 @@ ColumnData.ColumnDataValueMixin = Ember.Mixin.create({
       return val;
     }
   }.property('columnData', 'view.columnData'),
+
+  valueDidChange : function(val) {
+  },
 
   prevRecord : null,
   recordDidChange : function() {
@@ -4498,7 +4729,7 @@ Alerts.AlertTypeMap = {
 };
 
 /**
- * Component for alert message.
+ * View for alert message.
  * Usage : 
  *
  *     {{alert-message type="info" title="Title" message="Message"}}
@@ -4506,6 +4737,11 @@ Alerts.AlertTypeMap = {
  * @class Alerts.AlertMessage
  */
 Alerts.AlertMessage = Ember.Component.extend({
+  init : function() {
+    this._super();
+    this.set("switchOnMessageListener", true);
+  },
+
   /**
    * Type of alert message. Possible values are "success", "warning", "info", "error"
    *
@@ -4531,36 +4767,56 @@ Alerts.AlertMessage = Ember.Component.extend({
    */
   message : function(key, value) {
     if(arguments.length > 1) {
-      if(!Ember.isEmply(value)) {
+      if(!Ember.isEmpty(value) && this.get("switchOnMessageListener")) {
+        var timeout = this.get("collapseTimeout"), that = this;
         this.set("showAlert", true);
+        if(!Ember.isEmpty(timeout) && timeout > 0) {
+          Timer.addToQue(this.get("elementId"), timeout).then(function() {
+            that.set("showAlert", false);
+          });
+        }
       }
       else {
         this.set("showAlert", false);
       }
       return value;
     }
-  },
+  }.property(),
+  switchOnMessageListener : false,
+
+  /**
+   * Timeout after which to collapse the alert message. 0 to disable.
+   *
+   * @property collapseTimeout
+   * @type Number
+   * @default 0
+   */
+  collapseTimeout : 0,
 
   typeData : function() {
     var type = this.get("type");
     return Alerts.AlertTypeMap[type] || Alerts.AlertTypeMap.error;
   }.property('type'),
 
-  classNameBindings : ["view.showAlert:hidden"],
-
   showAlert : false,
 
-  click : function(event) {
-    if($(event.target).filter('button.close').length > 0) {
-      this.set("message", "");
+  click : function(e) {
+    if($(event.target).filter("button.close").length > 0) {
+      var that = this;
+      Ember.run(function() {
+        that.set("showAlert", false);
+      });
     }
   },
 
-  template : Ember.Handlebars.compile('' +
-  '<div {{bind-attr class=":alert typeData.alertClass :alert-dismissable"}}>' +
-    '<button class="close" {{action "dismissed"}}>&times;</button>' +
-    '<strong><span {{bind-attr class=":glyphicon typeData.glyphiconClass :btn-sm"}}></span> <span class="alert-title">{{title}}</span></strong> <span class="alert-message">{{message}}</span>' +
-  '</div>'),
+  classNameBindings : [":alert", "typeData.alertClass", ":fade", "showAlert:in"],
+
+  layout : Ember.Handlebars.compile('' +
+    '<button class="close">&times;</button>' +
+    '<strong><span {{bind-attr class=":glyphicon typeData.glyphiconClass :btn-sm"}}></span>' +
+    '<span class="alert-title">{{title}}</span></strong> <span class="alert-message">{{message}}</span>' +
+    '{{yield}}' +
+  ''),
 });
 
 Ember.Handlebars.helper('alert-message', Alerts.AlertMessage);
@@ -4585,11 +4841,16 @@ DragDrop.DraggableMixin = Ember.Mixin.create({
 
   attributeBindings : 'draggable',
   draggable : 'true',
+  move : true,
   dragStart : function(event) {
     var dataTransfer = event.originalEvent.dataTransfer, viewid = this.get("elementId");
     dataTransfer.setData('ViewId', viewid);
     dataTransfer.dropEffect = 'move';
     DragDrop.VIEW_ID = viewid;
+    if(this.get("move")) {
+      var ele = this.get("element");
+      this.set("mouseOffset", { left : Utils.getOffset(ele, "Left") - event.originalEvent.x, top : Utils.getOffset(ele, "Top") - event.originalEvent.y });
+    }
     this.dragStartCallback(event);
     event.stopPropagation();
   },
@@ -4664,6 +4925,10 @@ DragDrop.DroppableMixin = Ember.Mixin.create({
     var dragView = Ember.View.views[DragDrop.VIEW_ID], dragEle = dragView && $(dragView.get("element")),
         dropView = this, dropEle = $(event.target);
     if(dragView && this.canInteract(dragView, dragEle, dropView, dropEle)) {
+      if(dragView.get("move")) {
+        var mouseOffset = dragView.get("mouseOffset");
+        dragEle.offset({ left : mouseOffset.left + event.originalEvent.x, top : mouseOffset.top + event.originalEvent.y });
+      }
       this.dropCallback(event, dragView, dragEle, dropView, dropEle);
     }
     event.preventDefault();
@@ -4757,6 +5022,7 @@ DragDrop.SortableDraggableMixin = Ember.Mixin.create(DragDrop.DraggableMixin, Dr
     return this.get("hierarchy")+"_"+this.get("groupId");
   }.property('view.groupId', 'view.hierarchy'),
   isPlaceholder : false,
+  move : false,
   calcAppendPosition : function(xy) {
     var lxy = this.get("lastXY"),
         dx = xy[0] - lxy[0], adx = Math.abs(dx),
@@ -4964,6 +5230,7 @@ DragDrop.SortablePlaceholderMixin = Ember.Mixin.create(DragDrop.DraggableMixin, 
   },
 
   isPlaceholder : true,
+  move : false,
 
   classNames : ['dragdrop-sortable-placeholder'],
   //classNameBindings : Ember.computed.alias('columnDataGroup.sort.sortablePlaceholderClassNames'),
@@ -5446,7 +5713,7 @@ Modal.ModalWindowView = Ember.View.extend({
           '<h5 class="custom-font">{{view.windowMessage}}</h5>'+
         '</div>' +
         '<div class="modal-body">' +
-          '{{alert-message message=view.message title=view.messageLabel type="error"}}' +
+          //'{{alert-message message=view.message title=view.messageLabel type="error"}}' +
           '{{yield}}' +
         '</div>' +
         '<div class="modal-footer">' +

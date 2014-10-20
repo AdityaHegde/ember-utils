@@ -477,3 +477,11 @@ Utils.getEmberId = function(obj) {
   var str = obj.toString(), match = str.match(Utils.ExtractIdRegex);
   return match && match[1];
 };
+
+Utils.getOffset = function(ele, type, parentSelector) {
+  parentSelector = parentSelector || "body";
+  if(!Ember.isEmpty($(ele).filter(parentSelector))) {
+    return 0;
+  }
+  return ele["offset"+type] + Utils.getOffset(ele.offsetParent, type, parentSelector);
+};

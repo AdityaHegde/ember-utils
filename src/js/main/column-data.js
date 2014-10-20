@@ -104,11 +104,17 @@ ColumnData.ColumnDataValidation = Ember.Object.extend({
 
   canBeEmpty : function() {
     if(this.get("validations") && !this.get("validations").mapBy("type").contains(0)) {
+      this.set("mandatory", false);
       this.get("validations").forEach(function(item) {
         item.set('canBeEmpty', true);
       });
     }
+    else {
+      this.set("mandatory", true);
+    }
   }.observes('validations.@each'),
+
+  mandatory : false,
 });
 
 /** ColumnDataValidations **/
@@ -266,6 +272,10 @@ ColumnData.ColumnDataValueMixin = Ember.Mixin.create({
         //TODO : find a better way to fix value becoming null when selection changes
         if(val || !columnData.get("cantBeNull")) {
           record.set(columnData.get("key"), val);
+          this.valueDidChange(val);
+          if(record.valueDidChange) {
+            record.valueDidChange(columnData, val);
+          }
         }
       }
       return val;
@@ -276,6 +286,9 @@ ColumnData.ColumnDataValueMixin = Ember.Mixin.create({
       return val;
     }
   }.property('columnData', 'view.columnData'),
+
+  valueDidChange : function(val) {
+  },
 
   prevRecord : null,
   recordDidChange : function() {

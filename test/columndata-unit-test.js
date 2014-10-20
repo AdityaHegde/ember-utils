@@ -6,35 +6,34 @@ module("columndata.js", {
   },
 });
 
-/*test("Sanity tests", function() {
+test("Sanity tests", function() {
   var columnData = ColumnData.ColumnData.create({
     name : "vara",
     keyName : "varb",
     label : "Vara",
     placeholder : "_Vara",
-    validations : [
-      {type : 0},
-      {type : 1, regex : "^([a-zA-Z0-9](?:[ \\t]*\\,[ \\t]*)?)+$", negate : true, invalidMessage : "Can only be alphanumeric"},
-      {type : 2, delimeter : ",", regex : "^[a-zA-Z0-9]*$", negate : true, invalidMessage : "Can only be alphanumeric"},
-      {type : 3, delimeter : ",", invalidMessage : "Cannot have duplicates"},
-    ],
+    validation : {
+      validations : [
+        {type : 0},
+        {type : 1, regex : "^([a-zA-Z0-9](?:[ \\t]*\\,[ \\t]*)?)+$", negate : true, invalidMessage : "Can only be alphanumeric"},
+        {type : 2, delimeter : ",", regex : "^[a-zA-Z0-9]*$", negate : true, invalidMessage : "Can only be alphanumeric"},
+        {type : 3, delimeter : ",", invalidMessage : "Cannot have duplicates"},
+      ],
+    },
   }), record = Ember.Object.create();
   andThen(function() {
     equal(columnData.get("key"), "varb", "Has proper 'key' : 'varb'");
-    equal(columnData.get("placeholderActual"), "_Vara", "Has proper 'placeholderActual' : '_Vara'");
-    ok(columnData.get("mandatory"), "Has proper 'mandatory' : 'true'");
+    ok(columnData.get("validation.mandatory"), "Has proper 'mandatory' : 'true'");
   });
   Ember.run(function() {
     columnData.set("keyName", null);
-    columnData.set("placeholder", null);
-    columnData.get("validations").shiftObject();
+    columnData.get("validation.validations").shiftObject();
   });
   andThen(function() {
     equal(columnData.get("key"), "vara", "Has proper 'key' : 'vara'");
-    equal(columnData.get("placeholderActual"), "Vara", "Has proper 'placeholderActual' : 'Vara'");
-    ok(!columnData.get("mandatory"), "Has proper 'mandatory' : 'false'");
+    ok(!columnData.get("validation.mandatory"), "Has proper 'mandatory' : 'false'");
   });
-});*/
+});
 
 test("Validation tests - simple", function() {
   var columnData = ColumnData.ColumnData.create({

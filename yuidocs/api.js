@@ -20,6 +20,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ListGroup.ListColumnDataGroup",
         "ListGroup.ListGroupView",
         "ListGroup.ListItemView",
+        "ModelWrapper.ModelWrapper",
         "Panels.PanelCollapsibleView",
         "Panels.PanelColumnDataGroup",
         "Panels.PanelView",
@@ -30,7 +31,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "Tree.NodeRecordMixin",
         "Tree.NodeView",
         "Tree.TreeColumnData",
-        "Tree.TreeColumnDataGroup"
+        "Tree.TreeColumnDataGroup",
+        "model-wrapper"
     ],
     "modules": [
         "alerts",
@@ -43,6 +45,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "list-column-data",
         "list-group",
         "list-item",
+        "model-wrapper",
         "panel-column-data",
         "panel-views",
         "panels",
@@ -101,6 +104,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "list-item",
             "name": "list-item",
             "description": "Different list item views."
+        },
+        {
+            "displayName": "model-wrapper",
+            "name": "model-wrapper",
+            "description": "Ember Data Model wrapper to support crud adaptor shipped with this util package."
         },
         {
             "displayName": "panel-column-data",

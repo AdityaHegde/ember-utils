@@ -97,6 +97,19 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/js/main/model-wrapper.js": {
+            "name": "src/js/main/model-wrapper.js",
+            "modules": {
+                "model-wrapper": 1
+            },
+            "classes": {
+                "ModelWrapper.ModelWrapper": 1
+            },
+            "fors": {
+                "model-wrapper": 1
+            },
+            "namespaces": {}
+        },
         "src/js/main/panels.js": {
             "name": "src/js/main/panels.js",
             "modules": {
@@ -182,7 +195,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src/js/main/dragdrop.js",
-            "line": 49,
+            "line": 54,
             "description": "A drag drop module for all operations related to drag and drop. Uses html5 drag drop feature."
         },
         "global-module": {
@@ -308,6 +321,22 @@
             "file": "src/js/main/listgroups.js",
             "line": 102,
             "description": "Column data interface for list item views."
+        },
+        "model-wrapper": {
+            "name": "model-wrapper",
+            "submodules": {},
+            "classes": {
+                "ModelWrapper.ModelWrapper": 1,
+                "model-wrapper": 1
+            },
+            "fors": {
+                "model-wrapper": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/js/main/model-wrapper.js",
+            "line": 9,
+            "description": "Ember Data Model wrapper to support crud adaptor shipped with this util package."
         },
         "panels": {
             "name": "panels",
@@ -443,7 +472,7 @@
             "namespace": "",
             "file": "src/js/main/alerts.js",
             "line": 28,
-            "description": "Component for alert message.\nUsage : \n\n    {{alert-message type=\"info\" title=\"Title\" message=\"Message\"}}"
+            "description": "View for alert message.\nUsage : \n\n    {{alert-message type=\"info\" title=\"Title\" message=\"Message\"}}"
         },
         "AppWrapper.AppWrapper": {
             "name": "AppWrapper.AppWrapper",
@@ -484,7 +513,7 @@
             "module": "drag-drop",
             "namespace": "",
             "file": "src/js/main/dragdrop.js",
-            "line": 49,
+            "line": 54,
             "description": "A droppable mixin when included enables the view to be dropped on."
         },
         "GlobalModules.DisplayTextView": {
@@ -710,6 +739,31 @@
             "line": 183,
             "description": "Column data for the list group modules (title, rightBlock or desc based on 'type')"
         },
+        "ModelWrapper.ModelWrapper": {
+            "name": "ModelWrapper.ModelWrapper",
+            "shortname": "ModelWrapper.ModelWrapper",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "model-wrapper",
+            "namespace": "",
+            "file": "src/js/main/model-wrapper.js",
+            "line": 9,
+            "description": "Model wrapper model class."
+        },
+        "model-wrapper": {
+            "name": "model-wrapper",
+            "shortname": "model-wrapper",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "model-wrapper",
+            "namespace": ""
+        },
         "Panels.PanelsView": {
             "name": "Panels.PanelsView",
             "shortname": "Panels.PanelsView",
@@ -878,7 +932,7 @@
     "classitems": [
         {
             "file": "src/js/main/alerts.js",
-            "line": 37,
+            "line": 42,
             "description": "Type of alert message. Possible values are \"success\", \"warning\", \"info\", \"error\"",
             "itemtype": "property",
             "name": "type",
@@ -889,7 +943,7 @@
         },
         {
             "file": "src/js/main/alerts.js",
-            "line": 46,
+            "line": 51,
             "description": "Title of the alert message.",
             "itemtype": "property",
             "name": "title",
@@ -899,11 +953,22 @@
         },
         {
             "file": "src/js/main/alerts.js",
-            "line": 54,
+            "line": 59,
             "description": "Alert message.",
             "itemtype": "property",
             "name": "message",
             "type": "String",
+            "class": "Alerts.AlertMessage",
+            "module": "alerts"
+        },
+        {
+            "file": "src/js/main/alerts.js",
+            "line": 84,
+            "description": "Timeout after which to collapse the alert message. 0 to disable.",
+            "itemtype": "property",
+            "name": "collapseTimeout",
+            "type": "Number",
+            "default": "0",
             "class": "Alerts.AlertMessage",
             "module": "alerts"
         },
@@ -933,13 +998,13 @@
         },
         {
             "file": "src/js/main/column-data.js",
-            "line": 350,
+            "line": 357,
             "class": "DragDrop.DraggableMixin",
             "module": "app-wrapper"
         },
         {
             "file": "src/js/main/dragdrop.js",
-            "line": 30,
+            "line": 35,
             "description": "A callback method that is called when a drag starts.",
             "itemtype": "method",
             "name": "dragStartCallback",
@@ -955,7 +1020,7 @@
         },
         {
             "file": "src/js/main/dragdrop.js",
-            "line": 39,
+            "line": 44,
             "description": "Targets that are allowed to be dropped on. Can be a selector or an array of selectors.",
             "itemtype": "property",
             "name": "allowedDropTargets",
@@ -966,7 +1031,7 @@
         },
         {
             "file": "src/js/main/dragdrop.js",
-            "line": 105,
+            "line": 114,
             "description": "A callback method that is called when the view being dragged enters this view.",
             "itemtype": "method",
             "name": "dragEnterCallback",
@@ -1002,7 +1067,7 @@
         },
         {
             "file": "src/js/main/dragdrop.js",
-            "line": 118,
+            "line": 127,
             "description": "A callback method that is called when the view being dragged is over this view.",
             "itemtype": "method",
             "name": "dragOverCallback",
@@ -1038,7 +1103,7 @@
         },
         {
             "file": "src/js/main/dragdrop.js",
-            "line": 131,
+            "line": 140,
             "description": "A callback method that is called when the view being dragged leaves this view.",
             "itemtype": "method",
             "name": "dragLeaveCallback",
@@ -1074,7 +1139,7 @@
         },
         {
             "file": "src/js/main/dragdrop.js",
-            "line": 144,
+            "line": 153,
             "description": "A callback method that is called when the view being dragged is dropped on this view.",
             "itemtype": "method",
             "name": "dropCallback",
@@ -1110,7 +1175,7 @@
         },
         {
             "file": "src/js/main/dragdrop.js",
-            "line": 157,
+            "line": 166,
             "description": "Accept drops from elements passing the selectors. Can be a single selectors or an array of it.",
             "itemtype": "property",
             "name": "acceptDropFrom",
@@ -1121,13 +1186,13 @@
         },
         {
             "file": "src/js/main/dragdrop.js",
-            "line": 168,
+            "line": 177,
             "class": "DragDrop.DroppableMixin",
             "module": "drag-drop"
         },
         {
             "file": "src/js/main/dragdrop.js",
-            "line": 471,
+            "line": 482,
             "class": "DragDrop.DroppableMixin",
             "module": "drag-drop"
         },
@@ -1440,6 +1505,345 @@
             "class": "ListGroup.ListColumnData",
             "module": "list-group",
             "submodule": "list-column-data"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 68,
+            "description": "Boolean to denote validation failure. Poppulated by form module.",
+            "itemtype": "property",
+            "name": "validationFailed",
+            "type": "Boolean",
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 76,
+            "description": "Bubbled isLoading boolean from child records.",
+            "itemtype": "property",
+            "name": "isLoading_alias",
+            "type": "Boolean",
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 84,
+            "description": "Bubbled isReloading boolean from child records.",
+            "itemtype": "property",
+            "name": "isReloading_alias",
+            "type": "Boolean",
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 92,
+            "description": "Bubbled isSaving boolean from child records.",
+            "itemtype": "property",
+            "name": "isSaving_alias",
+            "type": "Boolean",
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 100,
+            "description": "Bubbled isDirty boolean from child records.",
+            "itemtype": "property",
+            "name": "isDirty_alias",
+            "type": "Boolean",
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 109,
+            "description": "Boolean to denote disabling of save based on isDirty_alias, validationFailed, isLoading_alias, isReloading_alias, isSaving_alias.",
+            "itemtype": "property",
+            "name": "disableSave",
+            "type": "Boolean",
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 119,
+            "description": "Array of primary keys for the model. The values of these keys will be joined with '__' and will be assigned to 'id'.",
+            "itemtype": "property",
+            "name": "keys",
+            "type": "Array",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 129,
+            "description": "API end point on server for transactions for this model.",
+            "itemtype": "property",
+            "name": "apiName",
+            "type": "String",
+            "default": "\"data/generic\"",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 141,
+            "description": "Keys needed to make delete calls. These values will be taken from either the record or 'CrudAdapter.GlobalData'",
+            "itemtype": "property",
+            "name": "queryParams",
+            "type": "Array",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 151,
+            "description": "Keys needed to make find calls. These values will be taken from either the record or 'CrudAdapter.GlobalData'",
+            "itemtype": "property",
+            "name": "findParams",
+            "type": "Array",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 161,
+            "description": "Keys for extra attributes to be passed along with record attrs during create/update call. These values will be taken from either the record or 'CrudAdapter.GlobalData'",
+            "itemtype": "property",
+            "name": "extraAttrs",
+            "type": "Array",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 171,
+            "description": "Keys from record to be deleted when making create/update call.",
+            "itemtype": "property",
+            "name": "ignoreFieldsOnCreateUpdate",
+            "type": "Array",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 181,
+            "description": "Keys from backup data to be deleted when data is recieved from server after a create/update call.",
+            "itemtype": "property",
+            "name": "ignoreFieldsOnRetrieveBackup",
+            "type": "Array",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 191,
+            "description": "Keys from record data to be deleted when data is being backed up during a find call.",
+            "itemtype": "property",
+            "name": "removeAttrsFromBackupOnFind",
+            "type": "Array",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 201,
+            "description": "Retain id when backing up data.",
+            "itemtype": "property",
+            "name": "retainId",
+            "type": "Boolean",
+            "default": "false",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 213,
+            "description": "Use id from record while backing up (default is to use \"new\" when creating record and id when updating). Used when records are child records and are not saved directly, in which case the child records must have an id and should be used when backing up.",
+            "itemtype": "property",
+            "name": "useIdForBackup",
+            "type": "Boolean",
+            "default": "false",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 225,
+            "description": "Attribute that will be paginated. Applies during findNext calls.",
+            "itemtype": "property",
+            "name": "paginatedAttribute",
+            "type": "String",
+            "default": "\"id\"",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper"
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 237,
+            "description": "Callback called when normalizing record.",
+            "itemtype": "property",
+            "name": "normalizeFunction",
+            "type": "Function",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper",
+            "subprops": [
+                {
+                    "name": "hash",
+                    "description": "JSON object of the data returned from server.",
+                    "type": "Object",
+                    "optional": true
+                }
+            ]
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 249,
+            "description": "Callback called before serializing child records.",
+            "itemtype": "property",
+            "name": "preSerializeRelations",
+            "type": "Function",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper",
+            "subprops": [
+                {
+                    "name": "data",
+                    "description": "JSON object of the data returned from server.",
+                    "type": "Object",
+                    "optional": true
+                }
+            ]
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 261,
+            "description": "Callback called for serializing data being sent to server.",
+            "itemtype": "property",
+            "name": "serializeFunction",
+            "type": "Function",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper",
+            "subprops": [
+                {
+                    "name": "record",
+                    "description": "Record being sent to server.",
+                    "type": "Class",
+                    "optional": true
+                },
+                {
+                    "name": "json",
+                    "description": "JSON object of the data to be sent to server.",
+                    "type": "Object",
+                    "optional": true
+                }
+            ]
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 274,
+            "description": "Callback called after backing up data.",
+            "itemtype": "property",
+            "name": "backupData",
+            "type": "Function",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper",
+            "subprops": [
+                {
+                    "name": "record",
+                    "description": "Record being backed up.",
+                    "type": "Class",
+                    "optional": true
+                },
+                {
+                    "name": "type",
+                    "description": "Record type.",
+                    "type": "String|Class",
+                    "optional": true
+                },
+                {
+                    "name": "data",
+                    "description": "JSON object being backed up.",
+                    "type": "Object",
+                    "optional": true
+                }
+            ]
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 288,
+            "description": "Callback called after retrieving backup data.",
+            "itemtype": "property",
+            "name": "retrieveBackup",
+            "type": "Function",
+            "static": 1,
+            "class": "ModelWrapper.ModelWrapper",
+            "module": "model-wrapper",
+            "subprops": [
+                {
+                    "name": "hash",
+                    "description": "JSON object returned by server.",
+                    "type": "Object",
+                    "optional": true
+                },
+                {
+                    "name": "type",
+                    "description": "Record type.",
+                    "type": "String|Class",
+                    "optional": true
+                },
+                {
+                    "name": "data",
+                    "description": "JSON object stored in backup.",
+                    "type": "Object",
+                    "optional": true
+                }
+            ]
+        },
+        {
+            "file": "src/js/main/model-wrapper.js",
+            "line": 303,
+            "description": "Function that returns an ember data model.",
+            "itemtype": "method",
+            "name": "ModelWrapper.createModelWrapper",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "JSON that are member attributes.",
+                    "type": "Object",
+                    "optional": true
+                },
+                {
+                    "name": "config",
+                    "description": "JSON that are static attributes.",
+                    "type": "Object",
+                    "optional": true
+                },
+                {
+                    "name": "mixins",
+                    "description": "Array of mixins to include.",
+                    "type": "Array",
+                    "optional": true
+                }
+            ],
+            "class": "model-wrapper",
+            "module": "model-wrapper"
         },
         {
             "file": "src/js/main/panels.js",
@@ -1794,15 +2198,15 @@
         },
         {
             "message": "Missing item type",
-            "line": " src/js/main/column-data.js:350"
+            "line": " src/js/main/column-data.js:357"
         },
         {
             "message": "Missing item type",
-            "line": " src/js/main/dragdrop.js:168"
+            "line": " src/js/main/dragdrop.js:177"
         },
         {
             "message": "Missing item type",
-            "line": " src/js/main/dragdrop.js:471"
+            "line": " src/js/main/dragdrop.js:482"
         },
         {
             "message": "Missing item type",

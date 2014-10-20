@@ -79,6 +79,10 @@
             
                 <li><a href="../classes/ListGroup.ListItemView.html">ListGroup.ListItemView</a></li>
             
+                <li><a href="../classes/model-wrapper.html">model-wrapper</a></li>
+            
+                <li><a href="../classes/ModelWrapper.ModelWrapper.html">ModelWrapper.ModelWrapper</a></li>
+            
                 <li><a href="../classes/Panels.PanelCollapsibleView.html">Panels.PanelCollapsibleView</a></li>
             
                 <li><a href="../classes/Panels.PanelColumnDataGroup.html">Panels.PanelColumnDataGroup</a></li>
@@ -124,6 +128,8 @@
                 <li><a href="../modules/list-group.html">list-group</a></li>
             
                 <li><a href="../modules/list-item.html">list-item</a></li>
+            
+                <li><a href="../modules/model-wrapper.html">model-wrapper</a></li>
             
                 <li><a href="../modules/panel-column-data.html">panel-column-data</a></li>
             
@@ -206,7 +212,7 @@ Alerts.AlertTypeMap = {
 };
 
 /**
- * Component for alert message.
+ * View for alert message.
  * Usage : 
  *
  *     {{alert-message type=&quot;info&quot; title=&quot;Title&quot; message=&quot;Message&quot;}}
@@ -214,6 +220,11 @@ Alerts.AlertTypeMap = {
  * @class Alerts.AlertMessage
  */
 Alerts.AlertMessage = Ember.Component.extend({
+  init : function() {
+    this._super();
+    this.set(&quot;switchOnMessageListener&quot;, true);
+  },
+
   /**
    * Type of alert message. Possible values are &quot;success&quot;, &quot;warning&quot;, &quot;info&quot;, &quot;error&quot;
    *
@@ -239,36 +250,56 @@ Alerts.AlertMessage = Ember.Component.extend({
    */
   message : function(key, value) {
     if(arguments.length &gt; 1) {
-      if(!Ember.isEmply(value)) {
+      if(!Ember.isEmpty(value) &amp;&amp; this.get(&quot;switchOnMessageListener&quot;)) {
+        var timeout = this.get(&quot;collapseTimeout&quot;), that = this;
         this.set(&quot;showAlert&quot;, true);
+        if(!Ember.isEmpty(timeout) &amp;&amp; timeout &gt; 0) {
+          Timer.addToQue(this.get(&quot;elementId&quot;), timeout).then(function() {
+            that.set(&quot;showAlert&quot;, false);
+          });
+        }
       }
       else {
         this.set(&quot;showAlert&quot;, false);
       }
       return value;
     }
-  },
+  }.property(),
+  switchOnMessageListener : false,
+
+  /**
+   * Timeout after which to collapse the alert message. 0 to disable.
+   *
+   * @property collapseTimeout
+   * @type Number
+   * @default 0
+   */
+  collapseTimeout : 0,
 
   typeData : function() {
     var type = this.get(&quot;type&quot;);
     return Alerts.AlertTypeMap[type] || Alerts.AlertTypeMap.error;
   }.property(&#x27;type&#x27;),
 
-  classNameBindings : [&quot;view.showAlert:hidden&quot;],
-
   showAlert : false,
 
-  click : function(event) {
-    if($(event.target).filter(&#x27;button.close&#x27;).length &gt; 0) {
-      this.set(&quot;message&quot;, &quot;&quot;);
+  click : function(e) {
+    if($(event.target).filter(&quot;button.close&quot;).length &gt; 0) {
+      var that = this;
+      Ember.run(function() {
+        that.set(&quot;showAlert&quot;, false);
+      });
     }
   },
 
-  template : Ember.Handlebars.compile(&#x27;&#x27; +
-  &#x27;&lt;div {{bind-attr class=&quot;:alert typeData.alertClass :alert-dismissable&quot;}}&gt;&#x27; +
-    &#x27;&lt;button class=&quot;close&quot; {{action &quot;dismissed&quot;}}&gt;&amp;times;&lt;/button&gt;&#x27; +
-    &#x27;&lt;strong&gt;&lt;span {{bind-attr class=&quot;:glyphicon typeData.glyphiconClass :btn-sm&quot;}}&gt;&lt;/span&gt; &lt;span class=&quot;alert-title&quot;&gt;{{title}}&lt;/span&gt;&lt;/strong&gt; &lt;span class=&quot;alert-message&quot;&gt;{{message}}&lt;/span&gt;&#x27; +
-  &#x27;&lt;/div&gt;&#x27;),
+  classNameBindings : [&quot;:alert&quot;, &quot;typeData.alertClass&quot;, &quot;:fade&quot;, &quot;showAlert:in&quot;],
+
+  layout : Ember.Handlebars.compile(&#x27;&#x27; +
+    &#x27;&lt;button class=&quot;close&quot;&gt;&amp;times;&lt;/button&gt;&#x27; +
+    &#x27;&lt;strong&gt;&lt;span {{bind-attr class=&quot;:glyphicon typeData.glyphiconClass :btn-sm&quot;}}&gt;&lt;/span&gt;&#x27; +
+    &#x27;&lt;span class=&quot;alert-title&quot;&gt;{{title}}&lt;/span&gt;&lt;/strong&gt; &lt;span class=&quot;alert-message&quot;&gt;{{message}}&lt;/span&gt;&#x27; +
+    &#x27;{{yield}}&#x27; +
+  &#x27;&#x27;),
 });
 
 Ember.Handlebars.helper(&#x27;alert-message&#x27;, Alerts.AlertMessage);

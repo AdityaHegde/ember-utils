@@ -1,2 +1,30 @@
 <?xml version="1.0"?>
-<testsuites/>
+<testsuites>
+  <testsuite name="PhantomJS 1.9.7 (Mac OS X)" package="" timestamp="2014-10-20T11:07:29" id="0" hostname="usegivesall-lm" tests="13" errors="0" failures="0" time="9.097">
+    <properties>
+      <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.7 Safari/534.34"/>
+    </properties>
+    <testcase name="Timer - Sanity Test" time="1.524" classname="PhantomJS 1.9.7 (Mac OS X).timer_js"/>
+    <testcase name="Timer - Different period." time="2.515" classname="PhantomJS 1.9.7 (Mac OS X).timer_js"/>
+    <testcase name="Async Que - Sanity test" time="0.522" classname="PhantomJS 1.9.7 (Mac OS X).timer_js"/>
+    <testcase name="test async que with same keys" time="0.472" classname="PhantomJS 1.9.7 (Mac OS X).timer_js"/>
+    <testcase name="test async que with different keys" time="0.229" classname="PhantomJS 1.9.7 (Mac OS X).timer_js"/>
+    <testcase name="sort - descending on varb and ascending on vara" time="0.862" classname="PhantomJS 1.9.7 (Mac OS X).array-modifier_js"/>
+    <testcase name="search - on varb with &apos;test_1&apos;" time="1.662" classname="PhantomJS 1.9.7 (Mac OS X).array-modifier_js"/>
+    <testcase name="filter - on varb with tags &apos;test_2&apos; and &apos;test_4&apos;" time="1.151" classname="PhantomJS 1.9.7 (Mac OS X).array-modifier_js"/>
+    <testcase name="Sanity tests" time="0.03" classname="PhantomJS 1.9.7 (Mac OS X).columndata_js"/>
+    <testcase name="Validation tests - simple" time="0.033" classname="PhantomJS 1.9.7 (Mac OS X).columndata_js"/>
+    <testcase name="Validation tests - number" time="0.037" classname="PhantomJS 1.9.7 (Mac OS X).columndata_js"/>
+    <testcase name="Validation tests - array" time="0.033" classname="PhantomJS 1.9.7 (Mac OS X).columndata_js"/>
+    <testcase name="Deep columns" time="0.027" classname="PhantomJS 1.9.7 (Mac OS X).columndata_js"/>
+    <system-out><![CDATA[PhantomJS 1.9.7 (Mac OS X) DEBUG: 'DEBUG: -------------------------------'
+,PhantomJS 1.9.7 (Mac OS X) DEBUG: 'DEBUG: Ember      : 1.8.0-beta.1'
+,PhantomJS 1.9.7 (Mac OS X) DEBUG: 'DEBUG: Ember Data : 1.0.0-beta.9'
+,PhantomJS 1.9.7 (Mac OS X) DEBUG: 'DEBUG: Handlebars : 1.1.2'
+,PhantomJS 1.9.7 (Mac OS X) DEBUG: 'DEBUG: jQuery     : 2.1.1'
+,PhantomJS 1.9.7 (Mac OS X) DEBUG: 'DEBUG: -------------------------------'
+
+]]></system-out>
+    <system-err/>
+  </testsuite>
+</testsuites>

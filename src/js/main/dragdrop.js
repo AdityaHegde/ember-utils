@@ -18,11 +18,16 @@ DragDrop.DraggableMixin = Ember.Mixin.create({
 
   attributeBindings : 'draggable',
   draggable : 'true',
+  move : true,
   dragStart : function(event) {
     var dataTransfer = event.originalEvent.dataTransfer, viewid = this.get("elementId");
     dataTransfer.setData('ViewId', viewid);
     dataTransfer.dropEffect = 'move';
     DragDrop.VIEW_ID = viewid;
+    if(this.get("move")) {
+      var ele = this.get("element");
+      this.set("mouseOffset", { left : Utils.getOffset(ele, "Left") - event.originalEvent.x, top : Utils.getOffset(ele, "Top") - event.originalEvent.y });
+    }
     this.dragStartCallback(event);
     event.stopPropagation();
   },
@@ -97,6 +102,10 @@ DragDrop.DroppableMixin = Ember.Mixin.create({
     var dragView = Ember.View.views[DragDrop.VIEW_ID], dragEle = dragView && $(dragView.get("element")),
         dropView = this, dropEle = $(event.target);
     if(dragView && this.canInteract(dragView, dragEle, dropView, dropEle)) {
+      if(dragView.get("move")) {
+        var mouseOffset = dragView.get("mouseOffset");
+        dragEle.offset({ left : mouseOffset.left + event.originalEvent.x, top : mouseOffset.top + event.originalEvent.y });
+      }
       this.dropCallback(event, dragView, dragEle, dropView, dropEle);
     }
     event.preventDefault();
@@ -190,6 +199,7 @@ DragDrop.SortableDraggableMixin = Ember.Mixin.create(DragDrop.DraggableMixin, Dr
     return this.get("hierarchy")+"_"+this.get("groupId");
   }.property('view.groupId', 'view.hierarchy'),
   isPlaceholder : false,
+  move : false,
   calcAppendPosition : function(xy) {
     var lxy = this.get("lastXY"),
         dx = xy[0] - lxy[0], adx = Math.abs(dx),
@@ -397,6 +407,7 @@ DragDrop.SortablePlaceholderMixin = Ember.Mixin.create(DragDrop.DraggableMixin, 
   },
 
   isPlaceholder : true,
+  move : false,
 
   classNames : ['dragdrop-sortable-placeholder'],
   //classNameBindings : Ember.computed.alias('columnDataGroup.sort.sortablePlaceholderClassNames'),

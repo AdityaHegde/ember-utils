@@ -141,6 +141,13 @@ Timer.Timer = Ember.Object.extend({
     if(!Timer.curTimer) {
       Timer.curTimer = setInterval(Timer.timerFunction, Timer.TIMERTIMEOUT);
     }
+    var that = this;
+    this.set("promise", new Ember.RSVP.Promise(function(resolve, reject) {
+      that.setProperties({
+        resolve : resolve,
+        reject : reject,
+      });
+    }));
   },
 
   /**
@@ -187,28 +194,35 @@ Timer.Timer = Ember.Object.extend({
    */
   endCallback : function() {
   },
+
+  promise : null,
+  resolve : null,
+  reject : null,
 });
 Timer.timerFunction = function() {
-  if(Timer.timers.length === 0) {
-    clearTimeout(Timer.curTimer);
-    Timer.curTimer = null;
-  }
-  else {
-    for(var i = 0; i < Timer.timers.length;) {
-      var timer = Timer.timers[i];
-      timer.decrementProperty("ticks");
-      if(timer.get("ticks") === 0) {
-        timer.set("ticks", Math.ceil(timer.get("timeout") / Timer.TIMERTIMEOUT));
-        timer.timerCallback();
-        timer.decrementProperty("count");
-      }
-      if(timer.get("count") <= 0) {
-        Timer.timers.removeAt(i);
-        timer.endCallback();
-      }
-      else {
-        i++;
+  Ember.run(function() {
+    if(Timer.timers.length === 0) {
+      clearTimeout(Timer.curTimer);
+      Timer.curTimer = null;
+    }
+    else {
+      for(var i = 0; i < Timer.timers.length;) {
+        var timer = Timer.timers[i];
+        timer.decrementProperty("ticks");
+        if(timer.get("ticks") === 0) {
+          timer.set("ticks", Math.ceil(timer.get("timeout") / Timer.TIMERTIMEOUT));
+          timer.timerCallback();
+          timer.decrementProperty("count");
+        }
+        if(timer.get("count") <= 0) {
+          Timer.timers.removeAt(i);
+          timer.endCallback();
+          timer.get("resolve")();
+        }
+        else {
+          i++;
+        }
       }
     }
-  }
+  });
 };

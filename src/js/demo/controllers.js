@@ -13,6 +13,8 @@ DemoApp.DemoAppController = Ember.Controller.extend({
 
 DemoApp.FormController = DemoApp.DemoAppController.extend({
   columnDataGroupName : "formTest",
+  collapseTimeout : 0,
+  message : "-",
 });
 
 DemoApp.LazydisplayController = DemoApp.DemoAppController.extend({

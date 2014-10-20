@@ -7,64 +7,6 @@ CrudAdapter.GlobalData = Ember.Object.create();
 CrudAdapter.endPoint = {
   find : "get",
 };
-CrudAdapter.allowedModelAttrs = [{
-  attr : "keys",
-  defaultValue : "emptyArray",
-}, {
-  attr : "apiName",
-  defaultValue : "value",
-  value : "data/generic",
-}, {
-  attr : "queryParams", 
-  defaultValue : "emptyArray",
-}, {
-  attr : "findParams", 
-  defaultValue : "emptyArray",
-}, {
-  attr : "extraAttrs", 
-  defaultValue : "emptyArray",
-}, {
-  attr : "ignoreFieldsOnCreateUpdate", 
-  defaultValue : "emptyArray",
-}, {
-  attr : "ignoreFieldsOnRetrieveBackup", 
-  defaultValue : "emptyArray",
-}, {
-  attr : "removeAttrsFromBackupOnFind", 
-  defaultValue : "emptyArray",
-}, {
-  attr : "retainId", 
-  defaultValue : "value",
-  value : false,
-}, {
-  attr : "useIdForBackup", 
-  defaultValue : "value",
-  value : false,
-}, {
-  attr : "paginatedAttribute", 
-  defaultValue : "value",
-  value : "id",
-}, {
-  attr : "normalizeFunction", 
-  defaultValue : "value",
-  value : function() {},
-}, {
-  attr : "preSerializeRelations", 
-  defaultValue : "value",
-  value : function() {},
-}, {
-  attr : "serializeFunction", 
-  defaultValue : "value",
-  value : function() {},
-}, {
-  attr : "backupData", 
-  defaultValue : "value",
-  value : function() {},
-}, {
-  attr : "retrieveBackup", 
-  defaultValue : "value",
-  value : function() {},
-}];
 CrudAdapter.ModelMap = {};
 
 CrudAdapter.ApplicationAdapter = DS.RESTAdapter.extend({
