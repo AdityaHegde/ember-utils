@@ -7,7 +7,7 @@
                 "alerts": 1
             },
             "classes": {
-                "Alerts.AlertMessage": 1
+                "Alerts.AlertMessageComponent": 1
             },
             "fors": {},
             "namespaces": {}
@@ -105,9 +105,7 @@
             "classes": {
                 "ModelWrapper.ModelWrapper": 1
             },
-            "fors": {
-                "model-wrapper": 1
-            },
+            "fors": {},
             "namespaces": {}
         },
         "src/js/main/panels.js": {
@@ -162,7 +160,7 @@
             "name": "alerts",
             "submodules": {},
             "classes": {
-                "Alerts.AlertMessage": 1
+                "Alerts.AlertMessageComponent": 1
             },
             "fors": {},
             "namespaces": {},
@@ -326,12 +324,9 @@
             "name": "model-wrapper",
             "submodules": {},
             "classes": {
-                "ModelWrapper.ModelWrapper": 1,
-                "model-wrapper": 1
+                "ModelWrapper.ModelWrapper": 1
             },
-            "fors": {
-                "model-wrapper": 1
-            },
+            "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "src/js/main/model-wrapper.js",
@@ -460,9 +455,9 @@
         }
     },
     "classes": {
-        "Alerts.AlertMessage": {
-            "name": "Alerts.AlertMessage",
-            "shortname": "Alerts.AlertMessage",
+        "Alerts.AlertMessageComponent": {
+            "name": "Alerts.AlertMessageComponent",
+            "shortname": "Alerts.AlertMessageComponent",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -753,17 +748,6 @@
             "line": 9,
             "description": "Model wrapper model class."
         },
-        "model-wrapper": {
-            "name": "model-wrapper",
-            "shortname": "model-wrapper",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "model-wrapper",
-            "namespace": ""
-        },
         "Panels.PanelsView": {
             "name": "Panels.PanelsView",
             "shortname": "Panels.PanelsView",
@@ -938,7 +922,7 @@
             "name": "type",
             "type": "String",
             "default": "\"error\"",
-            "class": "Alerts.AlertMessage",
+            "class": "Alerts.AlertMessageComponent",
             "module": "alerts"
         },
         {
@@ -948,7 +932,7 @@
             "itemtype": "property",
             "name": "title",
             "type": "String",
-            "class": "Alerts.AlertMessage",
+            "class": "Alerts.AlertMessageComponent",
             "module": "alerts"
         },
         {
@@ -958,7 +942,7 @@
             "itemtype": "property",
             "name": "message",
             "type": "String",
-            "class": "Alerts.AlertMessage",
+            "class": "Alerts.AlertMessageComponent",
             "module": "alerts"
         },
         {
@@ -969,7 +953,7 @@
             "name": "collapseTimeout",
             "type": "Number",
             "default": "0",
-            "class": "Alerts.AlertMessage",
+            "class": "Alerts.AlertMessageComponent",
             "module": "alerts"
         },
         {
@@ -986,19 +970,19 @@
         },
         {
             "file": "src/js/main/column-data.js",
-            "line": 114,
+            "line": 120,
             "class": "DragDrop.DraggableMixin",
             "module": "app-wrapper"
         },
         {
             "file": "src/js/main/column-data.js",
-            "line": 233,
+            "line": 239,
             "class": "DragDrop.DraggableMixin",
             "module": "app-wrapper"
         },
         {
             "file": "src/js/main/column-data.js",
-            "line": 357,
+            "line": 363,
             "class": "DragDrop.DraggableMixin",
             "module": "app-wrapper"
         },
@@ -1821,7 +1805,7 @@
             "line": 303,
             "description": "Function that returns an ember data model.",
             "itemtype": "method",
-            "name": "ModelWrapper.createModelWrapper",
+            "name": "createModelWrapper",
             "params": [
                 {
                     "name": "object",
@@ -1842,7 +1826,7 @@
                     "optional": true
                 }
             ],
-            "class": "model-wrapper",
+            "class": "ModelWrapper.ModelWrapper",
             "module": "model-wrapper"
         },
         {
@@ -2053,7 +2037,7 @@
         },
         {
             "file": "src/js/main/timer.js",
-            "line": 146,
+            "line": 153,
             "description": "Periodic timeout after which the job should be executed.",
             "itemtype": "property",
             "name": "timeout",
@@ -2064,7 +2048,7 @@
         },
         {
             "file": "src/js/main/timer.js",
-            "line": 155,
+            "line": 162,
             "description": "Number of times of Timer.TIMERTIMEOUT per period.",
             "itemtype": "property",
             "name": "ticks",
@@ -2077,7 +2061,7 @@
         },
         {
             "file": "src/js/main/timer.js",
-            "line": 165,
+            "line": 172,
             "description": "Number of times to execute the job.",
             "itemtype": "property",
             "name": "count",
@@ -2088,7 +2072,7 @@
         },
         {
             "file": "src/js/main/timer.js",
-            "line": 174,
+            "line": 181,
             "description": "Callback executed every period. The job goes here.",
             "itemtype": "method",
             "name": "timerCallback",
@@ -2097,7 +2081,7 @@
         },
         {
             "file": "src/js/main/timer.js",
-            "line": 183,
+            "line": 190,
             "description": "Callback executed after the end of timer.",
             "itemtype": "method",
             "name": "endCallback",
@@ -2190,15 +2174,15 @@
         },
         {
             "message": "Missing item type",
-            "line": " src/js/main/column-data.js:114"
+            "line": " src/js/main/column-data.js:120"
         },
         {
             "message": "Missing item type",
-            "line": " src/js/main/column-data.js:233"
+            "line": " src/js/main/column-data.js:239"
         },
         {
             "message": "Missing item type",
-            "line": " src/js/main/column-data.js:357"
+            "line": " src/js/main/column-data.js:363"
         },
         {
             "message": "Missing item type",

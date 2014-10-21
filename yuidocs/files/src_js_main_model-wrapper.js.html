@@ -41,7 +41,7 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/Alerts.AlertMessage.html">Alerts.AlertMessage</a></li>
+                <li><a href="../classes/Alerts.AlertMessageComponent.html">Alerts.AlertMessageComponent</a></li>
             
                 <li><a href="../classes/AppWrapper.AppWrapper.html">AppWrapper.AppWrapper</a></li>
             
@@ -78,8 +78,6 @@
                 <li><a href="../classes/ListGroup.ListGroupView.html">ListGroup.ListGroupView</a></li>
             
                 <li><a href="../classes/ListGroup.ListItemView.html">ListGroup.ListItemView</a></li>
-            
-                <li><a href="../classes/model-wrapper.html">model-wrapper</a></li>
             
                 <li><a href="../classes/ModelWrapper.ModelWrapper.html">ModelWrapper.ModelWrapper</a></li>
             
@@ -197,7 +195,7 @@ ModelWrapper = Ember.Namespace.create();
  *
  * @class ModelWrapper.ModelWrapper
  */
-ModelWrapper.ModelWrapper = DS.Model.extend({
+ModelWrapper.ModelWrapper = DS.Model.extend(Utils.ObjectWithArrayMixin, {
   init : function() {
     this._super();
     var arrayProps = this.get(&quot;arrayProps&quot;), that = this;
@@ -489,8 +487,7 @@ ModelWrapper.allowedModelAttrs = [{
 /**
  * Function that returns an ember data model.
  *
- * @method ModelWrapper.createModelWrapper
- * @for model-wrapper
+ * @method createModelWrapper
  * @param {Object} [object] JSON that are member attributes.
  * @param {Object} [config] JSON that are static attributes.
  * @param {Array} [mixins] Array of mixins to include.
@@ -499,16 +496,16 @@ ModelWrapper.createModelWrapper = function(object, config, mixins) {
   var args = mixins || [];
   args.push(object);
   var model = ModelWrapper.ModelWrapper.extend.apply(ModelWrapper.ModelWrapper, args);
-  for(var i = 0; i &lt; CrudAdapter.allowedModelAttrs.length; i++) {
-    if(config[CrudAdapter.allowedModelAttrs[i].attr]) {
-      model[CrudAdapter.allowedModelAttrs[i].attr] = config[CrudAdapter.allowedModelAttrs[i].attr];
+  for(var i = 0; i &lt; ModelWrapper.allowedModelAttrs.length; i++) {
+    if(config[ModelWrapper.allowedModelAttrs[i].attr]) {
+      model[ModelWrapper.allowedModelAttrs[i].attr] = config[ModelWrapper.allowedModelAttrs[i].attr];
     }
     else {
-      if(CrudAdapter.allowedModelAttrs[i].defaultValue === &quot;emptyArray&quot;) {
-        model[CrudAdapter.allowedModelAttrs[i].attr] = Ember.A();
+      if(ModelWrapper.allowedModelAttrs[i].defaultValue === &quot;emptyArray&quot;) {
+        model[ModelWrapper.allowedModelAttrs[i].attr] = Ember.A();
       }
-      else if(CrudAdapter.allowedModelAttrs[i].defaultValue === &quot;value&quot;) {
-        model[CrudAdapter.allowedModelAttrs[i].attr] = CrudAdapter.allowedModelAttrs[i].value;
+      else if(ModelWrapper.allowedModelAttrs[i].defaultValue === &quot;value&quot;) {
+        model[ModelWrapper.allowedModelAttrs[i].attr] = ModelWrapper.allowedModelAttrs[i].value;
       }
     }
   }

@@ -11,7 +11,7 @@ ModelWrapper = Ember.Namespace.create();
  *
  * @class ModelWrapper.ModelWrapper
  */
-ModelWrapper.ModelWrapper = DS.Model.extend({
+ModelWrapper.ModelWrapper = DS.Model.extend(Utils.ObjectWithArrayMixin, {
   init : function() {
     this._super();
     var arrayProps = this.get("arrayProps"), that = this;

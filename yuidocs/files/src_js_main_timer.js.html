@@ -41,7 +41,7 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/Alerts.AlertMessage.html">Alerts.AlertMessage</a></li>
+                <li><a href="../classes/Alerts.AlertMessageComponent.html">Alerts.AlertMessageComponent</a></li>
             
                 <li><a href="../classes/AppWrapper.AppWrapper.html">AppWrapper.AppWrapper</a></li>
             
@@ -78,8 +78,6 @@
                 <li><a href="../classes/ListGroup.ListGroupView.html">ListGroup.ListGroupView</a></li>
             
                 <li><a href="../classes/ListGroup.ListItemView.html">ListGroup.ListItemView</a></li>
-            
-                <li><a href="../classes/model-wrapper.html">model-wrapper</a></li>
             
                 <li><a href="../classes/ModelWrapper.ModelWrapper.html">ModelWrapper.ModelWrapper</a></li>
             
@@ -327,6 +325,13 @@ Timer.Timer = Ember.Object.extend({
     if(!Timer.curTimer) {
       Timer.curTimer = setInterval(Timer.timerFunction, Timer.TIMERTIMEOUT);
     }
+    var that = this;
+    this.set(&quot;promise&quot;, new Ember.RSVP.Promise(function(resolve, reject) {
+      that.setProperties({
+        resolve : resolve,
+        reject : reject,
+      });
+    }));
   },
 
   /**
@@ -373,30 +378,37 @@ Timer.Timer = Ember.Object.extend({
    */
   endCallback : function() {
   },
+
+  promise : null,
+  resolve : null,
+  reject : null,
 });
 Timer.timerFunction = function() {
-  if(Timer.timers.length === 0) {
-    clearTimeout(Timer.curTimer);
-    Timer.curTimer = null;
-  }
-  else {
-    for(var i = 0; i &lt; Timer.timers.length;) {
-      var timer = Timer.timers[i];
-      timer.decrementProperty(&quot;ticks&quot;);
-      if(timer.get(&quot;ticks&quot;) === 0) {
-        timer.set(&quot;ticks&quot;, Math.ceil(timer.get(&quot;timeout&quot;) / Timer.TIMERTIMEOUT));
-        timer.timerCallback();
-        timer.decrementProperty(&quot;count&quot;);
-      }
-      if(timer.get(&quot;count&quot;) &lt;= 0) {
-        Timer.timers.removeAt(i);
-        timer.endCallback();
-      }
-      else {
-        i++;
+  Ember.run(function() {
+    if(Timer.timers.length === 0) {
+      clearTimeout(Timer.curTimer);
+      Timer.curTimer = null;
+    }
+    else {
+      for(var i = 0; i &lt; Timer.timers.length;) {
+        var timer = Timer.timers[i];
+        timer.decrementProperty(&quot;ticks&quot;);
+        if(timer.get(&quot;ticks&quot;) === 0) {
+          timer.set(&quot;ticks&quot;, Math.ceil(timer.get(&quot;timeout&quot;) / Timer.TIMERTIMEOUT));
+          timer.timerCallback();
+          timer.decrementProperty(&quot;count&quot;);
+        }
+        if(timer.get(&quot;count&quot;) &lt;= 0) {
+          Timer.timers.removeAt(i);
+          timer.endCallback();
+          timer.get(&quot;resolve&quot;)();
+        }
+        else {
+          i++;
+        }
       }
     }
-  }
+  });
 };
 
     </pre>

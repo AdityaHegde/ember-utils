@@ -41,7 +41,7 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/Alerts.AlertMessage.html">Alerts.AlertMessage</a></li>
+                <li><a href="../classes/Alerts.AlertMessageComponent.html">Alerts.AlertMessageComponent</a></li>
             
                 <li><a href="../classes/AppWrapper.AppWrapper.html">AppWrapper.AppWrapper</a></li>
             
@@ -78,8 +78,6 @@
                 <li><a href="../classes/ListGroup.ListGroupView.html">ListGroup.ListGroupView</a></li>
             
                 <li><a href="../classes/ListGroup.ListItemView.html">ListGroup.ListItemView</a></li>
-            
-                <li><a href="../classes/model-wrapper.html">model-wrapper</a></li>
             
                 <li><a href="../classes/ModelWrapper.ModelWrapper.html">ModelWrapper.ModelWrapper</a></li>
             
@@ -217,9 +215,9 @@ Alerts.AlertTypeMap = {
  *
  *     {{alert-message type=&quot;info&quot; title=&quot;Title&quot; message=&quot;Message&quot;}}
  *
- * @class Alerts.AlertMessage
+ * @class Alerts.AlertMessageComponent
  */
-Alerts.AlertMessage = Ember.Component.extend({
+Alerts.AlertMessageComponent = Ember.Component.extend({
   init : function() {
     this._super();
     this.set(&quot;switchOnMessageListener&quot;, true);
@@ -284,7 +282,7 @@ Alerts.AlertMessage = Ember.Component.extend({
   showAlert : false,
 
   click : function(e) {
-    if($(event.target).filter(&quot;button.close&quot;).length &gt; 0) {
+    if($(e.target).filter(&quot;button.close&quot;).length &gt; 0) {
       var that = this;
       Ember.run(function() {
         that.set(&quot;showAlert&quot;, false);
@@ -302,7 +300,7 @@ Alerts.AlertMessage = Ember.Component.extend({
   &#x27;&#x27;),
 });
 
-Ember.Handlebars.helper(&#x27;alert-message&#x27;, Alerts.AlertMessage);
+Ember.Handlebars.helper(&quot;alert-message&quot;, Alerts.AlertMessageComponent);
 
     </pre>
 </div>

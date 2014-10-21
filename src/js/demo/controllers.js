@@ -111,3 +111,7 @@ DemoApp.ProgressbarController = Ember.Controller.extend({
   striped : true,
   animated : false,
 });
+
+DemoApp.ModalController = DemoApp.DemoAppController.extend({
+  columnDataGroupName : "formTest",
+});

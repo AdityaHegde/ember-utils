@@ -31,9 +31,9 @@ Alerts.AlertTypeMap = {
  *
  *     {{alert-message type="info" title="Title" message="Message"}}
  *
- * @class Alerts.AlertMessage
+ * @class Alerts.AlertMessageComponent
  */
-Alerts.AlertMessage = Ember.Component.extend({
+Alerts.AlertMessageComponent = Ember.Component.extend({
   init : function() {
     this._super();
     this.set("switchOnMessageListener", true);
@@ -98,7 +98,7 @@ Alerts.AlertMessage = Ember.Component.extend({
   showAlert : false,
 
   click : function(e) {
-    if($(event.target).filter("button.close").length > 0) {
+    if($(e.target).filter("button.close").length > 0) {
       var that = this;
       Ember.run(function() {
         that.set("showAlert", false);
@@ -116,4 +116,4 @@ Alerts.AlertMessage = Ember.Component.extend({
   ''),
 });
 
-Ember.Handlebars.helper('alert-message', Alerts.AlertMessage);
+Ember.Handlebars.helper("alert-message", Alerts.AlertMessageComponent);

@@ -34,7 +34,7 @@ Modal.ModalWindowView = Ember.View.extend({
           '<h5 class="custom-font">{{view.windowMessage}}</h5>'+
         '</div>' +
         '<div class="modal-body">' +
-          //'{{alert-message message=view.message title=view.messageLabel type="error"}}' +
+          '{{alert-message message=view.message title=view.messageLabel}}' +
           '{{yield}}' +
         '</div>' +
         '<div class="modal-footer">' +
@@ -95,8 +95,6 @@ Modal.ModalWindowView = Ember.View.extend({
 
     cancelClicked : function(event) {
       var onCancel = this.get("onCancel");
-      //this.set("fromButton", true);
-      //if(onCancel) onCancel.call(this.get("actionContext") || this);
     },
   },
 
@@ -109,14 +107,14 @@ Modal.ModalWindowView = Ember.View.extend({
 });
 
 Modal.AddEditWindowView = Modal.ModalWindowView.extend({
-  columns : [],
-  data : null,
+  columnDataGroup : [],
+  record : null,
 
   saveCallback : null,
   postCancelCallback : null,
   closeOnSuccess : true,
 
-  disableAlias : Ember.computed.or("data.disableSave", "saving"),
+  disableAlias : Ember.computed.or("record.disableSave", "saving"),
 
   saving : false,
 
@@ -133,23 +131,23 @@ Modal.AddEditWindowView = Modal.ModalWindowView.extend({
 
   template : Ember.Handlebars.compile('' +
     '{{#unless view.loaded}}Loading...{{/unless}}' +
-    '{{view Form.FormView record=view.data cols=view.columns classNameBindings="view.loaded::hidden"}}' +
+    '{{view Form.FormView record=view.record columnDataGroup=view.columnDataGroup classNameBindings="view.loaded::hidden"}}' +
   ''),
 
   onOk : function() {
-    var data = this.get("data"), that = this;
+    var record = this.get("record"), that = this;
     this.set("saving", true);
-    CrudAdapter.saveRecord(data).then(function(response) {
+    CrudAdapter.saveRecord(record).then(function(response) {
       if(that.get("closeOnSuccess")) {
         $(that.get("element")).modal('hide');
         that.set("showAlert", false);
         that.set("loaded", false);
         that.set("saving", false);
       }
-      if(that.get("saveCallback")) that.get("saveCallback")(data, "Saved successfully!", data.__proto__.constructor.title || "Data");
+      if(that.get("saveCallback")) that.get("saveCallback")(record, "Saved successfully!", record.__proto__.constructor.title || "Data");
     }, function(response) {
-      that.showModalMesssage(data.__proto__.constructor.title, response.statusText || response);
-      CrudAdapter.retrieveFailure(data);
+      that.showModalMesssage(record.__proto__.constructor.title, response.statusText || response);
+      CrudAdapter.retrieveFailure(record);
       CrudAdapter.backupDataMap = {};
       that.set("fromButton", false);
       that.set("saving", false);
@@ -158,20 +156,20 @@ Modal.AddEditWindowView = Modal.ModalWindowView.extend({
 
   onCancel : function() {
     this._super();
-    var data = this.get("data"), postCancelCallback = this.get("postCancelCallback");
+    var record = this.get("record"), postCancelCallback = this.get("postCancelCallback");
     this.set("showAlert", false);
     this.set("loaded", false);
-    if(data && !data.get("isSaving")) {
-      if(data.get("isNew")) data.deleteRecord();
+    if(record && !record.get("isSaving")) {
+      if(record.get("isNew")) record.deleteRecord();
       else {
-        data._validation = {};
-        data.set("validationFailed", false);
-        CrudAdapter.rollbackRecord(data);
+        record._validation = {};
+        record.set("validationFailed", false);
+        CrudAdapter.rollbackRecord(record);
       }
       if(postCancelCallback) {
-        postCancelCallback(data);
+        postCancelCallback(record);
       }
-      this.set("data", null);
+      this.set("record", null);
     }
   },
 });

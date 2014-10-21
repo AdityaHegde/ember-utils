@@ -1,7 +1,7 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
-        "Alerts.AlertMessage",
+        "Alerts.AlertMessageComponent",
         "AppWrapper.AppWrapper",
         "DragDrop.DraggableMixin",
         "DragDrop.DroppableMixin",
@@ -31,8 +31,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Tree.NodeRecordMixin",
         "Tree.NodeView",
         "Tree.TreeColumnData",
-        "Tree.TreeColumnDataGroup",
-        "model-wrapper"
+        "Tree.TreeColumnDataGroup"
     ],
     "modules": [
         "alerts",
