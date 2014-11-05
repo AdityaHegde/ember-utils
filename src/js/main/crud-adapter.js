@@ -372,6 +372,17 @@ CrudAdapter.retrieveFailure = function(record) {
   var type = record.__proto__.constructor,
       backupId = record.get("isNew") ? "New" : record.get("id"),
       id = record.get("id") || "New";
+  if(record.get("isDeleted")) {
+    record.transitionTo('loaded.updated.uncommitted');
+  }
+  else {
+    if(record.get("isNew")) {
+      record.transitionTo('loaded.created.uncommitted');
+    }
+    else {
+      record.transitionTo('loaded.updated.uncommitted');
+    }
+  }
   if(CrudAdapter.backupDataMap[type.typeKey] && CrudAdapter.backupDataMap[type.typeKey][backupId]) {
     var data = CrudAdapter.backupDataMap[type.typeKey][backupId],
         attrs = record._inFlightAttributes;
@@ -379,7 +390,6 @@ CrudAdapter.retrieveFailure = function(record) {
       Utils.merge(attrs, record._attributes); 
     }
     delete CrudAdapter.backupDataMap[type.typeKey][backupId];
-    if(!record.get("isDeleted")) record.rollback();
     record._inFlightAttributes = {};
     for(var f in attrs) {
       record.set(f, attrs[f]);
@@ -389,7 +399,7 @@ CrudAdapter.retrieveFailure = function(record) {
         var arr = this.record.get(relationship.key), darr = this.data[relationship.key];
         if(darr) {
           for(var i = 0; i < darr.length; i++) {
-            var rid = CrudAdapter.getId(darr[i], relationship.type), rrec = this.record.store.getById(relationship.type, rid);
+            var rid = CrudAdapter.getId(darr[i], relationship.type), rrec = this.record.store.getById(relationship.type, rid) || arr.objectAt(i);
             if(rrec) {
               CrudAdapter.retrieveFailure(rrec);
               if(this.record.addToProp) {
@@ -430,17 +440,6 @@ CrudAdapter.retrieveFailure = function(record) {
         }
       }
     }, {record : record, data : data});
-  }
-  if(record.get("isDeleted")) {
-    record.transitionTo('loaded.updated.uncommitted');
-  }
-  else {
-    if(record.get("isNew")) {
-      record.transitionTo('loaded.created.uncommitted');
-    }
-    else {
-      record.transitionTo('loaded.updated.uncommitted');
-    }
   }
 };
 

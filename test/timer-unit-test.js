@@ -1,4 +1,4 @@
-module("timer.js", {
+module("timer", {
   setup: function() {
   },
   teardown : function() {

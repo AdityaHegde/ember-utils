@@ -25,22 +25,22 @@
     "express": "~3.4.4"
   },
   "devDependencies": {
+    "requirejs": "*",
     "grunt": "*",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-concat" : "*",
     "grunt-ember-templates" : "*",
     "grunt-contrib-yuidoc": "*",
+    "grunt-contrib-requirejs": "*",
     "grunt-concurrent": "*",
+    "grunt-contrib-qunit": "*",
+    "grunt-qunit-istanbul": "*",
+    "grunt-contrib-clean": "*",
     "load-grunt-config": "*",
     "time-grunt": "*",
     "yuidocjs": "*",
-    "karma-qunit": "*",
-    "karma-junit-reporter": "*",
-    "karma-coverage": "*",
-    "karma-ember-preprocessor": "*",
-    "karma-chrome-launcher": "*",
-    "karma-phantomjs-launcher": "*"
+    "express": "*"
   },
   "bundleDependencies": [],
   "scripts" : {

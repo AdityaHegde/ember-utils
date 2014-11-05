@@ -3,8 +3,39 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "Alerts.AlertMessageComponent",
         "AppWrapper.AppWrapper",
+        "ArrayMod.ArrayFilterGroup",
+        "ArrayMod.ArrayFilterModifier",
+        "ArrayMod.ArrayModController",
+        "ArrayMod.ArrayModGroup",
+        "ArrayMod.ArrayModifier",
+        "ArrayMod.ArraySearchModifier",
+        "ArrayMod.ArraySortGroup",
+        "ArrayMod.ArraySortModifier",
+        "ArrayMod.ArrayTagObjectModifier",
+        "ArrayMod.ArrayTagSearchModifier",
+        "CSVDuplicateValidation",
+        "CSVRegexValidation",
+        "ColumnData.CSVDuplicateValidation",
+        "ColumnData.CSVRegexValidation",
+        "ColumnData.ColumnData",
+        "ColumnData.ColumnDataChangeCollectorMixin",
+        "ColumnData.ColumnDataGroup",
+        "ColumnData.ColumnDataGroupPluginMixin",
+        "ColumnData.ColumnDataValidation",
+        "ColumnData.ColumnDataValueMixin",
+        "ColumnData.DuplicateAcrossRecordsValidation",
+        "ColumnData.EmptyValidation",
+        "ColumnData.NumberRangeValidation",
+        "ColumnData.RegexValidation",
+        "ColumnDataChangeCollectorMixin",
+        "ColumnDataGroupPluginMixin",
+        "ColumnDataValidation",
+        "ColumnDataValueMixin",
+        "DelayedAddToHasMany",
         "DragDrop.DraggableMixin",
         "DragDrop.DroppableMixin",
+        "DuplicateAcrossRecordsValidation",
+        "EmptyValidation",
         "GlobalModules.DisplayTextCollapsibleColumnDataMixin",
         "GlobalModules.DisplayTextCollapsibleGlypiconColumnDataMixin",
         "GlobalModules.DisplayTextCollapsibleGlypiconView",
@@ -21,10 +52,13 @@ YUI.add("yuidoc-meta", function(Y) {
         "ListGroup.ListGroupView",
         "ListGroup.ListItemView",
         "ModelWrapper.ModelWrapper",
+        "NumberRangeValidation",
+        "ObjectWithArrayMixin",
         "Panels.PanelCollapsibleView",
         "Panels.PanelColumnDataGroup",
         "Panels.PanelView",
         "Panels.PanelsView",
+        "RegexValidation",
         "Timer.AsyncQue",
         "Timer.Timer",
         "Tree.LeafView",
@@ -36,7 +70,13 @@ YUI.add("yuidoc-meta", function(Y) {
     "modules": [
         "alerts",
         "app-wrapper",
+        "array-modifier",
+        "array-modifier-types",
+        "column-data",
+        "column-data-utils",
+        "column-data-validation",
         "drag-drop",
+        "ember-utils-core",
         "global-module",
         "global-module-column-data",
         "global-module-view",
@@ -65,9 +105,39 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "A module for wrapper over Ember.Application which initializes a few things automatically"
         },
         {
+            "displayName": "array-modifier",
+            "name": "array-modifier",
+            "description": "Module to handle array modification like sorting, searching and filtering."
+        },
+        {
+            "displayName": "array-modifier-types",
+            "name": "array-modifier-types",
+            "description": "Array modifier types"
+        },
+        {
+            "displayName": "column-data",
+            "name": "column-data",
+            "description": "Module for meta data of a record type and its properties."
+        },
+        {
+            "displayName": "column-data-utils",
+            "name": "column-data-utils",
+            "description": "Utility classes related to column data."
+        },
+        {
+            "displayName": "column-data-validation",
+            "name": "column-data-validation",
+            "description": "Validations for property in record."
+        },
+        {
             "displayName": "drag-drop",
             "name": "drag-drop",
             "description": "A drag drop module for all operations related to drag and drop. Uses html5 drag drop feature."
+        },
+        {
+            "displayName": "ember-utils-core",
+            "name": "ember-utils-core",
+            "description": "Core module for ember-utils."
         },
         {
             "displayName": "global-module",

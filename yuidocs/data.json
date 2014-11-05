@@ -1,6 +1,193 @@
 {
-    "project": {},
+    "project": {
+        "name": "Ember Utils",
+        "description": "A utility module for ember apps."
+    },
     "files": {
+        "src/js/column-data/utils/columnDataChangeCollectorMixin.js": {
+            "name": "src/js/column-data/utils/columnDataChangeCollectorMixin.js",
+            "modules": {},
+            "classes": {
+                "ColumnDataChangeCollectorMixin": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/column-data/utils/columnDataGroupPluginMixin.js": {
+            "name": "src/js/column-data/utils/columnDataGroupPluginMixin.js",
+            "modules": {},
+            "classes": {
+                "ColumnDataGroupPluginMixin": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/column-data/utils/columnDataValueMixin.js": {
+            "name": "src/js/column-data/utils/columnDataValueMixin.js",
+            "modules": {},
+            "classes": {
+                "ColumnDataValueMixin": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/column-data/utils/main.js": {
+            "name": "src/js/column-data/utils/main.js",
+            "modules": {
+                "column-data-utils": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/column-data/validations/columnDataValidation.js": {
+            "name": "src/js/column-data/validations/columnDataValidation.js",
+            "modules": {},
+            "classes": {
+                "ColumnDataValidation": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/column-data/validations/csvDuplicateValidation.js": {
+            "name": "src/js/column-data/validations/csvDuplicateValidation.js",
+            "modules": {},
+            "classes": {
+                "CSVDuplicateValidation": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/column-data/validations/csvRegexValidation.js": {
+            "name": "src/js/column-data/validations/csvRegexValidation.js",
+            "modules": {},
+            "classes": {
+                "CSVRegexValidation": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/column-data/validations/duplicateAcrossRecordsValidation.js": {
+            "name": "src/js/column-data/validations/duplicateAcrossRecordsValidation.js",
+            "modules": {},
+            "classes": {
+                "DuplicateAcrossRecordsValidation": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/column-data/validations/emptyValidation.js": {
+            "name": "src/js/column-data/validations/emptyValidation.js",
+            "modules": {},
+            "classes": {
+                "EmptyValidation": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/column-data/validations/main.js": {
+            "name": "src/js/column-data/validations/main.js",
+            "modules": {
+                "column-data-validation": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/column-data/validations/numberRangeValidation.js": {
+            "name": "src/js/column-data/validations/numberRangeValidation.js",
+            "modules": {},
+            "classes": {
+                "NumberRangeValidation": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/column-data/validations/regexValidation.js": {
+            "name": "src/js/column-data/validations/regexValidation.js",
+            "modules": {},
+            "classes": {
+                "RegexValidation": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/column-data/columnData.js": {
+            "name": "src/js/column-data/columnData.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/column-data/columnDataGroup.js": {
+            "name": "src/js/column-data/columnDataGroup.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/column-data/main.js": {
+            "name": "src/js/column-data/main.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/core/belongsTo.js": {
+            "name": "src/js/core/belongsTo.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/core/delayedAddToHasMany.js": {
+            "name": "src/js/core/delayedAddToHasMany.js",
+            "modules": {},
+            "classes": {
+                "DelayedAddToHasMany": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/core/hasMany.js": {
+            "name": "src/js/core/hasMany.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/core/hierarchy.js": {
+            "name": "src/js/core/hierarchy.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/core/main.js": {
+            "name": "src/js/core/main.js",
+            "modules": {
+                "ember-utils-core": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/core/misc.js": {
+            "name": "src/js/core/misc.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/core/objectWithArrayMixin.js": {
+            "name": "src/js/core/objectWithArrayMixin.js",
+            "modules": {},
+            "classes": {
+                "ObjectWithArrayMixin": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/js/main/alerts.js": {
             "name": "src/js/main/alerts.js",
             "modules": {
@@ -23,10 +210,46 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/js/main/array-modifier.js": {
+            "name": "src/js/main/array-modifier.js",
+            "modules": {
+                "array-modifier": 1,
+                "array-modifier-types": 1
+            },
+            "classes": {
+                "ArrayMod.ArrayModifier": 1,
+                "ArrayMod.ArrayFilterModifier": 1,
+                "ArrayMod.ArraySearchModifier": 1,
+                "ArrayMod.ArrayTagObjectModifier": 1,
+                "ArrayMod.ArrayTagSearchModifier": 1,
+                "ArrayMod.ArraySortModifier": 1,
+                "ArrayMod.ArrayModGroup": 1,
+                "ArrayMod.ArrayFilterGroup": 1,
+                "ArrayMod.ArraySortGroup": 1,
+                "ArrayMod.ArrayModController": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/js/main/column-data.js": {
             "name": "src/js/main/column-data.js",
-            "modules": {},
-            "classes": {},
+            "modules": {
+                "column-data": 1
+            },
+            "classes": {
+                "ColumnData.ColumnData": 1,
+                "ColumnData.ColumnDataGroup": 1,
+                "ColumnData.ColumnDataValidation": 1,
+                "ColumnData.EmptyValidation": 1,
+                "ColumnData.RegexValidation": 1,
+                "ColumnData.CSVRegexValidation": 1,
+                "ColumnData.CSVDuplicateValidation": 1,
+                "ColumnData.DuplicateAcrossRecordsValidation": 1,
+                "ColumnData.NumberRangeValidation": 1,
+                "ColumnData.ColumnDataChangeCollectorMixin": 1,
+                "ColumnData.ColumnDataValueMixin": 1,
+                "ColumnData.ColumnDataGroupPluginMixin": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -156,6 +379,89 @@
         }
     },
     "modules": {
+        "column-data-utils": {
+            "name": "column-data-utils",
+            "submodules": {},
+            "classes": {
+                "ColumnDataChangeCollectorMixin": 1,
+                "ColumnDataGroupPluginMixin": 1,
+                "ColumnDataValueMixin": 1,
+                "ColumnData.NumberRangeValidation": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "column-data",
+            "file": "src/js/main/column-data.js",
+            "line": 495,
+            "description": "Utility classes related to column data."
+        },
+        "column-data": {
+            "name": "column-data",
+            "submodules": {
+                "column-data-utils": 1,
+                "column-data-validation": 1
+            },
+            "classes": {
+                "ColumnDataChangeCollectorMixin": 1,
+                "ColumnDataGroupPluginMixin": 1,
+                "ColumnDataValueMixin": 1,
+                "ColumnDataValidation": 1,
+                "CSVDuplicateValidation": 1,
+                "CSVRegexValidation": 1,
+                "DuplicateAcrossRecordsValidation": 1,
+                "EmptyValidation": 1,
+                "NumberRangeValidation": 1,
+                "RegexValidation": 1,
+                "ColumnData.ColumnData": 1,
+                "ColumnData.ColumnDataGroup": 1,
+                "DelayedAddToHasMany": 1,
+                "ColumnData.ColumnDataValidation": 1,
+                "ColumnData.EmptyValidation": 1,
+                "ColumnData.RegexValidation": 1,
+                "ColumnData.CSVRegexValidation": 1,
+                "ColumnData.CSVDuplicateValidation": 1,
+                "ColumnData.DuplicateAcrossRecordsValidation": 1,
+                "ColumnData.NumberRangeValidation": 1,
+                "ColumnData.ColumnDataChangeCollectorMixin": 1,
+                "ColumnData.ColumnDataValueMixin": 1,
+                "ColumnData.ColumnDataGroupPluginMixin": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/js/main/column-data.js",
+            "line": 767,
+            "description": "Module for meta data of a record type and its properties."
+        },
+        "column-data-validation": {
+            "name": "column-data-validation",
+            "submodules": {},
+            "classes": {
+                "ColumnData.ColumnData": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/main/column-data.js",
+            "line": 99,
+            "description": "Validations for property in record."
+        },
+        "ember-utils-core": {
+            "name": "ember-utils-core",
+            "submodules": {},
+            "classes": {
+                "ObjectWithArrayMixin": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/js/core/objectWithArrayMixin.js",
+            "line": 6,
+            "description": "Core module for ember-utils."
+        },
         "alerts": {
             "name": "alerts",
             "submodules": {},
@@ -181,6 +487,43 @@
             "file": "src/js/main/app-wrapper.js",
             "line": 9,
             "description": "A module for wrapper over Ember.Application which initializes a few things automatically"
+        },
+        "array-modifier": {
+            "name": "array-modifier",
+            "submodules": {
+                "array-modifier-types": 1
+            },
+            "classes": {
+                "ArrayMod.ArrayModifier": 1,
+                "ArrayMod.ArrayFilterModifier": 1,
+                "ArrayMod.ArraySearchModifier": 1,
+                "ArrayMod.ArrayTagObjectModifier": 1,
+                "ArrayMod.ArrayTagSearchModifier": 1,
+                "ArrayMod.ArraySortModifier": 1,
+                "ArrayMod.ArrayModGroup": 1,
+                "ArrayMod.ArrayFilterGroup": 1,
+                "ArrayMod.ArraySortGroup": 1,
+                "ArrayMod.ArrayModController": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/js/main/array-modifier.js",
+            "line": 457,
+            "description": "Module to handle array modification like sorting, searching and filtering."
+        },
+        "array-modifier-types": {
+            "name": "array-modifier-types",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "array-modifier",
+            "namespace": "",
+            "file": "src/js/main/array-modifier.js",
+            "line": 10,
+            "description": "Array modifier types"
         },
         "drag-drop": {
             "name": "drag-drop",
@@ -455,6 +798,204 @@
         }
     },
     "classes": {
+        "ColumnDataChangeCollectorMixin": {
+            "name": "ColumnDataChangeCollectorMixin",
+            "shortname": "ColumnDataChangeCollectorMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "file": "src/js/column-data/utils/columnDataChangeCollectorMixin.js",
+            "line": 5,
+            "description": "A mixin that is a parent of ColumnDataValueMixin that collects value changes and fires listeners on the column.",
+            "submodule": "column-data-utils"
+        },
+        "ColumnDataGroupPluginMixin": {
+            "name": "ColumnDataGroupPluginMixin",
+            "shortname": "ColumnDataGroupPluginMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "file": "src/js/column-data/utils/columnDataGroupPluginMixin.js",
+            "line": 6,
+            "description": "A mixin that used by column data group extensions. It adds view lookup paths based on the 'type' and for modules based on <module>Type.",
+            "submodule": "column-data-utils"
+        },
+        "ColumnDataValueMixin": {
+            "name": "ColumnDataValueMixin",
+            "shortname": "ColumnDataValueMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "file": "src/js/column-data/utils/columnDataValueMixin.js",
+            "line": 5,
+            "description": "A mixin that aliases the value of the attribute given by 'columnData' in 'record' to 'value'.",
+            "submodule": "column-data-utils"
+        },
+        "ColumnDataValidation": {
+            "name": "ColumnDataValidation",
+            "shortname": "ColumnDataValidation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/column-data/validations/columnDataValidation.js",
+            "line": 18,
+            "description": "Validation class that goes as 'validation' on column data."
+        },
+        "CSVDuplicateValidation": {
+            "name": "CSVDuplicateValidation",
+            "shortname": "CSVDuplicateValidation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/column-data/validations/csvDuplicateValidation.js",
+            "line": 7,
+            "description": "Validate duplication in a CSV. Pass type = 3 to get this."
+        },
+        "CSVRegexValidation": {
+            "name": "CSVRegexValidation",
+            "shortname": "CSVRegexValidation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/column-data/validations/csvRegexValidation.js",
+            "line": 6,
+            "description": "Validate on a regex on each value in a Comma Seperated Value. Pass type = 2 to get this."
+        },
+        "DuplicateAcrossRecordsValidation": {
+            "name": "DuplicateAcrossRecordsValidation",
+            "shortname": "DuplicateAcrossRecordsValidation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/column-data/validations/duplicateAcrossRecordsValidation.js",
+            "line": 7,
+            "description": "Validate duplication across siblings of the record. Pass type = 4 to get this."
+        },
+        "EmptyValidation": {
+            "name": "EmptyValidation",
+            "shortname": "EmptyValidation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/column-data/validations/emptyValidation.js",
+            "line": 6,
+            "description": "Not empty validation class. Pass type = 0 to get this."
+        },
+        "NumberRangeValidation": {
+            "name": "NumberRangeValidation",
+            "shortname": "NumberRangeValidation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/column-data/validations/numberRangeValidation.js",
+            "line": 7,
+            "description": "Validate number ranges. Pass type = 5 to get this."
+        },
+        "RegexValidation": {
+            "name": "RegexValidation",
+            "shortname": "RegexValidation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/column-data/validations/regexValidation.js",
+            "line": 6,
+            "description": "Validate on a regex. Pass type = 1 to get this."
+        },
+        "ColumnData.ColumnData": {
+            "name": "ColumnData.ColumnData",
+            "shortname": "ColumnData.ColumnData",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/main/column-data.js",
+            "line": 99,
+            "description": "Class for meta data for a property on a record.",
+            "submodule": "column-data-validation"
+        },
+        "ColumnData.ColumnDataGroup": {
+            "name": "ColumnData.ColumnDataGroup",
+            "shortname": "ColumnData.ColumnDataGroup",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/main/column-data.js",
+            "line": 8,
+            "description": "Class with meta data of a record type."
+        },
+        "DelayedAddToHasMany": {
+            "name": "DelayedAddToHasMany",
+            "shortname": "DelayedAddToHasMany",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/core/delayedAddToHasMany.js",
+            "line": 7,
+            "description": "A mixin to add observers to array properties. Used in belongsTo of a ember-data model.\nAdds after the HasMany object is resolved.",
+            "extends": "ObjectWithArrayMixin"
+        },
+        "ObjectWithArrayMixin": {
+            "name": "ObjectWithArrayMixin",
+            "shortname": "ObjectWithArrayMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ember-utils-core",
+            "namespace": "",
+            "file": "src/js/core/objectWithArrayMixin.js",
+            "line": 6,
+            "description": "A mixin to add observers to array properties."
+        },
         "Alerts.AlertMessageComponent": {
             "name": "Alerts.AlertMessageComponent",
             "shortname": "Alerts.AlertMessageComponent",
@@ -482,6 +1023,287 @@
             "file": "src/js/main/app-wrapper.js",
             "line": 9,
             "description": "A wrapper class over Ember.Application which initializes CrudAdapter and ColumnData."
+        },
+        "ArrayMod.ArrayModifier": {
+            "name": "ArrayMod.ArrayModifier",
+            "shortname": "ArrayMod.ArrayModifier",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "array-modifier",
+            "namespace": "",
+            "file": "src/js/main/array-modifier.js",
+            "line": 17,
+            "description": "Base class for array modifier"
+        },
+        "ArrayMod.ArrayFilterModifier": {
+            "name": "ArrayMod.ArrayFilterModifier",
+            "shortname": "ArrayMod.ArrayFilterModifier",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "array-modifier",
+            "namespace": "",
+            "file": "src/js/main/array-modifier.js",
+            "line": 83,
+            "description": "Base class for array filter, which removes/adds elements."
+        },
+        "ArrayMod.ArraySearchModifier": {
+            "name": "ArrayMod.ArraySearchModifier",
+            "shortname": "ArrayMod.ArraySearchModifier",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "array-modifier",
+            "namespace": "",
+            "file": "src/js/main/array-modifier.js",
+            "line": 117,
+            "description": "Class to search for a string in the array elements."
+        },
+        "ArrayMod.ArrayTagObjectModifier": {
+            "name": "ArrayMod.ArrayTagObjectModifier",
+            "shortname": "ArrayMod.ArrayTagObjectModifier",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "array-modifier",
+            "namespace": "",
+            "file": "src/js/main/array-modifier.js",
+            "line": 174,
+            "description": "Class for a tag."
+        },
+        "ArrayMod.ArrayTagSearchModifier": {
+            "name": "ArrayMod.ArrayTagSearchModifier",
+            "shortname": "ArrayMod.ArrayTagSearchModifier",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "array-modifier",
+            "namespace": "",
+            "file": "src/js/main/array-modifier.js",
+            "line": 215,
+            "description": "Class to filter elements based on tags."
+        },
+        "ArrayMod.ArraySortModifier": {
+            "name": "ArrayMod.ArraySortModifier",
+            "shortname": "ArrayMod.ArraySortModifier",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "array-modifier",
+            "namespace": "",
+            "file": "src/js/main/array-modifier.js",
+            "line": 270,
+            "description": "Class to sort elements in the array."
+        },
+        "ArrayMod.ArrayModGroup": {
+            "name": "ArrayMod.ArrayModGroup",
+            "shortname": "ArrayMod.ArrayModGroup",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "array-modifier",
+            "namespace": "",
+            "file": "src/js/main/array-modifier.js",
+            "line": 316,
+            "description": "Basic array modifier group."
+        },
+        "ArrayMod.ArrayFilterGroup": {
+            "name": "ArrayMod.ArrayFilterGroup",
+            "shortname": "ArrayMod.ArrayFilterGroup",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "array-modifier",
+            "namespace": "",
+            "file": "src/js/main/array-modifier.js",
+            "line": 355,
+            "description": "Array filter modifier group which has ArrayMod.ArrayFilterModifier and ArrayMod.ArraySearchModifier"
+        },
+        "ArrayMod.ArraySortGroup": {
+            "name": "ArrayMod.ArraySortGroup",
+            "shortname": "ArrayMod.ArraySortGroup",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "array-modifier",
+            "namespace": "",
+            "file": "src/js/main/array-modifier.js",
+            "line": 400,
+            "description": "Array sort modifier group."
+        },
+        "ArrayMod.ArrayModController": {
+            "name": "ArrayMod.ArrayModController",
+            "shortname": "ArrayMod.ArrayModController",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "array-modifier",
+            "namespace": "",
+            "file": "src/js/main/array-modifier.js",
+            "line": 457,
+            "description": "Array controller which will modify the array on 'content' and put it under 'arrangedContent'."
+        },
+        "ColumnData.ColumnDataValidation": {
+            "name": "ColumnData.ColumnDataValidation",
+            "shortname": "ColumnData.ColumnDataValidation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/main/column-data.js",
+            "line": 253,
+            "description": "Validation class that goes as 'validation' on column data."
+        },
+        "ColumnData.EmptyValidation": {
+            "name": "ColumnData.EmptyValidation",
+            "shortname": "ColumnData.EmptyValidation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/main/column-data.js",
+            "line": 319,
+            "description": "Not empty validation class. Pass type = 0 to get this."
+        },
+        "ColumnData.RegexValidation": {
+            "name": "ColumnData.RegexValidation",
+            "shortname": "ColumnData.RegexValidation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/main/column-data.js",
+            "line": 351,
+            "description": "Validate on a regex. Pass type = 1 to get this."
+        },
+        "ColumnData.CSVRegexValidation": {
+            "name": "ColumnData.CSVRegexValidation",
+            "shortname": "ColumnData.CSVRegexValidation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/main/column-data.js",
+            "line": 404,
+            "description": "Validate on a regex on each value in a Comma Seperated Value. Pass type = 2 to get this."
+        },
+        "ColumnData.CSVDuplicateValidation": {
+            "name": "ColumnData.CSVDuplicateValidation",
+            "shortname": "ColumnData.CSVDuplicateValidation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/main/column-data.js",
+            "line": 435,
+            "description": "Validate duplication in a CSV. Pass type = 3 to get this."
+        },
+        "ColumnData.DuplicateAcrossRecordsValidation": {
+            "name": "ColumnData.DuplicateAcrossRecordsValidation",
+            "shortname": "ColumnData.DuplicateAcrossRecordsValidation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/main/column-data.js",
+            "line": 463,
+            "description": "Validate duplication across siblings of the record. Pass type = 4 to get this."
+        },
+        "ColumnData.NumberRangeValidation": {
+            "name": "ColumnData.NumberRangeValidation",
+            "shortname": "ColumnData.NumberRangeValidation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/main/column-data.js",
+            "line": 495,
+            "description": "Validate number ranges. Pass type = 5 to get this.",
+            "submodule": "column-data-utils"
+        },
+        "ColumnData.ColumnDataChangeCollectorMixin": {
+            "name": "ColumnData.ColumnDataChangeCollectorMixin",
+            "shortname": "ColumnData.ColumnDataChangeCollectorMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/main/column-data.js",
+            "line": 547,
+            "description": "A mixin that is a parent of ColumnData.ColumnDataValueMixin that collects value changes and fires listeners on the column."
+        },
+        "ColumnData.ColumnDataValueMixin": {
+            "name": "ColumnData.ColumnDataValueMixin",
+            "shortname": "ColumnData.ColumnDataValueMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/main/column-data.js",
+            "line": 621,
+            "description": "A mixin that aliases the value of the attribute given by 'columnData' in 'record' to 'value'."
+        },
+        "ColumnData.ColumnDataGroupPluginMixin": {
+            "name": "ColumnData.ColumnDataGroupPluginMixin",
+            "shortname": "ColumnData.ColumnDataGroupPluginMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/main/column-data.js",
+            "line": 767,
+            "description": "A mixin that used by column data group extensions. It adds view lookup paths based on the 'type' and for modules based on <module>Type."
         },
         "DragDrop.DraggableMixin": {
             "name": "DragDrop.DraggableMixin",
@@ -915,6 +1737,937 @@
     },
     "classitems": [
         {
+            "file": "src/js/column-data/utils/columnDataGroupPluginMixin.js",
+            "line": 20,
+            "description": "Type of the column data group extension. Used to extract 'typeLookup' in 'lookupMap' along with 'type'.",
+            "itemtype": "property",
+            "name": "groupType",
+            "type": "String",
+            "class": "ColumnDataGroupPluginMixin"
+        },
+        {
+            "file": "src/js/column-data/utils/columnDataGroupPluginMixin.js",
+            "line": 28,
+            "description": "Type of the column data group in extension. Used to extract 'typeLookup' in 'lookupMap' along with 'groupType'.",
+            "itemtype": "property",
+            "name": "type",
+            "type": "String",
+            "class": "ColumnDataGroupPluginMixin"
+        },
+        {
+            "file": "src/js/column-data/utils/columnDataGroupPluginMixin.js",
+            "line": 36,
+            "description": "View lookup path extracted from 'lookupMap' using 'groupType' and 'type'.\n    lookupMap[groupType][type]",
+            "itemtype": "property",
+            "name": "typeLookup",
+            "type": "String",
+            "class": "ColumnDataGroupPluginMixin"
+        },
+        {
+            "file": "src/js/column-data/utils/columnDataGroupPluginMixin.js",
+            "line": 49,
+            "description": "Array of modules present in the extension.",
+            "itemtype": "property",
+            "name": "modules",
+            "type": "Array",
+            "class": "ColumnDataGroupPluginMixin"
+        },
+        {
+            "file": "src/js/column-data/utils/columnDataValueMixin.js",
+            "line": 17,
+            "description": "Column data instance to be used to extract value.",
+            "itemtype": "property",
+            "name": "columnData",
+            "type": "Class",
+            "class": "ColumnDataValueMixin"
+        },
+        {
+            "file": "src/js/column-data/utils/columnDataValueMixin.js",
+            "line": 25,
+            "description": "Record to extract the value from.",
+            "itemtype": "property",
+            "name": "record",
+            "type": "Class",
+            "class": "ColumnDataValueMixin"
+        },
+        {
+            "file": "src/js/column-data/utils/columnDataValueMixin.js",
+            "line": 67,
+            "description": "An alias to the value in attribute. It undergoes validations and the change will be bubbled.",
+            "itemtype": "property",
+            "name": "value",
+            "class": "ColumnDataValueMixin"
+        },
+        {
+            "file": "src/js/column-data/validations/columnDataValidation.js",
+            "line": 29,
+            "description": "Array of validations to run. Passed as objects while creating.",
+            "itemtype": "property",
+            "name": "validations",
+            "type": "Array",
+            "class": "ColumnDataValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/validations/columnDataValidation.js",
+            "line": 37,
+            "itemtype": "property",
+            "name": "validate",
+            "type": "Boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "ColumnDataValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/validations/columnDataValidation.js",
+            "line": 44,
+            "description": "Method to validate a value on record.",
+            "itemtype": "method",
+            "name": "validateValue",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "Value to validate.",
+                    "type": "Any"
+                },
+                {
+                    "name": "record",
+                    "description": "Record to validate on.",
+                    "type": "Class"
+                },
+                {
+                    "name": "validations",
+                    "description": "Optional override of the validations to run.",
+                    "type": "Array",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Returns an array with 1st element as a boolean which says whether validations passed or not, 2nd element is the invalid message if it failed.",
+                "type": "Array"
+            },
+            "class": "ColumnDataValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/validations/columnDataValidation.js",
+            "line": 75,
+            "description": "Boolean to denote whether the property is mandatory or not.",
+            "itemtype": "property",
+            "name": "mandatory",
+            "type": "Boolean",
+            "class": "ColumnDataValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/validations/csvRegexValidation.js",
+            "line": 12,
+            "description": "Delimeter to use to split values in the CSV.",
+            "itemtype": "property",
+            "name": "delimeter",
+            "type": "String",
+            "class": "CSVRegexValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/validations/duplicateAcrossRecordsValidation.js",
+            "line": 13,
+            "description": "Path relative to record to check duplication under.",
+            "itemtype": "property",
+            "name": "duplicateCheckPath",
+            "type": "String",
+            "class": "DuplicateAcrossRecordsValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/validations/duplicateAcrossRecordsValidation.js",
+            "line": 21,
+            "description": "Key in the object to check duplicate for.",
+            "itemtype": "property",
+            "name": "duplicateCheckKey",
+            "type": "String",
+            "class": "DuplicateAcrossRecordsValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/validations/emptyValidation.js",
+            "line": 12,
+            "description": "Message to show when the validation fails.",
+            "itemtype": "property",
+            "name": "invalidMessage",
+            "type": "String",
+            "class": "EmptyValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/validations/emptyValidation.js",
+            "line": 20,
+            "description": "Boolean that says whether to negate the result or not.",
+            "itemtype": "property",
+            "name": "negate",
+            "type": "Boolean",
+            "class": "EmptyValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/validations/numberRangeValidation.js",
+            "line": 13,
+            "description": "Min value of a number.",
+            "itemtype": "property",
+            "name": "minValue",
+            "type": "Number",
+            "class": "NumberRangeValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/validations/numberRangeValidation.js",
+            "line": 21,
+            "description": "Max value of a number.",
+            "itemtype": "property",
+            "name": "maxValue",
+            "type": "Number",
+            "class": "NumberRangeValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/validations/regexValidation.js",
+            "line": 12,
+            "description": "Regex to valide with.",
+            "itemtype": "property",
+            "name": "regex",
+            "type": "String",
+            "class": "RegexValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/validations/regexValidation.js",
+            "line": 20,
+            "description": "Regex flags to use while creating the regex object.",
+            "itemtype": "property",
+            "name": "regexFlags",
+            "type": "String",
+            "class": "RegexValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/validations/regexValidation.js",
+            "line": 28,
+            "description": "RegExp object create using regex and regexFlags.",
+            "itemtype": "property",
+            "name": "regexObject",
+            "type": "RegExp",
+            "class": "RegexValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/validations/regexValidation.js",
+            "line": 38,
+            "description": "Method to validate.",
+            "itemtype": "method",
+            "name": "validateValue",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "Value to validate.",
+                    "type": "Any"
+                },
+                {
+                    "name": "record",
+                    "description": "Record to validate on.",
+                    "type": "Class"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "RegexValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnData.js",
+            "line": 20,
+            "description": "A name to uniquely identify column data.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "String",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnData.js",
+            "line": 28,
+            "description": "Key name of the attribute in the record. If not provided, 'name' is used a key.",
+            "itemtype": "property",
+            "name": "keyName",
+            "type": "String",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnData.js",
+            "line": 36,
+            "description": "Key of the attribute based on keyName or name if keyName is not provided.",
+            "itemtype": "property",
+            "name": "key",
+            "type": "String",
+            "access": "private",
+            "tagname": "",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnData.js",
+            "line": 47,
+            "description": "Meta data for the validation of the attribute on the record. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "validation",
+            "type": "Class",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnData.js",
+            "line": 55,
+            "description": "Meta data used by list-group module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "list",
+            "type": "Class",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnData.js",
+            "line": 63,
+            "description": "Meta data used by tree module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "tree",
+            "type": "Class",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnData.js",
+            "line": 71,
+            "description": "Meta data used by sortable module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "sort",
+            "type": "Class",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnData.js",
+            "line": 79,
+            "description": "Meta data used by panels module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "panel",
+            "type": "Class",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnData.js",
+            "line": 87,
+            "description": "Meta data used by form module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "form",
+            "type": "Class",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnData.js",
+            "line": 95,
+            "description": "A suitable label for the attribute used in displaying in certain places.",
+            "itemtype": "property",
+            "name": "label",
+            "type": "String",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnData.js",
+            "line": 103,
+            "description": "A nested child column data.",
+            "itemtype": "property",
+            "name": "childCol",
+            "type": "Class",
+            "access": "private",
+            "tagname": "",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnData.js",
+            "line": 112,
+            "description": "A name for the nesting of a column data.",
+            "itemtype": "property",
+            "name": "childColName",
+            "type": "String",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnData.js",
+            "line": 127,
+            "description": "A nested child column data group.",
+            "itemtype": "property",
+            "name": "childColGroup",
+            "type": "Class",
+            "access": "private",
+            "tagname": "",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnData.js",
+            "line": 136,
+            "description": "A name for the nesting of a column data group.",
+            "itemtype": "property",
+            "name": "childColGroupName",
+            "type": "String",
+            "access": "private",
+            "tagname": "",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnDataGroup.js",
+            "line": 23,
+            "description": "A name to uniquely identify the column data group.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "String",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnDataGroup.js",
+            "line": 31,
+            "description": "Array of columns. Each element is an object which will be passed to ColumnData.ColumnData.create.",
+            "itemtype": "property",
+            "name": "columns",
+            "type": "Array",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnDataGroup.js",
+            "line": 39,
+            "description": "Meta data used by list-group module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "list",
+            "type": "Class",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnDataGroup.js",
+            "line": 47,
+            "description": "Meta data used by tree module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "tree",
+            "type": "Class",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnDataGroup.js",
+            "line": 55,
+            "description": "Meta data used by sortable module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "sort",
+            "type": "Class",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnDataGroup.js",
+            "line": 63,
+            "description": "Meta data used by panels module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "panel",
+            "type": "Class",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnDataGroup.js",
+            "line": 71,
+            "description": "Meta data used by lazy-display module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "lazyDisplay",
+            "type": "Class",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnDataGroup.js",
+            "line": 79,
+            "description": "Meta data used by form module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "form",
+            "type": "Class",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/core/belongsTo.js",
+            "line": 5,
+            "description": "Creates a computed property for an object that when set with native js object will return an instances of a class.\n\nThe class is decided by the 1st param 'modelClass'. If it is not a class but an object and 'modelClassKey', the 2nd parameter is a string,\nthen the 'modelClassKey' in the object is used as a key in 'modelClass' the object to get the class.\n'defaultKey' the 3rd parameter is used as a default if object[modelClassKey] is not present.\n\nOptionally can create the instance with mixin. A single mixin can be passed or a map of mixins as 4th parameter with key extracted from object using mixinKey (5th parameter) can be passed.\n'defaultMixin' (6th parameter) is used when object[mixinKey] is not present.",
+            "itemtype": "method",
+            "name": "belongsTo",
+            "params": [
+                {
+                    "name": "modelClass",
+                    "description": "",
+                    "type": "Class|Object"
+                },
+                {
+                    "name": "modelClassKey",
+                    "description": "",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "name": "defaultKey",
+                    "description": "",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "name": "mixin",
+                    "description": "",
+                    "type": "Mixin|Object",
+                    "optional": true
+                },
+                {
+                    "name": "mixinKey",
+                    "description": "",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "name": "defaultMixin",
+                    "description": "",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Instance"
+            },
+            "class": "DelayedAddToHasMany",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/core/delayedAddToHasMany.js",
+            "line": 47,
+            "description": "Method to add a property after the array prop loads.",
+            "itemtype": "property",
+            "name": "addToProp",
+            "class": "DelayedAddToHasMany",
+            "module": "column-data",
+            "subprops": [
+                {
+                    "name": "prop",
+                    "description": "Property of array to add to.",
+                    "type": "String"
+                },
+                {
+                    "name": "propObj",
+                    "description": "Object to add to array.",
+                    "type": "Instance"
+                }
+            ]
+        },
+        {
+            "file": "src/js/core/hasMany.js",
+            "line": 5,
+            "description": "Creates a computed property for an array that when set with array of native js object will return an array of instances of a class.\n\nThe class is decided by the 1st param 'modelClass'. If it is not a class but an object and 'modelClassKey', the 2nd parameter is a string,\nthen the 'modelClassKey' in the object is used as a key in 'modelClass' the object to get the class.\n'defaultKey' the 3rd parameter is used as a default if object[modelClassKey] is not present.",
+            "itemtype": "method",
+            "name": "hasMany",
+            "params": [
+                {
+                    "name": "modelClass",
+                    "description": "",
+                    "type": "Class|Object"
+                },
+                {
+                    "name": "modelClassKey",
+                    "description": "",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "name": "defaultKey",
+                    "description": "",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Instance"
+            },
+            "class": "ObjectWithArrayMixin",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/core/hierarchy.js",
+            "line": 21,
+            "description": "Register a hierarchy. This will setup the meta of the hierarchy.",
+            "itemtype": "method",
+            "name": "registerHierarchy",
+            "params": [
+                {
+                    "name": "hierarchy",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "ObjectWithArrayMixin",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/core/hierarchy.js",
+            "line": 31,
+            "description": "Add an entry to the hierarchy. It takes care of updating meta also.",
+            "itemtype": "method",
+            "name": "addToHierarchy",
+            "params": [
+                {
+                    "name": "hierarchy",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "classObj",
+                    "description": "",
+                    "type": "Class"
+                },
+                {
+                    "name": "level",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "ObjectWithArrayMixin",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/core/hierarchy.js",
+            "line": 61,
+            "description": "Creates a computed property which creates a class for every element in the set array based on hierarchy.\nThe objects in the array can be of any level at or below the current level. An instance with the basic class is automatically wrapped around the objects at lower level.",
+            "itemtype": "method",
+            "name": "hasManyWithHierarchy",
+            "params": [
+                {
+                    "name": "hasManyHierarchy",
+                    "description": "Assumed to be already initialized by calling 'registerHierarchy'.",
+                    "type": "Object"
+                },
+                {
+                    "name": "level",
+                    "description": "Level of the computed property.",
+                    "type": "Number"
+                },
+                {
+                    "name": "key",
+                    "description": "Key used to get the key used in retrieving the class object in the classes map.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Instance"
+            },
+            "class": "ObjectWithArrayMixin",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/core/misc.js",
+            "line": 5,
+            "description": "Search in a multi level array.",
+            "itemtype": "method",
+            "name": "deepSearchArray",
+            "params": [
+                {
+                    "name": "d",
+                    "description": "Root object to search from.",
+                    "type": "Object"
+                },
+                {
+                    "name": "e",
+                    "description": "Element to search for.",
+                    "type": "Any"
+                },
+                {
+                    "name": "k",
+                    "description": "Key of the element in the object.",
+                    "type": "String"
+                },
+                {
+                    "name": "ak",
+                    "description": "Key of the array to dig deep.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns the found object.",
+                "type": "Object"
+            },
+            "class": "ObjectWithArrayMixin",
+            "module": "ember-utils-core"
+        },
+        {
+            "file": "src/js/core/misc.js",
+            "line": 29,
+            "description": "Binary insertion within a sorted array.",
+            "itemtype": "method",
+            "name": "binaryInsert",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "Sorted array to insert in.",
+                    "type": "Array"
+                },
+                {
+                    "name": "e",
+                    "description": "Element to insert.",
+                    "type": "Any"
+                },
+                {
+                    "name": "c",
+                    "description": "Optional comparator to use.",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "class": "ObjectWithArrayMixin",
+            "module": "ember-utils-core"
+        },
+        {
+            "file": "src/js/core/misc.js",
+            "line": 62,
+            "description": "Merge a src object to a tar object and return tar.",
+            "itemtype": "method",
+            "name": "merge",
+            "params": [
+                {
+                    "name": "tar",
+                    "description": "Target object.",
+                    "type": "Object"
+                },
+                {
+                    "name": "src",
+                    "description": "Source object.",
+                    "type": "Object"
+                },
+                {
+                    "name": "replace",
+                    "description": "Replace keys if they already existed.",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "false"
+                }
+            ],
+            "return": {
+                "description": "Returns the target object.",
+                "type": "Object"
+            },
+            "class": "ObjectWithArrayMixin",
+            "module": "ember-utils-core"
+        },
+        {
+            "file": "src/js/core/misc.js",
+            "line": 83,
+            "description": "Checks if an object has any key.",
+            "itemtype": "method",
+            "name": "hashHasKeys",
+            "params": [
+                {
+                    "name": "hash",
+                    "description": "Object to check for keys.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "ObjectWithArrayMixin",
+            "module": "ember-utils-core"
+        },
+        {
+            "file": "src/js/core/misc.js",
+            "line": 97,
+            "description": "Returns an array of integers from a starting number to another number with steps.",
+            "itemtype": "method",
+            "name": "getArrayFromRange",
+            "params": [
+                {
+                    "name": "l",
+                    "description": "Starting number.",
+                    "type": "Number"
+                },
+                {
+                    "name": "h",
+                    "description": "Ending number.",
+                    "type": "Number"
+                },
+                {
+                    "name": "s",
+                    "description": "Steps.",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "ObjectWithArrayMixin",
+            "module": "ember-utils-core"
+        },
+        {
+            "file": "src/js/core/misc.js",
+            "line": 116,
+            "description": "Get the ember assigned id to the instance.",
+            "itemtype": "method",
+            "name": "getEmberId",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "",
+                    "type": "Instance"
+                }
+            ],
+            "return": {
+                "description": "Ember assigned id.",
+                "type": "String"
+            },
+            "class": "ObjectWithArrayMixin",
+            "module": "ember-utils-core"
+        },
+        {
+            "file": "src/js/core/misc.js",
+            "line": 128,
+            "description": "Recursively return the offset of an element relative to a parent element.",
+            "itemtype": "method",
+            "name": "getOffset",
+            "params": [
+                {
+                    "name": "ele",
+                    "description": "",
+                    "type": "DOMElement"
+                },
+                {
+                    "name": "type",
+                    "description": "Type of the offset.",
+                    "type": "String"
+                },
+                {
+                    "name": "parentSelector",
+                    "description": "Selector for the parent.",
+                    "type": "String"
+                },
+                {
+                    "name": "Offset.",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "ObjectWithArrayMixin",
+            "module": "ember-utils-core"
+        },
+        {
+            "file": "src/js/core/objectWithArrayMixin.js",
+            "line": 111,
+            "description": "Method called just before array elements will be deleted. This is a fallback method. A method with name <propKey>WillBeDeleted can be added to handle for 'propKey' seperately.",
+            "itemtype": "method",
+            "name": "propWillBeDeleted",
+            "params": [
+                {
+                    "name": "eles",
+                    "description": "The elements that will be deleted.",
+                    "type": "Array"
+                },
+                {
+                    "name": "idxs",
+                    "description": "The indices of the elements that will be deleted.",
+                    "type": "Array"
+                }
+            ],
+            "class": "ObjectWithArrayMixin",
+            "module": "ember-utils-core"
+        },
+        {
+            "file": "src/js/core/objectWithArrayMixin.js",
+            "line": 120,
+            "description": "Method called when deciding whether to add an ele or not. This is a fallback method. A method with name <propKey>CanAdd can be added to handle for 'propKey' seperately.",
+            "itemtype": "method",
+            "name": "propCanAdd",
+            "params": [
+                {
+                    "name": "ele",
+                    "description": "The element that can be added or not.",
+                    "type": "Object|Instance"
+                },
+                {
+                    "name": "idx",
+                    "description": "The indice of the element that can be added or not.",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "ObjectWithArrayMixin",
+            "module": "ember-utils-core"
+        },
+        {
+            "file": "src/js/core/objectWithArrayMixin.js",
+            "line": 131,
+            "description": "Method called after array elements are added. This is a fallback method. A method with name <propKey>WasAdded can be added to handle for 'propKey' seperately.",
+            "itemtype": "method",
+            "name": "propWasAdded",
+            "params": [
+                {
+                    "name": "eles",
+                    "description": "The elements that are added.",
+                    "type": "Array"
+                },
+                {
+                    "name": "idxs",
+                    "description": "The indices of the elements that are added.",
+                    "type": "Array"
+                }
+            ],
+            "class": "ObjectWithArrayMixin",
+            "module": "ember-utils-core"
+        },
+        {
+            "file": "src/js/core/objectWithArrayMixin.js",
+            "line": 141,
+            "description": "List of keys to array properties.",
+            "itemtype": "property",
+            "name": "arrayProps",
+            "type": "Array",
+            "class": "ObjectWithArrayMixin",
+            "module": "ember-utils-core"
+        },
+        {
             "file": "src/js/main/alerts.js",
             "line": 42,
             "description": "Type of alert message. Possible values are \"success\", \"warning\", \"info\", \"error\"",
@@ -957,34 +2710,765 @@
             "module": "alerts"
         },
         {
-            "file": "src/js/main/column-data.js",
-            "line": 37,
-            "class": "DragDrop.DraggableMixin",
-            "module": "app-wrapper"
+            "file": "src/js/main/array-modifier.js",
+            "line": 23,
+            "description": "Type of the array modifier.",
+            "itemtype": "property",
+            "name": "type",
+            "type": "String",
+            "default": "\"basic\"",
+            "readonly": "",
+            "class": "ArrayMod.ArrayModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 33,
+            "description": "Array modifier group type the modifier belongs to.",
+            "itemtype": "property",
+            "name": "groupType",
+            "type": "String",
+            "default": "\"basic\"",
+            "readonly": "",
+            "class": "ArrayMod.ArrayModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 43,
+            "description": "Property the modifier applies on.",
+            "itemtype": "property",
+            "name": "property",
+            "type": "String",
+            "class": "ArrayMod.ArrayModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 51,
+            "description": "Set to true if a listener on all objects in the array should be added.",
+            "itemtype": "property",
+            "name": "addObserverToAll",
+            "type": "Boolean",
+            "default": "true",
+            "class": "ArrayMod.ArrayModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 60,
+            "description": "Function called when observers are supposed to be added.",
+            "itemtype": "method",
+            "name": "addModObservers",
+            "params": [
+                {
+                    "name": "context",
+                    "description": "Context to add the observer to.",
+                    "type": "Class"
+                },
+                {
+                    "name": "method",
+                    "description": "Method to be called when observer is called.",
+                    "type": "String|Function"
+                }
+            ],
+            "class": "ArrayMod.ArrayModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 71,
+            "description": "Function called when observers are supposed to be removed.",
+            "itemtype": "method",
+            "name": "removeModObservers",
+            "params": [
+                {
+                    "name": "context",
+                    "description": "Context to add the observer to.",
+                    "type": "Class"
+                },
+                {
+                    "name": "method",
+                    "description": "Method to be called when observer is called.",
+                    "type": "String|Function"
+                }
+            ],
+            "class": "ArrayMod.ArrayModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 92,
+            "description": "Method called to modify an entire array.",
+            "itemtype": "method",
+            "name": "modify",
+            "params": [
+                {
+                    "name": "array",
+                    "description": "The array to modify.",
+                    "type": "Array"
+                }
+            ],
+            "class": "ArrayMod.ArrayFilterModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 105,
+            "description": "Method called to modify a single element.",
+            "itemtype": "method",
+            "name": "modify",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "The item to modify.",
+                    "type": "Class"
+                },
+                {
+                    "name": "value",
+                    "description": "The value to modfiy on.",
+                    "type": "Any"
+                }
+            ],
+            "class": "ArrayMod.ArrayFilterModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 125,
+            "description": "Search string.",
+            "itemtype": "property",
+            "name": "searchString",
+            "type": "String",
+            "class": "ArrayMod.ArraySearchModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 133,
+            "description": "If set to true, all elements matching searchString will be removed, else all elements not matching searchString will be removed.",
+            "itemtype": "property",
+            "name": "negate",
+            "type": "Boolean",
+            "default": "false",
+            "class": "ArrayMod.ArraySearchModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 142,
+            "description": "Search string regex object.",
+            "itemtype": "property",
+            "name": "searchRegex",
+            "type": "RegEx",
+            "access": "private",
+            "tagname": "",
+            "class": "ArrayMod.ArraySearchModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 180,
+            "description": "Label for the tag.",
+            "itemtype": "property",
+            "name": "label",
+            "type": "String",
+            "class": "ArrayMod.ArrayTagObjectModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 188,
+            "description": "Value for the tag.",
+            "itemtype": "property",
+            "name": "val",
+            "type": "String",
+            "class": "ArrayMod.ArrayTagObjectModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 196,
+            "description": "Checked boolean.",
+            "itemtype": "property",
+            "name": "checked",
+            "type": "Boolean",
+            "default": "true",
+            "class": "ArrayMod.ArrayTagObjectModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 205,
+            "description": "If set to true, val will be not taken if checked, else val will be taken if checked.",
+            "itemtype": "property",
+            "name": "negate",
+            "type": "Boolean",
+            "default": "false",
+            "class": "ArrayMod.ArrayTagObjectModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 223,
+            "description": "Tags to filter with. Elements are ArrayMod.ArrayTagObjectModifier instances. But passed as objects while creating.",
+            "itemtype": "property",
+            "name": "tags",
+            "class": "ArrayMod.ArrayTagSearchModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 230,
+            "description": "Tags that are taken.",
+            "itemtype": "property",
+            "name": "selectedTags",
+            "class": "ArrayMod.ArrayTagSearchModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 237,
+            "description": "Joiner for the tags. Can be \"or\" or \"and\".",
+            "itemtype": "property",
+            "name": "joiner",
+            "type": "String",
+            "default": "\"or\"",
+            "class": "ArrayMod.ArrayTagSearchModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 279,
+            "description": "Order to sort by. true for ascending, false for descending",
+            "itemtype": "property",
+            "name": "order",
+            "type": "String",
+            "default": "true",
+            "class": "ArrayMod.ArraySortModifier",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 324,
+            "description": "Array modifiers present in the group. Use object while creating.",
+            "itemtype": "property",
+            "name": "arrayMods",
+            "type": "Array",
+            "class": "ArrayMod.ArrayModGroup",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/main/array-modifier.js",
+            "line": 335,
+            "description": "Method that returns whether an item can be added or not.",
+            "itemtype": "method",
+            "name": "canAdd",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "Item that is to be checked whether it can be added or not.",
+                    "type": "Class"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "ArrayMod.ArrayModGroup",
+            "module": "array-modifier"
         },
         {
             "file": "src/js/main/column-data.js",
-            "line": 84,
-            "class": "DragDrop.DraggableMixin",
-            "module": "app-wrapper"
+            "line": 20,
+            "description": "A name to uniquely identify the column data group.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "String",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
         },
         {
             "file": "src/js/main/column-data.js",
-            "line": 120,
-            "class": "DragDrop.DraggableMixin",
-            "module": "app-wrapper"
+            "line": 28,
+            "description": "Array of columns. Each element is an object which will be passed to ColumnData.ColumnData.create.",
+            "itemtype": "property",
+            "name": "columns",
+            "type": "Array",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
         },
         {
             "file": "src/js/main/column-data.js",
-            "line": 239,
-            "class": "DragDrop.DraggableMixin",
-            "module": "app-wrapper"
+            "line": 36,
+            "description": "Meta data used by list-group module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "list",
+            "type": "Class",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
         },
         {
             "file": "src/js/main/column-data.js",
-            "line": 363,
-            "class": "DragDrop.DraggableMixin",
-            "module": "app-wrapper"
+            "line": 44,
+            "description": "Meta data used by tree module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "tree",
+            "type": "Class",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 52,
+            "description": "Meta data used by sortable module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "sort",
+            "type": "Class",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 60,
+            "description": "Meta data used by panels module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "panel",
+            "type": "Class",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 68,
+            "description": "Meta data used by lazy-display module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "lazyDisplay",
+            "type": "Class",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 76,
+            "description": "Meta data used by form module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "form",
+            "type": "Class",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 110,
+            "description": "A name to uniquely identify column data.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "String",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 118,
+            "description": "Key name of the attribute in the record. If not provided, 'name' is used a key.",
+            "itemtype": "property",
+            "name": "keyName",
+            "type": "String",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 126,
+            "description": "Key of the attribute based on keyName or name if keyName is not provided.",
+            "itemtype": "property",
+            "name": "key",
+            "type": "String",
+            "access": "private",
+            "tagname": "",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 137,
+            "description": "Meta data for the validation of the attribute on the record. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "validation",
+            "type": "Class",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 145,
+            "description": "Meta data used by list-group module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "list",
+            "type": "Class",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 153,
+            "description": "Meta data used by tree module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "tree",
+            "type": "Class",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 161,
+            "description": "Meta data used by sortable module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "sort",
+            "type": "Class",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 169,
+            "description": "Meta data used by panels module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "panel",
+            "type": "Class",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 177,
+            "description": "Meta data used by form module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "form",
+            "type": "Class",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 185,
+            "description": "A suitable label for the attribute used in displaying in certain places.",
+            "itemtype": "property",
+            "name": "label",
+            "type": "String",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 193,
+            "description": "A nested child column data.",
+            "itemtype": "property",
+            "name": "childCol",
+            "type": "Class",
+            "access": "private",
+            "tagname": "",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 202,
+            "description": "A name for the nesting of a column data.",
+            "itemtype": "property",
+            "name": "childColName",
+            "type": "String",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 217,
+            "description": "A nested child column data group.",
+            "itemtype": "property",
+            "name": "childColGroup",
+            "type": "Class",
+            "access": "private",
+            "tagname": "",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 226,
+            "description": "A name for the nesting of a column data group.",
+            "itemtype": "property",
+            "name": "childColGroupName",
+            "type": "String",
+            "access": "private",
+            "tagname": "",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 264,
+            "description": "Array of validations to run. Passed as objects while creating.",
+            "itemtype": "property",
+            "name": "validations",
+            "type": "Array",
+            "class": "ColumnData.ColumnDataValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 272,
+            "itemtype": "property",
+            "name": "validate",
+            "type": "Boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "ColumnData.ColumnDataValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 279,
+            "description": "Method to validate a value on record.",
+            "itemtype": "method",
+            "name": "validateValue",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "Value to validate.",
+                    "type": "Any"
+                },
+                {
+                    "name": "record",
+                    "description": "Record to validate on.",
+                    "type": "Class"
+                },
+                {
+                    "name": "validations",
+                    "description": "Optional override of the validations to run.",
+                    "type": "Array",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Returns an array with 1st element as a boolean which says whether validations passed or not, 2nd element is the invalid message if it failed.",
+                "type": "Array"
+            },
+            "class": "ColumnData.ColumnDataValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 310,
+            "description": "Boolean to denote whether the property is mandatory or not.",
+            "itemtype": "property",
+            "name": "mandatory",
+            "type": "Boolean",
+            "class": "ColumnData.ColumnDataValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 325,
+            "description": "Message to show when the validation fails.",
+            "itemtype": "property",
+            "name": "invalidMessage",
+            "type": "String",
+            "class": "ColumnData.EmptyValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 333,
+            "description": "Boolean that says whether to negate the result or not.",
+            "itemtype": "property",
+            "name": "negate",
+            "type": "Boolean",
+            "class": "ColumnData.EmptyValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 357,
+            "description": "Regex to valide with.",
+            "itemtype": "property",
+            "name": "regex",
+            "type": "String",
+            "class": "ColumnData.RegexValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 365,
+            "description": "Regex flags to use while creating the regex object.",
+            "itemtype": "property",
+            "name": "regexFlags",
+            "type": "String",
+            "class": "ColumnData.RegexValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 373,
+            "description": "RegExp object create using regex and regexFlags.",
+            "itemtype": "property",
+            "name": "regexObject",
+            "type": "RegExp",
+            "class": "ColumnData.RegexValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 383,
+            "description": "Method to validate.",
+            "itemtype": "method",
+            "name": "validateValue",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "Value to validate.",
+                    "type": "Any"
+                },
+                {
+                    "name": "record",
+                    "description": "Record to validate on.",
+                    "type": "Class"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "ColumnData.RegexValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 410,
+            "description": "Delimeter to use to split values in the CSV.",
+            "itemtype": "property",
+            "name": "delimeter",
+            "type": "String",
+            "class": "ColumnData.CSVRegexValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 469,
+            "description": "Path relative to record to check duplication under.",
+            "itemtype": "property",
+            "name": "duplicateCheckPath",
+            "type": "String",
+            "class": "ColumnData.DuplicateAcrossRecordsValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 477,
+            "description": "Key in the object to check duplicate for.",
+            "itemtype": "property",
+            "name": "duplicateCheckKey",
+            "type": "String",
+            "class": "ColumnData.DuplicateAcrossRecordsValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 501,
+            "description": "Min value of a number.",
+            "itemtype": "property",
+            "name": "minValue",
+            "type": "Number",
+            "class": "ColumnData.NumberRangeValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 509,
+            "description": "Max value of a number.",
+            "itemtype": "property",
+            "name": "maxValue",
+            "type": "Number",
+            "class": "ColumnData.NumberRangeValidation",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 633,
+            "description": "Column data instance to be used to extract value.",
+            "itemtype": "property",
+            "name": "columnData",
+            "type": "Class",
+            "class": "ColumnData.ColumnDataValueMixin",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 641,
+            "description": "Record to extract the value from.",
+            "itemtype": "property",
+            "name": "record",
+            "type": "Class",
+            "class": "ColumnData.ColumnDataValueMixin",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 683,
+            "description": "An alias to the value in attribute. It undergoes validations and the change will be bubbled.",
+            "itemtype": "property",
+            "name": "value",
+            "class": "ColumnData.ColumnDataValueMixin",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 781,
+            "description": "Type of the column data group extension. Used to extract 'typeLookup' in 'lookupMap' along with 'type'.",
+            "itemtype": "property",
+            "name": "groupType",
+            "type": "String",
+            "class": "ColumnData.ColumnDataGroupPluginMixin",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 789,
+            "description": "Type of the column data group in extension. Used to extract 'typeLookup' in 'lookupMap' along with 'groupType'.",
+            "itemtype": "property",
+            "name": "type",
+            "type": "String",
+            "class": "ColumnData.ColumnDataGroupPluginMixin",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 797,
+            "description": "View lookup path extracted from 'lookupMap' using 'groupType' and 'type'.\n    lookupMap[groupType][type]",
+            "itemtype": "property",
+            "name": "typeLookup",
+            "type": "String",
+            "class": "ColumnData.ColumnDataGroupPluginMixin",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 810,
+            "description": "Array of modules present in the extension.",
+            "itemtype": "property",
+            "name": "modules",
+            "type": "Array",
+            "class": "ColumnData.ColumnDataGroupPluginMixin",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/main/column-data.js",
+            "line": 847,
+            "class": "ColumnData.ColumnDataGroupPluginMixin",
+            "module": "column-data"
         },
         {
             "file": "src/js/main/dragdrop.js",
@@ -1182,7 +3666,7 @@
         },
         {
             "file": "src/js/main/form.js",
-            "line": 1101,
+            "line": 1095,
             "class": "GlobalModules.DisplayTextView",
             "module": "drag-drop"
         },
@@ -2165,24 +4649,64 @@
     ],
     "warnings": [
         {
-            "message": "Missing item type",
-            "line": " src/js/main/column-data.js:37"
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/js/column-data/validations/columnDataValidation.js:44"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/js/column-data/validations/regexValidation.js:38"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/js/core/belongsTo.js:5"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/js/core/hasMany.js:5"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/js/core/hierarchy.js:61"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/js/core/misc.js:5"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/js/core/misc.js:62"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/js/core/misc.js:83"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/js/core/misc.js:97"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/js/core/misc.js:116"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/js/core/objectWithArrayMixin.js:120"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/js/main/array-modifier.js:335"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/js/main/column-data.js:279"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/js/main/column-data.js:383"
         },
         {
             "message": "Missing item type",
-            "line": " src/js/main/column-data.js:84"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/js/main/column-data.js:120"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/js/main/column-data.js:239"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/js/main/column-data.js:363"
+            "line": " src/js/main/column-data.js:847"
         },
         {
             "message": "Missing item type",
@@ -2194,7 +4718,7 @@
         },
         {
             "message": "Missing item type",
-            "line": " src/js/main/form.js:1101"
+            "line": " src/js/main/form.js:1095"
         },
         {
             "message": "Missing item type",

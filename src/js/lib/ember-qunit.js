@@ -42,6 +42,7 @@ function globalize() {
   window.setResolver = setResolver;
 }
 
+window.emq = exports;
 exports.globalize = globalize;
 exports.moduleFor = moduleFor;
 exports.moduleForComponent = moduleForComponent;

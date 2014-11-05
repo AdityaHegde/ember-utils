@@ -1,4 +1,4 @@
-moduleForComponent("alerts/alert-message", "alerts.js", {
+moduleForComponent("alerts/alert-message", "alerts", {
   setup : function() {
   },
   teardown : function() {

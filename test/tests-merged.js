@@ -1,13 +1,3 @@
-$.mockjaxSettings.logging = false;
-$.mockjaxSettings.responseTime = 50;
-
-var mockjaxSettings = {
-  throwServerError : false,
-  throwProcessError : 0,
-  returnId : false,
-  modelChangeMap : {
-  },
-},
 mockjaxData = {
   test : {
     data : [{
@@ -83,107 +73,7 @@ mockjaxData = {
     },
     //modelClass : TestApp.Testp,
   },
-},
-urlPartsExtractRegex = new RegExp("^/(.*)/(.*?)$");
-
-function getDataForModelType(settings, model, type) {
-  var retData = {
-    result : {
-      status : mockjaxSettings.throwProcessError,
-      message : mockjaxSettings.throwProcessError ? "Failed" : "Success",
-    }
-  }, parts = settings.url.match(urlPartsExtractRegex),
-  params = Ember.typeOf(settings.data) === "string" ? JSON.parse(settings.data.replace(/^data=/, "")) : settings.data;
-  model = model || (parts && parts[1]);
-  type = type || (parts && parts[2]);
-  if(mockjaxSettings.modelChangeMap[model]) {
-    model = mockjaxSettings.modelChangeMap[model];
-  }
-  mockjaxData.lastPassedData = {
-    model : model,
-    type : type,
-    params : params,
-  };
-  if(model && type) {
-    var modelData = mockjaxData[model];
-    if(type === "getAll") {
-      retData.result.data = modelData.data;
-      if(modelData.getAllAdditionalData) {
-        Utils.merge(retData.result, modelData.getAllAdditionalData);
-      }
-    }
-    else if(type === "get") {
-      retData.result.data = modelData.data.findBy("id", CrudAdapter.getId(params, modelData.modelClass));
-      if(modelData.getAdditionalData) {
-        Utils.merge(retData.result, modelData.getAdditionalData);
-      }
-    }
-    else if(type === "delete") {
-      retData.result.data = {
-        id : CrudAdapter.getId(params, modelData.modelClass),
-      };
-    }
-  }
-  return retData;
-}
-
-$.mockjax({
-  url: /\/.*?\/.*?/,
-  type : "GET",
-  response : function(settings) {
-    this.responseText = getDataForModelType(settings);
-  },
-});
-
-$.mockjax({
-  url: /\/.*?\/.*?/,
-  type : "POST",
-  response : function(settings) {
-    //console.log(settings.data);
-    if(mockjaxSettings.throwServerError) {
-      this.status = 500;
-      this.statusText = "Server Error";
-    }
-    else {
-      var retData = {
-        result : {
-          status : mockjaxSettings.throwProcessError,
-          message : mockjaxSettings.throwProcessError ? "Failed" : "Success",
-        }
-      }, parts = settings.url.match(urlPartsExtractRegex),
-      model = parts && parts[1],
-      type = parts && parts[2],
-      params = Ember.typeOf(settings.data) === "string" ? JSON.parse(settings.data) : settings.data,
-      modelData = model && mockjaxData[model];
-      mockjaxData.lastPassedData = {
-        model : model,
-        type : type,
-        params : params,
-      };
-      retData.result.data = {
-        id : type === "update" ? CrudAdapter.getId(params, modelData.modelClass) : null,
-      };
-      if(modelData.createUpdateData) {
-        Utils.merge(retData.result.data, modelData.createUpdateData);
-      }
-      this.responseText = retData;
-    }
-  },
-});
-
-function checkElements(arrayController, key, expected, exactCheck) {
-  equal(arrayController.get("length"), expected.length, expected.length+" elements are there");
-  for(var i = 0; i < expected.length; i++) {
-    if(exactCheck) {
-      var arrayObj = arrayController.objectAt(i);
-      equal(arrayObj.get(key), expected[i], "element at index "+i+" has "+key+" = "+expected[i]);
-    }
-    else {
-      var found = arrayController.findBy(key, expected[i]);
-      ok(found, "element with "+key+" = "+expected[i]+" is present in arrangedContent");
-    }
-  }
-}
+};
 
 function checkTableRowElements(column, expected) {
   var rowEles = [];
@@ -214,101 +104,221 @@ function getRowByPos(row) {
   return ".main-table tbody tr:nth-of-type("+row+") td";
 }
 
-function getCurDate(offset) {
-  var d = new Date();
-  if(offset) {
-    d = new Date(d.getTime() + offset*1000);
-  }
-  return d.toLocaleDateString()+" "+d.toTimeString();
-};
+TestCase.ArrayModifierTC = TestCase.TestCase.extend({
+  initialize : function() {
+    this.set("testData.arrayController", ArrayMod.ArrayModController.create({
+      content : [
+        Ember.Object.create({vara : "test1", varb : "test_1"}),
+        Ember.Object.create({vara : "test5", varb : "test_1"}),
+        Ember.Object.create({vara : "test2", varb : "test_2"}),
+        Ember.Object.create({vara : "test4", varb : "test_4"}),
+        Ember.Object.create({vara : "test6", varb : "test_2"}),
+        Ember.Object.create({vara : "test3", varb : "test_1"}),
+        Ember.Object.create({vara : "test8", varb : "test_3"}),
+        Ember.Object.create({vara : "test7", varb : "test_1"}),
+      ],
+      unique_id : "test",
+    }));
+  },
+});
+Utils.addToHierarchy(TestCase.TestHierarchyMap, "arrayMod", TestCase.ArrayModifierTC, 0);
 
-function setupStoreAndReturnIt(container) {
-  if (DS._setupContainer) {
-    DS._setupContainer(container);
-  } else {
-    container.register('store:main', DS.Store);
-  }
-
-  container.register('adapter:application', CrudAdapter.ApplicationAdapter);
-  container.register('serializer:application', CrudAdapter.ApplicationSerializer);
-
-  return container.lookup('store:main');
-}
-
-function setupAppForTesting(app, container) {
-  Ember.run(function() {
-    app.setupEventDispatcher();
-    app.resolve(app);
-    container.register('view:select', Ember.Select);
-    container.register('view:checkbox', Ember.Checkbox);
-  });
-}
-
-//Markup needed for testing
-//TODO : find a way to add thru karma config
-$("body").append("" +
-  "<div id='qunit-main-container'>" +
-    "<h1 id='qunit-header'>Tests</h1>" +
-    "<h2 id='qunit-banner'></h2>" +
-    "<div id='qunit-testrunner-toolbar'></div>" +
-    "<h2 id='qunit-userAgent'></h2>" +
-    "<ol id='qunit-tests'></ol>" +
-    "<div id='qunit-fixture'></div>" +
-  "</div>" +
-  "<div id='ember-testing'></div>" +
-"");
-
-TestApp = Ember.Application.create({
-  rootElement : "#ember-testing",
+TestCase.TestSuit.create({
+  suitName : "array-modifier",
+  testCases : [{
+    title : "sort - descending on varb and ascending on vara",
+    type : "arrayMod",
+    testData : {},
+    testBlocks : [
+      ["baseTestBlock", [
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "arrayController.arrayMods", "", ArrayMod.ArraySortModifier.create({ property : "varb", order : false, }), "push"],
+          ["base", "arrayController.arrayMods", "", ArrayMod.ArraySortModifier.create({ property : "vara" }),                 "push"],
+        ]],
+      ]],
+      ["baseTestBlock", [
+        ["checkValues", [
+          //"type", "path", "value"
+          ["base", "arrayController.@.vara", ["test4", "test8", "test2", "test6", "test1", "test3", "test5", "test7"]],
+        ]],
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "arrayController",                      "",     Ember.Object.create({ vara : "test9", varb : "test_4" }),  "push"   ],
+          ["base", "arrayController",                      "",     Ember.Object.create({ vara : "test10", varb : "test_1" }), "unshift"],
+          ["base", "arrayController",                      "",     Ember.Object.create({ vara : "test80", varb : "test_1" }), "unshift"],
+          ["base", "arrayController.content.[vara=test5]", "varb", "test_3"],
+          ["base", "arrayController",                      "",     "",                                                        "remove" , "arrayController.content.[vara=test4]"],
+        ]],
+      ]],
+      ["baseTestBlock", [
+        ["checkValues", [
+          //"type", "path", "value"
+          ["base", "arrayController.@.vara", ["test9", "test5", "test8", "test2", "test6", "test1", "test10", "test3", "test7", "test80"]],
+        ]],
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "arrayController.arrayMods", 1, "", "removeAt"],
+        ]],
+      ]],
+      ["baseTestBlock", [
+        ["checkValues", [
+          //"type", "path", "value"
+          ["base", "arrayController.@.vara", ["test9", "test5", "test8", "test2", "test6", "test80", "test10", "test1", "test3", "test7"]],
+        ]],
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "arrayController.arrayMods", 0, "", "removeAt"],
+        ]],
+      ]],
+      ["checkValues", [
+          //"type", "path", "value"
+          ["base", "arrayController.@.vara", ["test80", "test10", "test1", "test5", "test2", "test6", "test3", "test8", "test7", "test9"]],
+      ]],
+    ],
+  }, {
+    type : "arrayMod",
+    title : "search - on varb with 'test_1'",
+    testData : {},
+    testBlocks : [
+      ["baseTestBlock", [
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "arrayController.arrayMods", "", ArrayMod.ArraySearchModifier.create({ property : "varb", searchString : "test_1" }), "push"],
+        ]],
+      ]],
+      ["baseTestBlock", [
+        ["checkValues", [
+          //"type", "path", "value"
+          ["base", "arrayController.@.vara", ["test1", "test3", "test5", "test7"]],
+        ]],
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "arrayController",                      "",     Ember.Object.create({ vara : "test9", varb : "test_1" }),  "push"],
+          ["base", "arrayController",                      "",     Ember.Object.create({ vara : "test10", varb : "test_2" }), "push"],
+          ["base", "arrayController.content.[vara=test5]", "varb", "test_3"],
+          ["base", "arrayController.content.[vara=test6]", "varb", "test_1"],
+        ]],
+      ]],
+      ["baseTestBlock", [
+        ["checkValues", [
+          //"type", "path", "value"
+          ["base", "arrayController.@.vara", ["test1", "test3", "test6", "test7", "test9"]],
+        ]],
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "arrayController.arrayMods.0", "searchString", "test_2"],
+        ]],
+      ]],
+      ["baseTestBlock", [
+        ["checkValues", [
+          //"type", "path", "value"
+          ["base", "arrayController.@.vara", ["test2", "test10"]],
+        ]],
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "arrayController.arrayMods.0", "property",     "vara"],
+          ["base", "arrayController.arrayMods.0", "searchString", "test1"],
+        ]],
+      ]],
+      ["baseTestBlock", [
+        ["checkValues", [
+          //"type", "path", "value"
+          ["base", "arrayController.@.vara", ["test1", "test10"]],
+        ]],
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "arrayController.arrayMods.0", "negate", true],
+        ]],
+      ]],
+      ["baseTestBlock", [
+        ["checkValues", [
+          //"type", "path", "value"
+          ["base", "arrayController.@.vara", ["test5", "test2", "test4", "test6", "test3", "test8", "test7", "test9"]],
+        ]],
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "arrayController.arrayMods", 0, "", "removeAt"],
+        ]],
+      ]],
+      ["checkValues", [
+          //"type", "path", "value"
+          ["base", "arrayController.@.vara", ["test1", "test5", "test2", "test4", "test6", "test3", "test8", "test7", "test9", "test10"]],
+      ]],
+    ],
+  }, {
+    type : "arrayMod",
+    title : "filter - on varb with tags 'test_2' and 'test_4'",
+    testData : {},
+    testBlocks : [
+      ["baseTestBlock", [
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "arrayController.arrayMods", "", ArrayMod.ArrayTagSearchModifier.create({
+            property : "varb",
+            tags : [
+              {label : "test_1", val : "test_1", checked : false},
+              {label : "test_2", val : "test_2", checked : true},
+              {label : "test_3", val : "test_3", checked : false},
+              {label : "test_4", val : "test_4", checked : true},
+            ],
+          }), "push"],
+        ]],
+      ]],
+      ["baseTestBlock", [
+        ["checkValues", [
+          //"type", "path", "value"
+          ["base", "arrayController.@.vara", ["test2", "test4", "test6"]],
+        ]],
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "arrayController",                      "",     Ember.Object.create({ vara : "test9",  varb : "test_1" }), "push"],
+          ["base", "arrayController",                      "",     Ember.Object.create({ vara : "test10", varb : "test_2" }), "push"],
+          ["base", "arrayController.content.[vara=test5]", "varb", "test_2"],
+          ["base", "arrayController.content.[vara=test6]", "varb", "test_1"],
+        ]],
+      ]],
+      ["baseTestBlock", [
+        ["checkValues", [
+          //"type", "path", "value"
+          ["base", "arrayController.@.vara", ["test2", "test4", "test5", "test10"]],
+        ]],
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "arrayController.arrayMods.0.tags.1", "checked", false],
+          ["base", "arrayController.arrayMods.0.tags.2", "checked", true],
+        ]],
+      ]],
+      ["baseTestBlock", [
+        ["checkValues", [
+          //"type", "path", "value"
+          ["base", "arrayController.@.vara", ["test4", "test8"]],
+        ]],
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "arrayController.arrayMods.0.tags.2", "negate",  true],
+          ["base", "arrayController.arrayMods.0.tags.3", "checked", false],
+        ]],
+      ]],
+      ["baseTestBlock", [
+        ["checkValues", [
+          //"type", "path", "value"
+          ["base", "arrayController.@.vara", ["test4", "test1", "test5", "test2", "test6", "test3", "test7", "test9", "test10"]],
+        ]],
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "arrayController.arrayMods", 0, "", "removeAt"],
+        ]],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value"
+        ["base", "arrayController.@.vara", ["test1", "test5", "test2", "test4", "test6", "test3", "test8", "test7", "test9", "test10"]],
+      ]],
+    ],
+  }],
 });
 
-var attr = DS.attr, hasMany = DS.hasMany, belongsTo = DS.belongsTo;
-
-QUnit.config.reorder = false;
-QUnit.config.autostart = false;
-//workaroud for qunit not reporting toatal tests
-var testCount = 0;
-var qunitTest = QUnit.test;
-QUnit.test = window.test = function () {
-  testCount += 1;
-  qunitTest.apply(this, arguments);
-};
-QUnit.begin(function (args) {
-  args.totalTests = testCount;
-});
-
-emq.globalize();
-TestApp.setupForTesting();
-//TestApp.rootElement = '#ember-testing';
-Ember.Test.registerAsyncHelper("fillFormElement",
-  function(app, column, inputType, text, context) {
-    return fillIn(getColumnSelector(column, inputType), text, context);
-  }
-);
-Ember.Test.registerAsyncHelper("selectFromElement",
-  function(app, column, value, context) {
-    var ele = findWithAssert(getColumnSelector(column, "select"), context);
-    if(ele) {
-      Ember.run(function() {
-        var op = ele.find("option[value='"+value+"']");
-        if(op[0]) op[0].click();
-      });
-    }
-    return wait();
-  }
-);
-
-Ember.Test.registerAsyncHelper("scrollHelper",
-  function(app, element, scrollVal, context) {
-    Ember.run(function() {
-      element.scrollTop(scrollVal).change();
-    });
-  }
-);
-TestApp.injectTestHelpers();
-setResolver(Ember.DefaultResolver.create({ namespace: TestApp }))
-
-module("timer.js", {
+module("timer", {
   setup: function() {
   },
   teardown : function() {
@@ -418,430 +428,1016 @@ test("test async que with different keys", function() {
   });
 });
 
-module("array-modifier.js", {
+TestApp.Test = ModelWrapper.createModelWrapper({
+  vara : attr(),
+  varb : attr(),
+  varc : attr(),
+  vard : attr(),
+
+  testp : belongsTo("testp", {async : true}),
+}, {
+  keys : ["vara"],
+  apiName : "test",
+  queryParams : ["vara"],
+});
+MockjaxUtils.addMockjaxData({
+  name : "test",
+  data : [{
+    id : "test",
+    vara : "test",
+    varb : "test_varb",
+  }, {
+    id : "test2",
+    vara : "test2",
+  }, {
+    id : "test3",
+    vara : "test3",
+  }, {
+    id : "test4",
+    vara : "test4",
+  }, {
+    id : "test5",
+    vara : "test5",
+  }],
+  createUpdateAdditionalData : {
+    varc : "test_varc",
+  },
+  modelClass : TestApp.Test,
+});
+
+TestApp.Testp = ModelWrapper.createModelWrapper({
+  vara : attr(),
+  varb : attr(),
+
+  tests : hasMany("test", {async : true}),
+
+  arrayProps : ["tests"],
+}, {
+  keys : ["vara"],
+  apiName : "testparent",
+  queryParams : ["vara"],
+}, [Utils.DelayedAddToHasMany]);
+MockjaxUtils.addMockjaxData({
+  name : "testparent",
+  data : [
+    {
+      id : "test",
+      vara : "test",
+      tests : [{
+        id : "test1",
+        vara : "test1",
+        varb : "test_varb",
+      }, {
+        id : "test2",
+        vara : "test2",
+      }, {
+        id : "test3",
+        vara : "test3",
+      }, {
+        id : "test4",
+        vara : "test4",
+      }, {
+        id : "test5",
+        vara : "test5",
+      }],
+    },
+    {
+      id : "test1",
+      vara : "test1",
+      varb : "vb1",
+      tests : [{
+        id : "test11",
+        vara : "test11",
+        varb : "vb1",
+      }, {
+        id : "test12",
+        vara : "test12",
+        varb : "vb1",
+      }, {
+        id : "test13",
+        vara : "test13",
+        varb : "vb1",
+      }],
+    },
+  ],
+  modelClass : TestApp.Testp,
+});
+
+Utils.addToHierarchy(TestCase.TestHierarchyMap, "mockjaxSetting", TestCase.TestOperation.extend({
+  run : function(testData) {
+    testData.set("mockjaxSettingBack", MockjaxUtils.MockjaxSettingsInstance);
+    MockjaxUtils.MockjaxSettingsInstance = MockjaxUtils.MockjaxSettings.create(this.get("attr1"));
+  },
+}), 2);
+Utils.addToHierarchy(TestCase.TestHierarchyMap, "restoreMockjaxSetting", TestCase.TestOperation.extend({
+  run : function(testData) {
+    MockjaxUtils.MockjaxSettingsInstance = testData.get("mockjaxSettingBack");
+  },
+}), 2);
+Utils.addToHierarchy(TestCase.TestHierarchyMap, "createRecord", TestCase.TestOperation.extend({
+  run : function(testData) {
+    testData.set("record", CrudAdapter.createRecordWrapper(testData.get("store"), this.get("attr1"), this.get("attr2")));
+  },
+}), 2);
+Utils.addToHierarchy(TestCase.TestHierarchyMap, "findRecord", TestCase.TestOperation.extend({
+  run : function(testData) {
+    testData.set("record", testData.get("store").find(this.get("attr1"), this.get("attr2")));
+  },
+}), 2);
+Utils.addToHierarchy(TestCase.TestHierarchyMap, "correctRecord", TestCase.TestOperation.extend({
+  run : function(testData) {
+    testData.set("record", testData.get("record").content);
+  },
+}), 2);
+Utils.addToHierarchy(TestCase.TestHierarchyMap, "deleteRecord", TestCase.TestOperation.extend({
+  run : function(testData) {
+    testData.get("record").deleteRecord();
+  },
+}), 2);
+Utils.addToHierarchy(TestCase.TestHierarchyMap, "saveRecord", TestCase.TestOperation.extend({
+  run : function(testData) {
+    CrudAdapter.saveRecord(testData.get("record")).then(function() {
+      testData.set("savePassed", true);
+    }, function(message) {
+      testData.set("failureMessage", message);
+      CrudAdapter.retrieveFailure(testData.get("record"));
+    });
+  },
+}), 2);
+Utils.addToHierarchy(TestCase.TestHierarchyMap, "createChildRecord", TestCase.AsyncOperation.extend({
+  asyncRun : function(testData) {
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      var tests = testData.get("record.tests");
+      tests.then(function() {
+        for(var i = 0; i < 5; i++) {
+          tests.pushObject(CrudAdapter.createRecordWrapper(testData.get("store"), "test", {
+            vara : "test"+i,
+          }));
+        }
+        resolve();
+      }, function(e) {
+        reject(e);
+      });
+    });
+  },
+}), 2);
+
+TestCase.EmberTestSuit.create({
+  suitName : "crud-adaptor",
+  moduleFunction : "moduleForModel",
+  param : "test",
+  moduleOpts : {
+    setup : function() {
+      CrudAdapter.loadAdaptor(TestApp);
+    },
+    teardown : function() {
+    },
+
+    needs : ["model:testp"],
+  },
+
+  testCases : [{
+    title : "Create Record",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["createRecord", "test", { vara : "test", varc : "test" }],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "record.id",   "test",      "Has proper id : 'test'"                                                     ],
+        ["base", "record.vara", "test",      "'vara' has correct value : 'test'"                                          ],
+        ["base", "record.varc", "test_varc", "'varc' has correct value : 'test_varc' as returned from server after update"],
+      ]],
+    ],
+  }, {
+    title : "Create Record on existing id",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["createRecord", "test", { vara : "test" }],
+        ["saveRecord"],
+      ]],
+      ["baseTestBlock", [
+        ["createRecord", "test", { id : "test", vara : "test" }],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "record.id",   "test",      "Has proper id : 'test'"           ],
+        ["base", "record.vara", "test",      "'vara' has correct value : 'test'"],
+      ]],
+    ],
+  }, {
+    title : "Create Record with 500 server error status",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["createRecord", "test", { vara : "test" }],
+        ["assignValues", [
+          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record", "varb",     "varb_changed"],
+        ]],
+        ["mockjaxSetting", { throwServerError : true }],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "record.id",      undefined,      "Id is not defined as save failed"        ],
+        ["base", "record.varb",    "varb_changed", "'varb' value 'varb_changed' was retained"],
+        ["base", "failureMessage", "Server Error", "Failure message captured"                ],
+      ]],
+      //to check that record is not in failure state and can be edited
+      ["assignValues", [
+        //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
+        ["base",    "record", "varb",     "varb_changed"],
+      ]],
+      ["restoreMockjaxSetting"],
+    ],
+  }, {
+    title : "Create Record with 404 server error status",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["createRecord", "test", { vara : "test" }],
+        ["assignValues", [
+          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record", "varb",     "varb_changed"],
+        ]],
+        ["mockjaxSetting", { throwServerError : true, serverErrorCode : 404 }],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "record.id",      undefined,      "Id is not defined as save failed"        ],
+        ["base", "record.varb",    "varb_changed", "'varb' value 'varb_changed' was retained"],
+        ["base", "failureMessage", "Server Error", "Failure message captured"                ],
+      ]],
+      //to check that record is not in failure state and can be edited
+      ["assignValues", [
+        //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
+        ["base",    "record", "varb",     "varb_changed"],
+      ]],
+      ["restoreMockjaxSetting"],
+    ],
+  }, {
+    title : "Create Record with processing error on server",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["createRecord", "test", { vara : "test" }],
+        ["assignValues", [
+          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record", "varb",     "varb_changed"],
+        ]],
+        ["mockjaxSetting", { throwProcessError : 1 }],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "record.id",      undefined,      "Id is not defined as save failed"        ],
+        ["base", "record.varb",    "varb_changed", "'varb' value 'varb_changed' was retained"],
+        ["base", "failureMessage", "Failed",       "Failure message captured"                ],
+      ]],
+      //to check that record is not in failure state and can be edited
+      ["assignValues", [
+        //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
+        ["base",    "record", "varb",     "varb_changed"],
+      ]],
+      ["restoreMockjaxSetting"],
+    ],
+  }, {
+    title : "Create Record with hasMany",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["createRecord", "testp", { vara : "test" }],
+        ["createChildRecord"],
+        ["assignValues", [
+          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record", "varb",     "varb_changed"],
+        ]],
+      ]],
+      ["baseTestBlock", [
+        ["assignValues", [
+          //"type"    "path"            "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record.tests.0", "varb",     "varb_changed"],
+        ]],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "record.id",             "test",                                        "Has proper id : 'test'"                             ],
+        ["base", "record.vara",           "test",                                        "'vara' has correct value : 'test'"                  ],
+        ["base", "record.varb",           "varb_changed",                                "'varb' value 'varb_changed' was retained"           ],
+        ["base", "record.tests.@.vara",   ["test0", "test1", "test2", "test3", "test4"], "'tests' has right children with right 'vara' values"],
+        ["base", "record.tests.0.id",     "test0",                                       "'id' of 1st element in tests is as expected"        ],
+        ["base", "record.tests.0.varb",   "varb_changed",                                "'varb' of 1st element in tests is as expected"      ],
+      ]],
+    ],
+  }, {
+    title : "Create Record with hasMany, server error",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["createRecord", "testp", { vara : "test" }],
+        ["createChildRecord"],
+        ["assignValues", [
+          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record", "varb",     "varb_changed"],
+        ]],
+      ]],
+      ["baseTestBlock", [
+        ["assignValues", [
+          //"type"    "path"            "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record.tests.0", "varb",     "varb_changed"],
+        ]],
+        ["mockjaxSetting", { throwServerError : true }],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "record.id",             undefined,                                     "No id assigned as save failed"                      ],
+        ["base", "record.varb",           "varb_changed",                                "'varb' value 'varb_changed' was retained"           ],
+        ["base", "record.tests.@.vara",   ["test0", "test1", "test2", "test3", "test4"], "'tests' has right children with right 'vara' values"],
+        ["base", "record.tests.0.varb",   "varb_changed",                                "'varb' of 1st element in tests is as expected"      ],
+        ["base", "failureMessage",        "Server Error",                                "Failure message captured"                           ],
+      ]],
+      //to check that record is not in failure state and can be edited
+      ["assignValues", [
+        //"type"    "path"            "putPath"   "value"   "param"   "valuePath"
+        ["base",    "record",         "varb",     "varb_changed"],
+        ["base",    "record.tests.0", "varb",     "varb_changed"],
+      ]],
+      ["restoreMockjaxSetting"],
+    ],
+  }, {
+    title : "Create Record with hasMany, server processing error",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["createRecord", "testp", { vara : "test" }],
+        ["createChildRecord"],
+        ["assignValues", [
+          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record", "varb",     "varb_changed"],
+        ]],
+      ]],
+      ["baseTestBlock", [
+        ["assignValues", [
+          //"type"    "path"            "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record.tests.0", "varb",     "varb_changed"],
+        ]],
+        ["mockjaxSetting", { throwProcessError : 1 }],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "record.id",             undefined,                                     "No id assigned as save failed"                      ],
+        ["base", "record.varb",           "varb_changed",                                "'varb' value 'varb_changed' was retained"           ],
+        ["base", "record.tests.@.vara",   ["test0", "test1", "test2", "test3", "test4"], "'tests' has right children with right 'vara' values"],
+        ["base", "record.tests.0.varb",   "varb_changed",                                "'varb' of 1st element in tests is as expected"      ],
+        ["base", "failureMessage",        "Failed",                                      "Failure message captured"                           ],
+      ]],
+      //to check that record is not in failure state and can be edited
+      ["assignValues", [
+        //"type"    "path"            "putPath"   "value"   "param"   "valuePath"
+        ["base",    "record",         "varb",     "varb_changed"],
+        ["base",    "record.tests.0", "varb",     "varb_changed"],
+      ]],
+      ["restoreMockjaxSetting"],
+    ],
+  }, {
+    title : "Update Record",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["findRecord", "test", "test"],
+      ]],
+      ["baseTestBlock", [
+        ["correctRecord"],
+        ["checkValues", [
+          //"type", "path", "value", "message"
+          ["base",  "record.varb",  "test_varb",  "Initial value of 'varb' is 'test_varb'"],
+        ]],
+        ["assignValues", [
+          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record", "varb",     "test_update"],
+        ]],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "record.id",   "test",        "Has proper id : 'test'"                 ],
+        ["base", "record.vara", "test",        "'vara' has correct value : 'test'"      ],
+        ["base", "record.varb", "test_update", "'varb' value 'test_update' was retained"],
+      ]],
+    ],
+  }, {
+    title : "Update Record with server error",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["findRecord", "test", "test"],
+      ]],
+      ["baseTestBlock", [
+        ["correctRecord"],
+        ["checkValues", [
+          //"type", "path", "value", "message"
+          ["base",  "record.varb",  "test_varb",  "Initial value of 'varb' is 'test_varb'"],
+        ]],
+        ["assignValues", [
+          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record", "varb",     "test_update"],
+        ]],
+        ["mockjaxSetting", { throwServerError : true }],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "failureMessage", "Server Error", "Failure message captured"               ],
+        ["base", "record.id",      "test",         "Has proper id : 'test'"                 ],
+        ["base", "record.vara",    "test",         "'vara' has correct value : 'test'"      ],
+        ["base", "record.varb",    "test_update",  "'varb' value 'test_update' was retained"],
+      ]],
+      ["restoreMockjaxSetting"],
+    ],
+  }, {
+    title : "Update Record with server error",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["findRecord", "test", "test"],
+      ]],
+      ["baseTestBlock", [
+        ["correctRecord"],
+        ["checkValues", [
+          //"type", "path", "value", "message"
+          ["base",  "record.varb",  "test_varb",  "Initial value of 'varb' is 'test_varb'"],
+        ]],
+        ["assignValues", [
+          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record", "varb",     "test_update"],
+        ]],
+        ["mockjaxSetting", { throwProcessError : 1 }],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "failureMessage", "Failed",       "Failure message captured"               ],
+        ["base", "record.id",      "test",         "Has proper id : 'test'"                 ],
+        ["base", "record.vara",    "test",         "'vara' has correct value : 'test'"      ],
+        ["base", "record.varb",    "test_update",  "'varb' value 'test_update' was retained"],
+      ]],
+      ["restoreMockjaxSetting"],
+    ],
+  }, {
+    title : "Update Record with hasMany",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["findRecord", "testp", "test"],
+      ]],
+      ["baseTestBlock", [
+        ["correctRecord"],
+        ["checkValues", [
+          //"type", "path", "value", "message"
+          ["base",  "record.tests.0.varb",  "test_varb",  "Initial value of 'varb' of 1st child record is 'test_varb'"],
+        ]],
+        ["assignValues", [
+          //"type"    "path"            "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record.tests.0", "varb",     "test_update"],
+        ]],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "record.id",           "test",                                        "Has proper id : 'test'"                                      ],
+        ["base", "record.vara",         "test",                                        "'vara' has correct value : 'test'"                           ],
+        ["base", "record.tests.@.vara", ["test1", "test2", "test3", "test4", "test5"], "'tests' has right children with right 'vara' values"         ],
+        ["base", "record.tests.0.varb", "test_update",                                 "'varb' of 1st child record has correct value : 'test_update'"],
+        ["base", "record.tests.0.id",   "test1",                                       "id of 1st child record has correct value : 'test0'"          ],
+      ]],
+    ],
+  }, {
+    title : "Update Record with hasMany, server error",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["findRecord", "testp", "test"],
+      ]],
+      ["baseTestBlock", [
+        ["correctRecord"],
+        ["checkValues", [
+          //"type", "path", "value", "message"
+          ["base",  "record.tests.0.varb",  "test_varb",  "Initial value of 'varb' of 1st child record is 'test_varb'"],
+        ]],
+        ["assignValues", [
+          //"type"    "path"            "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record.tests.0", "varb",     "test_update"],
+        ]],
+        ["mockjaxSetting", { throwServerError : true }],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "failureMessage",      "Server Error",                                "Failure message captured"                                    ],
+        ["base", "record.id",           "test",                                        "Has proper id : 'test'"                                      ],
+        ["base", "record.vara",         "test",                                        "'vara' has correct value : 'test'"                           ],
+        ["base", "record.tests.@.vara", ["test1", "test2", "test3", "test4", "test5"], "'tests' has right children with right 'vara' values"         ],
+        ["base", "record.tests.0.varb", "test_update",                                 "'varb' of 1st child record has correct value : 'test_update'"],
+        ["base", "record.tests.0.id",   "test1",                                       "id of 1st child record has correct value : 'test0'"          ],
+      ]],
+      ["restoreMockjaxSetting"],
+    ],
+  }, {
+    title : "Update Record with hasMany, server process error",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["findRecord", "testp", "test"],
+      ]],
+      ["baseTestBlock", [
+        ["correctRecord"],
+        ["checkValues", [
+          //"type", "path", "value", "message"
+          ["base",  "record.tests.0.varb",  "test_varb",  "Initial value of 'varb' of 1st child record is 'test_varb'"],
+        ]],
+        ["assignValues", [
+          //"type"    "path"            "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record.tests.0", "varb",     "test_update"],
+        ]],
+        ["mockjaxSetting", { throwProcessError : true }],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "failureMessage",      "Failed",                                      "Failure message captured"                                    ],
+        ["base", "record.id",           "test",                                        "Has proper id : 'test'"                                      ],
+        ["base", "record.vara",         "test",                                        "'vara' has correct value : 'test'"                           ],
+        ["base", "record.tests.@.vara", ["test1", "test2", "test3", "test4", "test5"], "'tests' has right children with right 'vara' values"         ],
+        ["base", "record.tests.0.varb", "test_update",                                 "'varb' of 1st child record has correct value : 'test_update'"],
+        ["base", "record.tests.0.id",   "test1",                                       "id of 1st child record has correct value : 'test0'"          ],
+      ]],
+      ["restoreMockjaxSetting"],
+    ],
+  }, {
+    title : "Delete Record with server error.",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["findRecord", "test", "test"],
+      ]],
+      ["baseTestBlock", [
+        ["correctRecord"],
+        ["assignValues", [
+          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record", "varb",     "test_update"],
+        ]],
+        ["mockjaxSetting", { throwServerError : true }],
+        ["deleteRecord"],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "failureMessage", "Server Error", "Failure message captured"               ],
+        ["base", "record.id",      "test",         "Has proper id : 'test'"                 ],
+        ["base", "record.vara",    "test",         "'vara' has correct value : 'test'"      ],
+        ["base", "record.varb",    "test_update",  "'varb' value 'test_update' was retained"],
+      ]],
+      ["restoreMockjaxSetting"],
+    ],
+  }, {
+    title : "Delete Record with server process error.",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["findRecord", "test", "test"],
+      ]],
+      ["baseTestBlock", [
+        ["correctRecord"],
+        ["assignValues", [
+          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record", "varb",     "test_update"],
+        ]],
+        ["mockjaxSetting", { throwProcessError : 1 }],
+        ["deleteRecord"],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "failureMessage", "Failed",       "Failure message captured"               ],
+        ["base", "record.id",      "test",         "Has proper id : 'test'"                 ],
+        ["base", "record.vara",    "test",         "'vara' has correct value : 'test'"      ],
+        ["base", "record.varb",    "test_update",  "'varb' value 'test_update' was retained"],
+      ]],
+      ["restoreMockjaxSetting"],
+    ],
+  }, {
+    title : "Delete Record with hasMany, server error",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["findRecord", "testp", "test"],
+      ]],
+      ["baseTestBlock", [
+        ["correctRecord"],
+        ["assignValues", [
+          //"type"    "path"            "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record.tests.0", "varb",     "test_update"],
+        ]],
+        ["mockjaxSetting", { throwServerError : true }],
+        ["deleteRecord"],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "failureMessage",      "Server Error",                                "Failure message captured"                                    ],
+        ["base", "record.id",           "test",                                        "Has proper id : 'test'"                                      ],
+        ["base", "record.vara",         "test",                                        "'vara' has correct value : 'test'"                           ],
+        ["base", "record.tests.@.vara", ["test1", "test2", "test3", "test4", "test5"], "'tests' has right children with right 'vara' values"         ],
+        ["base", "record.tests.0.varb", "test_update",                                 "'varb' of 1st child record has correct value : 'test_update'"],
+        ["base", "record.tests.0.id",   "test1",                                       "id of 1st child record has correct value : 'test0'"          ],
+      ]],
+      ["restoreMockjaxSetting"],
+    ],
+  }, {
+    title : "Delete Record with hasMany, server process error",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["findRecord", "testp", "test"],
+      ]],
+      ["baseTestBlock", [
+        ["correctRecord"],
+        ["assignValues", [
+          //"type"    "path"            "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record.tests.0", "varb",     "test_update"],
+        ]],
+        ["mockjaxSetting", { throwProcessError : true }],
+        ["deleteRecord"],
+        ["saveRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "failureMessage",      "Failed",                                      "Failure message captured"                                    ],
+        ["base", "record.id",           "test",                                        "Has proper id : 'test'"                                      ],
+        ["base", "record.vara",         "test",                                        "'vara' has correct value : 'test'"                           ],
+        ["base", "record.tests.@.vara", ["test1", "test2", "test3", "test4", "test5"], "'tests' has right children with right 'vara' values"         ],
+        ["base", "record.tests.0.varb", "test_update",                                 "'varb' of 1st child record has correct value : 'test_update'"],
+        ["base", "record.tests.0.id",   "test1",                                       "id of 1st child record has correct value : 'test0'"          ],
+      ]],
+      ["restoreMockjaxSetting"],
+    ],
+  }],
+});
+
+define([
+  "ember",
+  "lib/ember-test-utils",
+  "core/main",
+], function(Ember, Utils) {
+
+Utils.addToHierarchy(TestCase.TestHierarchyMap, "validateValue", TestCase.TestOperation.extend({
+  run : function(testData) {
+    var valid = testData.get("columnData.validation").validateValue(this.get("attr1"), testData.get("record"), this.get("attr4"));
+    TestUtils.equal(valid[0], this.get("attr2"), "Validation result was as expected for "+this.get("attr1"));
+    if(valid[0]) {
+      equal(valid[1], this.get("attr3"), "Invalid message was as expected.");
+    }
+  },
+
+  assertions : function() {
+    return this.get("attr2") ? 2 : 1;
+  }.property("attr2"),
+}), 2);
+
+TestCase.EmberTestSuit.create({
+  suitName : "column-data",
+  moduleFunction : "moduleForModel",
+  param : "test",
+  moduleOpts : {
+    setup : function() {
+      CrudAdapter.loadAdaptor(TestApp);
+    },
+    teardown : function() {
+    },
+
+    needs : ["model:testp", "model:test"],
+  },
+
+  testCases : [{
+    title : "Sanity Test",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["assignValues", [
+        //"type", "path", "putPath", "value", "param", "valuePath"
+        ["base", "", "columnDataGroup1", ColumnData.ColumnDataGroup.create({
+          name : "test1",
+          columns : [{
+            name : "vara1",
+          }, {
+            name : "varb1",
+          }],
+        })],
+        ["base", "", "columnDataGroup",  ColumnData.ColumnDataGroup.create({
+          name : "test",
+          columns : [{
+            name : "vara",
+            label : "VarA",
+          }, {
+            name : "varb",
+            keyName : "varc",
+            label : "VarB",
+          }, {
+            name : "vard",
+            childColName : "vara1",
+            childColGroupName : "test1",
+          }, {
+            name : "vare",
+            childCol : {
+              name : "varf",
+            },
+            childColGroup : {
+              name : "test2",
+              columns : [{
+                name : "vara2",
+              }, {
+                name : "varb2",
+              }],
+            },
+          }],
+        })],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "columnDataGroup",                                        ColumnData.ColumnDataGroup,       "Instance of ColumnData.ColumnDataGroup was created"],
+        ["base", "columnDataGroup.columns.0",                              ColumnData.ColumnData,            "Instance of ColumnData.ColumnData was created for columns"],
+        ["base", "columnDataGroup.columns.@.name",                         ["vara", "varb", "vard", "vare"], "'name' of all columns are as expected"],
+        ["base", "columnDataGroup.columns.@.key",                          ["vara", "varc", "vard", "vare"], "'key' of all columns are as expected"],
+        ["base", "columnDataGroup.columns.2.childCol",                     ColumnData.ColumnData,            "Child col was created when referenced with 'childColName'"],
+        ["base", "columnDataGroup.columns.2.childCol.name",                "vara1"],
+        ["base", "columnDataGroup.columns.2.childColGroup",                ColumnData.ColumnDataGroup,       "Child col group was created when referenced with 'childColGroupName'"],
+        ["base", "columnDataGroup.columns.2.childColGroup.name",           "test1"],
+        ["base", "columnDataGroup.columns.2.childColGroup.columns.@.name", ["vara1", "varb1"],               "Child col group has the right names for columns"],
+        ["base", "columnDataGroup.columns.3.childCol",                     ColumnData.ColumnData,            "Child col was created when an object was passed to 'childCol'"],
+        ["base", "columnDataGroup.columns.3.childCol.name",                "varf"],
+        ["base", "columnDataGroup.columns.3.childColGroup",                ColumnData.ColumnDataGroup,       "Child col group was created when an object was passed to 'childColGroup'"],
+        ["base", "columnDataGroup.columns.3.childColGroup.name",           "test2"],
+        ["base", "columnDataGroup.columns.3.childColGroup.columns.@.name", ["vara2", "varb2"],               "Child col group has the right names for columns"],
+      ]],
+    ],
+  }, {
+    title : "Validation tests - simple",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["assignValues", [
+        //"type", "path", "putPath", "value", "param", "valuePath"
+        ["base", "", "columnData", ColumnData.ColumnData.create({
+          name : "test1",
+          validation : {
+            validations : [
+              {type : 0, invalidMessage : "Cant be empty"},
+              {type : 1, regex : "^[a-z]*$", regexFlags : "i", negate : true, invalidMessage : "Failed Regex"},
+            ],
+          },
+        })],
+        ["base", "", "record",     Ember.Object.create()],
+      ]],
+      ["validateValue", null,  true,  "Cant be empty"],
+      ["validateValue", "",    true,  "Cant be empty"],
+      ["validateValue", 123,   true,  "Failed Regex"],
+      ["validateValue", "a.b", true,  "Failed Regex"],
+      ["validateValue", "abc", false, ""],
+      ["validateValue", "ABC", false, ""],
+    ],
+  }, {
+    title : "Validation tests - can be empty",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["assignValues", [
+        //"type", "path", "putPath", "value", "param", "valuePath"
+        ["base", "", "columnData", ColumnData.ColumnData.create({
+          name : "test1",
+          validation : {
+            validations : [
+              {type : 1, regex : "^[a-z]+$", negate : true, invalidMessage : "Failed Regex"},
+            ],
+          },
+        })],
+        ["base", "", "record",     Ember.Object.create()],
+      ]],
+      ["validateValue", null,  false, ""],
+      ["validateValue", "",    false, ""],
+      ["validateValue", "abc", false, ""],
+    ],
+  }, {
+    title : "Validation tests - csv",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["assignValues", [
+        //"type", "path", "putPath", "value", "param", "valuePath"
+        ["base", "", "columnData", ColumnData.ColumnData.create({
+          name : "test1",
+          validation : {
+            validations : [
+              {type : 2, delimeter : ",", regex : "^[a-z]+$", negate : true, invalidMessage : "CSV validation failed."},
+              {type : 3, delimeter : ",", invalidMessage : "Duplicates not allowed."},
+            ],
+          },
+        })],
+        ["base", "", "record",     Ember.Object.create()],
+      ]],
+      ["validateValue", "a,b.,c", true,  "CSV validation failed."],
+      ["validateValue", "a,b,c",  false, ""],
+      ["validateValue", "a,a,c",  true,  "Duplicates not allowed."],
+    ],
+  }, {
+    title : "Validation tests - number",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["assignValues", [
+        //"type", "path", "putPath", "value", "param", "valuePath"
+        ["base", "", "columnData", ColumnData.ColumnData.create({
+          name : "test1",
+          validation : {
+            validations : [
+              {type : 1, regex : "^[0-9]*$", negate : true, invalidMessage : "Can only be number"},
+              {type : 5, minValue : 10, maxValue : 100, invalidMessage : "Should be between 10 and 100"},
+            ],
+          },
+        })],
+        ["base", "", "record",     Ember.Object.create()],
+      ]],
+      ["validateValue", undefined, false, ""],
+      ["validateValue", "abc",     true,  "Can only be number"],
+      ["validateValue", "1",       true,  "Should be between 10 and 100"],
+      ["validateValue", "1000",    true,  "Should be between 10 and 100"],
+      ["validateValue", "50",      false, ""],
+    ],
+  }, {
+    title : "Validation tests - array duplicate check",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["assignValues", [
+        //"type", "path", "putPath", "value", "param", "valuePath"
+        ["base", "", "columnData", ColumnData.ColumnData.create({
+          name : "vara",
+          validation : {
+            validations : [
+              {type : 0, invalidMessage : "Cant be empty"},
+              {type : 1, regex : "^[a-z]*$", negate : true, invalidMessage : "Failed Regex"},
+              {type : 4, duplicateCheckPath : "parentRecord.records", duplicateCheckKey : "vara", invalidMessage : "Should be unique across records"},
+            ],
+          },
+        })],
+        ["base", "",                  "precord",      Ember.Object.create({ records : [] })                           ],
+        ["base", "precord.records",   "",             Ember.Object.create({ vara : "a" }),  "push"                    ],
+        ["base", "precord.records",   "",             Ember.Object.create({ vara : "b" }),  "push"                    ],
+        ["base", "precord.records",   "",             Ember.Object.create({ vara : "c" }),  "push"                    ],
+        ["base", "precord.records.0", "parentRecord", "",                                   "",    "precord"          ],
+        ["base", "precord.records.1", "parentRecord", "",                                   "",    "precord"          ],
+        ["base", "precord.records.2", "parentRecord", "",                                   "",    "precord"          ],
+        ["base", "",                  "record",       "",                                   "",    "precord.records.1"],
+      ]],
+      ["validateValue", undefined, true,  "Cant be empty"],
+      ["validateValue", "a",       true,  "Should be unique across records"],
+      ["validateValue", "b",       false, ""],
+      ["validateValue", "c",       true,  "Should be unique across records"],
+      ["validateValue", "d",       false, ""],
+    ],
+  }, {
+    title : "Validation tests - array empty/not empty",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["assignValues", [
+        //"type", "path", "putPath", "value", "param", "valuePath"
+        ["base", "", "columnData", ColumnData.ColumnData.create({
+          name : "vara",
+          validation : {
+            validations : [
+              {type : 0, invalidMessage : "Cant be empty"},
+            ],
+          },
+        })],
+        ["base", "", "record",    Ember.Object.create()],
+      ]],
+      ["validateValue", [],              true,  "Cant be empty"],
+      ["validateValue", ["a", "b", "c"], false, ""],
+    ],
+  }],
+});
+
+});
+
+moduleForComponent("alerts/alert-message", "alerts", {
+  setup : function() {
+  },
   teardown : function() {
-    TestApp.reset();
   },
 });
 
-function getTestController() {
-  return ArrayMod.ArrayModController.create({
-    content : [
-      Ember.Object.create({vara : "test1", varb : "test_1"}),
-      Ember.Object.create({vara : "test5", varb : "test_1"}),
-      Ember.Object.create({vara : "test2", varb : "test_2"}),
-      Ember.Object.create({vara : "test4", varb : "test_4"}),
-      Ember.Object.create({vara : "test6", varb : "test_2"}),
-      Ember.Object.create({vara : "test3", varb : "test_1"}),
-      Ember.Object.create({vara : "test8", varb : "test_3"}),
-      Ember.Object.create({vara : "test7", varb : "test_1"}),
-    ],
-    unique_id : "test",
-  });
-}
+test("Sanity Test", function() {
+  var component = this.subject(), ele = this.$();
 
-test("sort - descending on varb and ascending on vara", function() {
-  var arrayController = getTestController(),
-  arrangedContent = arrayController.get("arrangedContent"),
-  sortMod1 = ArrayMod.ArraySortModifier.create({
-    property : "varb",
-    order : false,
-  }),
-  sortMod2 = ArrayMod.ArraySortModifier.create({
-    property : "vara",
-  });
+  ok(ele.hasClass("alert alert-danger fade") && !ele.hasClass("in"), "Alert message has the right classes initially.");
+
   Ember.run(function() {
-    arrayController.get("arrayMods").pushObjects([sortMod1, sortMod2]);
+    component.set("message", "Test");
   });
 
   wait();
-
   andThen(function() {
-    var expected = ["test4", "test8", "test2", "test6", "test1", "test3", "test5", "test7"];
-    checkElements(arrayController, "vara", expected, 1);
-  });
-
-  andThen(function() {
-    Ember.run(function() {
-      arrayController.pushObject(Ember.Object.create({
-        vara : "test9",
-        varb : "test_4",
-      }));
-      arrayController.unshiftObject(Ember.Object.create({
-        vara : "test10",
-        varb : "test_1",
-      }));
-      arrayController.unshiftObject(Ember.Object.create({
-        //just to put it at the end
-        vara : "test80",
-        varb : "test_1",
-      }));
-      var test5 = arrayController.get("content").findBy("vara", "test5");
-      test5.set("varb", "test_3");
-      arrayController.removeObject(arrayController.get("content").findBy("vara", "test4"));
-    });
-  });
-
-  wait();
-
-  andThen(function() {
-    var expected = ["test9", "test5", "test8", "test2", "test6", "test1", "test10", "test3", "test7", "test80"];
-    checkElements(arrayController, "vara",  expected, 1);
-    arrayController.get("arrayMods").removeAt(1);
-  });
-
-  wait();
-
-  andThen(function() {
-    checkElements(arrayController, "vara",  ["test9", "test5", "test8", "test2", "test6", "test80", "test10", "test1", "test3", "test7"], 1);
-    arrayController.get("arrayMods").removeAt(0);
-  });
-
-  wait();
-
-  andThen(function() {
-    checkElements(arrayController, "vara",  ["test80", "test10", "test1", "test5", "test2", "test6", "test3", "test8", "test7", "test9"], 1);
+    ok(ele.hasClass("alert alert-danger fade in"), "Alert message has the right class after message was shown.");
+    equal(ele.find(".alert-message").text(), "Test", "Alert message was updated.");
   });
 });
 
-test("search - on varb with 'test_1'", function() {
-  var arrayController = getTestController(),
-  arrangedContent = arrayController.get("arrangedContent"),
-  searchMod = ArrayMod.ArraySearchModifier.create({
-    property : "varb",
-    searchString : "test_1",
-  });
+test("Clicking on close button", function() {
+  var component = this.subject(), ele = this.$();
+
   Ember.run(function() {
-    arrayController.get("arrayMods").pushObject(searchMod);
+    component.set("message", "Test");
   });
 
   wait();
-
   andThen(function() {
-    var expected = ["test1", "test3", "test5", "test7"];
-    checkElements(arrayController, "vara", expected);
+    click(ele.find("button.close"));
   });
 
   wait();
-
   andThen(function() {
-    Ember.run(function() {
-      arrayController.pushObject(Ember.Object.create({
-        vara : "test9",
-        varb : "test_1",
-      }));
-      arrayController.pushObject(Ember.Object.create({
-        vara : "test10",
-        varb : "test_2",
-      }));
-      var test5 = arrayController.get("content").findBy("vara", "test5");
-      test5.set("varb", "test_3");
-      var test6 = arrayController.get("content").findBy("vara", "test6");
-      test6.set("varb", "test_1");
-    });
-  });
-
-  wait();
-
-  andThen(function() {
-    var expected = ["test1", "test3", "test6", "test7", "test9"];
-    checkElements(arrayController, "vara", expected);
-  });
-
-  wait();
-
-  andThen(function() {
-    Ember.run(function() {
-      searchMod.set("searchString", "test_2");
-    });
-  });
-
-  wait();
-
-  andThen(function() {
-    var expected = ["test2", "test10"];
-    checkElements(arrayController, "vara", expected);
-  });
-
-  wait();
-
-  andThen(function() {
-    Ember.run(function() {
-      searchMod.set("property", "vara");
-      searchMod.set("searchString", "test1");
-    });
-  });
-
-  wait();
-
-  andThen(function() {
-    var expected = ["test1", "test10"];
-    checkElements(arrayController, "vara", expected);
-    arrayController.get("arrayMods").removeAt(0);
-  });
-
-  wait();
-
-  andThen(function() {
-    checkElements(arrayController, "vara",  ["test1", "test5", "test2", "test4", "test6", "test3", "test8", "test7", "test9", "test10"], 1);
+    ok(ele.hasClass("alert alert-danger fade") && !ele.hasClass("in"), "Alert message has the right classes after closed.");
+    ok(!component.get("showAlert"), "'showAlert' was set to false");
   });
 });
 
-test("filter - on varb with tags 'test_2' and 'test_4'", function() {
-  var arrayController = getTestController(),
-  arrangedContent = arrayController.get("arrangedContent"),
-  filterMod = ArrayMod.ArrayTagSearchModifier.create({
-    property : "varb",
-    tags : [
-      {label : "test_1", val : "test_1", checked : false},
-      {label : "test_2", val : "test_2", checked : true},
-      {label : "test_3", val : "test_3", checked : false},
-      {label : "test_4", val : "test_4", checked : true},
-    ],
-  });
-  arrayController.get("arrayMods").pushObject(filterMod);
+test("Auto collapse after message change", function() {
+  var component = this.subject(), ele = this.$(), d;
 
-  wait();
-
-  andThen(function() {
-    var expected = ["test2", "test4", "test6"];
-    checkElements(arrayController, "vara", expected);
-  });
-
-  wait();
-
-  andThen(function() {
-    Ember.run(function() {
-      arrayController.pushObject(Ember.Object.create({
-        vara : "test9",
-        varb : "test_1",
-      }));
-      arrayController.pushObject(Ember.Object.create({
-        vara : "test10",
-        varb : "test_2",
-      }));
-      var test5 = arrayController.get("content").findBy("vara", "test5");
-      test5.set("varb", "test_2");
-      var test6 = arrayController.get("content").findBy("vara", "test6");
-      test6.set("varb", "test_1");
-    });
-  });
-
-  wait();
-
-  andThen(function() {
-    var expected = ["test2", "test4", "test5", "test10"];
-    checkElements(arrayController, "vara", expected);
-  });
-
-  wait();
-
-  andThen(function() {
-    Ember.run(function() {
-      filterMod.get("tags")[1].set("checked", false);
-      filterMod.get("tags")[2].set("checked", true);
-    });
-  });
-
-  wait();
-
-  andThen(function() {
-    var expected = ["test4", "test8"];
-    checkElements(arrayController, "vara", expected);
-    arrayController.get("arrayMods").removeAt(0);
-  });
-
-  wait();
-
-  andThen(function() {
-    checkElements(arrayController, "vara",  ["test1", "test5", "test2", "test4", "test6", "test3", "test8", "test7", "test9", "test10"], 1);
-  });
-});
-
-module("columndata.js", {
-  setup: function() {
-  },
-  teardown : function() {
-    TestApp.reset();
-  },
-});
-
-test("Sanity tests", function() {
-  var columnData = ColumnData.ColumnData.create({
-    name : "vara",
-    keyName : "varb",
-    label : "Vara",
-    placeholder : "_Vara",
-    validation : {
-      validations : [
-        {type : 0},
-        {type : 1, regex : "^([a-zA-Z0-9](?:[ \\t]*\\,[ \\t]*)?)+$", negate : true, invalidMessage : "Can only be alphanumeric"},
-        {type : 2, delimeter : ",", regex : "^[a-zA-Z0-9]*$", negate : true, invalidMessage : "Can only be alphanumeric"},
-        {type : 3, delimeter : ",", invalidMessage : "Cannot have duplicates"},
-      ],
-    },
-  }), record = Ember.Object.create();
-  andThen(function() {
-    equal(columnData.get("key"), "varb", "Has proper 'key' : 'varb'");
-    ok(columnData.get("validation.mandatory"), "Has proper 'mandatory' : 'true'");
-  });
   Ember.run(function() {
-    columnData.set("keyName", null);
-    columnData.get("validation.validations").shiftObject();
+    component.set("collapseTimeout", 250);
+    component.set("message", "Test");
+    d = new Date();
   });
+
+  wait();
   andThen(function() {
-    equal(columnData.get("key"), "vara", "Has proper 'key' : 'vara'");
-    ok(!columnData.get("validation.mandatory"), "Has proper 'mandatory' : 'false'");
-  });
-});
+    ok(new Date() - d >= 250, "Alert message closed after 250ms");
+    ok(!component.get("showAlert"), "'showAlert' was set to false");
 
-test("Validation tests - simple", function() {
-  var columnData = ColumnData.ColumnData.create({
-    name : "vara",
-    label : "Vara",
-    validation : {
-      validations : [
-        {type : 0},
-        {type : 1, regex : "^([a-zA-Z0-9](?:[ \\t]*\\,[ \\t]*)?)+$", negate : true, invalidMessage : "Can only be alphanumeric"},
-        {type : 2, delimeter : ",", regex : "^[a-zA-Z0-9]*$", negate : true, invalidMessage : "Can only be alphanumeric"},
-        {type : 3, delimeter : ",", invalidMessage : "Cannot have duplicates"},
-      ],
-    },
-  }), record = Ember.Object.create(),
-  validationObj = columnData.get("validation"),
-  validation11, validation12, validation13, validation14, validation15;
-  Ember.run(function() {
-    validation11 = validationObj.validateValue("", record);
-    validation12 = validationObj.validateValue("abc$", record);
-    validation13 = validationObj.validateValue("a,a,b,c", record);
-    validation14 = validationObj.validateValue("a,b,c", record);
-    validation15 = validationObj.validateValue("a*b", record, [
-      ColumnData.RegexValidation.create({
-        type : 1,
-        regex : "[a-zA-Z0-9\*]*",
-        negate : true,
-        invalidMessage : "",
-      }),
-    ]);
+    component.set("collapseTimeout", 1000);
+    component.set("message", "Test1");
+    d = new Date();
   });
+
+  wait();
   andThen(function() {
-    ok(validation11[0], "Validation failed for empty value");
-    ok(validation12[0], "Validation failed for value with '$', character not allowed");
-    equal(validation12[1], "Can only be alphanumeric", "Invalid message has the proper value");
-    ok(validation13[0], "Validation failed for value with duplicates");
-    equal(validation13[1], "Cannot have duplicates", "Invalid message has the proper value");
-    ok(!validation14[0], "Validation passed for valid value");
-    ok(!validation15[0], "Validation passed for valid value with overriden validation");
-  });
-});
-
-test("Validation tests - number", function() {
-  var record = Ember.Object.create(),
-  columnDataNum = ColumnData.ColumnData.create({
-    name : "varb",
-    label : "Varb",
-    validation : {
-      validations : [
-        {type : 1, regex : "^[0-9]*$", negate : true, invalidMessage : "Can only be number"},
-        {type : 5, minValue : 10, maxValue : 100, invalidMessage : "Should be between 10 and 100"},
-      ],
-    },
-  }),
-  validationObj = columnDataNum.get("validation"),
-  validation21, validation22, validation23, validation24;
-  Ember.run(function() {
-    validation21 = validationObj.validateValue(undefined, record);
-    validation22 = validationObj.validateValue("1", record);
-    validation23 = validationObj.validateValue("1000", record);
-    validation24 = validationObj.validateValue("50", record);
-  });
-  andThen(function() {
-    ok(!validation21[0], "Validation passed for empty value");
-    ok(validation22[0], "Validation failed for 1 : not within 10 and 100");
-    equal(validation22[1], "Should be between 10 and 100", "Invalid message has the proper value");
-    ok(validation23[0], "Validation failed for 1000 : not within 10 and 100");
-    equal(validation23[1], "Should be between 10 and 100", "Invalid message has the proper value");
-    ok(!validation24[0], "Validation passed for 50 : within 10 and 100");
-  });
-});
-
-test("Validation tests - array", function() {
-  var columnDataDup = ColumnData.ColumnData.create({
-    name : "varc",
-    label : "Varc",
-    validation : {
-      validations : [
-        {type : 0},
-        {type : 1, regex : "^[a-zA-Z0-9]*$", negate : true, invalidMessage : "Can only be alphanumeric"},
-        {type : 4, duplicateCheckPath : "parentRecord.records", duplicateCheckKey : "varc", invalidMessage : "Should be unique across records"},
-      ],
-    },
-  }),
-  columnDataArr = ColumnData.ColumnData.create({
-    name : "records",
-    label : "records",
-    validation : {
-      validations : [
-        {type : 0},
-      ],
-    },
-  }),
-  validationObjDup = columnDataDup.get("validation"),
-  validationObjArr = columnDataArr.get("validation"),
-  rec1 = Ember.Object.create({varc : "a"}),
-  rec2 = Ember.Object.create({varc : "b"}),
-  rec3 = Ember.Object.create({varc : "c"}),
-  parentRecord = Ember.Object.create({records : [rec1, rec2, rec3]}),
-  validation31, validation32, validation33, validation34;
-  rec1.set("parentRecord", parentRecord);
-  rec2.set("parentRecord", parentRecord);
-  rec3.set("parentRecord", parentRecord);
-  Ember.run(function() {
-    validation31 = validationObjDup.validateValue("b", rec1);
-    validation32 = validationObjDup.validateValue("a", rec1);
-
-    validation33 = validationObjArr.validateValue([], parentRecord);
-    validation34 = validationObjArr.validateValue(parentRecord.get("records"), parentRecord);
-  });
-  andThen(function() {
-    ok(validation31[0], "Validation failed for 'b' : already present in rec2");
-    equal(validation31[1], "Should be unique across records", "Invalid message has the proper value");
-    ok(!validation32[0], "Validation passed for 'a' : is unique");
-
-    ok(validation33[0], "Validation failed for empty array");
-    ok(!validation34[0], "Validaiton passed for non empty array");
-  });
-});
-
-test("Deep columns", function() {
-  var columnDataBack = ColumnData.ColumnDataMap;
-  ColumnData.ColumnDataGroup.create({
-    name : "record",
-    columns : [
-      {
-        name : "varb",
-        childColName : "doesnt-exist",
-      },
-      {
-        name : "varc",
-      },
-    ],
-  });
-  ColumnData.ColumnData.create({
-    name : "vara",
-    childColGroupName : "record",
-  });
-  var record = Ember.Object.create(),
-  columnDataArr = ColumnData.ColumnData.create({
-    name : "records",
-    label : "records",
-    childColName : "vara",
-  });
-  andThen(function() {
-    var deepChildColGroup = columnDataArr.get("childCol.childColGroup");
-    equal(columnDataArr.get("childCol.name"), "vara", "Child col was successfully extracted");
-    equal(deepChildColGroup.get("columns.length"), 2, "Child col group were successfully extracted");
-    ok(Ember.isEmpty(deepChildColGroup.get("columns")[0].get("childColGroup")), "Child col group for childColGroupName that is not present is not extracted");
-    ColumnData.ColumnDataMap = columnDataBack;
+    ok(new Date() - d >= 1000, "Alert message closed after 1000ms");
+    ok(!component.get("showAlert"), "'showAlert' was set to false");
   });
 });

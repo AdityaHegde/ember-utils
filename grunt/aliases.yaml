@@ -1,10 +1,7 @@
 default:
-  - 'concat:dist'
-  - 'emberTemplates:compile'
-  - 'uglify'
+  - 'requirejs'
+  - 'qunit'
   - 'yuidoc'
-
-build_test:
-  - 'concat:dist'
-  - 'concat:test'
-  - 'emberTemplates:compile_dev'
+  - 'concat'
+  - 'uglify'
+  - 'clean'

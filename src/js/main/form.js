@@ -9,9 +9,12 @@ Form.MultiColumnMixin = Ember.Mixin.create({
 
   filteredCols : function() {
     var cols = this.get("columnDataGroup.columns"), record = this.get("record"), that = this;
-    return cols.filter(function(col) {
-      return that.canAddCol(col, record);
-    });
+    if(cols) {
+      return cols.filter(function(col) {
+        return that.canAddCol(col, record);
+      });
+    }
+    return [];
   }.property('columnDataGroup.columns.@each.form', 'view.columnDataGroup.columns.@each.form', 'record.isNew', 'view.record.isNew'),
 
   canAddCol : function(col, record) {
@@ -118,12 +121,6 @@ Form.TextInputView = Ember.View.extend({
 
   parentForm : null,
   immediateParent : null,
-  valLength : function(){
-    if(this.get("val"))
-      return this.get("col.form.maxlength") - this.get("val").length;
-    else
-      return this.get("col.form.maxlength");
-  }.property('view.val','val'),
 
   layout : Ember.Handlebars.compile('' +
     '{{#if view.showLabelComp}}<div {{bind-attr class="view.labelClass"}} >' +
@@ -140,9 +137,6 @@ Form.TextInputView = Ember.View.extend({
             '{{#tool-tip placement="right" title=view.col.form.helpText}}<span class="glyphicon glyphicon-question-sign"></span>{{/tool-tip}}' +
           '</div>{{/if}}' +
         '{{/unless}}'+
-        '{{#if view.col.form.maxlength}}'+
-          '<span class="maxlength"><span>{{ view.valLength}}</span></span>'+
-        '{{/if}}'+
         '{{#if view.invalid}}' +
           '{{#if view.invalidReason}}<span class="help-block text-danger">{{view.invalidReason}}</span>{{/if}}' +
         '{{/if}}' +
