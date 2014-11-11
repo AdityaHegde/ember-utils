@@ -4,31 +4,32 @@ module.exports = {
       baseUrl : "src/js",
       dir : "build",
       mainConfigFile : "src/js/config.js",
-      modules : [
-        {
-          name : "core/main",
-          out : "build/core.js",
-          exclude : [
-            "jquery",
-            "handlebars",
-            "ember",
-          ],
-        },
-        {
-          name : "main",
-          out : "build/ember-utils.js",
-          exclude : [
-            "jquery",
-            "handlebars",
-            "ember",
-          ],
-        },
-      ],
+
       fileExclusionRegExp : /^(?:\.|_)/,
+      findNestedDependencies : true,
       skipDirOptimize : true,
       removeCombined : true,
       optimize : "none",
-      wrap: true,
+      wrap: {
+        startFile: ["wrap/start.frag", "wrap/almond.js"],
+        endFile: "wrap/end.frag"
+      },
+
+      modules : [
+        {
+          name : "ember-utils",
+          exclude : [
+            "jquery",
+            "handlebars",
+            "ember",
+          ],
+          insertRequire : ["ember-utils"],
+        },
+        {
+          name : "demo/demo",
+          insertRequire : ["demo/demo"],
+        },
+      ],
     },
   },
 };

@@ -34,7 +34,6 @@
     "grunt-contrib-yuidoc": "*",
     "grunt-contrib-requirejs": "*",
     "grunt-concurrent": "*",
-    "grunt-contrib-qunit": "*",
     "grunt-qunit-istanbul": "*",
     "grunt-contrib-clean": "*",
     "load-grunt-config": "*",
@@ -44,6 +43,7 @@
   },
   "bundleDependencies": [],
   "scripts" : {
-    "test" : "./node_modules/karma/bin/karma start karma.conf.js"
+    "test" : "./node_modules/karma/bin/karma start karma.conf.js",
+    "start" : "node server.js"
   }
 }

@@ -2,7 +2,7 @@ module.exports = {
   options : {
     coverage : {
       disposeCollector : true,
-      src : ["src/js/core/*.js"],
+      src : ["src/js/array-modifier/*.js", "src/js/column-data/*.js"],
       instrumentedFiles : "tmp",
       lcovReport : "coverage",
     },

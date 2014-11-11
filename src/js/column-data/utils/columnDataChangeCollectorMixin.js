@@ -6,6 +6,8 @@ define([
  * A mixin that is a parent of ColumnDataValueMixin that collects value changes and fires listeners on the column.
  *
  * @class ColumnDataChangeCollectorMixin
+ * @module column-data
+ * @submodule column-data-utils
  */
 var ColumnDataChangeCollectorMixin = Ember.Mixin.create({
   init : function() {
@@ -23,7 +25,7 @@ var ColumnDataChangeCollectorMixin = Ember.Mixin.create({
         for(var i = 0; i < listeningViews.length; i++) {
           var view = listeningViews[i];
           if(view !== callingView) {
-            view.colValueChanged(columnData, val, oldVal);
+            view.listenedColumnChanged(columnData, val, oldVal);
           }
           if(view.get("columnData.bubbleValues") && parentForm && parentForm.bubbleValChange) parentForm.bubbleValChange(columnData, val, oldVal, callingView);
         }
@@ -39,6 +41,7 @@ var ColumnDataChangeCollectorMixin = Ember.Mixin.create({
         callingCol = colView.get("columnData"),
         colName = callingCol.get("name"),
         parentForm = this.get("parentForm");
+    listenColName = (listenColName && listenColName.get ? listenColName.get("name") : listenColName);
     if(callingCol.get("bubbleValues") && parentForm && parentForm.registerForValChange) parentForm.registerForValChange(colView, listenColName);
     if(!listenToMap) {
       listenToMap = {};
@@ -60,6 +63,7 @@ var ColumnDataChangeCollectorMixin = Ember.Mixin.create({
         colListener = listenToMap && listenToMap[listenColName],
         existing = colListener && listenToMap[listenColName].findBy("name", colName),
         parentForm = this.get("parentForm");
+    listenColName = (listenColName && listenColName.get ? listenColName.get("name") : listenColName);
     if(callingCol.get("bubbleValues") && parentForm && parentForm.unregisterForValChange) parentForm.unregisterForValChange(colView, listenColName);
     if(existing) {
       var existingViews = existing.get("views");

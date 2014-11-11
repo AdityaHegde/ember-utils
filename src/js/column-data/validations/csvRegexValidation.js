@@ -7,6 +7,8 @@ define([
  * Validate on a regex on each value in a Comma Seperated Value. Pass type = 2 to get this.
  *
  * @class CSVRegexValidation
+ * @module column-data
+ * @submodule column-data-validation
  */
 var CSVRegexValidation = RegexValidation.extend({
   /**

@@ -1,3 +1,10 @@
+define([
+  "ember",
+  "./app",
+  "lib/ember-utils-core",
+  "ember-utils",
+], function(Ember, DemoApp, Utils) {
+
 DemoApp.SortDraggableAView = Ember.View.extend(DragDrop.SortableDraggableMixin, {
   classNames : ["sort-demo-draggable-main"],
   template : Ember.Handlebars.compile('' +
@@ -43,4 +50,6 @@ DemoApp.LazyDisplayMain = Ember.ContainerView.extend(LazyDisplay.LazyDisplayMain
 
 DemoApp.TreeRecord = Ember.Object.extend(Tree.NodeRecordMixin, {
   children : Utils.hasMany("DemoApp.TreeRecord"),
+});
+
 });

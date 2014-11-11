@@ -1,4 +1,9 @@
+define([
+  "ember-utils",
+], function() {
+
 var DemoApp = AppWrapper.AppWrapper.create();
+window.DemoApp = DemoApp;
 
 DemoApp.Router.map(function() {
   this.resource('form', { path : 'form' });
@@ -8,4 +13,8 @@ DemoApp.Router.map(function() {
   this.resource('dragdrop', { path : 'dragdrop' });
   this.resource('panels', { path : 'panels' });
   this.resource('progressbar', { path : 'progressbar' });
+});
+
+return DemoApp;
+
 });

@@ -2,9 +2,9 @@ define([
   "ember",
   "./registry",
   "./validations/columnDataValidation",
-  "core/belongsTo",
-], function(Ember, Registry, ColumnDataValidation, belongsTo) {
-belongsTo = belongsTo.belongsTo;
+  "./columnListenerEntry",
+  "lib/ember-utils-core",
+], function(Ember, Registry, ColumnDataValidation, ColumnListenerEntry, Utils) {
 
 /**
  * Class for meta data for a property on a record.
@@ -50,7 +50,7 @@ var ColumnData = Ember.Object.extend({
    * @property validation
    * @type Class
    */
-  validation : belongsTo(ColumnDataValidation),
+  validation : Utils.belongsTo(ColumnDataValidation),
 
   /**
    * Meta data used by list-group module. Passed as an object while creating.
@@ -58,7 +58,7 @@ var ColumnData = Ember.Object.extend({
    * @property list
    * @type Class
    */
-  list : belongsTo("ListGroup.ListColumnDataMap", "moduleType", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
+  list : Utils.belongsTo("ListGroup.ListColumnDataMap", "moduleType", "default", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
 
   /**
    * Meta data used by tree module. Passed as an object while creating.
@@ -66,7 +66,7 @@ var ColumnData = Ember.Object.extend({
    * @property tree
    * @type Class
    */
-  tree : belongsTo("Tree.TreeColumnDataMap", "moduleType", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
+  tree : Utils.belongsTo("Tree.TreeColumnDataMap", "moduleType", "default", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
 
   /**
    * Meta data used by sortable module. Passed as an object while creating.
@@ -74,7 +74,7 @@ var ColumnData = Ember.Object.extend({
    * @property sort
    * @type Class
    */
-  sort : belongsTo("DragDrop.SortableColumnDataMap", "moduleType", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
+  sort : Utils.belongsTo("DragDrop.SortableColumnDataMap", "moduleType", "default", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
 
   /**
    * Meta data used by panels module. Passed as an object while creating.
@@ -82,7 +82,7 @@ var ColumnData = Ember.Object.extend({
    * @property panel
    * @type Class
    */
-  panel : belongsTo("Panels.PanelColumnDataMap", "moduleType", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
+  panel : Utils.belongsTo("Panels.PanelColumnDataMap", "moduleType", "default", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
 
   /**
    * Meta data used by form module. Passed as an object while creating.
@@ -90,7 +90,7 @@ var ColumnData = Ember.Object.extend({
    * @property form
    * @type Class
    */
-  form : Utils.belongsTo("Form.FormColumnDataMap", "type"),
+  form : Utils.belongsTo("Form.FormColumnDataMap", "moduleType"),
 
   /**
    * A suitable label for the attribute used in displaying in certain places.
@@ -107,7 +107,7 @@ var ColumnData = Ember.Object.extend({
    * @type Class
    * @private
    */
-  childCol : belongsTo("ColumnData.ColumnData"),
+  childCol : Utils.belongsTo("ColumnData.ColumnData"),
 
   /**
    * A name for the nesting of a column data.
@@ -131,7 +131,7 @@ var ColumnData = Ember.Object.extend({
    * @type Class
    * @private
    */
-  childColGroup : belongsTo("ColumnData.ColumnDataGroup"),
+  childColGroup : Utils.belongsTo("ColumnData.ColumnDataGroup"),
 
   /**
    * A name for the nesting of a column data group.
@@ -148,6 +148,8 @@ var ColumnData = Ember.Object.extend({
       return value;
     }
   }.property(),
+
+  columnListenerEntries : Utils.hasMany(ColumnListenerEntry),
 });
 
 return {

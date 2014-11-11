@@ -1,3 +1,9 @@
+define([
+  "ember",
+  "./app",
+  "ember-utils",
+], function(Ember, DemoApp) {
+
 DemoApp.IndexRoute = Ember.Route.extend({
   model : function(params, transition) {
     return {};
@@ -104,4 +110,6 @@ DemoApp.PanelsRoute = Ember.Route.extend({
       desc : "Ele4 Desc",
     })];
   },
+});
+
 });

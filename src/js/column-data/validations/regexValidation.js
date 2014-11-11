@@ -7,6 +7,8 @@ define([
  * Validate on a regex. Pass type = 1 to get this.
  *
  * @class RegexValidation
+ * @module column-data
+ * @submodule column-data-validation
  */
 var RegexValidation = EmptyValidation.extend({
   /**

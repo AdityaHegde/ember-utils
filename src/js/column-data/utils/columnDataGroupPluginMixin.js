@@ -1,14 +1,16 @@
 define([
   "ember",
-  "core/objectWithArrayMixin",
-], function(Ember, ObjectWithArrayMixin) {
+  "lib/ember-utils-core",
+], function(Ember, Utils) {
 
 /**
  * A mixin that used by column data group extensions. It adds view lookup paths based on the 'type' and for modules based on <module>Type.
  *
  * @class ColumnDataGroupPluginMixin
+ * @module column-data
+ * @submodule column-data-utils
  */
-var ColumnDataGroupPluginMixin = Ember.Mixin.create(ObjectWithArrayMixin, {
+var ColumnDataGroupPluginMixin = Ember.Mixin.create(Utils.ObjectWithArrayMixin, {
   init : function() {
     this._super();
     var arrayProps = this.get("arrayProps");

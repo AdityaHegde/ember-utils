@@ -7,6 +7,8 @@ define([
  * Not empty validation class. Pass type = 0 to get this.
  *
  * @class EmptyValidation
+ * @module column-data
+ * @submodule column-data-validation
  */
 var EmptyValidation = Ember.Object.extend({
   /**

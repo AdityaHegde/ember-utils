@@ -8,6 +8,8 @@ define([
  * Validate duplication in a CSV. Pass type = 3 to get this.
  *
  * @class CSVDuplicateValidation
+ * @module column-data
+ * @submodule column-data-validation
  */
 var CSVDuplicateValidation = CSVRegexValidation.extend({
   validateValue : function(value, record) {

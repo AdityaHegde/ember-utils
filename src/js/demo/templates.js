@@ -1,3 +1,7 @@
+define([
+  "ember",
+], function(Ember) {
+
 Ember.TEMPLATES["application"] = Ember.Handlebars.compile('' +
   '<nav class="navbar navbar-default" role="navigation"> ' +
     '<div class="container-fluid"> ' +
@@ -33,7 +37,6 @@ Ember.TEMPLATES["dragdrop"] = Ember.Handlebars.compile('' +
 '');
 
 Ember.TEMPLATES["form"] = Ember.Handlebars.compile('' +
-  '{{alert-message message=message collapseTimeout=collapseTimeout}} ' +
   '{{view "form/form" record=model columnDataGroup=columnDataGroup}} ' +
 '');
 
@@ -59,3 +62,5 @@ Ember.TEMPLATES["progressbar"] = Ember.Handlebars.compile('' +
 Ember.TEMPLATES["tree"] = Ember.Handlebars.compile('' +
   '{{view "tree/node" record=model columnDataGroup=columnDataGroup}} ' +
 '');
+
+});

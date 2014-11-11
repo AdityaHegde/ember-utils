@@ -6,10 +6,9 @@ module.exports = {
       },
     },
     files: {
-      "dist/ember-utils-core.min.js": "dist/ember-utils-core.js",
       "dist/ember-utils.min.js": "dist/ember-utils.js",
       //"build/templates.min.js" : "build/templates.js",
-      //"dist/demo-app.min.js" : "dist/demo-app.js",
+      "dist/demo.min.js" : "dist/demo.js",
     }
   }
 };

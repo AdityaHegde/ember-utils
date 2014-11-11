@@ -8,6 +8,8 @@ define([
  * Validate number ranges. Pass type = 5 to get this.
  *
  * @class NumberRangeValidation
+ * @module column-data
+ * @submodule column-data-validation
  */
 var NumberRangeValidation = EmptyValidation.extend({
   /**

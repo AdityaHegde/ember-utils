@@ -1,11 +1,14 @@
 define([
   "ember",
-], function(Ember) {
+  "lib/ember-utils-core",
+], function(Ember, Utils) {
 
 /**
  * A mixin that aliases the value of the attribute given by 'columnData' in 'record' to 'value'.
  *
  * @class ColumnDataValueMixin
+ * @module column-data
+ * @submodule column-data-utils
  */
 var ColumnDataValueMixin = Ember.Mixin.create({
   init : function() {
@@ -43,6 +46,14 @@ var ColumnDataValueMixin = Ember.Mixin.create({
       });
     }
   },
+  /**
+   * Callback callled when the column listened on changes.
+   *
+   * @method listenedColumnChangedHook
+   * @param {ColumnData} changedColumnData ColumnData instance of the changed column.
+   * @param {any} changedValue
+   * @param {any} oldValue
+   */
   listenedColumnChangedHook : function(changedColumnData, changedValue, oldValue) {
   },
 
@@ -50,7 +61,7 @@ var ColumnDataValueMixin = Ember.Mixin.create({
     var columnData = this.get("columnData"), record = this.get("record"),
         validation = columnData.get("validation");
     if(validation) {
-      if(!this.get("disabled")) {
+      if(!this.get("disableValidation")) {
         var validVal = validation.validateValue(value, record);
         if(validVal[0]) record._validation[columnData.name] = 1;
         else delete record._validation[columnData.name];
@@ -79,26 +90,29 @@ var ColumnDataValueMixin = Ember.Mixin.create({
         var oldVal = record.get(columnData.get("key"));
         this.validateValue(val);
         //TODO : find a better way to fix value becoming null when selection changes
-        if(val || !columnData.get("cantBeNull")) {
+        //if(val || !columnData.get("cantBeNull")) {
           record.set(columnData.get("key"), val);
-          this.valueDidChange(val);
-          if(record.valueDidChange) {
-            record.valueDidChange(columnData, val);
-          }
-          if(parentForBubbling && parentForBubbling.bubbleValChange) parentForBubbling.bubbleValChange(col, value, oldVal, this); 
-        }
+          this.valueChangeHook(val);
+          if(parentForBubbling && parentForBubbling.bubbleValChange) parentForBubbling.bubbleValChange(columnData, val, oldVal, this); 
+        //}
       }
       return val;
     }
     else {
       val = record.get(columnData.get("key"));
       this.validateValue(val);
-      if(parentForBubbling && parentForBubbling.bubbleValChange) parentForBubbling.bubbleValChange(col, value, oldVal, this); 
+      if(parentForBubbling && parentForBubbling.bubbleValChange) parentForBubbling.bubbleValChange(columnData, val, oldVal, this); 
       return val;
     }
-  }.property('columnData', 'view.columnData'),
+  }.property("columnData.key", "view.columnData.key", "disableValidation", "view.disableValidation"),
 
-  valueDidChange : function(val) {
+  /**
+   * Callback called when the value changes.
+   *
+   * @method valueChangeHook
+   * @param {any} val
+   */
+  valueChangeHook : function(val) {
   },
 
   prevRecord : null,
@@ -106,41 +120,63 @@ var ColumnDataValueMixin = Ember.Mixin.create({
     var record = this.get("record"), prevRecord = this.get("prevRecord"),
         columnData = this.get("columnData");
     if(prevRecord) {
-      Ember.removeObserver(prevRecord, columnData.get("name"), this, "notifyValChange");
+      Ember.removeObserver(prevRecord, columnData.get("key"), this, "notifyValChange");
     }
     if(record) {
       this.recordChangeHook();
-      Ember.addObserver(record, columnData.get("name"), this, "notifyValChange");
+      Ember.addObserver(record, columnData.get("key"), this, "notifyValChange");
       this.set("prevRecord", record);
-      this.notifyPropertyChange("val");
     }
-    else {
+    else if(prevRecord) {
       this.recordRemovedHook();
     }
-  }.observes("view.record", "record"),
+    this.notifyPropertyChange("value");
+  }.observes("record", "view.record"),
+  /**
+   * Callback called when record changes.
+   *
+   * @method recordChangeHook
+   */
   recordChangeHook : function() {
-    this.notifyPropertyChange('isDisabled');
   },
+  /**
+   * Callback called when record is removed (set to null).
+   *
+   * @method recordRemovedHook
+   */
   recordRemovedHook : function(){
+  },
+
+  notifyValChange : function(obj, key) {
+    this.notifyPropertyChange("value");
+    this.valueChangeHook(this.get("value"));
   },
 
   registerForValChangeChild : function() {
     var columnData = this.get("columnData"), parentForBubbling = this.get("parentForBubbling");
-    if(columnData.get("listenForCols")) {
-      columnData.get("listenForCols").forEach(function(listenCol) {
+    if(columnData && columnData.get("columnListenerEntries")) {
+      columnData.get("columnListenerEntries").forEach(function(listenCol) {
         if(parentForBubbling && parentForBubbling.registerForValChange) parentForBubbling.registerForValChange(this, listenCol);
       }, this);
     }
-  },
+  }.observes("columnData", "view.columnData"),
 
   unregisterForValChangeChild : function() {
     var columnData = this.get("columnData"), parentForBubbling = this.get("parentForBubbling");
-    if(columnData.get("listenForCols")) {
-      columnData.get("listenForCols").forEach(function(listenCol) {
+    if(columnData.get("columnListenerEntries")) {
+      columnData.get("columnListenerEntries").forEach(function(listenCol) {
         if(parentForBubbling && parentForBubbling.unregisterForValChange) parentForBubbling.unregisterForValChange(this, listenCol);
       }, this);
     }
   },
+
+  /**
+   * Parent object with mixin ColumnData.ColumnDataChangeCollectorMixin to bubble to.
+   *
+   * @property parentForBubbling
+   * @type Instance
+   */
+  parentForBubbling : null,
 
   destroy : function() {
     this._super();

@@ -3,6 +3,8 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "Alerts.AlertMessageComponent",
         "AppWrapper.AppWrapper",
+        "ApplicationAdapter",
+        "ApplicationSerializer",
         "ArrayMod.ArrayFilterGroup",
         "ArrayMod.ArrayFilterModifier",
         "ArrayMod.ArrayModController",
@@ -11,31 +13,49 @@ YUI.add("yuidoc-meta", function(Y) {
         "ArrayMod.ArraySearchModifier",
         "ArrayMod.ArraySortGroup",
         "ArrayMod.ArraySortModifier",
-        "ArrayMod.ArrayTagObjectModifier",
         "ArrayMod.ArrayTagSearchModifier",
+        "ArrayMod.TagObject",
+        "AsyncQue",
         "CSVDuplicateValidation",
         "CSVRegexValidation",
-        "ColumnData.CSVDuplicateValidation",
-        "ColumnData.CSVRegexValidation",
         "ColumnData.ColumnData",
-        "ColumnData.ColumnDataChangeCollectorMixin",
         "ColumnData.ColumnDataGroup",
-        "ColumnData.ColumnDataGroupPluginMixin",
-        "ColumnData.ColumnDataValidation",
-        "ColumnData.ColumnDataValueMixin",
-        "ColumnData.DuplicateAcrossRecordsValidation",
-        "ColumnData.EmptyValidation",
-        "ColumnData.NumberRangeValidation",
-        "ColumnData.RegexValidation",
         "ColumnDataChangeCollectorMixin",
         "ColumnDataGroupPluginMixin",
         "ColumnDataValidation",
         "ColumnDataValueMixin",
-        "DelayedAddToHasMany",
+        "ColumnListenerEntry",
+        "CrudAdapter",
+        "CrudAdaptor",
         "DragDrop.DraggableMixin",
         "DragDrop.DroppableMixin",
+        "DragDrop.SortableDraggableMixin",
+        "DragDrop.SortableDroppableMixin",
+        "DragDrop.SortablePlaceholderMixin",
         "DuplicateAcrossRecordsValidation",
         "EmptyValidation",
+        "Form.CSVDataInputView",
+        "Form.CheckBoxView",
+        "Form.DisableForCol",
+        "Form.DynamicSelectView",
+        "Form.FileUploadView",
+        "Form.FormColumnData",
+        "Form.FormColumnDataGroup",
+        "Form.GroupCheckBoxView",
+        "Form.GroupRadioButtonView",
+        "Form.ImageUploadView",
+        "Form.LabelView",
+        "Form.Legend",
+        "Form.MultiEntryView",
+        "Form.MultiInputView",
+        "Form.MultipleValue",
+        "Form.MultipleValueMixin",
+        "Form.RadioInputView",
+        "Form.StaticSelectView",
+        "Form.TextAreaView",
+        "Form.TextInputView",
+        "Form.WrapperView",
+        "FormView",
         "GlobalModules.DisplayTextCollapsibleColumnDataMixin",
         "GlobalModules.DisplayTextCollapsibleGlypiconColumnDataMixin",
         "GlobalModules.DisplayTextCollapsibleGlypiconView",
@@ -51,16 +71,19 @@ YUI.add("yuidoc-meta", function(Y) {
         "ListGroup.ListColumnDataGroup",
         "ListGroup.ListGroupView",
         "ListGroup.ListItemView",
-        "ModelWrapper.ModelWrapper",
+        "ModelWrapper",
+        "MultiColumnMixin",
         "NumberRangeValidation",
-        "ObjectWithArrayMixin",
+        "PanelGroup.PanelColumnData",
         "Panels.PanelCollapsibleView",
         "Panels.PanelColumnDataGroup",
         "Panels.PanelView",
         "Panels.PanelsView",
+        "Popovers.PopoverComponent",
+        "ProgressBars.ProgressBar",
         "RegexValidation",
-        "Timer.AsyncQue",
-        "Timer.Timer",
+        "Timer",
+        "TimerObj",
         "Tree.LeafView",
         "Tree.NodeRecordMixin",
         "Tree.NodeView",
@@ -71,12 +94,16 @@ YUI.add("yuidoc-meta", function(Y) {
         "alerts",
         "app-wrapper",
         "array-modifier",
+        "array-modifier-groups",
         "array-modifier-types",
         "column-data",
         "column-data-utils",
         "column-data-validation",
+        "crud-adapter",
         "drag-drop",
-        "ember-utils-core",
+        "form",
+        "form-column-data",
+        "form-items",
         "global-module",
         "global-module-column-data",
         "global-module-view",
@@ -84,11 +111,13 @@ YUI.add("yuidoc-meta", function(Y) {
         "list-column-data",
         "list-group",
         "list-item",
-        "model-wrapper",
         "panel-column-data",
         "panel-views",
         "panels",
+        "popover",
+        "progress-bar",
         "timer",
+        "tooltip",
         "tree",
         "tree-column-data",
         "tree-nodes"
@@ -107,6 +136,11 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "array-modifier",
             "name": "array-modifier",
+            "description": "Module to handle array modification like sorting, searching and filtering."
+        },
+        {
+            "displayName": "array-modifier-groups",
+            "name": "array-modifier-groups",
             "description": "Module to handle array modification like sorting, searching and filtering."
         },
         {
@@ -130,14 +164,29 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "Validations for property in record."
         },
         {
+            "displayName": "crud-adapter",
+            "name": "crud-adapter",
+            "description": "Wrapper module around ember data."
+        },
+        {
             "displayName": "drag-drop",
             "name": "drag-drop",
             "description": "A drag drop module for all operations related to drag and drop. Uses html5 drag drop feature."
         },
         {
-            "displayName": "ember-utils-core",
-            "name": "ember-utils-core",
-            "description": "Core module for ember-utils."
+            "displayName": "form",
+            "name": "form",
+            "description": "A module for a form."
+        },
+        {
+            "displayName": "form-column-data",
+            "name": "form-column-data",
+            "description": "Column data interface for form module."
+        },
+        {
+            "displayName": "form-items",
+            "name": "form-items",
+            "description": "Module with all the form items."
         },
         {
             "displayName": "global-module",
@@ -147,7 +196,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "global-module-column-data",
             "name": "global-module-column-data",
-            "description": "Column Data Interface or the global modules."
+            "description": "Views for the global modules."
         },
         {
             "displayName": "global-module-view",
@@ -162,7 +211,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "list-column-data",
             "name": "list-column-data",
-            "description": "Column data interface for list item views."
+            "description": "Different list item views."
         },
         {
             "displayName": "list-group",
@@ -173,11 +222,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "list-item",
             "name": "list-item",
             "description": "Different list item views."
-        },
-        {
-            "displayName": "model-wrapper",
-            "name": "model-wrapper",
-            "description": "Ember Data Model wrapper to support crud adaptor shipped with this util package."
         },
         {
             "displayName": "panel-column-data",
@@ -195,9 +239,24 @@ YUI.add("yuidoc-meta", function(Y) {
             "description": "An ember wrapper module for bootstrap's list group component."
         },
         {
+            "displayName": "popover",
+            "name": "popover",
+            "description": "Module for popovers."
+        },
+        {
+            "displayName": "progress-bar",
+            "name": "progress-bar",
+            "description": "Progress bar module."
+        },
+        {
             "displayName": "timer",
             "name": "timer",
             "description": "Timer module with stuff related to timers."
+        },
+        {
+            "displayName": "tooltip",
+            "name": "tooltip",
+            "description": "Module for the tooltip component."
         },
         {
             "displayName": "tree",

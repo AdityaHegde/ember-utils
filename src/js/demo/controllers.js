@@ -1,3 +1,9 @@
+define([
+  "ember",
+  "./app",
+  "ember-utils",
+], function(Ember, DemoApp) {
+
 DemoApp.IndexController = Ember.Controller.extend({
 });
 
@@ -114,4 +120,8 @@ DemoApp.ProgressbarController = Ember.Controller.extend({
 
 DemoApp.ModalController = DemoApp.DemoAppController.extend({
   columnDataGroupName : "formTest",
+});
+
+return {};
+
 });

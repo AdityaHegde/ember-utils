@@ -8,6 +8,8 @@ define([
  * Validate duplication across siblings of the record. Pass type = 4 to get this.
  *
  * @class DuplicateAcrossRecordsValidation
+ * @module column-data
+ * @submodule column-data-validation
  */
 var DuplicateAcrossRecordsValidation = EmptyValidation.extend({
   /**

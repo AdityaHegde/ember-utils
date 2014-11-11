@@ -1,14 +1,13 @@
 define([
   "ember",
-  "core/hasMany",
+  "lib/ember-utils-core",
   "./emptyValidation",
   "./regexValidation",
   "./csvRegexValidation",
   "./csvDuplicateValidation",
   "./duplicateAcrossRecordsValidation",
   "./numberRangeValidation",
-], function(Ember, hasMany) { 
-hasMany = hasMany.hasMany;
+], function(Ember, Utils) { 
 
 var ColumnDataValidationsMap = {};
 for(var i = 2; i < arguments.length; i++) {
@@ -19,6 +18,8 @@ for(var i = 2; i < arguments.length; i++) {
  * Validation class that goes as 'validation' on column data.
  *
  * @class ColumnDataValidation
+ * @module column-data
+ * @submodule column-data-validation
  */
 var ColumnDataValidation = Ember.Object.extend({
   init : function() {
@@ -32,7 +33,7 @@ var ColumnDataValidation = Ember.Object.extend({
    * @property validations
    * @type Array
    */
-  validations : hasMany(ColumnDataValidationsMap, "type"),
+  validations : Utils.hasMany(ColumnDataValidationsMap, "type"),
 
   /**
    * @property validate
