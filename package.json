@@ -27,12 +27,14 @@
   "devDependencies": {
     "requirejs": "*",
     "grunt": "*",
+    "grunt-cli": "*",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-concat" : "*",
     "grunt-ember-templates" : "*",
     "grunt-contrib-yuidoc": "*",
     "grunt-contrib-requirejs": "*",
+    "grunt-contrib-cssmin": "*",
     "grunt-concurrent": "*",
     "grunt-qunit-istanbul": "*",
     "grunt-contrib-clean": "*",
@@ -44,6 +46,7 @@
   "bundleDependencies": [],
   "scripts" : {
     "test" : "./node_modules/karma/bin/karma start karma.conf.js",
+    "build" : "./node_modules/.bin/grunt",
     "start" : "node server.js"
   }
 }

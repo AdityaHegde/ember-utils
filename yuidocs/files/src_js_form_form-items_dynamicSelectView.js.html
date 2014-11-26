@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/Alerts.AlertMessageComponent.html">Alerts.AlertMessageComponent</a></li>
             
+                <li><a href="../classes/APIConfig.html">APIConfig</a></li>
+            
                 <li><a href="../classes/ApplicationAdapter.html">ApplicationAdapter</a></li>
             
                 <li><a href="../classes/ApplicationSerializer.html">ApplicationSerializer</a></li>
@@ -77,8 +79,6 @@
             
                 <li><a href="../classes/ColumnDataChangeCollectorMixin.html">ColumnDataChangeCollectorMixin</a></li>
             
-                <li><a href="../classes/ColumnDataGroupPluginMixin.html">ColumnDataGroupPluginMixin</a></li>
-            
                 <li><a href="../classes/ColumnDataValidation.html">ColumnDataValidation</a></li>
             
                 <li><a href="../classes/ColumnDataValueMixin.html">ColumnDataValueMixin</a></li>
@@ -92,6 +92,8 @@
                 <li><a href="../classes/CSVDuplicateValidation.html">CSVDuplicateValidation</a></li>
             
                 <li><a href="../classes/CSVRegexValidation.html">CSVRegexValidation</a></li>
+            
+                <li><a href="../classes/DelayedAddToHasManyMixin.html">DelayedAddToHasManyMixin</a></li>
             
                 <li><a href="../classes/DragDrop.DraggableMixin.html">DragDrop.DraggableMixin</a></li>
             
@@ -112,6 +114,8 @@
                 <li><a href="../classes/Form.CSVDataInputView.html">Form.CSVDataInputView</a></li>
             
                 <li><a href="../classes/Form.DisableForCol.html">Form.DisableForCol</a></li>
+            
+                <li><a href="../classes/Form.DynamicMultiSelectView.html">Form.DynamicMultiSelectView</a></li>
             
                 <li><a href="../classes/Form.DynamicSelectView.html">Form.DynamicSelectView</a></li>
             
@@ -173,6 +177,8 @@
             
                 <li><a href="../classes/LazyDisplay.LazyDisplayView.html">LazyDisplay.LazyDisplayView</a></li>
             
+                <li><a href="../classes/LazyDisplay.PassValueObject.html">LazyDisplay.PassValueObject</a></li>
+            
                 <li><a href="../classes/ListGroup.ListColumnData.html">ListGroup.ListColumnData</a></li>
             
                 <li><a href="../classes/ListGroup.ListColumnDataGroup.html">ListGroup.ListColumnDataGroup</a></li>
@@ -180,6 +186,28 @@
                 <li><a href="../classes/ListGroup.ListGroupView.html">ListGroup.ListGroupView</a></li>
             
                 <li><a href="../classes/ListGroup.ListItemView.html">ListGroup.ListItemView</a></li>
+            
+                <li><a href="../classes/Modal.FormWindowView.html">Modal.FormWindowView</a></li>
+            
+                <li><a href="../classes/Modal.ModalBodyColumnDataMixin.html">Modal.ModalBodyColumnDataMixin</a></li>
+            
+                <li><a href="../classes/Modal.ModalBodyView.html">Modal.ModalBodyView</a></li>
+            
+                <li><a href="../classes/Modal.ModalColumnData.html">Modal.ModalColumnData</a></li>
+            
+                <li><a href="../classes/Modal.ModalColumnDataGroup.html">Modal.ModalColumnDataGroup</a></li>
+            
+                <li><a href="../classes/Modal.ModalFooterColumnDataMixin.html">Modal.ModalFooterColumnDataMixin</a></li>
+            
+                <li><a href="../classes/Modal.ModalFooterView.html">Modal.ModalFooterView</a></li>
+            
+                <li><a href="../classes/Modal.ModalFormBodyView.html">Modal.ModalFormBodyView</a></li>
+            
+                <li><a href="../classes/Modal.ModalTitleColumnDataMixin.html">Modal.ModalTitleColumnDataMixin</a></li>
+            
+                <li><a href="../classes/Modal.ModalTitleView.html">Modal.ModalTitleView</a></li>
+            
+                <li><a href="../classes/Modal.ModalWindowView.html">Modal.ModalWindowView</a></li>
             
                 <li><a href="../classes/ModelWrapper.html">ModelWrapper</a></li>
             
@@ -261,6 +289,12 @@
             
                 <li><a href="../modules/list-item.html">list-item</a></li>
             
+                <li><a href="../modules/modal.html">modal</a></li>
+            
+                <li><a href="../modules/modal-column-data.html">modal-column-data</a></li>
+            
+                <li><a href="../modules/modal-item.html">modal-item</a></li>
+            
                 <li><a href="../modules/panel-column-data.html">panel-column-data</a></li>
             
                 <li><a href="../modules/panel-views.html">panel-views</a></li>
@@ -335,7 +369,7 @@ define([
  * @module form
  * @submodule form-items
  */
-var DynamicSelectView = StaticSelectView.StaticSelectView.extend(MultipleValueMixin.MultipleValueMixin, Utils.ObjectWithArrayMixin, {
+var DynamicSelectView = StaticSelectView.StaticSelectView.extend({
   init : function() {
     this._super();
     var columnData = this.get(&quot;columnData&quot;);
@@ -346,19 +380,20 @@ var DynamicSelectView = StaticSelectView.StaticSelectView.extend(MultipleValueMi
   hideOnEmpty : false,
 
   selectOptions : function() {
-    var columnData = this.get(&quot;columnData&quot;), data = [], opts = [];
-    if(columnData.dataPath) {
-      data = Ember.get(columnData.dataPath) || this.get(columnData.dataPath);
+    var columnData = this.get(&quot;columnData.form&quot;), data = [], opts = [],
+        dataPath = columnData.get(&quot;dataPath&quot;);
+    if(dataPath) {
+      data = Ember.get(dataPath) || this.get(dataPath);
     }
     else {
       data = columnData.data || [];
     }
     if(data) {
       data.forEach(function(item) {
-        opts.push(Ember.Object.create({ val : item.get(columnData.dataValCol), label : item.get(columnData.dataLabelCol)}));
+        opts.push(Ember.Object.create({ val : item.get(columnData.get(&quot;dataValCol&quot;)), label : item.get(columnData.get(&quot;dataLabelCol&quot;))}));
       }, this);
     }
-    if(columnData.get(&quot;form.hideOnEmpty&quot;) &amp;&amp; opts.length - columnData.get(&quot;form.hideEmptyBuffer&quot;) === 0) {
+    if(columnData.get(&quot;hideOnEmpty&quot;) &amp;&amp; opts.length - columnData.get(&quot;hideEmptyBuffer&quot;) === 0) {
       this.set(&quot;hideOnEmpty&quot;, true);
     }
     else {
@@ -372,41 +407,6 @@ var DynamicSelectView = StaticSelectView.StaticSelectView.extend(MultipleValueMi
     this.rerender();
   },
 
-  selection : function(key, value) {
-    if(arguments.length &gt; 1) {
-      if(this._state !== &quot;preRender&quot;) {
-        if(this.get(&quot;columnData.form.multiple&quot;)) {
-          if(Ember.isEmpty(value[0])) {
-            //initially the selection is an array with undef as its 1st element
-            //this.set(&quot;values&quot;, []);
-          }
-          else {
-            this.set(&quot;values&quot;, value); 
-          }
-        }
-        else {
-          this.set(&quot;value&quot;, value &amp;&amp; value.val);
-        }
-      }
-      return value;
-    }
-    else {
-      var options = this.get(&quot;selectOptions&quot;), sel;
-      if(this.get(&quot;columnData.form.multiple&quot;)) {
-        var values = this.get(&quot;values&quot;), columnData = this.get(&quot;columnData&quot;);
-        if(values &amp;&amp; values.get(&quot;length&quot;)) {
-          sel = options.filter(function(e, i, a) {
-            return !!values.findBy(&quot;value&quot;, e.get(&quot;value&quot;));
-          });
-        }
-      }
-      else {
-        sel = options.findBy(&quot;value&quot;, this.get(&quot;value&quot;));
-      }
-      return sel;
-    }
-  }.property(&quot;view.values.@each&quot;, &quot;values.@each&quot;),
-
   recordChangeHook : function() {
     this._super();
     this.notifyPropertyChange(&quot;selection&quot;);
@@ -416,16 +416,19 @@ var DynamicSelectView = StaticSelectView.StaticSelectView.extend(MultipleValueMi
     this.notifyPropertyChange(&quot;selection&quot;);
   },
 
-  selectionWasAdded : function(addedSels, idxs, fromSetFunc) {
-    if(this.get(&quot;columnData.form.multiple&quot;) &amp;&amp; !fromSetFunc) {
-      this.set(&quot;values&quot;, this.get(&quot;selection&quot;));
+  selection : function(key, value) {
+    var columnData = this.get(&quot;columnData.form&quot;);
+    if(arguments.length &gt; 1) {
+      this.set(&quot;value&quot;, value &amp;&amp; columnData &amp;&amp; value.get(&quot;val&quot;));
+      return value;
     }
-  },
-
-  arrayProps : [&quot;selection&quot;],
+    else {
+      return columnData &amp;&amp; this.get(&quot;selectOptions&quot;).findBy(&quot;val&quot;, this.get(&quot;value&quot;));
+    }
+  }.property(),
 
   template : Ember.Handlebars.compile(&#x27;{{view &quot;select&quot; class=&quot;form-control&quot; content=view.selectOptions optionValuePath=&quot;content.val&quot; optionLabelPath=&quot;content.label&quot; &#x27; +
-                                                      &#x27;multiple=view.columnData.form.multiple prompt=view.columnData.form.prompt selection=view.selection disabled=view.isDisabled}}&#x27;),
+                                                      &#x27;prompt=view.columnData.form.prompt selection=view.selection disabled=view.isDisabled}}&#x27;),
 });
 
 return {

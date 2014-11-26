@@ -5,15 +5,14 @@ define([
   "lib/ember-test-utils",
   "source/crud-adapter/main",
   "test/test-app",
-  "./model-setup",
 ], function(Ember, emq, Utils, EmberTests, CrudAdapter, TestApp) {
 
 return function() {
 
 EmberTests.TestCase.EmberTestSuit.create({
-  suitName : "crud-adaptor CRUD operations",
+  suitName : "crud-adaptor hasMany record",
   moduleFunction : "moduleForModel",
-  param : "test",
+  param : "testp",
   moduleOpts : {
     setup : function() {
       CrudAdapter.loadAdaptor(TestApp);
@@ -21,132 +20,11 @@ EmberTests.TestCase.EmberTestSuit.create({
     teardown : function() {
     },
 
-    needs : ["model:testp"],
+    needs : ["model:test"],
   },
 
   testCases : [{
     title : "Create Record",
-    type : "crudTestCase",
-    testData : {},
-    testBlocks : [
-      ["setupStore"],
-      ["baseTestBlock", [
-        ["createRecord", "test", { vara : "test", varc : "test" }],
-        ["saveRecord"],
-      ]],
-      ["checkValues", [
-        //"type", "path", "value", "message"
-        ["base", "record.id",   "test",      "Has proper id : 'test'"                                                     ],
-        ["base", "record.vara", "test",      "'vara' has correct value : 'test'"                                          ],
-        ["base", "record.varc", "test_varc", "'varc' has correct value : 'test_varc' as returned from server after update"],
-      ]],
-    ],
-  }, {
-    title : "Create Record on existing id",
-    type : "crudTestCase",
-    testData : {},
-    testBlocks : [
-      ["setupStore"],
-      ["baseTestBlock", [
-        ["createRecord", "test", { vara : "test" }],
-        ["saveRecord"],
-      ]],
-      ["baseTestBlock", [
-        ["createRecord", "test", { id : "test", vara : "test" }],
-        ["saveRecord"],
-      ]],
-      ["checkValues", [
-        //"type", "path", "value", "message"
-        ["base", "record.id",   "test",      "Has proper id : 'test'"           ],
-        ["base", "record.vara", "test",      "'vara' has correct value : 'test'"],
-      ]],
-    ],
-  }, {
-    title : "Create Record with 500 server error status",
-    type : "crudTestCase",
-    testData : {},
-    testBlocks : [
-      ["setupStore"],
-      ["baseTestBlock", [
-        ["createRecord", "test", { vara : "test" }],
-        ["assignValues", [
-          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
-          ["base",    "record", "varb",     "varb_changed"],
-        ]],
-        ["mockjaxSetting", { throwServerError : true }],
-        ["saveRecord"],
-      ]],
-      ["checkValues", [
-        //"type", "path", "value", "message"
-        ["base", "record.id",      undefined,      "Id is not defined as save failed"        ],
-        ["base", "record.varb",    "varb_changed", "'varb' value 'varb_changed' was retained"],
-        ["base", "failureMessage", "Server Error", "Failure message captured"                ],
-      ]],
-      //to check that record is not in failure state and can be edited
-      ["assignValues", [
-        //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
-        ["base",    "record", "varb",     "varb_changed"],
-      ]],
-      ["restoreMockjaxSetting"],
-    ],
-  }, {
-    title : "Create Record with 404 server error status",
-    type : "crudTestCase",
-    testData : {},
-    testBlocks : [
-      ["setupStore"],
-      ["baseTestBlock", [
-        ["createRecord", "test", { vara : "test" }],
-        ["assignValues", [
-          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
-          ["base",    "record", "varb",     "varb_changed"],
-        ]],
-        ["mockjaxSetting", { throwServerError : true, serverErrorCode : 404 }],
-        ["saveRecord"],
-      ]],
-      ["checkValues", [
-        //"type", "path", "value", "message"
-        ["base", "record.id",      undefined,      "Id is not defined as save failed"        ],
-        ["base", "record.varb",    "varb_changed", "'varb' value 'varb_changed' was retained"],
-        ["base", "failureMessage", "Server Error", "Failure message captured"                ],
-      ]],
-      //to check that record is not in failure state and can be edited
-      ["assignValues", [
-        //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
-        ["base",    "record", "varb",     "varb_changed"],
-      ]],
-      ["restoreMockjaxSetting"],
-    ],
-  }, {
-    title : "Create Record with processing error on server",
-    type : "crudTestCase",
-    testData : {},
-    testBlocks : [
-      ["setupStore"],
-      ["baseTestBlock", [
-        ["createRecord", "test", { vara : "test" }],
-        ["assignValues", [
-          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
-          ["base",    "record", "varb",     "varb_changed"],
-        ]],
-        ["mockjaxSetting", { throwProcessError : 1 }],
-        ["saveRecord"],
-      ]],
-      ["checkValues", [
-        //"type", "path", "value", "message"
-        ["base", "record.id",      undefined,      "Id is not defined as save failed"        ],
-        ["base", "record.varb",    "varb_changed", "'varb' value 'varb_changed' was retained"],
-        ["base", "failureMessage", "Failed",       "Failure message captured"                ],
-      ]],
-      //to check that record is not in failure state and can be edited
-      ["assignValues", [
-        //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
-        ["base",    "record", "varb",     "varb_changed"],
-      ]],
-      ["restoreMockjaxSetting"],
-    ],
-  }, {
-    title : "Create Record with hasMany",
     type : "crudTestCase",
     testData : {},
     testBlocks : [
@@ -177,7 +55,7 @@ EmberTests.TestCase.EmberTestSuit.create({
       ]],
     ],
   }, {
-    title : "Create Record with hasMany, server error",
+    title : "Create Record with server error",
     type : "crudTestCase",
     testData : {},
     testBlocks : [
@@ -215,7 +93,7 @@ EmberTests.TestCase.EmberTestSuit.create({
       ["restoreMockjaxSetting"],
     ],
   }, {
-    title : "Create Record with hasMany, server processing error",
+    title : "Create Record with server processing error",
     type : "crudTestCase",
     testData : {},
     testBlocks : [
@@ -259,96 +137,6 @@ EmberTests.TestCase.EmberTestSuit.create({
     testBlocks : [
       ["setupStore"],
       ["baseTestBlock", [
-        ["findRecord", "test", "test"],
-      ]],
-      ["baseTestBlock", [
-        ["correctRecord"],
-        ["checkValues", [
-          //"type", "path", "value", "message"
-          ["base",  "record.varb",  "test_varb",  "Initial value of 'varb' is 'test_varb'"],
-        ]],
-        ["assignValues", [
-          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
-          ["base",    "record", "varb",     "test_update"],
-        ]],
-        ["saveRecord"],
-      ]],
-      ["checkValues", [
-        //"type", "path", "value", "message"
-        ["base", "record.id",   "test",        "Has proper id : 'test'"                 ],
-        ["base", "record.vara", "test",        "'vara' has correct value : 'test'"      ],
-        ["base", "record.varb", "test_update", "'varb' value 'test_update' was retained"],
-      ]],
-    ],
-  }, {
-    title : "Update Record with server error",
-    type : "crudTestCase",
-    testData : {},
-    testBlocks : [
-      ["setupStore"],
-      ["baseTestBlock", [
-        ["findRecord", "test", "test"],
-      ]],
-      ["baseTestBlock", [
-        ["correctRecord"],
-        ["checkValues", [
-          //"type", "path", "value", "message"
-          ["base",  "record.varb",  "test_varb",  "Initial value of 'varb' is 'test_varb'"],
-        ]],
-        ["assignValues", [
-          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
-          ["base",    "record", "varb",     "test_update"],
-        ]],
-        ["mockjaxSetting", { throwServerError : true }],
-        ["saveRecord"],
-      ]],
-      ["checkValues", [
-        //"type", "path", "value", "message"
-        ["base", "failureMessage", "Server Error", "Failure message captured"               ],
-        ["base", "record.id",      "test",         "Has proper id : 'test'"                 ],
-        ["base", "record.vara",    "test",         "'vara' has correct value : 'test'"      ],
-        ["base", "record.varb",    "test_update",  "'varb' value 'test_update' was retained"],
-      ]],
-      ["restoreMockjaxSetting"],
-    ],
-  }, {
-    title : "Update Record with server error",
-    type : "crudTestCase",
-    testData : {},
-    testBlocks : [
-      ["setupStore"],
-      ["baseTestBlock", [
-        ["findRecord", "test", "test"],
-      ]],
-      ["baseTestBlock", [
-        ["correctRecord"],
-        ["checkValues", [
-          //"type", "path", "value", "message"
-          ["base",  "record.varb",  "test_varb",  "Initial value of 'varb' is 'test_varb'"],
-        ]],
-        ["assignValues", [
-          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
-          ["base",    "record", "varb",     "test_update"],
-        ]],
-        ["mockjaxSetting", { throwProcessError : 1 }],
-        ["saveRecord"],
-      ]],
-      ["checkValues", [
-        //"type", "path", "value", "message"
-        ["base", "failureMessage", "Failed",       "Failure message captured"               ],
-        ["base", "record.id",      "test",         "Has proper id : 'test'"                 ],
-        ["base", "record.vara",    "test",         "'vara' has correct value : 'test'"      ],
-        ["base", "record.varb",    "test_update",  "'varb' value 'test_update' was retained"],
-      ]],
-      ["restoreMockjaxSetting"],
-    ],
-  }, {
-    title : "Update Record with hasMany",
-    type : "crudTestCase",
-    testData : {},
-    testBlocks : [
-      ["setupStore"],
-      ["baseTestBlock", [
         ["findRecord", "testp", "test"],
       ]],
       ["baseTestBlock", [
@@ -373,7 +161,7 @@ EmberTests.TestCase.EmberTestSuit.create({
       ]],
     ],
   }, {
-    title : "Update Record with hasMany, server error",
+    title : "Update Record with server error",
     type : "crudTestCase",
     testData : {},
     testBlocks : [
@@ -406,7 +194,7 @@ EmberTests.TestCase.EmberTestSuit.create({
       ["restoreMockjaxSetting"],
     ],
   }, {
-    title : "Update Record with hasMany, server process error",
+    title : "Update Record with server process error",
     type : "crudTestCase",
     testData : {},
     testBlocks : [
@@ -439,63 +227,7 @@ EmberTests.TestCase.EmberTestSuit.create({
       ["restoreMockjaxSetting"],
     ],
   }, {
-    title : "Delete Record with server error.",
-    type : "crudTestCase",
-    testData : {},
-    testBlocks : [
-      ["setupStore"],
-      ["baseTestBlock", [
-        ["findRecord", "test", "test"],
-      ]],
-      ["baseTestBlock", [
-        ["correctRecord"],
-        ["assignValues", [
-          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
-          ["base",    "record", "varb",     "test_update"],
-        ]],
-        ["mockjaxSetting", { throwServerError : true }],
-        ["deleteRecord"],
-        ["saveRecord"],
-      ]],
-      ["checkValues", [
-        //"type", "path", "value", "message"
-        ["base", "failureMessage", "Server Error", "Failure message captured"               ],
-        ["base", "record.id",      "test",         "Has proper id : 'test'"                 ],
-        ["base", "record.vara",    "test",         "'vara' has correct value : 'test'"      ],
-        ["base", "record.varb",    "test_update",  "'varb' value 'test_update' was retained"],
-      ]],
-      ["restoreMockjaxSetting"],
-    ],
-  }, {
-    title : "Delete Record with server process error.",
-    type : "crudTestCase",
-    testData : {},
-    testBlocks : [
-      ["setupStore"],
-      ["baseTestBlock", [
-        ["findRecord", "test", "test"],
-      ]],
-      ["baseTestBlock", [
-        ["correctRecord"],
-        ["assignValues", [
-          //"type"    "path"    "putPath"   "value"   "param"   "valuePath"
-          ["base",    "record", "varb",     "test_update"],
-        ]],
-        ["mockjaxSetting", { throwProcessError : 1 }],
-        ["deleteRecord"],
-        ["saveRecord"],
-      ]],
-      ["checkValues", [
-        //"type", "path", "value", "message"
-        ["base", "failureMessage", "Failed",       "Failure message captured"               ],
-        ["base", "record.id",      "test",         "Has proper id : 'test'"                 ],
-        ["base", "record.vara",    "test",         "'vara' has correct value : 'test'"      ],
-        ["base", "record.varb",    "test_update",  "'varb' value 'test_update' was retained"],
-      ]],
-      ["restoreMockjaxSetting"],
-    ],
-  }, {
-    title : "Delete Record with hasMany, server error",
+    title : "Delete Record with server error",
     type : "crudTestCase",
     testData : {},
     testBlocks : [
@@ -525,7 +257,7 @@ EmberTests.TestCase.EmberTestSuit.create({
       ["restoreMockjaxSetting"],
     ],
   }, {
-    title : "Delete Record with hasMany, server process error",
+    title : "Delete Record with server process error",
     type : "crudTestCase",
     testData : {},
     testBlocks : [
@@ -553,6 +285,32 @@ EmberTests.TestCase.EmberTestSuit.create({
         ["base", "record.tests.0.id",   "test1",                                       "id of 1st child record has correct value : 'test0'"          ],
       ]],
       ["restoreMockjaxSetting"],
+    ],
+  }, {
+    title : "Rollbak Record",
+    type : "crudTestCase",
+    testData : {},
+    testBlocks : [
+      ["setupStore"],
+      ["baseTestBlock", [
+        ["findRecord", "testp", "test"],
+      ]],
+      ["baseTestBlock", [
+        ["correctRecord"],
+        ["assignValues", [
+          //"type"    "path"            "putPath"   "value"   "param"   "valuePath"
+          ["base",    "record.tests.0", "varb",     "test_update"],
+        ]],
+        ["checkValues", [
+          //"type", "path", "value", "message"
+          ["base", "record.tests.0.varb", "test_update", "'varb' is updated to 'test_update'"],
+        ]],
+        ["rollbackRecord"],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "record.tests.0.varb", "test_varb", "'varb' of 1st child record has rollbacked value : 'test_varb'"],
+      ]],
     ],
   }],
 });

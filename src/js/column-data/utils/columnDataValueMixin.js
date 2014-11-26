@@ -57,6 +57,7 @@ var ColumnDataValueMixin = Ember.Mixin.create({
   listenedColumnChangedHook : function(changedColumnData, changedValue, oldValue) {
   },
 
+  disableValidation : false,
   validateValue : function(value) {
     var columnData = this.get("columnData"), record = this.get("record"),
         validation = columnData.get("validation");

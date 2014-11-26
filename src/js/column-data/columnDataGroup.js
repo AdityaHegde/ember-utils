@@ -80,6 +80,14 @@ var ColumnDataGroup = Ember.Object.extend({
    * @type Class
    */
   form : Utils.belongsTo("Form.FormColumnDataGroup"),
+
+  /**
+   * Meta data used by model module. Passed as an object while creating.
+   *
+   * @property model
+   * @type Class
+   */
+  modal : Utils.belongsTo("Modal.ModalColumnDataGroup"),
 });
 
 return {

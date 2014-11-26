@@ -22,13 +22,13 @@ module.exports = {
             "jquery",
             "handlebars",
             "ember",
+            "ember_data",
           ],
-          insertRequire : ["ember-utils"],
         },
-        {
+        /*{
           name : "demo/demo",
           insertRequire : ["demo/demo"],
-        },
+        },*/
       ],
     },
   },

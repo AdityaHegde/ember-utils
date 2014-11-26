@@ -1,7 +1,16 @@
+define([
+  "ember",
+  "ember_qunit",
+  "source/misc/main",
+], function() {
+
+return function() {
+
 moduleForComponent("alerts/alert-message", "alerts", {
   setup : function() {
   },
   teardown : function() {
+    TestApp.reset();
   },
 });
 
@@ -64,4 +73,8 @@ test("Auto collapse after message change", function() {
     ok(new Date() - d >= 1000, "Alert message closed after 1000ms");
     ok(!component.get("showAlert"), "'showAlert' was set to false");
   });
+});
+
+};
+
 });

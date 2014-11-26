@@ -8,17 +8,49 @@ define([
   "test/test-app",
 ], function(Ember, DS, emq, Utils, EmberTests, CrudAdapter, TestApp) {
 
+CrudAdapter.APIConfig.ENABLE_END_POINT = 1;
+CrudAdapter.APIConfig.APPEND_ID = 0;
+CrudAdapter.APIConfig.HTTP_METHOD_MAP = {
+  find    : "GET",
+  findAll : "GET",
+  create  : "POST",
+  update  : "POST",
+  delete  : "GET",
+};
+
 TestApp.Test = CrudAdapter.createModelWrapper({
   vara : attr(),
   varb : attr(),
   varc : attr(),
   vard : attr(),
+  vare : attr(),
+  varmeta : attr("string", {defaultValue : ""}),
 
   testp : belongsTo("testp", {async : true}),
 }, {
   keys : ["vara"],
   apiName : "test",
-  queryParams : ["vara"],
+  deleteParams : ["vara", "global_vardel"],
+  findParams : ["vard", "global_varfind"],
+  createUpdateParams : ["global_varcu"],
+  ignoreFieldsOnCreateUpdate : ["varb"],
+  ignoreFieldsOnRetrieveBackup : ["vard"],
+  removeAttrsFromBackupOnFind : ["vare"],
+  normalizeFunction : function(hash) {
+    hash.varmeta += "N";
+  },
+  preSerializeRelations : function(data) {
+    data.varmeta += "P";
+  },
+  serializeFunction : function(record, json) {
+    json.varmeta += "S";
+  },
+  backupData : function(record, type, data) {
+    data.varmeta += "B";
+  },
+  retrieveBackup : function(hash, type, data) {
+    hash.varmeta += "R";
+  },
 });
 EmberTests.MockjaxUtils.addMockjaxData({
   name : "test",
@@ -50,13 +82,11 @@ TestApp.Testp = CrudAdapter.createModelWrapper({
   varb : attr(),
 
   tests : hasMany("test", {async : true}),
-
-  arrayProps : ["tests"],
 }, {
   keys : ["vara"],
   apiName : "testparent",
   queryParams : ["vara"],
-}, [Utils.DelayedAddToHasManyMixin]);
+});
 EmberTests.MockjaxUtils.addMockjaxData({
   name : "testparent",
   data : [
@@ -102,75 +132,5 @@ EmberTests.MockjaxUtils.addMockjaxData({
   ],
   modelClass : TestApp.Testp,
 });
-
-EmberTests.TestCase.addToTestHierarchy("mockjaxSetting", EmberTests.TestCase.TestOperation.extend({
-  run : function(testData) {
-    testData.set("mockjaxSettingBack", EmberTests.MockjaxUtils.MockjaxSettingsInstance);
-    EmberTests.MockjaxUtils.MockjaxSettings.MockjaxSettingsInstance = EmberTests.MockjaxUtils.MockjaxSettings.create(this.get("attr1"));
-  },
-}), "to");
-EmberTests.TestCase.addToTestHierarchy("restoreMockjaxSetting", EmberTests.TestCase.TestOperation.extend({
-  run : function(testData) {
-    EmberTests.MockjaxUtils.MockjaxSettings.MockjaxSettingsInstance = testData.get("mockjaxSettingBack");
-  },
-}), "to");
-EmberTests.TestCase.addToTestHierarchy("createRecord", EmberTests.TestCase.TestOperation.extend({
-  run : function(testData) {
-    testData.set("record", CrudAdapter.createRecordWrapper(testData.get("store"), this.get("attr1"), this.get("attr2")));
-  },
-}), "to");
-EmberTests.TestCase.addToTestHierarchy("findRecord", EmberTests.TestCase.TestOperation.extend({
-  run : function(testData) {
-    testData.set("record", testData.get("store").find(this.get("attr1"), this.get("attr2")));
-  },
-}), "to");
-EmberTests.TestCase.addToTestHierarchy("correctRecord", EmberTests.TestCase.TestOperation.extend({
-  run : function(testData) {
-    testData.set("record", testData.get("record").content);
-  },
-}), "to");
-EmberTests.TestCase.addToTestHierarchy("deleteRecord", EmberTests.TestCase.TestOperation.extend({
-  run : function(testData) {
-    testData.get("record").deleteRecord();
-  },
-}), "to");
-EmberTests.TestCase.addToTestHierarchy("saveRecord", EmberTests.TestCase.TestOperation.extend({
-  run : function(testData) {
-    CrudAdapter.saveRecord(testData.get("record")).then(function() {
-      testData.set("savePassed", true);
-    }, function(message) {
-      testData.set("failureMessage", message);
-      CrudAdapter.retrieveFailure(testData.get("record"));
-    });
-  },
-}), "to");
-EmberTests.TestCase.addToTestHierarchy("createChildRecord", EmberTests.TestCase.AsyncOperation.extend({
-  asyncRun : function(testData) {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      var tests = testData.get("record.tests");
-      tests.then(function() {
-        for(var i = 0; i < 5; i++) {
-          tests.pushObject(CrudAdapter.createRecordWrapper(testData.get("store"), "test", {
-            vara : "test"+i,
-          }));
-        }
-        resolve();
-      }, function(e) {
-        reject(e);
-      });
-    });
-  },
-}), "to");
-
-EmberTests.TestCase.addToTestHierarchy("crudTestCase", EmberTests.TestCase.TestCase.extend({
-  initialize : function() {
-    this._super();
-    var testData = this.get("testData");
-    testData.setProperties({
-      ApplicationAdapter : CrudAdapter.ApplicationAdapter,
-      ApplicationSerializer : CrudAdapter.ApplicationSerializer,
-    });
-  },
-}), "tc");
 
 });

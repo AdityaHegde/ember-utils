@@ -58,7 +58,7 @@ var ColumnData = Ember.Object.extend({
    * @property list
    * @type Class
    */
-  list : Utils.belongsTo("ListGroup.ListColumnDataMap", "moduleType", "default", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
+  list : Utils.belongsTo("ListGroup.ListColumnDataMap", "moduleType", "default", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "displayText"),
 
   /**
    * Meta data used by tree module. Passed as an object while creating.
@@ -66,7 +66,7 @@ var ColumnData = Ember.Object.extend({
    * @property tree
    * @type Class
    */
-  tree : Utils.belongsTo("Tree.TreeColumnDataMap", "moduleType", "default", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
+  tree : Utils.belongsTo("Tree.TreeColumnDataMap", "moduleType", "default", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "displayText"),
 
   /**
    * Meta data used by sortable module. Passed as an object while creating.
@@ -74,7 +74,7 @@ var ColumnData = Ember.Object.extend({
    * @property sort
    * @type Class
    */
-  sort : Utils.belongsTo("DragDrop.SortableColumnDataMap", "moduleType", "default", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
+  sort : Utils.belongsTo("DragDrop.SortableColumnDataMap", "moduleType", "default", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "displayText"),
 
   /**
    * Meta data used by panels module. Passed as an object while creating.
@@ -82,7 +82,7 @@ var ColumnData = Ember.Object.extend({
    * @property panel
    * @type Class
    */
-  panel : Utils.belongsTo("Panels.PanelColumnDataMap", "moduleType", "default", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "GlobalModules.DisplayTextColumnDataMixin"),
+  panel : Utils.belongsTo("Panels.PanelColumnDataMap", "moduleType", "default", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "displayText"),
 
   /**
    * Meta data used by form module. Passed as an object while creating.
@@ -90,7 +90,15 @@ var ColumnData = Ember.Object.extend({
    * @property form
    * @type Class
    */
-  form : Utils.belongsTo("Form.FormColumnDataMap", "moduleType"),
+  form : Utils.belongsTo("Form.FormColumnDataMap", "moduleType", "textInput"),
+
+  /**
+   * Meta data used by model module. Passed as an object while creating.
+   *
+   * @property model
+   * @type Class
+   */
+  modal : Utils.belongsTo("Modal.ModalColumnDataMap", "moduleType", "default", "GlobalModules.GlobalModulesColumnDataMixinMap", "viewType", "displayText"),
 
   /**
    * A suitable label for the attribute used in displaying in certain places.

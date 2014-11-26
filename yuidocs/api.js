@@ -1,6 +1,7 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "APIConfig",
         "Alerts.AlertMessageComponent",
         "AppWrapper.AppWrapper",
         "ApplicationAdapter",
@@ -21,12 +22,12 @@ YUI.add("yuidoc-meta", function(Y) {
         "ColumnData.ColumnData",
         "ColumnData.ColumnDataGroup",
         "ColumnDataChangeCollectorMixin",
-        "ColumnDataGroupPluginMixin",
         "ColumnDataValidation",
         "ColumnDataValueMixin",
         "ColumnListenerEntry",
         "CrudAdapter",
         "CrudAdaptor",
+        "DelayedAddToHasManyMixin",
         "DragDrop.DraggableMixin",
         "DragDrop.DroppableMixin",
         "DragDrop.SortableDraggableMixin",
@@ -37,6 +38,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Form.CSVDataInputView",
         "Form.CheckBoxView",
         "Form.DisableForCol",
+        "Form.DynamicMultiSelectView",
         "Form.DynamicSelectView",
         "Form.FileUploadView",
         "Form.FormColumnData",
@@ -67,10 +69,22 @@ YUI.add("yuidoc-meta", function(Y) {
         "GlobalModules.GlobalModuleColumnDataGroupMixin",
         "LazyDisplay.LazyDisplayColumnDataGroup",
         "LazyDisplay.LazyDisplayView",
+        "LazyDisplay.PassValueObject",
         "ListGroup.ListColumnData",
         "ListGroup.ListColumnDataGroup",
         "ListGroup.ListGroupView",
         "ListGroup.ListItemView",
+        "Modal.FormWindowView",
+        "Modal.ModalBodyColumnDataMixin",
+        "Modal.ModalBodyView",
+        "Modal.ModalColumnData",
+        "Modal.ModalColumnDataGroup",
+        "Modal.ModalFooterColumnDataMixin",
+        "Modal.ModalFooterView",
+        "Modal.ModalFormBodyView",
+        "Modal.ModalTitleColumnDataMixin",
+        "Modal.ModalTitleView",
+        "Modal.ModalWindowView",
         "ModelWrapper",
         "MultiColumnMixin",
         "NumberRangeValidation",
@@ -111,6 +125,9 @@ YUI.add("yuidoc-meta", function(Y) {
         "list-column-data",
         "list-group",
         "list-item",
+        "modal",
+        "modal-column-data",
+        "modal-item",
         "panel-column-data",
         "panel-views",
         "panels",
@@ -222,6 +239,21 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "list-item",
             "name": "list-item",
             "description": "Different list item views."
+        },
+        {
+            "displayName": "modal",
+            "name": "modal",
+            "description": "A module for a modal windows."
+        },
+        {
+            "displayName": "modal-column-data",
+            "name": "modal-column-data",
+            "description": "Modal items submodule."
+        },
+        {
+            "displayName": "modal-item",
+            "name": "modal-item",
+            "description": "Modal items submodule."
         },
         {
             "displayName": "panel-column-data",

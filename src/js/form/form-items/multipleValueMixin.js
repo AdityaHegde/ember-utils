@@ -31,9 +31,9 @@ var MultipleValueMixin = Ember.Mixin.create({
   valuesArrayDidChange : function() {
     if(!this.get("values") || this.get("lock")) return;
     var value = this.get("value"), values = this.get("values"),
-        valLength = val && val.get("length"), valuesLength = values.get("length"),
+        valLength = value && value.get("length"), valuesLength = values.get("length"),
         columnData = this.get("columnData"), record = this.get("record");
-    if(val) {
+    if(value) {
       this.set("lock", true);
       values.forEach(function(val, idx) {
         var valObj = value.objectAt(idx);
@@ -45,7 +45,12 @@ var MultipleValueMixin = Ember.Mixin.create({
           var data = { /*id : columnData.get("name")+"__"+csvid++*/ };
           data[columnData.get("form.arrayCol")] = val.get("value");
           CopyValuesToObject(data, columnData, record, val);
-          record.addToProp(columnData.get("key"), CrudAdapter.createRecordWrapper(record.store, columnData.get("form.arrayType"), data));
+          if(record.addToProp) {
+            record.addToProp(columnData.get("key"), CrudAdapter.createRecordWrapper(record.store, columnData.get("form.arrayType"), data));
+          }
+          else {
+            value.pushObject(CrudAdapter.createRecordWrapper(record.store, columnData.get("form.arrayType"), data));
+          }
         }
       });
       if(valLength > valuesLength) {

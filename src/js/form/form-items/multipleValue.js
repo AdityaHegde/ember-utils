@@ -15,7 +15,7 @@ var MultipleValue = Ember.Object.extend({
     var columnData = this.get("columnData");
     if(arguments.length > 1) {
       if(!Ember.isNone(columnData)) {
-        var validation = columnData.validateValue(value, null, columnData.get("validation.eachValidations"));
+        var validation = columnData.get("validation").validateValue(value, null, columnData.get("validation.eachValidations"));
         if(validation[0]) {
           this.set("isInvalid", true);
         }

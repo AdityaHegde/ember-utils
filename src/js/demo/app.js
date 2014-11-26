@@ -13,6 +13,7 @@ DemoApp.Router.map(function() {
   this.resource('dragdrop', { path : 'dragdrop' });
   this.resource('panels', { path : 'panels' });
   this.resource('progressbar', { path : 'progressbar' });
+  this.resource('modal', { path : 'modal' });
 });
 
 return DemoApp;

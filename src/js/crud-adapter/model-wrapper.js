@@ -11,16 +11,15 @@ define([
  * @for CrudAdapter
  */
 var ModelWrapper = DS.Model.extend(Utils.ObjectWithArrayMixin, {
-  init : function() {
-    this._super();
-    var arrayProps = this.get("arrayProps"), that = this;
-    this.set("isDirty_alias", this.get("isDirty"));
+  recordReady : function() {
+    var arrayProps = this.get("arrayProps") || [];
     Ember.addObserver(this, "isDirty", this, "attributeDidChange");
     for(var i = 0; i < arrayProps.length; i++) {
       var arrayProp = arrayProps[i];
-      this[arrayProp+"WillBeDeleted"] = that.childrenWillBeDeleted;
-      this[arrayProp+"WasAdded"] = that.childrenWasAdded;
+      this[arrayProp+"WillBeDeleted"] = this.childrenWillBeDeleted;
+      this[arrayProp+"WasAdded"] = this.childrenWasAdded;
     }
+    this.set("isDirty_alias", this.get("isDirty"));
   },
 
   childrenWillBeDeleted : function(props, idxs) {
@@ -141,11 +140,11 @@ var allowedModelAttrs = [{
   /**
    * Keys needed to make delete calls. These values will be taken from either the record or 'CrudAdapter.GlobalData'
    *
-   * @property queryParams
+   * @property deleteParams
    * @type Array
    * @static
    */
-  attr : "queryParams", 
+  attr : "deleteParams", 
   defaultValue : "emptyArray",
 }, {
   /**
@@ -161,11 +160,11 @@ var allowedModelAttrs = [{
   /**
    * Keys for extra attributes to be passed along with record attrs during create/update call. These values will be taken from either the record or 'CrudAdapter.GlobalData'
    *
-   * @property extraAttrs
+   * @property createUpdateParams
    * @type Array
    * @static
    */
-  attr : "extraAttrs", 
+  attr : "createUpdateParams", 
   defaultValue : "emptyArray",
 }, {
   /**
@@ -235,7 +234,7 @@ var allowedModelAttrs = [{
   value : "id",
 }, {
   /**
-   * Callback called when normalizing record.
+   * Callback called when normalizing record. Will be called twice. Once before serializeRelations is called another by ember-data to normalize payload.
    *
    * @property normalizeFunction
    * @type Function

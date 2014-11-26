@@ -122,15 +122,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "src/js/column-data/utils/columnDataGroupPluginMixin.js": {
-            "name": "src/js/column-data/utils/columnDataGroupPluginMixin.js",
-            "modules": {},
-            "classes": {
-                "ColumnDataGroupPluginMixin": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "src/js/column-data/utils/columnDataValueMixin.js": {
             "name": "src/js/column-data/utils/columnDataValueMixin.js",
             "modules": {},
@@ -261,10 +252,12 @@
             "name": "src/js/crud-adapter/applicationAdapter.js",
             "modules": {},
             "classes": {
+                "APIConfig": 1,
                 "ApplicationAdapter": 1
             },
             "fors": {
-                "CrudAdapter": 1
+                "CrudAdapter": 1,
+                "APIConfig": 1
             },
             "namespaces": {}
         },
@@ -292,6 +285,17 @@
             "name": "src/js/crud-adapter/createRecordWrapper.js",
             "modules": {},
             "classes": {},
+            "fors": {
+                "CrudAdapter": 1
+            },
+            "namespaces": {}
+        },
+        "src/js/crud-adapter/delayedAddToHasManyMixin.js": {
+            "name": "src/js/crud-adapter/delayedAddToHasManyMixin.js",
+            "modules": {},
+            "classes": {
+                "DelayedAddToHasManyMixin": 1
+            },
             "fors": {
                 "CrudAdapter": 1
             },
@@ -477,6 +481,15 @@
             "modules": {},
             "classes": {
                 "Form.CSVDataInputView": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/form/form-items/dynamicMultiSelectView.js": {
+            "name": "src/js/form/form-items/dynamicMultiSelectView.js",
+            "modules": {},
+            "classes": {
+                "Form.DynamicMultiSelectView": 1
             },
             "fors": {},
             "namespaces": {}
@@ -773,6 +786,7 @@
             "name": "src/js/lazy-display/lazyDisplayColumnDataGroup.js",
             "modules": {},
             "classes": {
+                "LazyDisplay.PassValueObject": 1,
                 "LazyDisplay.LazyDisplayColumnDataGroup": 1
             },
             "fors": {},
@@ -909,6 +923,132 @@
                 "tooltip": 1
             },
             "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/modal/modal-column-data/main.js": {
+            "name": "src/js/modal/modal-column-data/main.js",
+            "modules": {
+                "modal-column-data": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/modal/modal-column-data/modalBodyColumnDataMixin.js": {
+            "name": "src/js/modal/modal-column-data/modalBodyColumnDataMixin.js",
+            "modules": {},
+            "classes": {
+                "Modal.ModalBodyColumnDataMixin": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/modal/modal-column-data/modalColumnData.js": {
+            "name": "src/js/modal/modal-column-data/modalColumnData.js",
+            "modules": {},
+            "classes": {
+                "Modal.ModalColumnData": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/modal/modal-column-data/modalColumnDataGroup.js": {
+            "name": "src/js/modal/modal-column-data/modalColumnDataGroup.js",
+            "modules": {},
+            "classes": {
+                "Modal.ModalColumnDataGroup": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/modal/modal-column-data/modalFooterColumnDataMixin.js": {
+            "name": "src/js/modal/modal-column-data/modalFooterColumnDataMixin.js",
+            "modules": {},
+            "classes": {
+                "Modal.ModalFooterColumnDataMixin": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/modal/modal-column-data/modalTitleColumnDataMixin.js": {
+            "name": "src/js/modal/modal-column-data/modalTitleColumnDataMixin.js",
+            "modules": {},
+            "classes": {
+                "Modal.ModalTitleColumnDataMixin": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/modal/modal-item/main.js": {
+            "name": "src/js/modal/modal-item/main.js",
+            "modules": {
+                "modal-item": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/modal/modal-item/modalBodyView.js": {
+            "name": "src/js/modal/modal-item/modalBodyView.js",
+            "modules": {},
+            "classes": {
+                "Modal.ModalBodyView": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/modal/modal-item/modalFooterView.js": {
+            "name": "src/js/modal/modal-item/modalFooterView.js",
+            "modules": {},
+            "classes": {
+                "Modal.ModalFooterView": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/modal/modal-item/modalFormBodyView.js": {
+            "name": "src/js/modal/modal-item/modalFormBodyView.js",
+            "modules": {},
+            "classes": {
+                "Modal.ModalFormBodyView": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/modal/modal-item/modalTitleView.js": {
+            "name": "src/js/modal/modal-item/modalTitleView.js",
+            "modules": {},
+            "classes": {
+                "Modal.ModalTitleView": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/modal/formWindowView.js": {
+            "name": "src/js/modal/formWindowView.js",
+            "modules": {},
+            "classes": {
+                "Modal.FormWindowView": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/modal/main.js": {
+            "name": "src/js/modal/main.js",
+            "modules": {
+                "modal": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/js/modal/modalWindowView.js": {
+            "name": "src/js/modal/modalWindowView.js",
+            "modules": {},
+            "classes": {
+                "Modal.ModalWindowView": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -1172,7 +1312,6 @@
             },
             "classes": {
                 "ColumnDataChangeCollectorMixin": 1,
-                "ColumnDataGroupPluginMixin": 1,
                 "ColumnDataValueMixin": 1,
                 "ColumnDataValidation": 1,
                 "CSVDuplicateValidation": 1,
@@ -1184,18 +1323,21 @@
                 "ColumnData.ColumnData": 1,
                 "ColumnData.ColumnDataGroup": 1,
                 "ColumnListenerEntry": 1,
+                "APIConfig": 1,
                 "ApplicationAdapter": 1,
                 "ApplicationSerializer": 1,
-                "CrudAdaptor": 1
+                "CrudAdaptor": 1,
+                "DelayedAddToHasManyMixin": 1
             },
             "fors": {
                 "CrudAdapter": 1,
+                "APIConfig": 1,
                 "CrudAdaptor": 1
             },
             "namespaces": {},
             "tag": "module",
-            "file": "src/js/crud-adapter/applicationSerializer.js",
-            "line": 15,
+            "file": "src/js/crud-adapter/delayedAddToHasManyMixin.js",
+            "line": 7,
             "description": "Module for meta data of a record type and its properties."
         },
         "column-data-utils": {
@@ -1203,7 +1345,6 @@
             "submodules": {},
             "classes": {
                 "ColumnDataChangeCollectorMixin": 1,
-                "ColumnDataGroupPluginMixin": 1,
                 "ColumnDataValueMixin": 1
             },
             "fors": {},
@@ -1300,6 +1441,7 @@
                 "Form.FormColumnDataGroup": 1,
                 "Form.CheckBoxView": 1,
                 "Form.CSVDataInputView": 1,
+                "Form.DynamicMultiSelectView": 1,
                 "Form.DynamicSelectView": 1,
                 "Form.FileUploadView": 1,
                 "Form.GroupCheckBoxView": 1,
@@ -1332,6 +1474,7 @@
             "classes": {
                 "Form.CheckBoxView": 1,
                 "Form.CSVDataInputView": 1,
+                "Form.DynamicMultiSelectView": 1,
                 "Form.DynamicSelectView": 1,
                 "Form.FileUploadView": 1,
                 "Form.GroupCheckBoxView": 1,
@@ -1374,6 +1517,7 @@
                 "GlobalModules.DisplayTextCollapsibleView": 1,
                 "GlobalModules.DisplayTextView": 1,
                 "GlobalModules.DisplayTextWithTooltipView": 1,
+                "LazyDisplay.PassValueObject": 1,
                 "LazyDisplay.LazyDisplayColumnDataGroup": 1,
                 "LazyDisplay.LazyDisplayView": 1
             },
@@ -1544,6 +1688,69 @@
             "file": "src/js/misc/tooltips.js",
             "line": 5,
             "description": "Module for the tooltip component."
+        },
+        "modal-column-data": {
+            "name": "modal-column-data",
+            "submodules": {},
+            "classes": {
+                "Modal.ModalBodyColumnDataMixin": 1,
+                "Modal.ModalColumnData": 1,
+                "Modal.ModalColumnDataGroup": 1,
+                "Modal.ModalFooterColumnDataMixin": 1,
+                "Modal.ModalTitleColumnDataMixin": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "modal",
+            "namespace": "",
+            "file": "src/js/modal/modal-column-data/modalTitleColumnDataMixin.js",
+            "line": 6,
+            "description": "Modal items submodule."
+        },
+        "modal": {
+            "name": "modal",
+            "submodules": {
+                "modal-column-data": 1,
+                "modal-item": 1
+            },
+            "classes": {
+                "Modal.ModalBodyColumnDataMixin": 1,
+                "Modal.ModalColumnData": 1,
+                "Modal.ModalColumnDataGroup": 1,
+                "Modal.ModalFooterColumnDataMixin": 1,
+                "Modal.ModalTitleColumnDataMixin": 1,
+                "Modal.ModalBodyView": 1,
+                "Modal.ModalFooterView": 1,
+                "Modal.ModalFormBodyView": 1,
+                "Modal.ModalTitleView": 1,
+                "Modal.FormWindowView": 1,
+                "Modal.ModalWindowView": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/js/modal/modalWindowView.js",
+            "line": 5,
+            "description": "A module for a modal windows."
+        },
+        "modal-item": {
+            "name": "modal-item",
+            "submodules": {},
+            "classes": {
+                "Modal.ModalBodyView": 1,
+                "Modal.ModalFooterView": 1,
+                "Modal.ModalFormBodyView": 1,
+                "Modal.ModalTitleView": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "modal",
+            "namespace": "",
+            "file": "src/js/modal/modal-item/modalTitleView.js",
+            "line": 6,
+            "description": "Modal items submodule."
         },
         "panels": {
             "name": "panels",
@@ -1840,21 +2047,6 @@
             "description": "A mixin that is a parent of ColumnDataValueMixin that collects value changes and fires listeners on the column.",
             "submodule": "column-data-utils"
         },
-        "ColumnDataGroupPluginMixin": {
-            "name": "ColumnDataGroupPluginMixin",
-            "shortname": "ColumnDataGroupPluginMixin",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "column-data",
-            "namespace": "",
-            "file": "src/js/column-data/utils/columnDataGroupPluginMixin.js",
-            "line": 6,
-            "description": "A mixin that used by column data group extensions. It adds view lookup paths based on the 'type' and for modules based on <module>Type.",
-            "submodule": "column-data-utils"
-        },
         "ColumnDataValueMixin": {
             "name": "ColumnDataValueMixin",
             "shortname": "ColumnDataValueMixin",
@@ -2017,9 +2209,9 @@
             "line": 5,
             "description": "Entry for column listeners."
         },
-        "ApplicationAdapter": {
-            "name": "ApplicationAdapter",
-            "shortname": "ApplicationAdapter",
+        "APIConfig": {
+            "name": "APIConfig",
+            "shortname": "APIConfig",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -2028,8 +2220,8 @@
             "module": "column-data",
             "namespace": "",
             "file": "src/js/crud-adapter/applicationAdapter.js",
-            "line": 15,
-            "description": "ApplicationAdapter for CRUD adapter. Not used direcrlty."
+            "line": 12,
+            "description": "API configuration"
         },
         "CrudAdapter": {
             "name": "CrudAdapter",
@@ -2042,8 +2234,22 @@
             "module": "crud-adapter",
             "namespace": "",
             "file": "src/js/crud-adapter/main.js",
-            "line": 19,
+            "line": 20,
             "description": "Global class for crud-adapter."
+        },
+        "ApplicationAdapter": {
+            "name": "ApplicationAdapter",
+            "shortname": "ApplicationAdapter",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/crud-adapter/applicationAdapter.js",
+            "line": 89,
+            "description": "ApplicationAdapter for CRUD adapter. Not used direcrlty."
         },
         "ApplicationSerializer": {
             "name": "ApplicationSerializer",
@@ -2069,6 +2275,21 @@
             "extension_for": [],
             "module": "column-data",
             "namespace": ""
+        },
+        "DelayedAddToHasManyMixin": {
+            "name": "DelayedAddToHasManyMixin",
+            "shortname": "DelayedAddToHasManyMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "column-data",
+            "namespace": "",
+            "file": "src/js/crud-adapter/delayedAddToHasManyMixin.js",
+            "line": 7,
+            "description": "A mixin to add objects after a hasMany relation is resolved.",
+            "static": 1
         },
         "ModelWrapper": {
             "name": "ModelWrapper",
@@ -2230,6 +2451,22 @@
             "description": "Input to accept csv data. Can be uploaded from a file or entered manually. INCOMPLETE!",
             "submodule": "form-items",
             "extends": "Form.FileUploadView"
+        },
+        "Form.DynamicMultiSelectView": {
+            "name": "Form.DynamicMultiSelectView",
+            "shortname": "Form.DynamicMultiSelectView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "form",
+            "namespace": "",
+            "file": "src/js/form/form-items/dynamicMultiSelectView.js",
+            "line": 8,
+            "description": "View for a select tag with dynamic options and multiple selections.",
+            "submodule": "form-items",
+            "extends": "Form.StaticSelectView"
         },
         "Form.DynamicSelectView": {
             "name": "Form.DynamicSelectView",
@@ -2647,6 +2884,20 @@
             "submodule": "global-module-view",
             "extends": "GlobalModules.DisplayTextView"
         },
+        "LazyDisplay.PassValueObject": {
+            "name": "LazyDisplay.PassValueObject",
+            "shortname": "LazyDisplay.PassValueObject",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "global-module",
+            "namespace": "",
+            "file": "src/js/lazy-display/lazyDisplayColumnDataGroup.js",
+            "line": 6,
+            "description": "Class for each pass value entry"
+        },
         "LazyDisplay.LazyDisplayColumnDataGroup": {
             "name": "LazyDisplay.LazyDisplayColumnDataGroup",
             "shortname": "LazyDisplay.LazyDisplayColumnDataGroup",
@@ -2658,7 +2909,7 @@
             "module": "global-module",
             "namespace": "",
             "file": "src/js/lazy-display/lazyDisplayColumnDataGroup.js",
-            "line": 5,
+            "line": 37,
             "description": "A column data group for the lazy display module."
         },
         "LazyDisplay.LazyDisplayView": {
@@ -2789,6 +3040,177 @@
             "file": "src/js/misc/progress-bars.js",
             "line": 26,
             "description": "View for progress bars.\nUsed as:\n\n    {{#progress-bar maxVal=150 minVal=50 val=100 style=\"info\" animated=true striped=true}}{{val}}/{{maxVal}}{{/progress-bar}}"
+        },
+        "Modal.ModalBodyColumnDataMixin": {
+            "name": "Modal.ModalBodyColumnDataMixin",
+            "shortname": "Modal.ModalBodyColumnDataMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "modal",
+            "namespace": "",
+            "file": "src/js/modal/modal-column-data/modalBodyColumnDataMixin.js",
+            "line": 6,
+            "description": "Column Data mixin for modal body.",
+            "submodule": "modal-column-data",
+            "extends": "GlobalModules.DisplayTextColumnDataMixin"
+        },
+        "Modal.ModalColumnData": {
+            "name": "Modal.ModalColumnData",
+            "shortname": "Modal.ModalColumnData",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "modal",
+            "namespace": "",
+            "file": "src/js/modal/modal-column-data/modalColumnData.js",
+            "line": 6,
+            "description": "Column data for the modal items (title, body, footer)",
+            "submodule": "modal-column-data"
+        },
+        "Modal.ModalColumnDataGroup": {
+            "name": "Modal.ModalColumnDataGroup",
+            "shortname": "Modal.ModalColumnDataGroup",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "modal",
+            "namespace": "",
+            "file": "src/js/modal/modal-column-data/modalColumnDataGroup.js",
+            "line": 6,
+            "description": "Column data group for modal module.",
+            "submodule": "modal-column-data"
+        },
+        "Modal.ModalFooterColumnDataMixin": {
+            "name": "Modal.ModalFooterColumnDataMixin",
+            "shortname": "Modal.ModalFooterColumnDataMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "modal",
+            "namespace": "",
+            "file": "src/js/modal/modal-column-data/modalFooterColumnDataMixin.js",
+            "line": 6,
+            "description": "Column Data mixin for modal footer.",
+            "submodule": "modal-column-data",
+            "extends": "GlobalModules.DisplayTextColumnDataMixin"
+        },
+        "Modal.ModalTitleColumnDataMixin": {
+            "name": "Modal.ModalTitleColumnDataMixin",
+            "shortname": "Modal.ModalTitleColumnDataMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "modal",
+            "namespace": "",
+            "file": "src/js/modal/modal-column-data/modalTitleColumnDataMixin.js",
+            "line": 6,
+            "description": "Column Data mixin for modal title.",
+            "submodule": "modal-column-data",
+            "extends": "GlobalModules.DisplayTextColumnDataMixin"
+        },
+        "Modal.ModalBodyView": {
+            "name": "Modal.ModalBodyView",
+            "shortname": "Modal.ModalBodyView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "modal",
+            "namespace": "",
+            "file": "src/js/modal/modal-item/modalBodyView.js",
+            "line": 6,
+            "description": "Body view for modal.",
+            "submodule": "modal-item",
+            "exends": "GlobalModules.DisplayTextView"
+        },
+        "Modal.ModalFooterView": {
+            "name": "Modal.ModalFooterView",
+            "shortname": "Modal.ModalFooterView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "modal",
+            "namespace": "",
+            "file": "src/js/modal/modal-item/modalFooterView.js",
+            "line": 6,
+            "description": "Footer view for modal.",
+            "submodule": "modal-item",
+            "exends": "GlobalModules.DisplayTextView"
+        },
+        "Modal.ModalFormBodyView": {
+            "name": "Modal.ModalFormBodyView",
+            "shortname": "Modal.ModalFormBodyView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "modal",
+            "namespace": "",
+            "file": "src/js/modal/modal-item/modalFormBodyView.js",
+            "line": 7,
+            "description": "Body view for modal with form.",
+            "submodule": "modal-item",
+            "exends": "Modal.ModalBodyView"
+        },
+        "Modal.ModalTitleView": {
+            "name": "Modal.ModalTitleView",
+            "shortname": "Modal.ModalTitleView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "modal",
+            "namespace": "",
+            "file": "src/js/modal/modal-item/modalTitleView.js",
+            "line": 6,
+            "description": "Title view for modal.",
+            "submodule": "modal-item",
+            "exends": "GlobalModules.DisplayTextView"
+        },
+        "Modal.FormWindowView": {
+            "name": "Modal.FormWindowView",
+            "shortname": "Modal.FormWindowView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "modal",
+            "namespace": "",
+            "file": "src/js/modal/formWindowView.js",
+            "line": 6,
+            "description": "Modal window that encapsulates form view.",
+            "extends": "Modal.ModalWindowView"
+        },
+        "Modal.ModalWindowView": {
+            "name": "Modal.ModalWindowView",
+            "shortname": "Modal.ModalWindowView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "modal",
+            "namespace": "",
+            "file": "src/js/modal/modalWindowView.js",
+            "line": 5,
+            "description": "Base modal window."
         },
         "PanelGroup.PanelColumnData": {
             "name": "PanelGroup.PanelColumnData",
@@ -3296,50 +3718,6 @@
             "module": "array-modifier"
         },
         {
-            "file": "src/js/column-data/utils/columnDataGroupPluginMixin.js",
-            "line": 22,
-            "description": "Type of the column data group extension. Used to extract 'typeLookup' in 'lookupMap' along with 'type'.",
-            "itemtype": "property",
-            "name": "groupType",
-            "type": "String",
-            "class": "ColumnDataGroupPluginMixin",
-            "module": "column-data",
-            "submodule": "column-data-utils"
-        },
-        {
-            "file": "src/js/column-data/utils/columnDataGroupPluginMixin.js",
-            "line": 30,
-            "description": "Type of the column data group in extension. Used to extract 'typeLookup' in 'lookupMap' along with 'groupType'.",
-            "itemtype": "property",
-            "name": "type",
-            "type": "String",
-            "class": "ColumnDataGroupPluginMixin",
-            "module": "column-data",
-            "submodule": "column-data-utils"
-        },
-        {
-            "file": "src/js/column-data/utils/columnDataGroupPluginMixin.js",
-            "line": 38,
-            "description": "View lookup path extracted from 'lookupMap' using 'groupType' and 'type'.\n    lookupMap[groupType][type]",
-            "itemtype": "property",
-            "name": "typeLookup",
-            "type": "String",
-            "class": "ColumnDataGroupPluginMixin",
-            "module": "column-data",
-            "submodule": "column-data-utils"
-        },
-        {
-            "file": "src/js/column-data/utils/columnDataGroupPluginMixin.js",
-            "line": 51,
-            "description": "Array of modules present in the extension.",
-            "itemtype": "property",
-            "name": "modules",
-            "type": "Array",
-            "class": "ColumnDataGroupPluginMixin",
-            "module": "column-data",
-            "submodule": "column-data-utils"
-        },
-        {
             "file": "src/js/column-data/utils/columnDataValueMixin.js",
             "line": 20,
             "description": "Column data instance to be used to extract value.",
@@ -3390,7 +3768,7 @@
         },
         {
             "file": "src/js/column-data/utils/columnDataValueMixin.js",
-            "line": 78,
+            "line": 79,
             "description": "An alias to the value in attribute. It undergoes validations and the change will be bubbled.",
             "itemtype": "property",
             "name": "value",
@@ -3400,7 +3778,7 @@
         },
         {
             "file": "src/js/column-data/utils/columnDataValueMixin.js",
-            "line": 109,
+            "line": 110,
             "description": "Callback called when the value changes.",
             "itemtype": "method",
             "name": "valueChangeHook",
@@ -3417,7 +3795,7 @@
         },
         {
             "file": "src/js/column-data/utils/columnDataValueMixin.js",
-            "line": 135,
+            "line": 136,
             "description": "Callback called when record changes.",
             "itemtype": "method",
             "name": "recordChangeHook",
@@ -3427,7 +3805,7 @@
         },
         {
             "file": "src/js/column-data/utils/columnDataValueMixin.js",
-            "line": 142,
+            "line": 143,
             "description": "Callback called when record is removed (set to null).",
             "itemtype": "method",
             "name": "recordRemovedHook",
@@ -3437,7 +3815,7 @@
         },
         {
             "file": "src/js/column-data/utils/columnDataValueMixin.js",
-            "line": 173,
+            "line": 174,
             "description": "Parent object with mixin ColumnData.ColumnDataChangeCollectorMixin to bubble to.",
             "itemtype": "property",
             "name": "parentForBubbling",
@@ -3745,6 +4123,16 @@
         {
             "file": "src/js/column-data/columnData.js",
             "line": 95,
+            "description": "Meta data used by model module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "model",
+            "type": "Class",
+            "class": "ColumnData.ColumnData",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/column-data/columnData.js",
+            "line": 103,
             "description": "A suitable label for the attribute used in displaying in certain places.",
             "itemtype": "property",
             "name": "label",
@@ -3754,7 +4142,7 @@
         },
         {
             "file": "src/js/column-data/columnData.js",
-            "line": 103,
+            "line": 111,
             "description": "A nested child column data.",
             "itemtype": "property",
             "name": "childCol",
@@ -3766,7 +4154,7 @@
         },
         {
             "file": "src/js/column-data/columnData.js",
-            "line": 112,
+            "line": 120,
             "description": "A name for the nesting of a column data.",
             "itemtype": "property",
             "name": "childColName",
@@ -3776,7 +4164,7 @@
         },
         {
             "file": "src/js/column-data/columnData.js",
-            "line": 127,
+            "line": 135,
             "description": "A nested child column data group.",
             "itemtype": "property",
             "name": "childColGroup",
@@ -3788,7 +4176,7 @@
         },
         {
             "file": "src/js/column-data/columnData.js",
-            "line": 136,
+            "line": 144,
             "description": "A name for the nesting of a column data group.",
             "itemtype": "property",
             "name": "childColGroupName",
@@ -3879,6 +4267,16 @@
             "module": "column-data"
         },
         {
+            "file": "src/js/column-data/columnDataGroup.js",
+            "line": 84,
+            "description": "Meta data used by model module. Passed as an object while creating.",
+            "itemtype": "property",
+            "name": "model",
+            "type": "Class",
+            "class": "ColumnData.ColumnDataGroup",
+            "module": "column-data"
+        },
+        {
             "file": "src/js/column-data/columnListenerEntry.js",
             "line": 11,
             "description": "A name to uniquely identify column data.",
@@ -3908,6 +4306,62 @@
             "access": "private",
             "tagname": "",
             "class": "ColumnListenerEntry",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/crud-adapter/applicationAdapter.js",
+            "line": 20,
+            "description": "Additional end point to add based on the call type.",
+            "itemtype": "property",
+            "name": "END_POINT_MAP",
+            "class": "APIConfig",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/crud-adapter/applicationAdapter.js",
+            "line": 34,
+            "description": "Enable additional end point appending.",
+            "itemtype": "property",
+            "name": "ENABLE_END_POINT",
+            "default": "0",
+            "class": "APIConfig",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/crud-adapter/applicationAdapter.js",
+            "line": 43,
+            "description": "Boolean to eable appending of id based on call type.",
+            "itemtype": "property",
+            "name": "APPEND_ID_MAP",
+            "class": "APIConfig",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/crud-adapter/applicationAdapter.js",
+            "line": 57,
+            "description": "Enable appending of id.",
+            "itemtype": "property",
+            "name": "APPEND_ID",
+            "default": "1",
+            "class": "APIConfig",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/crud-adapter/applicationAdapter.js",
+            "line": 66,
+            "description": "http(s) method based on call type.",
+            "itemtype": "property",
+            "name": "HTTP_METHOD_MAP",
+            "class": "APIConfig",
+            "module": "column-data"
+        },
+        {
+            "file": "src/js/crud-adapter/applicationAdapter.js",
+            "line": 80,
+            "description": "Base for the api.",
+            "itemtype": "property",
+            "name": "API_BASE",
+            "class": "APIConfig",
             "module": "column-data"
         },
         {
@@ -3968,6 +4422,37 @@
             "module": "column-data"
         },
         {
+            "file": "src/js/crud-adapter/delayedAddToHasManyMixin.js",
+            "line": 47,
+            "description": "Method to add a property after the array prop loads.",
+            "itemtype": "property",
+            "name": "addToProp",
+            "class": "CrudAdapter",
+            "module": "column-data",
+            "subprops": [
+                {
+                    "name": "prop",
+                    "description": "Property of array to add to.",
+                    "type": "String"
+                },
+                {
+                    "name": "propObj",
+                    "description": "Object to add to array.",
+                    "type": "Instance"
+                }
+            ]
+        },
+        {
+            "file": "src/js/crud-adapter/delayedAddToHasManyMixin.js",
+            "line": 92,
+            "description": "Properties that are hasMany relations.",
+            "itemtype": "property",
+            "name": "arrayProps",
+            "type": "Array",
+            "class": "CrudAdapter",
+            "module": "column-data"
+        },
+        {
             "file": "src/js/crud-adapter/forceReload.js",
             "line": 8,
             "description": "Method to reload a record.",
@@ -4024,7 +4509,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 67,
+            "line": 66,
             "description": "Boolean to denote validation failure. Poppulated by form module.",
             "itemtype": "property",
             "name": "validationFailed",
@@ -4034,7 +4519,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 76,
+            "line": 75,
             "description": "Bubbled isLoading boolean from child records.",
             "itemtype": "property",
             "name": "isLoading_alias",
@@ -4044,7 +4529,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 84,
+            "line": 83,
             "description": "Bubbled isReloading boolean from child records.",
             "itemtype": "property",
             "name": "isReloading_alias",
@@ -4054,7 +4539,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 92,
+            "line": 91,
             "description": "Bubbled isSaving boolean from child records.",
             "itemtype": "property",
             "name": "isSaving_alias",
@@ -4064,7 +4549,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 100,
+            "line": 99,
             "description": "Bubbled isDirty boolean from child records.",
             "itemtype": "property",
             "name": "isDirty_alias",
@@ -4074,7 +4559,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 109,
+            "line": 108,
             "description": "Boolean to denote disabling of save based on isDirty_alias, validationFailed, isLoading_alias, isReloading_alias, isSaving_alias.",
             "itemtype": "property",
             "name": "disableSave",
@@ -4084,7 +4569,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 119,
+            "line": 118,
             "description": "Array of primary keys for the model. The values of these keys will be joined with '__' and will be assigned to 'id'.",
             "itemtype": "property",
             "name": "keys",
@@ -4095,7 +4580,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 129,
+            "line": 128,
             "description": "API end point on server for transactions for this model.",
             "itemtype": "property",
             "name": "apiName",
@@ -4107,10 +4592,10 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 141,
+            "line": 140,
             "description": "Keys needed to make delete calls. These values will be taken from either the record or 'CrudAdapter.GlobalData'",
             "itemtype": "property",
-            "name": "queryParams",
+            "name": "deleteParams",
             "type": "Array",
             "static": 1,
             "class": "ModelWrapper",
@@ -4118,7 +4603,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 151,
+            "line": 150,
             "description": "Keys needed to make find calls. These values will be taken from either the record or 'CrudAdapter.GlobalData'",
             "itemtype": "property",
             "name": "findParams",
@@ -4129,10 +4614,10 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 161,
+            "line": 160,
             "description": "Keys for extra attributes to be passed along with record attrs during create/update call. These values will be taken from either the record or 'CrudAdapter.GlobalData'",
             "itemtype": "property",
-            "name": "extraAttrs",
+            "name": "createUpdateParams",
             "type": "Array",
             "static": 1,
             "class": "ModelWrapper",
@@ -4140,7 +4625,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 171,
+            "line": 170,
             "description": "Keys from record to be deleted when making create/update call.",
             "itemtype": "property",
             "name": "ignoreFieldsOnCreateUpdate",
@@ -4151,7 +4636,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 181,
+            "line": 180,
             "description": "Keys from backup data to be deleted when data is recieved from server after a create/update call.",
             "itemtype": "property",
             "name": "ignoreFieldsOnRetrieveBackup",
@@ -4162,7 +4647,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 191,
+            "line": 190,
             "description": "Keys from record data to be deleted when data is being backed up during a find call.",
             "itemtype": "property",
             "name": "removeAttrsFromBackupOnFind",
@@ -4173,7 +4658,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 201,
+            "line": 200,
             "description": "Retain id when backing up data.",
             "itemtype": "property",
             "name": "retainId",
@@ -4185,7 +4670,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 213,
+            "line": 212,
             "description": "Use id from record while backing up (default is to use \"new\" when creating record and id when updating). Used when records are child records and are not saved directly, in which case the child records must have an id and should be used when backing up.",
             "itemtype": "property",
             "name": "useIdForBackup",
@@ -4197,7 +4682,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 225,
+            "line": 224,
             "description": "Attribute that will be paginated. Applies during findNext calls.",
             "itemtype": "property",
             "name": "paginatedAttribute",
@@ -4209,8 +4694,8 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 237,
-            "description": "Callback called when normalizing record.",
+            "line": 236,
+            "description": "Callback called when normalizing record. Will be called twice. Once before serializeRelations is called another by ember-data to normalize payload.",
             "itemtype": "property",
             "name": "normalizeFunction",
             "type": "Function",
@@ -4228,7 +4713,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 249,
+            "line": 248,
             "description": "Callback called before serializing child records.",
             "itemtype": "property",
             "name": "preSerializeRelations",
@@ -4247,7 +4732,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 261,
+            "line": 260,
             "description": "Callback called for serializing data being sent to server.",
             "itemtype": "property",
             "name": "serializeFunction",
@@ -4272,7 +4757,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 274,
+            "line": 273,
             "description": "Callback called after backing up data.",
             "itemtype": "property",
             "name": "backupData",
@@ -4303,7 +4788,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 288,
+            "line": 287,
             "description": "Callback called after retrieving backup data.",
             "itemtype": "property",
             "name": "retrieveBackup",
@@ -4334,7 +4819,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 303,
+            "line": 302,
             "description": "Function that returns an ember data model.",
             "itemtype": "method",
             "name": "createModelWrapper",
@@ -4761,7 +5246,37 @@
         },
         {
             "file": "src/js/lazy-display/lazyDisplayColumnDataGroup.js",
-            "line": 11,
+            "line": 12,
+            "description": "Value to get from for passing values.",
+            "itemtype": "property",
+            "name": "srcObj",
+            "type": "String|Instance",
+            "class": "LazyDisplay.PassValueObject",
+            "module": "global-module"
+        },
+        {
+            "file": "src/js/lazy-display/lazyDisplayColumnDataGroup.js",
+            "line": 20,
+            "description": "Key within the srcObj to get value from.",
+            "itemtype": "property",
+            "name": "srcKey",
+            "type": "String",
+            "class": "LazyDisplay.PassValueObject",
+            "module": "global-module"
+        },
+        {
+            "file": "src/js/lazy-display/lazyDisplayColumnDataGroup.js",
+            "line": 28,
+            "description": "Key in the main view to put value to.",
+            "itemtype": "property",
+            "name": "tarKey",
+            "type": "String",
+            "class": "LazyDisplay.PassValueObject",
+            "module": "global-module"
+        },
+        {
+            "file": "src/js/lazy-display/lazyDisplayColumnDataGroup.js",
+            "line": 43,
             "description": "Height of each row.",
             "itemtype": "property",
             "name": "rowHeight",
@@ -4772,7 +5287,7 @@
         },
         {
             "file": "src/js/lazy-display/lazyDisplayColumnDataGroup.js",
-            "line": 20,
+            "line": 52,
             "description": "Number of extra rows to load past the area of view.",
             "itemtype": "property",
             "name": "rowBuffer",
@@ -4783,7 +5298,7 @@
         },
         {
             "file": "src/js/lazy-display/lazyDisplayColumnDataGroup.js",
-            "line": 29,
+            "line": 61,
             "description": "Timeout after which the async-que job to load views past the area of view.",
             "itemtype": "property",
             "name": "rowLoadDelay",
@@ -4794,7 +5309,17 @@
         },
         {
             "file": "src/js/lazy-display/lazyDisplayColumnDataGroup.js",
-            "line": 41,
+            "line": 70,
+            "description": "Array of values to pass to the main view.",
+            "itemtype": "property",
+            "name": "passValues",
+            "type": "Array",
+            "class": "LazyDisplay.LazyDisplayColumnDataGroup",
+            "module": "global-module"
+        },
+        {
+            "file": "src/js/lazy-display/lazyDisplayColumnDataGroup.js",
+            "line": 78,
             "description": "View for the lazy display main which has the rows.",
             "itemtype": "property",
             "name": "lazyDisplayMainClass",
@@ -4804,7 +5329,7 @@
         },
         {
             "file": "src/js/lazy-display/lazyDisplayColumnDataGroup.js",
-            "line": 49,
+            "line": 86,
             "description": "Addtional class name for the lazyDisplayHeightWrapper view.",
             "itemtype": "property",
             "name": "lazyDisplayHeightWrapperClasses",
@@ -4814,7 +5339,7 @@
         },
         {
             "file": "src/js/lazy-display/lazyDisplayColumnDataGroup.js",
-            "line": 57,
+            "line": 94,
             "description": "View for the lazy display main which has the rows.",
             "itemtype": "property",
             "name": "lazyDisplayScrollViewClasses",
@@ -5107,7 +5632,7 @@
             "file": "src/js/misc/tooltips.js",
             "line": 13,
             "description": "Component for the tooltip.\nUsage:\n\n    {{#tool-tip title=\"Tooltip\"}}Heading{{/tool-tip}}",
-            "class": "PanelGroup.PanelColumnData",
+            "class": "Modal.ModalBodyColumnDataMixin",
             "module": "tooltip"
         },
         {
@@ -5118,7 +5643,7 @@
             "name": "animation",
             "type": "String",
             "default": "\"true\"",
-            "class": "PanelGroup.PanelColumnData",
+            "class": "Modal.ModalBodyColumnDataMixin",
             "module": "tooltip"
         },
         {
@@ -5129,7 +5654,7 @@
             "name": "placement",
             "type": "String",
             "default": "\"top\"",
-            "class": "PanelGroup.PanelColumnData",
+            "class": "Modal.ModalBodyColumnDataMixin",
             "module": "tooltip"
         },
         {
@@ -5139,7 +5664,7 @@
             "itemtype": "property",
             "name": "title",
             "type": "String",
-            "class": "PanelGroup.PanelColumnData",
+            "class": "Modal.ModalBodyColumnDataMixin",
             "module": "tooltip"
         },
         {
@@ -5150,8 +5675,282 @@
             "name": "delay",
             "type": "Number",
             "default": "0",
-            "class": "PanelGroup.PanelColumnData",
+            "class": "Modal.ModalBodyColumnDataMixin",
             "module": "tooltip"
+        },
+        {
+            "file": "src/js/modal/modal-column-data/modalColumnDataGroup.js",
+            "line": 18,
+            "description": "Type of title view.",
+            "itemtype": "property",
+            "name": "titleType",
+            "type": "String",
+            "default": "\"modalTitle\"",
+            "class": "Modal.ModalColumnDataGroup",
+            "module": "modal",
+            "submodule": "modal-column-data"
+        },
+        {
+            "file": "src/js/modal/modal-column-data/modalColumnDataGroup.js",
+            "line": 27,
+            "description": "Type of body view.",
+            "itemtype": "property",
+            "name": "bodyType",
+            "type": "String",
+            "default": "\"modalBody\"",
+            "class": "Modal.ModalColumnDataGroup",
+            "module": "modal",
+            "submodule": "modal-column-data"
+        },
+        {
+            "file": "src/js/modal/modal-column-data/modalColumnDataGroup.js",
+            "line": 36,
+            "description": "Type of footer view.",
+            "itemtype": "property",
+            "name": "footerType",
+            "type": "String",
+            "default": "\"modalFooter\"",
+            "class": "Modal.ModalColumnDataGroup",
+            "module": "modal",
+            "submodule": "modal-column-data"
+        },
+        {
+            "file": "src/js/modal/formWindowView.js",
+            "line": 13,
+            "description": "Callback called when save is successfull. 'callbackContext' is used as context.",
+            "itemtype": "method",
+            "name": "saveSuccessCallback",
+            "params": [
+                {
+                    "name": "record",
+                    "description": "",
+                    "type": "Instance"
+                },
+                {
+                    "name": "message",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "title",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Modal.FormWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/formWindowView.js",
+            "line": 23,
+            "description": "To close on success or not.",
+            "itemtype": "property",
+            "name": "closeOnSuccess",
+            "type": "Boolean",
+            "default": "true",
+            "class": "Modal.FormWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/formWindowView.js",
+            "line": 32,
+            "description": "Callback called when save fails. 'callbackContext' is used as context.",
+            "itemtype": "method",
+            "name": "saveFailureCallback",
+            "params": [
+                {
+                    "name": "record",
+                    "description": "",
+                    "type": "Instance"
+                },
+                {
+                    "name": "message",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "title",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Modal.FormWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/formWindowView.js",
+            "line": 42,
+            "description": "To close on failure or not.",
+            "itemtype": "property",
+            "name": "closeOnSuccess",
+            "type": "Boolean",
+            "default": "false",
+            "class": "Modal.FormWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/formWindowView.js",
+            "line": 51,
+            "description": "Context used to call the callbacks.",
+            "itemtype": "property",
+            "name": "callbackContext",
+            "class": "Modal.FormWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/formWindowView.js",
+            "line": 58,
+            "description": "Status of last operation.",
+            "itemtype": "property",
+            "name": "operationStatus",
+            "type": "{String}",
+            "access": "protected",
+            "tagname": "",
+            "class": "Modal.FormWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/formWindowView.js",
+            "line": 69,
+            "description": "Callback called when form editing is cancelled. 'callbackContext' is used as context.",
+            "itemtype": "method",
+            "name": "postCancelCallback",
+            "params": [
+                {
+                    "name": "record",
+                    "description": "",
+                    "type": "Instance"
+                }
+            ],
+            "class": "Modal.FormWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/modalWindowView.js",
+            "line": 13,
+            "description": "Animate modal open/close.",
+            "itemtype": "property",
+            "name": "animate",
+            "type": "Boolean",
+            "default": "true",
+            "class": "Modal.ModalWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/modalWindowView.js",
+            "line": 32,
+            "description": "Z-index of the modal window. Use this to handle stacks of modal windows.",
+            "itemtype": "property",
+            "name": "zIndex",
+            "type": "Number",
+            "default": "1000",
+            "class": "Modal.ModalWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/modalWindowView.js",
+            "line": 41,
+            "description": "Show a dark backdrop or not.",
+            "itemtype": "property",
+            "name": "backdrop",
+            "type": "String",
+            "default": "\"true\"",
+            "class": "Modal.ModalWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/modalWindowView.js",
+            "line": 50,
+            "description": "Width of the modal window.",
+            "itemtype": "property",
+            "name": "width",
+            "type": "String",
+            "default": "\"300px\"",
+            "class": "Modal.ModalWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/modalWindowView.js",
+            "line": 79,
+            "description": "Callback called when ok is pressed.",
+            "itemtype": "method",
+            "name": "onOk",
+            "class": "Modal.ModalWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/modalWindowView.js",
+            "line": 86,
+            "description": "Callback called when cancel is pressed.",
+            "itemtype": "method",
+            "name": "onCancel",
+            "class": "Modal.ModalWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/modalWindowView.js",
+            "line": 93,
+            "description": "Context to use when calling ok/cancel callbacks",
+            "itemtype": "property",
+            "name": "actionContext",
+            "default": "{the modal view}",
+            "class": "Modal.ModalWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/modalWindowView.js",
+            "line": 103,
+            "description": "Alias to disable the ok button.",
+            "itemtype": "property",
+            "name": "disableAlias",
+            "default": "{'record.disableSave'}",
+            "class": "Modal.ModalWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/modalWindowView.js",
+            "line": 181,
+            "description": "Callback called after the modal window is shown.",
+            "itemtype": "method",
+            "name": "postShowHook",
+            "class": "Modal.ModalWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/modalWindowView.js",
+            "line": 189,
+            "description": "Callback called after the modal window is hidden.",
+            "itemtype": "method",
+            "name": "postHideHook",
+            "class": "Modal.ModalWindowView",
+            "module": "modal"
+        },
+        {
+            "file": "src/js/modal/modalWindowView.js",
+            "line": 199,
+            "description": "Static method to show a modal widnow using a selector.",
+            "itemtype": "method",
+            "name": "showModalWindow",
+            "static": 1,
+            "params": [
+                {
+                    "name": "modalSelector",
+                    "description": "Selector to select the modal window.",
+                    "type": "String"
+                },
+                {
+                    "name": "hide",
+                    "description": "Pass this to hide the window.",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "A promise that will resolve after the widnow is shown.",
+                "type": "Promise"
+            },
+            "class": "Modal.ModalWindowView",
+            "module": "modal"
         },
         {
             "file": "src/js/panels/panel-column-data/panelColumnData.js",
@@ -5500,11 +6299,31 @@
         },
         {
             "message": "unknown tag: fro",
-            "line": " src/js/crud-adapter/model-wrapper.js:303"
+            "line": " src/js/crud-adapter/model-wrapper.js:302"
         },
         {
             "message": "replacing incorrect tag: returns with return",
             "line": " src/js/crud-adapter/retrieveBackup.js:9"
+        },
+        {
+            "message": "unknown tag: exends",
+            "line": " src/js/modal/modal-item/modalBodyView.js:6"
+        },
+        {
+            "message": "unknown tag: exends",
+            "line": " src/js/modal/modal-item/modalFooterView.js:6"
+        },
+        {
+            "message": "unknown tag: exends",
+            "line": " src/js/modal/modal-item/modalFormBodyView.js:7"
+        },
+        {
+            "message": "unknown tag: exends",
+            "line": " src/js/modal/modal-item/modalTitleView.js:6"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/js/modal/modalWindowView.js:199"
         },
         {
             "message": "Missing item type",

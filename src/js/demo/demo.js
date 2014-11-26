@@ -1,5 +1,6 @@
 define([
   "ember",
+  "../ember-utils",
   "./app",
   "./column-data",
   "./controllers",

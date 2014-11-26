@@ -5,7 +5,6 @@ define([
   "lib/ember-test-utils",
   "source/crud-adapter/main",
   "test/test-app",
-  "./model-setup",
 ], function(Ember, emq, Utils, EmberTests, CrudAdapter, TestApp) {
 
 return function() {

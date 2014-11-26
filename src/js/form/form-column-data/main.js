@@ -24,6 +24,7 @@ define([
     textareaInput          : FormColumnData.FormColumnData,
     staticSelect           : FormColumnData.FormColumnData,
     dynamicSelect          : FormColumnData.FormColumnData,
+    dynamicMultiSelect     : FormColumnData.FormColumnData,
     selectiveSelect        : FormColumnData.FormColumnData,
     label                  : FormColumnData.FormColumnData,
     fileUpload             : FormColumnData.FormColumnData,

@@ -15,6 +15,7 @@ define([
   "./retrieveFailure",
   "./forceReload",
   "./rollbackRecord",
+  "./delayedAddToHasManyMixin",
 ], function() {
   /**
    * Global class for crud-adapter.

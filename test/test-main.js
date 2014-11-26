@@ -12,8 +12,11 @@ requirejs([
   "test/column-data-tests/main",
   "test/array-modifier-tests/main",
   "test/timer-tests/main",
-  //"test/lazy-display-tests/main",
-  //"test/crud-adapter-tests/main",
+  "test/lazy-display-tests/main",
+  "test/crud-adapter-tests/main",
+  "test/form-tests/main",
+  "test/modal-tests/main",
+  "test/alert-unit-test",
 ], function() {
   for(var i = 10; i < arguments.length; i++) {
     arguments[i]();

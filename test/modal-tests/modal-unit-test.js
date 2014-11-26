@@ -1,6 +1,6 @@
 moduleFor("view:modal/modalWindow", "modal.js - ModalWindow", {
   setup : function() {
-    setupAppForTesting(TestApp, this.container);
+    //setupAppForTesting(TestApp, this.container);
   },
   teardown : function() {
     TestApp.reset();

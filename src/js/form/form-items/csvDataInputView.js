@@ -1,7 +1,7 @@
 define([
   "ember",
   "lib/ember-utils-core",
-  "lazy-display/main",
+  "../../lazy-display/main",
   "./fileUploadView",
   "./multipleValueMixin",
   "./multipleValue",
@@ -108,7 +108,7 @@ var CSVDataInputView = FileUploadView.FileUploadView.extend(MultipleValueMixin.M
     return valuesTransformed;
   }.property("view.values.@each.showInput", "values.@each.showInput"),
   setToValues : function(value) {
-    var columnData = this.get("columnData"), values = value.split(new RegExp(columnData.get("splitRegex")));
+    var columnData = this.get("columnData"), values = value.split(new RegExp(columnData.get("form.splitRegex")));
     //this.set("value", value);
     for(var i = 0; i < values.length;) {
       if(Ember.isEmpty(values[i])) {

@@ -14,6 +14,10 @@ module("timer : Timer", {
   },
 });
 
+function closeTo(pt, err, dur) {
+  var elapsed = new Date() - pt;
+  return elapsed >= dur - err && elapsed <= dur + err;
+}
 
 test("Sanity Test", function() {
   var runCount = 0, end = 0,
@@ -24,7 +28,7 @@ test("Sanity Test", function() {
       count : 5,
       timerCallback : function() {
         runCount++;
-        timingWasAsExpected &= Math.round( ( new Date() - d ) / 10 ) * 10 === Timer.TIMERTIMEOUT;
+        timingWasAsExpected &= closeTo(d, 20, Timer.TIMERTIMEOUT);
         d = new Date();
       },
       endCallback : function() {
@@ -51,7 +55,7 @@ test("Different period.", function() {
       timeout : 750,
       timerCallback : function() {
         runCount++;
-        timingWasAsExpected &= Math.round( ( new Date() - d ) / 10 ) * 10 === 750;
+        timingWasAsExpected &= closeTo(d, 20, 750);
         d = new Date();
       },
       endCallback : function() {

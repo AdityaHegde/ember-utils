@@ -1,7 +1,5 @@
 default:
-  - 'requirejs'
-  - 'qunit'
-  - 'yuidoc'
-  - 'concat'
-  - 'uglify'
-  - 'clean'
+  - 'concurrent:build'
+  - 'concurrent:move'
+  - 'concurrent:process'
+  - 'concurrent:clean'

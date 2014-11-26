@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/Alerts.AlertMessageComponent.html">Alerts.AlertMessageComponent</a></li>
             
+                <li><a href="../classes/APIConfig.html">APIConfig</a></li>
+            
                 <li><a href="../classes/ApplicationAdapter.html">ApplicationAdapter</a></li>
             
                 <li><a href="../classes/ApplicationSerializer.html">ApplicationSerializer</a></li>
@@ -77,8 +79,6 @@
             
                 <li><a href="../classes/ColumnDataChangeCollectorMixin.html">ColumnDataChangeCollectorMixin</a></li>
             
-                <li><a href="../classes/ColumnDataGroupPluginMixin.html">ColumnDataGroupPluginMixin</a></li>
-            
                 <li><a href="../classes/ColumnDataValidation.html">ColumnDataValidation</a></li>
             
                 <li><a href="../classes/ColumnDataValueMixin.html">ColumnDataValueMixin</a></li>
@@ -92,6 +92,8 @@
                 <li><a href="../classes/CSVDuplicateValidation.html">CSVDuplicateValidation</a></li>
             
                 <li><a href="../classes/CSVRegexValidation.html">CSVRegexValidation</a></li>
+            
+                <li><a href="../classes/DelayedAddToHasManyMixin.html">DelayedAddToHasManyMixin</a></li>
             
                 <li><a href="../classes/DragDrop.DraggableMixin.html">DragDrop.DraggableMixin</a></li>
             
@@ -112,6 +114,8 @@
                 <li><a href="../classes/Form.CSVDataInputView.html">Form.CSVDataInputView</a></li>
             
                 <li><a href="../classes/Form.DisableForCol.html">Form.DisableForCol</a></li>
+            
+                <li><a href="../classes/Form.DynamicMultiSelectView.html">Form.DynamicMultiSelectView</a></li>
             
                 <li><a href="../classes/Form.DynamicSelectView.html">Form.DynamicSelectView</a></li>
             
@@ -173,6 +177,8 @@
             
                 <li><a href="../classes/LazyDisplay.LazyDisplayView.html">LazyDisplay.LazyDisplayView</a></li>
             
+                <li><a href="../classes/LazyDisplay.PassValueObject.html">LazyDisplay.PassValueObject</a></li>
+            
                 <li><a href="../classes/ListGroup.ListColumnData.html">ListGroup.ListColumnData</a></li>
             
                 <li><a href="../classes/ListGroup.ListColumnDataGroup.html">ListGroup.ListColumnDataGroup</a></li>
@@ -180,6 +186,28 @@
                 <li><a href="../classes/ListGroup.ListGroupView.html">ListGroup.ListGroupView</a></li>
             
                 <li><a href="../classes/ListGroup.ListItemView.html">ListGroup.ListItemView</a></li>
+            
+                <li><a href="../classes/Modal.FormWindowView.html">Modal.FormWindowView</a></li>
+            
+                <li><a href="../classes/Modal.ModalBodyColumnDataMixin.html">Modal.ModalBodyColumnDataMixin</a></li>
+            
+                <li><a href="../classes/Modal.ModalBodyView.html">Modal.ModalBodyView</a></li>
+            
+                <li><a href="../classes/Modal.ModalColumnData.html">Modal.ModalColumnData</a></li>
+            
+                <li><a href="../classes/Modal.ModalColumnDataGroup.html">Modal.ModalColumnDataGroup</a></li>
+            
+                <li><a href="../classes/Modal.ModalFooterColumnDataMixin.html">Modal.ModalFooterColumnDataMixin</a></li>
+            
+                <li><a href="../classes/Modal.ModalFooterView.html">Modal.ModalFooterView</a></li>
+            
+                <li><a href="../classes/Modal.ModalFormBodyView.html">Modal.ModalFormBodyView</a></li>
+            
+                <li><a href="../classes/Modal.ModalTitleColumnDataMixin.html">Modal.ModalTitleColumnDataMixin</a></li>
+            
+                <li><a href="../classes/Modal.ModalTitleView.html">Modal.ModalTitleView</a></li>
+            
+                <li><a href="../classes/Modal.ModalWindowView.html">Modal.ModalWindowView</a></li>
             
                 <li><a href="../classes/ModelWrapper.html">ModelWrapper</a></li>
             
@@ -261,6 +289,12 @@
             
                 <li><a href="../modules/list-item.html">list-item</a></li>
             
+                <li><a href="../modules/modal.html">modal</a></li>
+            
+                <li><a href="../modules/modal-column-data.html">modal-column-data</a></li>
+            
+                <li><a href="../modules/modal-item.html">modal-item</a></li>
+            
                 <li><a href="../modules/panel-column-data.html">panel-column-data</a></li>
             
                 <li><a href="../modules/panel-views.html">panel-views</a></li>
@@ -337,7 +371,7 @@ var MultipleValue = Ember.Object.extend({
     var columnData = this.get(&quot;columnData&quot;);
     if(arguments.length &gt; 1) {
       if(!Ember.isNone(columnData)) {
-        var validation = columnData.validateValue(value, null, columnData.get(&quot;validation.eachValidations&quot;));
+        var validation = columnData.get(&quot;validation&quot;).validateValue(value, null, columnData.get(&quot;validation.eachValidations&quot;));
         if(validation[0]) {
           this.set(&quot;isInvalid&quot;, true);
         }

@@ -1,8 +1,8 @@
 define([
   "ember",
   "lib/ember-utils-core",
-  "column-data/main",
-  "crud-adapter/main",
+  "../../column-data/main",
+  "../../crud-adapter/main",
   "./textInputView",
   "./copyValuesToObject",
 ], function(Ember, Utils, ColumnData, CrudAdapter, TextInputView, CopyValuesToObject) {

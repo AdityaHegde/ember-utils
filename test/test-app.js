@@ -1,6 +1,7 @@
 define([
   "ember",
   "ember_qunit",
+  "./test-utils",
 ], function(Ember, emq) {
 
   var TestApp;
@@ -37,6 +38,11 @@ define([
         });
       }
     );
+
+    Ember.Test.registerAsyncHelper("asyncOprnWrapper", function(app, context, callback, testData) {
+      return callback.call(context, testData);
+    });
+
     TestApp.injectTestHelpers();
     setResolver(Ember.DefaultResolver.create({ namespace: TestApp }));
   });

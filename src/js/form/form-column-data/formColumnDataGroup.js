@@ -1,7 +1,7 @@
 define([
   "ember",
   "lib/ember-utils-core",
-  "global-module/main",
+  "../../global-module/main",
 ], function(Ember, Utils, GlobalModules) {
 
 /**

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ColumnDataGroupPluginMixin - Ember Utils</title>
+    <title>src/js/modal/main.js - Ember Utils</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/Alerts.AlertMessageComponent.html">Alerts.AlertMessageComponent</a></li>
             
+                <li><a href="../classes/APIConfig.html">APIConfig</a></li>
+            
                 <li><a href="../classes/ApplicationAdapter.html">ApplicationAdapter</a></li>
             
                 <li><a href="../classes/ApplicationSerializer.html">ApplicationSerializer</a></li>
@@ -77,8 +79,6 @@
             
                 <li><a href="../classes/ColumnDataChangeCollectorMixin.html">ColumnDataChangeCollectorMixin</a></li>
             
-                <li><a href="../classes/ColumnDataGroupPluginMixin.html">ColumnDataGroupPluginMixin</a></li>
-            
                 <li><a href="../classes/ColumnDataValidation.html">ColumnDataValidation</a></li>
             
                 <li><a href="../classes/ColumnDataValueMixin.html">ColumnDataValueMixin</a></li>
@@ -92,6 +92,8 @@
                 <li><a href="../classes/CSVDuplicateValidation.html">CSVDuplicateValidation</a></li>
             
                 <li><a href="../classes/CSVRegexValidation.html">CSVRegexValidation</a></li>
+            
+                <li><a href="../classes/DelayedAddToHasManyMixin.html">DelayedAddToHasManyMixin</a></li>
             
                 <li><a href="../classes/DragDrop.DraggableMixin.html">DragDrop.DraggableMixin</a></li>
             
@@ -112,6 +114,8 @@
                 <li><a href="../classes/Form.CSVDataInputView.html">Form.CSVDataInputView</a></li>
             
                 <li><a href="../classes/Form.DisableForCol.html">Form.DisableForCol</a></li>
+            
+                <li><a href="../classes/Form.DynamicMultiSelectView.html">Form.DynamicMultiSelectView</a></li>
             
                 <li><a href="../classes/Form.DynamicSelectView.html">Form.DynamicSelectView</a></li>
             
@@ -173,6 +177,8 @@
             
                 <li><a href="../classes/LazyDisplay.LazyDisplayView.html">LazyDisplay.LazyDisplayView</a></li>
             
+                <li><a href="../classes/LazyDisplay.PassValueObject.html">LazyDisplay.PassValueObject</a></li>
+            
                 <li><a href="../classes/ListGroup.ListColumnData.html">ListGroup.ListColumnData</a></li>
             
                 <li><a href="../classes/ListGroup.ListColumnDataGroup.html">ListGroup.ListColumnDataGroup</a></li>
@@ -180,6 +186,28 @@
                 <li><a href="../classes/ListGroup.ListGroupView.html">ListGroup.ListGroupView</a></li>
             
                 <li><a href="../classes/ListGroup.ListItemView.html">ListGroup.ListItemView</a></li>
+            
+                <li><a href="../classes/Modal.FormWindowView.html">Modal.FormWindowView</a></li>
+            
+                <li><a href="../classes/Modal.ModalBodyColumnDataMixin.html">Modal.ModalBodyColumnDataMixin</a></li>
+            
+                <li><a href="../classes/Modal.ModalBodyView.html">Modal.ModalBodyView</a></li>
+            
+                <li><a href="../classes/Modal.ModalColumnData.html">Modal.ModalColumnData</a></li>
+            
+                <li><a href="../classes/Modal.ModalColumnDataGroup.html">Modal.ModalColumnDataGroup</a></li>
+            
+                <li><a href="../classes/Modal.ModalFooterColumnDataMixin.html">Modal.ModalFooterColumnDataMixin</a></li>
+            
+                <li><a href="../classes/Modal.ModalFooterView.html">Modal.ModalFooterView</a></li>
+            
+                <li><a href="../classes/Modal.ModalFormBodyView.html">Modal.ModalFormBodyView</a></li>
+            
+                <li><a href="../classes/Modal.ModalTitleColumnDataMixin.html">Modal.ModalTitleColumnDataMixin</a></li>
+            
+                <li><a href="../classes/Modal.ModalTitleView.html">Modal.ModalTitleView</a></li>
+            
+                <li><a href="../classes/Modal.ModalWindowView.html">Modal.ModalWindowView</a></li>
             
                 <li><a href="../classes/ModelWrapper.html">ModelWrapper</a></li>
             
@@ -261,6 +289,12 @@
             
                 <li><a href="../modules/list-item.html">list-item</a></li>
             
+                <li><a href="../modules/modal.html">modal</a></li>
+            
+                <li><a href="../modules/modal-column-data.html">modal-column-data</a></li>
+            
+                <li><a href="../modules/modal-item.html">modal-item</a></li>
+            
                 <li><a href="../modules/panel-column-data.html">panel-column-data</a></li>
             
                 <li><a href="../modules/panel-views.html">panel-views</a></li>
@@ -316,293 +350,36 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>ColumnDataGroupPluginMixin Class</h1>
-<div class="box meta">
-    
-
-    
-
-    
-        <div class="foundat">
-            Defined in: <a href="../files/src_js_column-data_utils_columnDataGroupPluginMixin.js.html#l6"><code>src&#x2F;js&#x2F;column-data&#x2F;utils&#x2F;columnDataGroupPluginMixin.js:6</code></a>
-        </div>
-    
-
-    
-        
-            Module: <a href="../modules/column-data-utils.html">column-data-utils</a><br>
-            Parent Module: <a href="../modules/column-data.html">column-data</a>
-        
-    
-
-    
-</div>
-
-
-
-<div class="box intro">
-    <p>A mixin that used by column data group extensions. It adds view lookup paths based on the &#39;type&#39; and for modules based on <module>Type.</p>
-
-</div>
-
-
-
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
-
-        
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-        
-        
-        
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-            
-
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_groupType">groupType</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_modules">modules</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_type">type</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_typeLookup">typeLookup</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-        </div>
-
-        
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_groupType" class="property item">
-    <h3 class="name"><code>groupType</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_js_column-data_utils_columnDataGroupPluginMixin.js.html#l22"><code>src&#x2F;js&#x2F;column-data&#x2F;utils&#x2F;columnDataGroupPluginMixin.js:22</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Type of the column data group extension. Used to extract &#39;typeLookup&#39; in &#39;lookupMap&#39; along with &#39;type&#39;.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_modules" class="property item">
-    <h3 class="name"><code>modules</code></h3>
-    <span class="type">Array</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_js_column-data_utils_columnDataGroupPluginMixin.js.html#l51"><code>src&#x2F;js&#x2F;column-data&#x2F;utils&#x2F;columnDataGroupPluginMixin.js:51</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Array of modules present in the extension.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_type" class="property item">
-    <h3 class="name"><code>type</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_js_column-data_utils_columnDataGroupPluginMixin.js.html#l30"><code>src&#x2F;js&#x2F;column-data&#x2F;utils&#x2F;columnDataGroupPluginMixin.js:30</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Type of the column data group in extension. Used to extract &#39;typeLookup&#39; in &#39;lookupMap&#39; along with &#39;groupType&#39;.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_typeLookup" class="property item">
-    <h3 class="name"><code>typeLookup</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/src_js_column-data_utils_columnDataGroupPluginMixin.js.html#l38"><code>src&#x2F;js&#x2F;column-data&#x2F;utils&#x2F;columnDataGroupPluginMixin.js:38</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>View lookup path extracted from &#39;lookupMap&#39; using &#39;groupType&#39; and &#39;type&#39;.
-    lookupMap[groupType][type]</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-    </div>
+                        <h1 class="file-heading">File: src/js/modal/main.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * A module for a modal windows.
+ *
+ * @module modal
+ */
+define([
+  &quot;./modalWindowView&quot;,
+  &quot;./formWindowView&quot;,
+  &quot;./modal-item/main&quot;,
+  &quot;./modal-column-data/main&quot;,
+], function() {
+  var Modal = Ember.Namespace.create();
+  window.Modal = Modal;
+
+  for(var i = 0; i &lt; arguments.length; i++) {
+    for(var k in arguments[i]) {
+      if(arguments[i].hasOwnProperty(k)) {
+        Modal[k] = arguments[i][k];
+      }
+    }
+  }
+
+  return Modal;
+});
+
+    </pre>
 </div>
 
                     </div>

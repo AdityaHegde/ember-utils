@@ -1,7 +1,7 @@
 define([
   "ember",
   "lib/ember-utils-core",
-  "column-data/main",
+  "../../column-data/main",
 ], function(Ember, Utils, ColumnData) {
 
 /**

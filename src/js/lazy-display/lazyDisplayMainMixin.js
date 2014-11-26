@@ -113,7 +113,7 @@ var LazyDisplayMainMixin = Ember.Mixin.create(Utils.ObjectWithArrayMixin, {
         scrollLength = Math.round(scrollTop / rowHeight - rowBuffer),
         heightLength = height / rowHeight + 2*rowBuffer;
     //console.log(scrollTop + ".." + height + ".." + idx + ".." + scrollLength + ".." + heightLength + "..retval.." + 
-    //            (idx < scrollLength ? -1 : (idx >= scrollLength && idx < scrollLength + heightLength ? 0: 1)));
+    //           (idx < scrollLength ? -1 : (idx >= scrollLength && idx < scrollLength + heightLength ? 0: 1)));
     if(idx < scrollLength) return -1;
     if(idx >= scrollLength && idx < scrollLength + heightLength) return 0;
     if(idx >= scrollLength + heightLength) return 1;

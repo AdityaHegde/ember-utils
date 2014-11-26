@@ -12,6 +12,7 @@ define([
   "./panels/main",
   "./lazy-display/main",
   "./form/main",
+  "./modal/main",
   "./misc/main",
 ], function() {
 });

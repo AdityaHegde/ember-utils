@@ -9,9 +9,83 @@ var backupDataMap = backupData.backupDataMap;
 backupData = backupData.backupData;
 
 var GlobalData = Ember.Object.create();
-var endPoint = {
-  find : "get",
+/**
+ * API configuration
+ *
+ * @class APIConfig
+ * @for CrudAdapter
+ */
+var
+APIConfig = {
+  /**
+   * Additional end point to add based on the call type.
+   *
+   * @property END_POINT_MAP
+   * @for APIConfig
+   */
+  END_POINT_MAP : {
+    find    : "get",
+    findAll : "getAll",
+    create  : "create",
+    update  : "update",
+    delete  : "delete",
+  },
+
+  /**
+   * Enable additional end point appending.
+   *
+   * @property ENABLE_END_POINT
+   * @default 0
+   * @for APIConfig
+   */
+  ENABLE_END_POINT : 0,
+
+  /**
+   * Boolean to eable appending of id based on call type.
+   *
+   * @property APPEND_ID_MAP
+   * @for APIConfig
+   */
+  APPEND_ID_MAP : {
+    find    : 1,
+    findAll : 0,
+    create  : 0,
+    update  : 1,
+    delete  : 1,
+  },
+
+  /**
+   * Enable appending of id.
+   *
+   * @property APPEND_ID
+   * @default 1
+   * @for APIConfig
+   */
+  APPEND_ID : 1,
+
+  /**
+   * http(s) method based on call type.
+   *
+   * @property HTTP_METHOD_MAP
+   * @for APIConfig
+   */
+  HTTP_METHOD_MAP : {
+    find    : "GET",
+    findAll : "GET",
+    create  : "POST",
+    update  : "PUT",
+    delete  : "DELETE",
+  },
+
+  /**
+   * Base for the api.
+   *
+   * @property API_BASE
+   * @for APIConfig
+   */
+  API_BASE : "",
 };
+
 /**
  * ApplicationAdapter for CRUD adapter. Not used direcrlty.
  *
@@ -28,20 +102,20 @@ var ApplicationAdapter = DS.RESTAdapter.extend({
       for(var i = 0; i < type.ignoreFieldsOnCreateUpdate.length; i++) {
         delete query[type.ignoreFieldsOnCreateUpdate[i]];
       }
-      for(var i = 0; i < type.extraAttrs.length; i++) {
-        extraParams[type.extraAttrs[i]] = record.get(type.extraAttrs[i]) || GlobalData.get(type.extraAttrs[i]);
+      for(var i = 0; i < type.createUpdateParams.length; i++) {
+        extraParams[type.createUpdateParams[i]] = record.get(type.createUpdateParams[i]) || GlobalData.get(type.createUpdateParams[i]);
         //find a better way to handle this (primary key shudnt be sent during create request)
-        if(query[type.extraAttrs[i]] == 'all') delete query[type.extraAttrs[i]];
+        if(query[type.createUpdateParams[i]] == 'all') delete query[type.createUpdateParams[i]];
       }
       Ember.merge(query, extraParams);
       //return "data="+JSON.stringify(query);
       return query;
     }
     else {
-      for(var i = 0; i < type.queryParams.length; i++) {
-        extraParams[type.queryParams[i]] = record.get(type.queryParams[i]) || GlobalData.get(type.queryParams[i]);
+      for(var i = 0; i < type.deleteParams.length; i++) {
+        extraParams[type.deleteParams[i]] = record.get(type.deleteParams[i]) || GlobalData.get(type.deleteParams[i]);
         //find a better way to handle this (primary key shudnt be sent during create request)
-        if(query[type.queryParams[i]] == 'all') delete query[type.queryParams[i]];
+        if(query[type.deleteParams[i]] == 'all') delete query[type.deleteParams[i]];
       }
       Ember.merge(query, extraParams);
     }
@@ -59,27 +133,40 @@ var ApplicationAdapter = DS.RESTAdapter.extend({
     return query;
   },
 
-  buildURL : function(type, id) {
-    var ty = (Ember.typeOf(type) == 'string' ? type : type.apiName || type.typeKey), url = '/' + ty;
+  buildURL : function(type, query, requestType) {
+    var 
+    ty = (Ember.typeOf(type) == 'string' ? type : type.apiName || type.typeKey),
+    model = (Ember.typeOf(type) == 'string' ? type : type),
+    url = APIConfig.API_BASE + "/" + ty;
+    if(APIConfig.APPEND_ID === 1 && APIConfig.APPEND_ID_MAP[requestType] === 1) {
+      url += "/" + getId(query, model);
+    }
+    if(APIConfig.ENABLE_END_POINT === 1) {
+      url += "/" + APIConfig.END_POINT_MAP[requestType];
+    }
     return url;
   },
 
   createRecord : function(store, type, record) {
-    var data = this.serialize(record, { includeId: true });
+    var 
+    data = this.serialize(record, { includeId: true }),
+    query = this.getQueryParams(type, data, record, true);
     backupData(record, type, "create");
-    return this.ajax(this.buildURL(type)+"/create", 'POST', { data : this.getQueryParams(type, data, record, true) });
+    return this.ajax(this.buildURL(type, query, "create"), APIConfig.HTTP_METHOD_MAP.create, { data : query });
   },
 
   find : function(store, type, id) {
-    return this.ajax(this.buildURL(type, id)+"/"+endPoint.find, 'GET', { data : this.buildFindQuery(type, id, {}) });
+    var
+    query = this.buildFindQuery(type, id, {});
+    return this.ajax(this.buildURL(type, query, "find"), APIConfig.HTTP_METHOD_MAP.find, { data : query });
   },
 
   findAll : function(store, type) {
-    return this.ajax(this.buildURL(type)+"/getAll", 'GET');
+    return this.ajax(this.buildURL(type, {}, "findAll"), APIConfig.HTTP_METHOD_MAP.find);
   },
 
   findQuery : function(store, type, query) {
-    return this.ajax(this.buildURL(type)+"/getAll", 'GET', { data : query });
+    return this.ajax(this.buildURL(type, query, "findAll"), APIConfig.HTTP_METHOD_MAP.find, { data : query });
   },
 
   _findNext : function(store, type, query, id, queryType) {
@@ -88,8 +175,9 @@ var ApplicationAdapter = DS.RESTAdapter.extend({
         label = "DS: Handle Adapter#find of " + type.typeKey;
 
     return $.ajax({
+    //TODO : fix the way url built
       url : adapter.buildURL(type)+"/"+queryType,
-      method : 'GET', 
+      method : APIConfig.HTTP_METHOD_MAP.find, 
       data : { id : id, cur : Ember.get("CrudAdapter.GlobalData.cursor."+id) },
       dataType : "json",
     }).then(function(adapterPayload) {
@@ -117,21 +205,25 @@ var ApplicationAdapter = DS.RESTAdapter.extend({
   },
 
   updateRecord : function(store, type, record) {
-    var data = this.serialize(record, { includeId: true });
+    var
+    data = this.serialize(record, { includeId: true }),
+    query = this.getQueryParams(type, data, record, true);
     backupData(record, type);
-    return this.ajax(this.buildURL(type)+"/update", 'POST', { data : this.getQueryParams(type, data, record, true) });
+    return this.ajax(this.buildURL(type, query, "update"), APIConfig.HTTP_METHOD_MAP.update, { data : query });
   },
 
   deleteRecord : function(store, type, record) {
-    var data = this.serialize(record, { includeId: true }), query = {};
-    return this.ajax(this.buildURL(type)+"/delete", 'GET', { data : this.getQueryParams(type, query, record) });
+    var
+    data = this.serialize(record, { includeId: true }),
+    query = this.getQueryParams(type, {}, record);
+    return this.ajax(this.buildURL(type, query, "delete"), APIConfig.HTTP_METHOD_MAP.delete, { data : this.getQueryParams(type, query, record) });
   },
 });
 
 return {
   ApplicationAdapter : ApplicationAdapter,
   GlobalData : GlobalData,
-  endPoint : endPoint,
+  APIConfig : APIConfig,
 };
 
 });

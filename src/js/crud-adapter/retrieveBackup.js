@@ -40,9 +40,9 @@ var retrieveBackup = function(hash, type, hasId) {
         }
       }
     }, {data : data, hash : hash});
-  }
-  if(type.retrieveBackup) {
-    type.retrieveBackup(hash, type, data);
+    if(type.retrieveBackup) {
+      type.retrieveBackup(hash, type, data);
+    }
   }
   return hash;
 };

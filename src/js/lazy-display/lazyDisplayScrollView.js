@@ -7,17 +7,26 @@ var LazyDisplayScrollView = Ember.ContainerView.extend({
   init : function() {
     this._super();
     var columnDataGroup = this.get("columnDataGroup"),
-        passValuePaths = columnDataGroup.get("lazyDisplay.passValuePaths"),
-        passKeys = columnDataGroup.get("lazyDisplay.passKeys"),
+        passValues = columnDataGroup.get("lazyDisplay.passValues"),
         lazyDisplayMainData = {
           rows : this.get("rows"),
           columnDataGroup : columnDataGroup,
           lazyDisplayHeightWrapper : this.get("lazyDisplayHeightWrapper"),
         }, lazyDisplayMainObj,
         mainClass = columnDataGroup.get("lazyDisplay.lazyDisplayMainClass");
-    for(var i = 0; i < passValuePaths.length; i++) {
-      TestApp.addObserver(passValuePaths[i], this, "passValueDidChange");
-      lazyDisplayMainData[passKeys[i]] = Ember.get(passValuePaths[i]);
+    if(passValues) {
+      for(var i = 0; i < passValues.length; i++) {
+        var
+        src = passValues[i].get("srcObj"),
+        key = passValues[i].get("srcKey");
+        if(src) {
+          if(Ember.typeOf(src) === "string") {
+            src = this.get("src");
+          }
+          Ember.addObserver(src, key, this, "passValueDidChange");
+          lazyDisplayMainData[passValues[i].get("tarKey")] = src.get(key);
+        }
+      }
     }
     if(Ember.typeOf(mainClass) === "string") {
       mainClass = (this.container && this.container.lookup(mainClass)) || Ember.get(mainClass);

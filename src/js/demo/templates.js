@@ -23,6 +23,7 @@ Ember.TEMPLATES["application"] = Ember.Handlebars.compile('' +
           '<li>{{#link-to "dragdrop"}}Drag Drop{{/link-to}}</li> ' +
           '<li>{{#link-to "panels"}}Panels{{/link-to}}</li> ' +
           '<li>{{#link-to "progressbar"}}Progress Bar{{/link-to}}</li> ' +
+          '<li>{{#link-to "modal"}}Modal{{/link-to}}</li> ' +
         '</ul> ' +
       '</div><!-- /.navbar-collapse --> ' +
     '</div><!-- /.container-fluid --> ' +
@@ -61,6 +62,11 @@ Ember.TEMPLATES["progressbar"] = Ember.Handlebars.compile('' +
 
 Ember.TEMPLATES["tree"] = Ember.Handlebars.compile('' +
   '{{view "tree/node" record=model columnDataGroup=columnDataGroup}} ' +
+'');
+
+Ember.TEMPLATES["modal"] = Ember.Handlebars.compile('' +
+  '<button {{action "openModalWindow"}}>Open</button>' +
+  '{{view "modal/modalWindow" id="modal-window-test" record=this columnDataGroup=columnDataGroup}} ' +
 '');
 
 });

@@ -13,7 +13,7 @@ define([
  * @module form
  * @submodule form-items
  */
-var DynamicSelectView = StaticSelectView.StaticSelectView.extend(MultipleValueMixin.MultipleValueMixin, Utils.ObjectWithArrayMixin, {
+var DynamicSelectView = StaticSelectView.StaticSelectView.extend({
   init : function() {
     this._super();
     var columnData = this.get("columnData");
@@ -24,19 +24,20 @@ var DynamicSelectView = StaticSelectView.StaticSelectView.extend(MultipleValueMi
   hideOnEmpty : false,
 
   selectOptions : function() {
-    var columnData = this.get("columnData"), data = [], opts = [];
-    if(columnData.dataPath) {
-      data = Ember.get(columnData.dataPath) || this.get(columnData.dataPath);
+    var columnData = this.get("columnData.form"), data = [], opts = [],
+        dataPath = columnData.get("dataPath");
+    if(dataPath) {
+      data = Ember.get(dataPath) || this.get(dataPath);
     }
     else {
       data = columnData.data || [];
     }
     if(data) {
       data.forEach(function(item) {
-        opts.push(Ember.Object.create({ val : item.get(columnData.dataValCol), label : item.get(columnData.dataLabelCol)}));
+        opts.push(Ember.Object.create({ val : item.get(columnData.get("dataValCol")), label : item.get(columnData.get("dataLabelCol"))}));
       }, this);
     }
-    if(columnData.get("form.hideOnEmpty") && opts.length - columnData.get("form.hideEmptyBuffer") === 0) {
+    if(columnData.get("hideOnEmpty") && opts.length - columnData.get("hideEmptyBuffer") === 0) {
       this.set("hideOnEmpty", true);
     }
     else {
@@ -50,41 +51,6 @@ var DynamicSelectView = StaticSelectView.StaticSelectView.extend(MultipleValueMi
     this.rerender();
   },
 
-  selection : function(key, value) {
-    if(arguments.length > 1) {
-      if(this._state !== "preRender") {
-        if(this.get("columnData.form.multiple")) {
-          if(Ember.isEmpty(value[0])) {
-            //initially the selection is an array with undef as its 1st element
-            //this.set("values", []);
-          }
-          else {
-            this.set("values", value); 
-          }
-        }
-        else {
-          this.set("value", value && value.val);
-        }
-      }
-      return value;
-    }
-    else {
-      var options = this.get("selectOptions"), sel;
-      if(this.get("columnData.form.multiple")) {
-        var values = this.get("values"), columnData = this.get("columnData");
-        if(values && values.get("length")) {
-          sel = options.filter(function(e, i, a) {
-            return !!values.findBy("value", e.get("value"));
-          });
-        }
-      }
-      else {
-        sel = options.findBy("value", this.get("value"));
-      }
-      return sel;
-    }
-  }.property("view.values.@each", "values.@each"),
-
   recordChangeHook : function() {
     this._super();
     this.notifyPropertyChange("selection");
@@ -94,16 +60,19 @@ var DynamicSelectView = StaticSelectView.StaticSelectView.extend(MultipleValueMi
     this.notifyPropertyChange("selection");
   },
 
-  selectionWasAdded : function(addedSels, idxs, fromSetFunc) {
-    if(this.get("columnData.form.multiple") && !fromSetFunc) {
-      this.set("values", this.get("selection"));
+  selection : function(key, value) {
+    var columnData = this.get("columnData.form");
+    if(arguments.length > 1) {
+      this.set("value", value && columnData && value.get("val"));
+      return value;
     }
-  },
-
-  arrayProps : ["selection"],
+    else {
+      return columnData && this.get("selectOptions").findBy("val", this.get("value"));
+    }
+  }.property(),
 
   template : Ember.Handlebars.compile('{{view "select" class="form-control" content=view.selectOptions optionValuePath="content.val" optionLabelPath="content.label" ' +
-                                                      'multiple=view.columnData.form.multiple prompt=view.columnData.form.prompt selection=view.selection disabled=view.isDisabled}}'),
+                                                      'prompt=view.columnData.form.prompt selection=view.selection disabled=view.isDisabled}}'),
 });
 
 return {

@@ -117,6 +117,40 @@ EmberTests.TestCase.TestSuit.create({
         ["base", "objWithValue.value",         null,  "value is not assigned"    ],
       ]],
     ],
+  }, {
+    title : "disableValidation",
+    type : "baseTestCase",
+    testData : {},
+    testBlocks : [
+      ["assignValues", [
+        //"type", "path", "putPath", "value", "param", "valuePath"
+        ["base", "", "objWithValue",             classWithValue.create()],
+        ["base", "", "objWithValue.columnData",  ColumnData.ColumnData.create({
+          name : "vara",
+          validation : {
+            validations : [
+              {type : 0}, {type : 1, regex : "^[a-z]*$", regexFlags : "i", negate : true, invalidMessage : "Failed Regex"},
+            ],
+          },
+        })],
+        ["base", "", "objWithValue.record",      Ember.Object.create({vara : "123"})],
+      ]],
+      ["baseTestBlock", [
+        ["checkValues", [
+          //"type", "path", "value", "message"
+          ["base", "objWithValue.value",                   "123", "Get value"],
+          ["base", "objWithValue.record.validationFailed", true,  "validation failed"],
+        ]],
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "", "objWithValue.disableValidation", true],
+        ]],
+      ]],
+      ["checkValues", [
+        //"type", "path", "value", "message"
+        ["base", "objWithValue.record.validationFailed", true, "validation passed"],
+      ]],
+    ],
   }],
 });
 

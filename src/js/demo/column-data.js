@@ -183,6 +183,34 @@ DemoApp.ColumnData = [
       rowHeight : 30,
     },
   },
+  {
+    name : "modalTest",
+    columns : [{
+      name : "title",
+      label : "Title",
+      modal : {
+        moduleType : "title",
+        viewType : "modalTitle",
+      },
+    }, {
+      name : "body",
+      label : "Body",
+      modal : {
+        moduleType : "body",
+        viewType : "modalBody",
+      },
+    }, {
+      name : "footer",
+      label : "Footer",
+      modal : {
+        moduleType : "footer",
+        viewType : "modalFooter",
+        okLabel : "Ok Label",
+        cancelLabel : "Cancel Label",
+      },
+    }],
+    modal : {},
+  },
 ];
 
 });

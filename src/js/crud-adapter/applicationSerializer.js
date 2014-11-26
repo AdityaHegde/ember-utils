@@ -149,26 +149,6 @@ var ApplicationSerializer = DS.RESTSerializer.extend({
     return json;
   },
 
-  serializeHasMany : function(record, json, relationship) {
-    var key = relationship.key;
-
-    var relationshipType = DS.RelationshipChange.determineRelationshipType(record.constructor, relationship);
-
-    json[key] = record.get(key);
-    if (relationshipType === 'manyToNone' || relationshipType === 'manyToMany') {
-      json[key] = json[key].mapBy('id');
-    }
-    else if (relationshipType === 'manyToOne') {
-      json[key] = json[key].map(function(r) {
-        return this.serialize(r, {});
-      }, this);
-    }
-  },
-
-  serializeBelongsTo: function(record, json, relationship) {
-    //do nothing!
-  },
-
   typeForRoot : function(root) {
     if(/data$/.test(root)) {
       return root;

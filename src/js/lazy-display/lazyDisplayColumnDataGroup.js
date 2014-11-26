@@ -1,6 +1,38 @@
 define([
   "ember",
-], function(Ember) {
+  "lib/ember-utils-core",
+], function(Ember, Utils) {
+
+/**
+ * Class for each pass value entry
+ *
+ * @class LazyDisplay.PassValueObject
+ */
+var PassValueObject = Ember.Object.extend({
+  /**
+   * Value to get from for passing values.
+   *
+   * @property srcObj
+   * @type String|Instance
+   */
+  srcObj : null,
+
+  /**
+   * Key within the srcObj to get value from.
+   *
+   * @property srcKey
+   * @type String
+   */
+  srcKey : "",
+
+  /**
+   * Key in the main view to put value to.
+   *
+   * @property tarKey
+   * @type String
+   */
+  tarKey : "",
+});
 
 /**
  * A column data group for the lazy display module.
@@ -35,8 +67,13 @@ var LazyDisplayColumnDataGroup = Ember.Object.extend({
    */
   rowLoadDelay : 150,
 
-  passKeys : [],
-  passValuePaths : [],
+  /**
+   * Array of values to pass to the main view.
+   *
+   * @property passValues
+   * @type Array
+   */
+  passValues : Utils.hasMany(PassValueObject),
 
   /**
    * View for the lazy display main which has the rows.

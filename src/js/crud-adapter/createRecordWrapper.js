@@ -17,7 +17,9 @@ var createRecordWrapper = function(store, type, data) {
     var record = store.recordForId(type, data.id);
     record.unloadRecord();
   }
-  return store.createRecord(type, data);
+  var record = store.createRecord(type, data);
+  record.recordReady();
+  return record;
 };
 
 return {

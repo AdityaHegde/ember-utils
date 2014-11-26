@@ -34,7 +34,7 @@ DemoApp.ListgroupController = DemoApp.DemoAppController.extend({
 DemoApp.TreeController = Ember.Controller.extend({
   init : function() {
     this._super();
-    ColumnData.ColumnDataGroup.create({
+    /*ColumnData.ColumnDataGroup.create({
       name : "treeTestLeaf",
       columns : [
         {
@@ -62,9 +62,9 @@ DemoApp.TreeController = Ember.Controller.extend({
       tree : {
         nodeType : "leaf",
       },
-    });
+    });*/
   },
-  columnDataGroup : ColumnData.ColumnDataGroup.create({
+  /*columnDataGroup : ColumnData.ColumnDataGroup.create({
     columns : [
       {
         name : "name",
@@ -93,7 +93,7 @@ DemoApp.TreeController = Ember.Controller.extend({
       leftBarType : "displayTextCollapsibleGlypicon",
     },
     name : "treeTestNode",
-  }),
+  }),*/
 });
 
 DemoApp.DragdropController = DemoApp.DemoAppController.extend({
@@ -119,7 +119,14 @@ DemoApp.ProgressbarController = Ember.Controller.extend({
 });
 
 DemoApp.ModalController = DemoApp.DemoAppController.extend({
-  columnDataGroupName : "formTest",
+  columnDataGroupName : "modalTest",
+  title : "Title!!",
+
+  actions : {
+    openModalWindow : function() {
+      Modal.ModalWindowView.showModalWindow("#modal-window-test");
+    },
+  },
 });
 
 return {};

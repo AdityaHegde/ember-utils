@@ -9,7 +9,6 @@ define([
   "ember",
   "./columnDataChangeCollectorMixin",
   "./columnDataValueMixin",
-  "./columnDataGroupPluginMixin",
 ], function(Ember) {
   var mod = {};
   for(var i = 1; i < arguments.length; i++) {

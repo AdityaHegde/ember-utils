@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/js/column-data/utils/columnDataGroupPluginMixin.js - Ember Utils</title>
+    <title>APIConfig - Ember Utils</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/Alerts.AlertMessageComponent.html">Alerts.AlertMessageComponent</a></li>
             
+                <li><a href="../classes/APIConfig.html">APIConfig</a></li>
+            
                 <li><a href="../classes/ApplicationAdapter.html">ApplicationAdapter</a></li>
             
                 <li><a href="../classes/ApplicationSerializer.html">ApplicationSerializer</a></li>
@@ -77,8 +79,6 @@
             
                 <li><a href="../classes/ColumnDataChangeCollectorMixin.html">ColumnDataChangeCollectorMixin</a></li>
             
-                <li><a href="../classes/ColumnDataGroupPluginMixin.html">ColumnDataGroupPluginMixin</a></li>
-            
                 <li><a href="../classes/ColumnDataValidation.html">ColumnDataValidation</a></li>
             
                 <li><a href="../classes/ColumnDataValueMixin.html">ColumnDataValueMixin</a></li>
@@ -92,6 +92,8 @@
                 <li><a href="../classes/CSVDuplicateValidation.html">CSVDuplicateValidation</a></li>
             
                 <li><a href="../classes/CSVRegexValidation.html">CSVRegexValidation</a></li>
+            
+                <li><a href="../classes/DelayedAddToHasManyMixin.html">DelayedAddToHasManyMixin</a></li>
             
                 <li><a href="../classes/DragDrop.DraggableMixin.html">DragDrop.DraggableMixin</a></li>
             
@@ -112,6 +114,8 @@
                 <li><a href="../classes/Form.CSVDataInputView.html">Form.CSVDataInputView</a></li>
             
                 <li><a href="../classes/Form.DisableForCol.html">Form.DisableForCol</a></li>
+            
+                <li><a href="../classes/Form.DynamicMultiSelectView.html">Form.DynamicMultiSelectView</a></li>
             
                 <li><a href="../classes/Form.DynamicSelectView.html">Form.DynamicSelectView</a></li>
             
@@ -173,6 +177,8 @@
             
                 <li><a href="../classes/LazyDisplay.LazyDisplayView.html">LazyDisplay.LazyDisplayView</a></li>
             
+                <li><a href="../classes/LazyDisplay.PassValueObject.html">LazyDisplay.PassValueObject</a></li>
+            
                 <li><a href="../classes/ListGroup.ListColumnData.html">ListGroup.ListColumnData</a></li>
             
                 <li><a href="../classes/ListGroup.ListColumnDataGroup.html">ListGroup.ListColumnDataGroup</a></li>
@@ -180,6 +186,28 @@
                 <li><a href="../classes/ListGroup.ListGroupView.html">ListGroup.ListGroupView</a></li>
             
                 <li><a href="../classes/ListGroup.ListItemView.html">ListGroup.ListItemView</a></li>
+            
+                <li><a href="../classes/Modal.FormWindowView.html">Modal.FormWindowView</a></li>
+            
+                <li><a href="../classes/Modal.ModalBodyColumnDataMixin.html">Modal.ModalBodyColumnDataMixin</a></li>
+            
+                <li><a href="../classes/Modal.ModalBodyView.html">Modal.ModalBodyView</a></li>
+            
+                <li><a href="../classes/Modal.ModalColumnData.html">Modal.ModalColumnData</a></li>
+            
+                <li><a href="../classes/Modal.ModalColumnDataGroup.html">Modal.ModalColumnDataGroup</a></li>
+            
+                <li><a href="../classes/Modal.ModalFooterColumnDataMixin.html">Modal.ModalFooterColumnDataMixin</a></li>
+            
+                <li><a href="../classes/Modal.ModalFooterView.html">Modal.ModalFooterView</a></li>
+            
+                <li><a href="../classes/Modal.ModalFormBodyView.html">Modal.ModalFormBodyView</a></li>
+            
+                <li><a href="../classes/Modal.ModalTitleColumnDataMixin.html">Modal.ModalTitleColumnDataMixin</a></li>
+            
+                <li><a href="../classes/Modal.ModalTitleView.html">Modal.ModalTitleView</a></li>
+            
+                <li><a href="../classes/Modal.ModalWindowView.html">Modal.ModalWindowView</a></li>
             
                 <li><a href="../classes/ModelWrapper.html">ModelWrapper</a></li>
             
@@ -261,6 +289,12 @@
             
                 <li><a href="../modules/list-item.html">list-item</a></li>
             
+                <li><a href="../modules/modal.html">modal</a></li>
+            
+                <li><a href="../modules/modal-column-data.html">modal-column-data</a></li>
+            
+                <li><a href="../modules/modal-item.html">modal-item</a></li>
+            
                 <li><a href="../modules/panel-column-data.html">panel-column-data</a></li>
             
                 <li><a href="../modules/panel-views.html">panel-views</a></li>
@@ -316,103 +350,399 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/js/column-data/utils/columnDataGroupPluginMixin.js</h1>
+                        <h1>APIConfig Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-define([
-  &quot;ember&quot;,
-  &quot;lib/ember-utils-core&quot;,
-], function(Ember, Utils) {
+    
 
-/**
- * A mixin that used by column data group extensions. It adds view lookup paths based on the &#x27;type&#x27; and for modules based on &lt;module&gt;Type.
- *
- * @class ColumnDataGroupPluginMixin
- * @module column-data
- * @submodule column-data-utils
- */
-var ColumnDataGroupPluginMixin = Ember.Mixin.create(Utils.ObjectWithArrayMixin, {
-  init : function() {
-    this._super();
-    var arrayProps = this.get(&quot;arrayProps&quot;);
-    if(!arrayProps.contains(&quot;modules&quot;)) {
-      arrayProps.pushObject(&quot;modules&quot;);
-    }
-  },
+    
+        <div class="foundat">
+            Defined in: <a href="../files/src_js_crud-adapter_applicationAdapter.js.html#l12"><code>src&#x2F;js&#x2F;crud-adapter&#x2F;applicationAdapter.js:12</code></a>
+        </div>
+    
 
-  /**
-   * Type of the column data group extension. Used to extract &#x27;typeLookup&#x27; in &#x27;lookupMap&#x27; along with &#x27;type&#x27;.
-   *
-   * @property groupType
-   * @type String
-   */
-  groupType : null,
+    
+        
+            Module: <a href="../modules/column-data.html">column-data</a>
+        
+    
 
-  /**
-   * Type of the column data group in extension. Used to extract &#x27;typeLookup&#x27; in &#x27;lookupMap&#x27; along with &#x27;groupType&#x27;.
-   *
-   * @property type
-   * @type String
-   */
-  type : &quot;base&quot;,
+    
+</div>
 
-  /**
-   * View lookup path extracted from &#x27;lookupMap&#x27; using &#x27;groupType&#x27; and &#x27;type&#x27;.
-   *     lookupMap[groupType][type]
-   *
-   * @property typeLookup
-   * @type String
-   */
-  typeLookup : function() {
-    return this.get(&quot;lookupMap&quot;)[this.get(&quot;groupType&quot;)][this.get(&quot;type&quot;)];
-  }.property(&quot;type&quot;),
 
-  arrayProps : [&#x27;modules&#x27;],
 
-  /**
-   * Array of modules present in the extension.
-   *
-   * @property modules
-   * @type Array
-   */
-  modules : null,
+<div class="box intro">
+    <p>API configuration</p>
 
-  modulesWillBeDeleted : function(modules, idxs) {
-    for(var i = 0; i &lt; modules.length; i++) {
-      this.removeObserver(modules[i]+&quot;Type&quot;, this, &quot;moduleTypeDidChange&quot;);
-    }
-  },
-  modulesWasAdded : function(modules, idxs) {
-    for(var i = 0; i &lt; modules.length; i++) {
-      this.addObserver(modules[i]+&quot;Type&quot;, this, &quot;moduleTypeDidChange&quot;);
-      this.moduleTypeDidChange(this, modules[i]+&quot;Type&quot;);
-    }
-    this.columnsChanged();
-  },
+</div>
 
-  moduleTypeDidChange : function(obj, key) {
-    var module = key.match(/^(\w*)Type$/)[1];
-    this.set(module+&quot;Lookup&quot;, this.get(&quot;lookupMap&quot;)[module][this.get(key) || &quot;base&quot;]);
-  },
 
-  columnsChanged : function() {
-    var columns = this.get(&quot;parentObj.columns&quot;), modules = this.get(&quot;modules&quot;);
-    if(columns) {
-      for(var i = 0; i &lt; modules.length; i++) {
-        this.set(modules[i]+&quot;ColumnData&quot;, columns.findBy(this.get(&quot;groupType&quot;)+&quot;.type&quot;, modules[i]));
-      }
-    }
-  }.observes(&quot;parentObj.columns.@each.panel&quot;),
-});
 
-return {
-  ColumnDataGroupPluginMixin : ColumnDataGroupPluginMixin,
-};
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
 
-});
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
+        
+        
+    </ul>
 
-    </pre>
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property_API_BASE">API_BASE</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_APPEND_ID">APPEND_ID</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_APPEND_ID_MAP">APPEND_ID_MAP</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_ENABLE_END_POINT">ENABLE_END_POINT</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_END_POINT_MAP">END_POINT_MAP</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_HTTP_METHOD_MAP">HTTP_METHOD_MAP</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+        </div>
+
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_API_BASE" class="property item">
+    <h3 class="name"><code>API_BASE</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_js_crud-adapter_applicationAdapter.js.html#l80"><code>src&#x2F;js&#x2F;crud-adapter&#x2F;applicationAdapter.js:80</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Base for the api.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_APPEND_ID" class="property item">
+    <h3 class="name"><code>APPEND_ID</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_js_crud-adapter_applicationAdapter.js.html#l57"><code>src&#x2F;js&#x2F;crud-adapter&#x2F;applicationAdapter.js:57</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Enable appending of id.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> 1</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_APPEND_ID_MAP" class="property item">
+    <h3 class="name"><code>APPEND_ID_MAP</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_js_crud-adapter_applicationAdapter.js.html#l43"><code>src&#x2F;js&#x2F;crud-adapter&#x2F;applicationAdapter.js:43</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Boolean to eable appending of id based on call type.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_ENABLE_END_POINT" class="property item">
+    <h3 class="name"><code>ENABLE_END_POINT</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_js_crud-adapter_applicationAdapter.js.html#l34"><code>src&#x2F;js&#x2F;crud-adapter&#x2F;applicationAdapter.js:34</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Enable additional end point appending.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> 0</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_END_POINT_MAP" class="property item">
+    <h3 class="name"><code>END_POINT_MAP</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_js_crud-adapter_applicationAdapter.js.html#l20"><code>src&#x2F;js&#x2F;crud-adapter&#x2F;applicationAdapter.js:20</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Additional end point to add based on the call type.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_HTTP_METHOD_MAP" class="property item">
+    <h3 class="name"><code>HTTP_METHOD_MAP</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_js_crud-adapter_applicationAdapter.js.html#l66"><code>src&#x2F;js&#x2F;crud-adapter&#x2F;applicationAdapter.js:66</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>http(s) method based on call type.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>
