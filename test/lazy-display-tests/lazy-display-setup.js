@@ -35,7 +35,19 @@ EmberTests.TestCase.addToTestHierarchy("initLazyDisplay", EmberTests.TestCase.Te
             return value;
           }
         }.property(),
-      }),
+      });
+      TestApp.LazyDisplayTestMain = lazyDisplayMainClass;
+      testData.set("lazyDisplayRow", lazyDisplayRow);
+      testData.set("lazyDisplayDummy", lazyDisplayDummy);
+    });
+    Ember.run.later(function() {
+    }, 250);
+  },
+}), "to");
+EmberTests.TestCase.addToTestHierarchy("initLazyDisplayView", EmberTests.TestCase.TestOperation.extend({
+  run : function(testData) {
+    Ember.run(function() {
+      var
       columnDataGroup = ColumnData.ColumnDataGroup.create({
         name : "lazyDisplayTest",
         lazyDisplay : {
@@ -50,7 +62,6 @@ EmberTests.TestCase.addToTestHierarchy("initLazyDisplay", EmberTests.TestCase.Te
         },
       }),
       rows = [];
-      TestApp.LazyDisplayTestMain = lazyDisplayMainClass;
       for(var i = 0; i < 1000; i++) {
         rows.pushObject(Ember.Object.create({vara : "row"+i}));
       }
@@ -63,8 +74,6 @@ EmberTests.TestCase.addToTestHierarchy("initLazyDisplay", EmberTests.TestCase.Te
       $("#ember-testing").append("<div id='lazy-display-container' style='height:300px;position:relative;'></div>");
       lazyDisplay.appendTo("#lazy-display-container");
       testData.set("lazyDisplay", lazyDisplay);
-      testData.set("lazyDisplayRow", lazyDisplayRow);
-      testData.set("lazyDisplayDummy", lazyDisplayDummy);
       testData.set("rows", rows);
     });
     Ember.run.later(function() {

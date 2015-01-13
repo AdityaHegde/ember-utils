@@ -100,12 +100,14 @@ var ApplicationSerializer = DS.RESTSerializer.extend({
     return this._super(store, type, payload, id, requestType);
   },
 
+  /* TODO : revisit this
   extractFindNext : function(store, type, payload) {
     var id = getId(payload.result.data, type);
     payload.result.data[type.paginatedAttribute].replace(0, 0, backupDataMap[type.typeKey][id][type.paginatedAttribute]);
     delete backupDataMap[type.typeKey][id];
     return this.extractSingle(store, type, payload);
   },
+  */
 
   extractDeleteRecord : function(store, type, payload) {
     if(payload.result.status == 1) throw new Ember.Error(payload.result.message);

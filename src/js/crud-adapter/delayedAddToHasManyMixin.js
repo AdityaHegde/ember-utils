@@ -58,7 +58,7 @@ var DelayedAddToHasManyMixin = Ember.Mixin.create(Utils.ObjectWithArrayMixin, {
         propArray.pushObject(propObj);
       }
     }
-    else {
+    else if(arrayPropDelayedObjs) {
       arrayPropDelayedObjs[prop] = arrayPropDelayedObjs[prop] || [];
       if(!arrayPropDelayedObjs[prop].contains(propObj)) {
         arrayPropDelayedObjs[prop].push(propObj);
@@ -79,7 +79,7 @@ var DelayedAddToHasManyMixin = Ember.Mixin.create(Utils.ObjectWithArrayMixin, {
 
   addToContent : function(prop) {
     var arrayPropDelayedObjs = this.get("arrayPropDelayedObjs"), propArray = this.get(prop);
-    if(propArray && propArray.get("canAddObjects") && arrayPropDelayedObjs[prop]) {
+    if(propArray && propArray.get("canAddObjects") && arrayPropDelayedObjs && arrayPropDelayedObjs[prop]) {
       arrayPropDelayedObjs[prop].forEach(function(propObj) {
         if(!propArray.contains(propObj)) {
           propArray.pushObject(propObj);

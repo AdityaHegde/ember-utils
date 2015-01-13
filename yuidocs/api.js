@@ -10,6 +10,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "ArrayMod.ArrayFilterModifier",
         "ArrayMod.ArrayModController",
         "ArrayMod.ArrayModGroup",
+        "ArrayMod.ArrayModMixin",
         "ArrayMod.ArrayModifier",
         "ArrayMod.ArraySearchModifier",
         "ArrayMod.ArraySortGroup",

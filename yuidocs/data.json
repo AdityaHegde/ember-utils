@@ -104,6 +104,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/js/array-modifier/arrayModMixin.js": {
+            "name": "src/js/array-modifier/arrayModMixin.js",
+            "modules": {},
+            "classes": {
+                "ArrayMod.ArrayModMixin": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/js/array-modifier/main.js": {
             "name": "src/js/array-modifier/main.js",
             "modules": {
@@ -296,6 +305,15 @@
             "classes": {
                 "DelayedAddToHasManyMixin": 1
             },
+            "fors": {
+                "CrudAdapter": 1
+            },
+            "namespaces": {}
+        },
+        "src/js/crud-adapter/findRecordWrapper.js": {
+            "name": "src/js/crud-adapter/findRecordWrapper.js",
+            "modules": {},
+            "classes": {},
             "fors": {
                 "CrudAdapter": 1
             },
@@ -1257,12 +1275,13 @@
                 "ArrayMod.ArraySortModifier": 1,
                 "ArrayMod.TagObject": 1,
                 "ArrayMod.ArrayTagSearchModifier": 1,
-                "ArrayMod.ArrayModController": 1
+                "ArrayMod.ArrayModController": 1,
+                "ArrayMod.ArrayModMixin": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src/js/array-modifier/arrayModController.js",
+            "file": "src/js/array-modifier/arrayModMixin.js",
             "line": 9,
             "description": "Module to handle array modification like sorting, searching and filtering."
         },
@@ -2032,6 +2051,20 @@
             "line": 9,
             "description": "Array controller which will modify the array on 'content' and put it under 'arrangedContent'."
         },
+        "ArrayMod.ArrayModMixin": {
+            "name": "ArrayMod.ArrayModMixin",
+            "shortname": "ArrayMod.ArrayModMixin",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "array-modifier",
+            "namespace": "",
+            "file": "src/js/array-modifier/arrayModMixin.js",
+            "line": 9,
+            "description": "ArrayModMixin modifies array in 'arrayModSrc' and puts it in 'arrayModTar'."
+        },
         "ColumnDataChangeCollectorMixin": {
             "name": "ColumnDataChangeCollectorMixin",
             "shortname": "ColumnDataChangeCollectorMixin",
@@ -2234,7 +2267,7 @@
             "module": "crud-adapter",
             "namespace": "",
             "file": "src/js/crud-adapter/main.js",
-            "line": 20,
+            "line": 21,
             "description": "Global class for crud-adapter."
         },
         "ApplicationAdapter": {
@@ -2543,7 +2576,7 @@
             "module": "form",
             "namespace": "",
             "file": "src/js/form/form-items/imageUploadView.js",
-            "line": 7,
+            "line": 8,
             "description": "Form item to upload image.",
             "submodule": "form-items",
             "extends": "Form.FileUploadView"
@@ -3718,6 +3751,49 @@
             "module": "array-modifier"
         },
         {
+            "file": "src/js/array-modifier/arrayModMixin.js",
+            "line": 32,
+            "description": "Source array to modifiy. Defaults to 'content'.",
+            "itemtype": "property",
+            "name": "arrayModSrc",
+            "type": "String",
+            "default": "\"content\"",
+            "class": "ArrayMod.ArrayModMixin",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/array-modifier/arrayModMixin.js",
+            "line": 41,
+            "description": "Source array to modifiy. Defaults to 'arrangedContent'.",
+            "itemtype": "property",
+            "name": "arrayModTar",
+            "type": "String",
+            "default": "\"arrangedContent\"",
+            "class": "ArrayMod.ArrayModMixin",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/array-modifier/arrayModMixin.js",
+            "line": 50,
+            "description": "Array mods added to the controller.",
+            "itemtype": "property",
+            "name": "arrayMods",
+            "type": "Array",
+            "class": "ArrayMod.ArrayModMixin",
+            "module": "array-modifier"
+        },
+        {
+            "file": "src/js/array-modifier/arrayModMixin.js",
+            "line": 59,
+            "description": "Array mods groups formed by arrayMods.",
+            "itemtype": "property",
+            "name": "arrayMods",
+            "type": "Array",
+            "readonly": "",
+            "class": "ArrayMod.ArrayModMixin",
+            "module": "array-modifier"
+        },
+        {
             "file": "src/js/column-data/utils/columnDataValueMixin.js",
             "line": 20,
             "description": "Column data instance to be used to extract value.",
@@ -4453,8 +4529,35 @@
             "module": "column-data"
         },
         {
+            "file": "src/js/crud-adapter/findRecordWrapper.js",
+            "line": 6,
+            "description": "Wrapper to find record(s).",
+            "itemtype": "method",
+            "name": "findRecordWrapper",
+            "params": [
+                {
+                    "name": "store",
+                    "description": "",
+                    "type": "Instance"
+                },
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "Class|String"
+                },
+                {
+                    "name": "query",
+                    "description": "",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "class": "CrudAdapter",
+            "module": "column-data"
+        },
+        {
             "file": "src/js/crud-adapter/forceReload.js",
-            "line": 8,
+            "line": 10,
             "description": "Method to reload a record.",
             "itemtype": "method",
             "name": "forceReload",
@@ -4593,6 +4696,17 @@
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
             "line": 140,
+            "description": "Custom end points map based on request types.",
+            "itemtype": "property",
+            "name": "customApiMap",
+            "type": "Object",
+            "static": 1,
+            "class": "ModelWrapper",
+            "module": "crud-adapter"
+        },
+        {
+            "file": "src/js/crud-adapter/model-wrapper.js",
+            "line": 149,
             "description": "Keys needed to make delete calls. These values will be taken from either the record or 'CrudAdapter.GlobalData'",
             "itemtype": "property",
             "name": "deleteParams",
@@ -4603,7 +4717,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 150,
+            "line": 159,
             "description": "Keys needed to make find calls. These values will be taken from either the record or 'CrudAdapter.GlobalData'",
             "itemtype": "property",
             "name": "findParams",
@@ -4614,7 +4728,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 160,
+            "line": 169,
             "description": "Keys for extra attributes to be passed along with record attrs during create/update call. These values will be taken from either the record or 'CrudAdapter.GlobalData'",
             "itemtype": "property",
             "name": "createUpdateParams",
@@ -4625,7 +4739,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 170,
+            "line": 179,
             "description": "Keys from record to be deleted when making create/update call.",
             "itemtype": "property",
             "name": "ignoreFieldsOnCreateUpdate",
@@ -4636,7 +4750,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 180,
+            "line": 189,
             "description": "Keys from backup data to be deleted when data is recieved from server after a create/update call.",
             "itemtype": "property",
             "name": "ignoreFieldsOnRetrieveBackup",
@@ -4647,7 +4761,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 190,
+            "line": 199,
             "description": "Keys from record data to be deleted when data is being backed up during a find call.",
             "itemtype": "property",
             "name": "removeAttrsFromBackupOnFind",
@@ -4658,7 +4772,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 200,
+            "line": 209,
             "description": "Retain id when backing up data.",
             "itemtype": "property",
             "name": "retainId",
@@ -4670,7 +4784,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 212,
+            "line": 221,
             "description": "Use id from record while backing up (default is to use \"new\" when creating record and id when updating). Used when records are child records and are not saved directly, in which case the child records must have an id and should be used when backing up.",
             "itemtype": "property",
             "name": "useIdForBackup",
@@ -4682,7 +4796,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 224,
+            "line": 233,
             "description": "Attribute that will be paginated. Applies during findNext calls.",
             "itemtype": "property",
             "name": "paginatedAttribute",
@@ -4694,7 +4808,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 236,
+            "line": 245,
             "description": "Callback called when normalizing record. Will be called twice. Once before serializeRelations is called another by ember-data to normalize payload.",
             "itemtype": "property",
             "name": "normalizeFunction",
@@ -4713,7 +4827,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 248,
+            "line": 257,
             "description": "Callback called before serializing child records.",
             "itemtype": "property",
             "name": "preSerializeRelations",
@@ -4732,7 +4846,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 260,
+            "line": 269,
             "description": "Callback called for serializing data being sent to server.",
             "itemtype": "property",
             "name": "serializeFunction",
@@ -4757,7 +4871,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 273,
+            "line": 282,
             "description": "Callback called after backing up data.",
             "itemtype": "property",
             "name": "backupData",
@@ -4788,7 +4902,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 287,
+            "line": 296,
             "description": "Callback called after retrieving backup data.",
             "itemtype": "property",
             "name": "retrieveBackup",
@@ -4819,7 +4933,7 @@
         },
         {
             "file": "src/js/crud-adapter/model-wrapper.js",
-            "line": 302,
+            "line": 311,
             "description": "Function that returns an ember data model.",
             "itemtype": "method",
             "name": "createModelWrapper",
@@ -6178,11 +6292,11 @@
         {
             "file": "src/js/timer/timerObj.js",
             "line": 52,
-            "description": "Number of times to execute the job.",
+            "description": "Number of times to execute the job. -1 to execute indefinitely.",
             "itemtype": "property",
             "name": "count",
             "type": "Number",
-            "default": "0",
+            "default": "-1",
             "class": "Timer",
             "module": "timer"
         },
@@ -6201,6 +6315,15 @@
             "description": "Callback executed after the end of timer.",
             "itemtype": "method",
             "name": "endCallback",
+            "class": "Timer",
+            "module": "timer"
+        },
+        {
+            "file": "src/js/timer/timerObj.js",
+            "line": 82,
+            "description": "Stop the timer if not already competed.",
+            "itemtype": "method",
+            "name": "stopTimer",
             "class": "Timer",
             "module": "timer"
         },
@@ -6291,7 +6414,7 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/js/crud-adapter/forceReload.js:8"
+            "line": " src/js/crud-adapter/forceReload.js:10"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -6299,7 +6422,7 @@
         },
         {
             "message": "unknown tag: fro",
-            "line": " src/js/crud-adapter/model-wrapper.js:302"
+            "line": " src/js/crud-adapter/model-wrapper.js:311"
         },
         {
             "message": "replacing incorrect tag: returns with return",

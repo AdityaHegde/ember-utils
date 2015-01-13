@@ -22,6 +22,7 @@ EmberTests.TestCase.TestSuit.create({
     type : "baseTestCase",
     testBlocks : [
       ["initLazyDisplay"],
+      ["initLazyDisplayView"],
       ["baseTestBlock", [
         ["getLazyDisplayMain"],
         ["checkChildViews", [
@@ -36,6 +37,7 @@ EmberTests.TestCase.TestSuit.create({
     type : "baseTestCase",
     testBlocks : [
       ["initLazyDisplay"],
+      ["initLazyDisplayView"],
       ["baseTestBlock", [
         ["getLazyDisplayMain"],
         ["getElement"],
@@ -56,6 +58,7 @@ EmberTests.TestCase.TestSuit.create({
     type : "baseTestCase",
     testBlocks : [
       ["initLazyDisplay"],
+      ["initLazyDisplayView"],
       ["baseTestBlock", [
         ["getLazyDisplayMain"],
         ["getElement"],
@@ -81,6 +84,7 @@ EmberTests.TestCase.TestSuit.create({
     type : "baseTestCase",
     testBlocks : [
       ["initLazyDisplay"],
+      ["initLazyDisplayView"],
       ["baseTestBlock", [
         ["getLazyDisplayMain"],
         ["getElement"],
@@ -118,6 +122,7 @@ EmberTests.TestCase.TestSuit.create({
     type : "baseTestCase",
     testBlocks : [
       ["initLazyDisplay"],
+      ["initLazyDisplayView"],
       ["baseTestBlock", [
         ["getLazyDisplayMain"],
         ["getElement"],
@@ -168,6 +173,7 @@ EmberTests.TestCase.TestSuit.create({
     type : "baseTestCase",
     testBlocks : [
       ["initLazyDisplay"],
+      ["initLazyDisplayView"],
       ["baseTestBlock", [
         ["getLazyDisplayMain"],
         ["getElement"],

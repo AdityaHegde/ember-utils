@@ -137,12 +137,18 @@ var ApplicationAdapter = DS.RESTAdapter.extend({
     var 
     ty = (Ember.typeOf(type) == 'string' ? type : type.apiName || type.typeKey),
     model = (Ember.typeOf(type) == 'string' ? type : type),
-    url = APIConfig.API_BASE + "/" + ty;
-    if(APIConfig.APPEND_ID === 1 && APIConfig.APPEND_ID_MAP[requestType] === 1) {
-      url += "/" + getId(query, model);
+    url = "";
+    if(type.customApiMap) {
+      url = type.customApiMap[requestType];
     }
-    if(APIConfig.ENABLE_END_POINT === 1) {
-      url += "/" + APIConfig.END_POINT_MAP[requestType];
+    else {
+      url = APIConfig.API_BASE + "/" + ty;
+      if(APIConfig.APPEND_ID === 1 && APIConfig.APPEND_ID_MAP[requestType] === 1) {
+        url += "/" + getId(query, model);
+      }
+      if(APIConfig.ENABLE_END_POINT === 1) {
+        url += "/" + APIConfig.END_POINT_MAP[requestType];
+      }
     }
     return url;
   },
@@ -169,7 +175,8 @@ var ApplicationAdapter = DS.RESTAdapter.extend({
     return this.ajax(this.buildURL(type, query, "findAll"), APIConfig.HTTP_METHOD_MAP.find, { data : query });
   },
 
-  _findNext : function(store, type, query, id, queryType) {
+  //TODO revisit this
+  /*_findNext : function(store, type, query, id, queryType) {
     var adapter = store.adapterFor(type),
         serializer = store.serializerFor(type),
         label = "DS: Handle Adapter#find of " + type.typeKey;
@@ -203,6 +210,7 @@ var ApplicationAdapter = DS.RESTAdapter.extend({
     backupData(record, type);
     return this._findNext(record.store, type, query, getId(record, type), "getNext");
   },
+  */
 
   updateRecord : function(store, type, record) {
     var

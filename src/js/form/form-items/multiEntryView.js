@@ -19,8 +19,9 @@ var mulid = 0;
 var MultiEntryView = TextInputView.TextInputView.extend(ColumnData.ColumnDataChangeCollectorMixin, {
   childView : function() {
     var columnData = this.get("columnData");
-    return Form.TypeToCellNameMap[columnData.get("childCol").type];
-  }.property("view.columnData.childCol.type"),
+    return Form.TypeToCellNameMap[columnData.get("childCol.form.moduleType")];
+  }.property("view.columnData.childCol.form.moduleType"),
+
   template : Ember.Handlebars.compile('' +
     '<div {{bind-attr class="view.columnData.form.multiEntryContainerClass"}}>' +
     '{{#with view as outerView}}' +
@@ -47,8 +48,8 @@ var MultiEntryView = TextInputView.TextInputView.extend(ColumnData.ColumnDataCha
       '{{/each}}'+
     '{{/with}}' +
     '</div>'+
-    '<p class="tp-rules-end-msg">{{view.columnData.form.postInputText}}</p>'
-    ),
+    '<p class="tp-rules-end-msg">{{view.columnData.form.postInputText}}</p>' +
+  ''),
 
   valuesArrayDidChange : function() {
     if(this.get("record")) this.validateValue(this.get("value"));

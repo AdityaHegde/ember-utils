@@ -10,7 +10,7 @@ define([
 return function() {
 
 EmberTests.TestCase.EmberTestSuit.create({
-  suitName : "ModelWrapper",
+  suitName : "crud-adapter ModelWrapper",
   moduleFunction : "moduleForModel",
   param : "test",
   moduleOpts : {
@@ -43,9 +43,9 @@ EmberTests.TestCase.EmberTestSuit.create({
       ]],
       ["checkValues", [
         //"type", "path", "value", "message"
-        ["base", "record.isDirty",       false, "record is dirty"      ],
-        ["base", "record.isDirty_alias", false, "isDirty_alias is true"],
-        ["base", "record.disableSave",   true,  "disableSave is true"  ],
+        ["base", "record.isDirty",       false, "record is not dirty"      ],
+        ["base", "record.isDirty_alias", false, "isDirty_alias is false"],
+        ["base", "record.disableSave",   true,  "disableSave is fase"  ],
       ]],
     ],
   }, {
@@ -55,23 +55,30 @@ EmberTests.TestCase.EmberTestSuit.create({
     testBlocks : [
       ["setupStore"],
       ["baseTestBlock", [
-        ["createRecord", "testp", { vara : "test" }],
-        ["createChildRecord"],
-      ]],
-      ["checkValues", [
-        //"type", "path", "value", "message"
-        ["base", "record.isDirty",       true,  "record is dirty"      ],
-        ["base", "record.isDirty_alias", true,  "isDirty_alias is true"],
-        ["base", "record.disableSave",   false, "disableSave is false" ],
+        ["findRecord", "testp", "test"],
       ]],
       ["baseTestBlock", [
-        ["saveRecord"],
+        ["correctRecord"],
+        ["createRecord", "test", { vara : "test10" }, "rec1"],
+      ]],
+      ["baseTestBlock", [
+        ["checkValues", [
+          //"type", "path", "value", "message"
+          ["base", "record.isDirty",       false,  "record is not dirty"   ],
+          ["base", "record.isDirty_alias", false,  "isDirty_alias is false"],
+          ["base", "record.disableSave",   true,   "disableSave is true"   ],
+        ]],
+        ["correctRecord", "rec1"],
+        ["assignValues", [
+          //"type", "path", "putPath", "value", "param", "valuePath"
+          ["base", "record.tests", "", "", "push", "rec1"],
+        ]],
       ]],
       ["checkValues", [
         //"type", "path", "value", "message"
-        ["base", "record.isDirty",       false, "record is dirty"      ],
-        ["base", "record.isDirty_alias", false, "isDirty_alias is true"],
-        ["base", "record.disableSave",   true,  "disableSave is true"  ],
+        ["base", "record.isDirty",       false, "record is not dirty"  ],
+        ["base", "record.isDirty_alias", true,  "isDirty_alias is true"],
+        ["base", "record.disableSave",   false, "disableSave is false" ],
       ]],
     ],
   }],

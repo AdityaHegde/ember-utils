@@ -82,11 +82,13 @@ TestApp.Testp = CrudAdapter.createModelWrapper({
   varb : attr(),
 
   tests : hasMany("test", {async : true}),
+
+  arrayProps : ["tests"],
 }, {
   keys : ["vara"],
   apiName : "testparent",
   queryParams : ["vara"],
-});
+}, [CrudAdapter.DelayedAddToHasManyMixin]);
 EmberTests.MockjaxUtils.addMockjaxData({
   name : "testparent",
   data : [

@@ -61,6 +61,8 @@
             
                 <li><a href="../classes/ArrayMod.ArrayModifier.html">ArrayMod.ArrayModifier</a></li>
             
+                <li><a href="../classes/ArrayMod.ArrayModMixin.html">ArrayMod.ArrayModMixin</a></li>
+            
                 <li><a href="../classes/ArrayMod.ArraySearchModifier.html">ArrayMod.ArraySearchModifier</a></li>
             
                 <li><a href="../classes/ArrayMod.ArraySortGroup.html">ArrayMod.ArraySortGroup</a></li>
@@ -388,17 +390,34 @@ var FileUploadView = TextInputView.TextInputView.extend({
   },
 
   change : function(event) {
-    var files = event.originalEvent &amp;&amp; event.originalEvent.target.files, that = this, columnData = this.get(&quot;columnData&quot;);
+    var
+    files = event.originalEvent &amp;&amp; event.originalEvent.target.files, that = this,
+    columnData = this.get(&quot;columnData&quot;),
+    record = this.get(&quot;record&quot;);
     if(files &amp;&amp; files.length &gt; 0 &amp;&amp; !Ember.isEmpty(files[0])) {
-      this.set(&quot;disableBtn&quot;, &quot;disabled&quot;);
-      this.set(&quot;fileName&quot;, files[0].name);
-      EmberFile[columnData.get(&quot;method&quot;)](files[0]).then(function(data) {
-        that.postRead(data);
-        that.set(&quot;disableBtn&quot;, false);
-      }, function(message) {
-        that.postFail(message);
-        that.set(&quot;disableBtn&quot;, false);
-      });
+      record._validation = record._validation || {};
+      if(columnData.get(&quot;form.maxSize&quot;) &amp;&amp; files[0].size &gt; columnData.get(&quot;form.maxSize&quot;)) {
+        record._validation[columnData.name] = 1;
+      }
+      else {
+        delete record._validation[columnData.name];
+        this.set(&quot;disableBtn&quot;, &quot;disabled&quot;);
+        this.set(&quot;fileName&quot;, files[0].name);
+        EmberFile[columnData.get(&quot;form.method&quot;)](files[0]).then(function(data) {
+          Ember.run(function() {
+            that.postRead(data);
+            that.set(&quot;disableBtn&quot;, false);
+          });
+        }, function(message) {
+          Ember.run(function() {
+            that.postFail(message);
+            that.set(&quot;disableBtn&quot;, false);
+          });
+        });
+      }
+      this.set(&quot;invalid&quot;, Utils.hashHasKeys(record._validation));
+      record.set(&quot;validationFailed&quot;, Utils.hashHasKeys(record._validation));
+
       $(this.get(&quot;element&quot;)).find(&quot;input[type=&#x27;file&#x27;]&quot;)[0].value = &quot;&quot;;
     }
   },

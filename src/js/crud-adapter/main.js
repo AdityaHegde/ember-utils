@@ -9,6 +9,7 @@ define([
   "./applicationAdapter",
   "./applicationSerializer",
   "./createRecordWrapper",
+  "./findRecordWrapper",
   "./saveRecord",
   "./backupData",
   "./retrieveBackup",

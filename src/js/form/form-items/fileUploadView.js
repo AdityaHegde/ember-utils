@@ -32,17 +32,34 @@ var FileUploadView = TextInputView.TextInputView.extend({
   },
 
   change : function(event) {
-    var files = event.originalEvent && event.originalEvent.target.files, that = this, columnData = this.get("columnData");
+    var
+    files = event.originalEvent && event.originalEvent.target.files, that = this,
+    columnData = this.get("columnData"),
+    record = this.get("record");
     if(files && files.length > 0 && !Ember.isEmpty(files[0])) {
-      this.set("disableBtn", "disabled");
-      this.set("fileName", files[0].name);
-      EmberFile[columnData.get("method")](files[0]).then(function(data) {
-        that.postRead(data);
-        that.set("disableBtn", false);
-      }, function(message) {
-        that.postFail(message);
-        that.set("disableBtn", false);
-      });
+      record._validation = record._validation || {};
+      if(columnData.get("form.maxSize") && files[0].size > columnData.get("form.maxSize")) {
+        record._validation[columnData.name] = 1;
+      }
+      else {
+        delete record._validation[columnData.name];
+        this.set("disableBtn", "disabled");
+        this.set("fileName", files[0].name);
+        EmberFile[columnData.get("form.method")](files[0]).then(function(data) {
+          Ember.run(function() {
+            that.postRead(data);
+            that.set("disableBtn", false);
+          });
+        }, function(message) {
+          Ember.run(function() {
+            that.postFail(message);
+            that.set("disableBtn", false);
+          });
+        });
+      }
+      this.set("invalid", Utils.hashHasKeys(record._validation));
+      record.set("validationFailed", Utils.hashHasKeys(record._validation));
+
       $(this.get("element")).find("input[type='file']")[0].value = "";
     }
   },

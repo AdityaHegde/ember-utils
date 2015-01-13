@@ -81,7 +81,7 @@ var CSVDataInputView = FileUploadView.FileUploadView.extend(MultipleValueMixin.M
                                         '{{view.fileName}} ({{view.valuesCount}} {{view.columnData.form.entityPlural}})' +
                                         '<button class="btn btn-link" {{action "remove" target="view"}}>Remove</button> | ' +
                                         '<button class="btn btn-link" {{action "replace" target="view"}}>Replace</button>' +
-                                        '{{view "lazyDisplay/lazyDisplay" classNameBindings=":form-sm :csv-values-wrapper" columnDataGroup=view.columnDataGroup rows=view.valuesTransformed}}' +
+                                        '{{view "lazyDisplay/lazyDisplay" classNameBindings=":form-sm :csv-values-wrapper" columnDataGroup=view.columnData.childColGroup rows=view.valuesTransformed}}' +
                                       '{{else}}' +
                                         '{{textarea class="form-control" autofocus="view.columnData.form.autofocus" value=view.csvVal rows=view.columnData.rows cols=view.columnData.cols ' +
                                                                         'placeholder=view.columnData.form.placeholderActual maxlength=view.columnData.form.maxlength ' +
@@ -93,10 +93,6 @@ var CSVDataInputView = FileUploadView.FileUploadView.extend(MultipleValueMixin.M
                                       '<input class="hidden" type="file" name="files[]" {{bind-attr accept="view.columnData.form.accept"}}>' +
                                       ''),
 
-  /*lazyDisplayConfig : LazyDisplay.LazyDisplayConfig.create({
-    rowHeight : 28,
-    lazyDisplayMainClass : "CSVDataValues",
-  }),*/
   hasFile : false,
 
   values : Utils.hasMany(CSVEntry),
@@ -171,6 +167,7 @@ var CSVDataInputView = FileUploadView.FileUploadView.extend(MultipleValueMixin.M
 
 return {
   CSVDataInputView : CSVDataInputView,
+  CSVDataValues : CSVDataValues,
 };
 
 });

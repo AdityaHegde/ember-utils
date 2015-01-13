@@ -61,6 +61,8 @@
             
                 <li><a href="../classes/ArrayMod.ArrayModifier.html">ArrayMod.ArrayModifier</a></li>
             
+                <li><a href="../classes/ArrayMod.ArrayModMixin.html">ArrayMod.ArrayModMixin</a></li>
+            
                 <li><a href="../classes/ArrayMod.ArraySearchModifier.html">ArrayMod.ArraySearchModifier</a></li>
             
                 <li><a href="../classes/ArrayMod.ArraySortGroup.html">ArrayMod.ArraySortGroup</a></li>
@@ -358,8 +360,10 @@ define([
   &quot;ember&quot;,
   &quot;ember_data&quot;,
   &quot;./backupData&quot;,
-], function(Ember, DS, backupData) {
+  &quot;./findRecordWrapper&quot;,
+], function(Ember, DS, backupData, findRecordWrapper) {
 backupData = backupData.backupData;
+findRecordWrapper = findRecordWrapper.findRecordWrapper;
 
 /**
  * Method to reload a record.
@@ -378,7 +382,7 @@ var forceReload = function(store, type, id) {
     return record.reload();
   }
   else {
-    return store.find(type, id);
+    return findRecordWrapper(store, type, id);
   }
 };
 

@@ -61,6 +61,8 @@
             
                 <li><a href="../classes/ArrayMod.ArrayModifier.html">ArrayMod.ArrayModifier</a></li>
             
+                <li><a href="../classes/ArrayMod.ArrayModMixin.html">ArrayMod.ArrayModMixin</a></li>
+            
                 <li><a href="../classes/ArrayMod.ArraySearchModifier.html">ArrayMod.ArraySearchModifier</a></li>
             
                 <li><a href="../classes/ArrayMod.ArraySortGroup.html">ArrayMod.ArraySortGroup</a></li>
@@ -437,7 +439,7 @@ var CSVDataInputView = FileUploadView.FileUploadView.extend(MultipleValueMixin.M
                                         &#x27;{{view.fileName}} ({{view.valuesCount}} {{view.columnData.form.entityPlural}})&#x27; +
                                         &#x27;&lt;button class=&quot;btn btn-link&quot; {{action &quot;remove&quot; target=&quot;view&quot;}}&gt;Remove&lt;/button&gt; | &#x27; +
                                         &#x27;&lt;button class=&quot;btn btn-link&quot; {{action &quot;replace&quot; target=&quot;view&quot;}}&gt;Replace&lt;/button&gt;&#x27; +
-                                        &#x27;{{view &quot;lazyDisplay/lazyDisplay&quot; classNameBindings=&quot;:form-sm :csv-values-wrapper&quot; columnDataGroup=view.columnDataGroup rows=view.valuesTransformed}}&#x27; +
+                                        &#x27;{{view &quot;lazyDisplay/lazyDisplay&quot; classNameBindings=&quot;:form-sm :csv-values-wrapper&quot; columnDataGroup=view.columnData.childColGroup rows=view.valuesTransformed}}&#x27; +
                                       &#x27;{{else}}&#x27; +
                                         &#x27;{{textarea class=&quot;form-control&quot; autofocus=&quot;view.columnData.form.autofocus&quot; value=view.csvVal rows=view.columnData.rows cols=view.columnData.cols &#x27; +
                                                                         &#x27;placeholder=view.columnData.form.placeholderActual maxlength=view.columnData.form.maxlength &#x27; +
@@ -449,10 +451,6 @@ var CSVDataInputView = FileUploadView.FileUploadView.extend(MultipleValueMixin.M
                                       &#x27;&lt;input class=&quot;hidden&quot; type=&quot;file&quot; name=&quot;files[]&quot; {{bind-attr accept=&quot;view.columnData.form.accept&quot;}}&gt;&#x27; +
                                       &#x27;&#x27;),
 
-  /*lazyDisplayConfig : LazyDisplay.LazyDisplayConfig.create({
-    rowHeight : 28,
-    lazyDisplayMainClass : &quot;CSVDataValues&quot;,
-  }),*/
   hasFile : false,
 
   values : Utils.hasMany(CSVEntry),
@@ -527,6 +525,7 @@ var CSVDataInputView = FileUploadView.FileUploadView.extend(MultipleValueMixin.M
 
 return {
   CSVDataInputView : CSVDataInputView,
+  CSVDataValues : CSVDataValues,
 };
 
 });

@@ -5,6 +5,7 @@ var require = {
     lib            : "src/js/lib",
     jquery         : "src/js/lib/jquery-2.1.1",
     jquery_mockjax : "src/js/lib/jquery.mockjax",
+    jquery_ui      : "src/js/lib/jquery-ui",
     handlebars     : "src/js/lib/handlebars",
     bootstrap      : "src/js/lib/bootstrap",
     ember          : "src/js/lib/ember",
@@ -13,6 +14,7 @@ var require = {
   },
   shim : {
     jquery_mockjax : [ "jquery" ],
+    jquery_ui : [ "jquery" ],
     bootstrap : [ "jquery" ],
     ember : {
       deps : [ "jquery", "handlebars"],

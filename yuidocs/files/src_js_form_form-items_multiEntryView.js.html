@@ -61,6 +61,8 @@
             
                 <li><a href="../classes/ArrayMod.ArrayModifier.html">ArrayMod.ArrayModifier</a></li>
             
+                <li><a href="../classes/ArrayMod.ArrayModMixin.html">ArrayMod.ArrayModMixin</a></li>
+            
                 <li><a href="../classes/ArrayMod.ArraySearchModifier.html">ArrayMod.ArraySearchModifier</a></li>
             
                 <li><a href="../classes/ArrayMod.ArraySortGroup.html">ArrayMod.ArraySortGroup</a></li>
@@ -375,8 +377,9 @@ var mulid = 0;
 var MultiEntryView = TextInputView.TextInputView.extend(ColumnData.ColumnDataChangeCollectorMixin, {
   childView : function() {
     var columnData = this.get(&quot;columnData&quot;);
-    return Form.TypeToCellNameMap[columnData.get(&quot;childCol&quot;).type];
-  }.property(&quot;view.columnData.childCol.type&quot;),
+    return Form.TypeToCellNameMap[columnData.get(&quot;childCol.form.moduleType&quot;)];
+  }.property(&quot;view.columnData.childCol.form.moduleType&quot;),
+
   template : Ember.Handlebars.compile(&#x27;&#x27; +
     &#x27;&lt;div {{bind-attr class=&quot;view.columnData.form.multiEntryContainerClass&quot;}}&gt;&#x27; +
     &#x27;{{#with view as outerView}}&#x27; +
@@ -403,8 +406,8 @@ var MultiEntryView = TextInputView.TextInputView.extend(ColumnData.ColumnDataCha
       &#x27;{{/each}}&#x27;+
     &#x27;{{/with}}&#x27; +
     &#x27;&lt;/div&gt;&#x27;+
-    &#x27;&lt;p class=&quot;tp-rules-end-msg&quot;&gt;{{view.columnData.form.postInputText}}&lt;/p&gt;&#x27;
-    ),
+    &#x27;&lt;p class=&quot;tp-rules-end-msg&quot;&gt;{{view.columnData.form.postInputText}}&lt;/p&gt;&#x27; +
+  &#x27;&#x27;),
 
   valuesArrayDidChange : function() {
     if(this.get(&quot;record&quot;)) this.validateValue(this.get(&quot;value&quot;));

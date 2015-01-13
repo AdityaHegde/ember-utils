@@ -138,6 +138,15 @@ var allowedModelAttrs = [{
   value : "data/generic",
 }, {
   /**
+   * Custom end points map based on request types.
+   *
+   * @property customApiMap
+   * @type Object
+   * @static
+   */
+  attr : "customApiMap",
+}, {
+  /**
    * Keys needed to make delete calls. These values will be taken from either the record or 'CrudAdapter.GlobalData'
    *
    * @property deleteParams

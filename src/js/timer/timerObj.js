@@ -50,13 +50,13 @@ var TimerObj = Ember.Object.extend({
   ticks : 1,
 
   /**
-   * Number of times to execute the job.
+   * Number of times to execute the job. -1 to execute indefinitely.
    *
    * @property count
    * @type Number
-   * @default 0
+   * @default -1
    */
-  count : 0,
+  count : -1,
 
   /**
    * Callback executed every period. The job goes here.
@@ -78,6 +78,15 @@ var TimerObj = Ember.Object.extend({
   promise : null,
   resolve : null,
   reject : null,
+
+  /**
+   * Stop the timer if not already competed.
+   *
+   * @method stopTimer
+   */
+  stopTimer : function() {
+    this.set("count", 0);
+  },
 });
 
 var timerFunction = function() {
@@ -90,12 +99,14 @@ var timerFunction = function() {
       for(var i = 0; i < timers.length;) {
         var timer = timers[i];
         timer.decrementProperty("ticks");
-        if(timer.get("ticks") === 0) {
+        if(timer.get("count") !== 0 && timer.get("ticks") === 0) {
           timer.set("ticks", Math.ceil(timer.get("timeout") / TimerConsts.TIMERTIMEOUT));
           timer.timerCallback();
-          timer.decrementProperty("count");
+          if(timer.get("count") > 0) {
+            timer.decrementProperty("count");
+          }
         }
-        if(timer.get("count") <= 0) {
+        if(timer.get("count") === 0) {
           timers.removeAt(i);
           timer.endCallback();
           timer.get("resolve")();

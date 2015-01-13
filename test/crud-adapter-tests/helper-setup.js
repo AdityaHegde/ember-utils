@@ -26,13 +26,16 @@ EmberTests.TestCase.addToTestHierarchy("createRecord", EmberTests.TestCase.TestO
 }), "to");
 EmberTests.TestCase.addToTestHierarchy("findRecord", EmberTests.TestCase.TestOperation.extend({
   run : function(testData) {
-    testData.set(this.get("attr3"), testData.get("store").find(this.get("attr1"), this.get("attr2")));
+    testData.set(this.get("attr3"), CrudAdapter.findRecordWrapper(testData.get("store"), this.get("attr1"), this.get("attr2")));
   },
   attr3 : "record",
 }), "to");
 EmberTests.TestCase.addToTestHierarchy("correctRecord", EmberTests.TestCase.TestOperation.extend({
   run : function(testData) {
-    testData.set(this.get("attr1"), testData.get(this.get("attr1")).content);
+    var
+    rec = testData.get(this.get("attr1")),
+    content = rec && (rec.content || rec);
+    testData.set(this.get("attr1"), content);
   },
   attr1 : "record",
 }), "to");
@@ -44,18 +47,21 @@ EmberTests.TestCase.addToTestHierarchy("deleteRecord", EmberTests.TestCase.TestO
 }), "to");
 EmberTests.TestCase.addToTestHierarchy("saveRecord", EmberTests.TestCase.TestOperation.extend({
   run : function(testData) {
-    CrudAdapter.saveRecord(testData.get("record")).then(function() {
+    var rec = testData.get(this.get("attr1"));
+    CrudAdapter.saveRecord(rec).then(function() {
       testData.set("savePassed", true);
     }, function(message) {
       testData.set("failureMessage", message);
-      CrudAdapter.retrieveFailure(testData.get("record"));
+      CrudAdapter.retrieveFailure(rec);
     });
   },
+  attr1 : "record",
 }), "to");
 EmberTests.TestCase.addToTestHierarchy("rollbackRecord", EmberTests.TestCase.TestOperation.extend({
   run : function(testData) {
-    CrudAdapter.rollbackRecord(testData.get("record"));
+    CrudAdapter.rollbackRecord(testData.get(this.get("attr1")));
   },
+  attr1 : "record",
 }), "to");
 EmberTests.TestCase.addToTestHierarchy("createChildRecord", EmberTests.TestCase.AsyncOperation.extend({
   asyncRun : function(testData) {

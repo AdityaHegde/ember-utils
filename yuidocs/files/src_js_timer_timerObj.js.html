@@ -61,6 +61,8 @@
             
                 <li><a href="../classes/ArrayMod.ArrayModifier.html">ArrayMod.ArrayModifier</a></li>
             
+                <li><a href="../classes/ArrayMod.ArrayModMixin.html">ArrayMod.ArrayModMixin</a></li>
+            
                 <li><a href="../classes/ArrayMod.ArraySearchModifier.html">ArrayMod.ArraySearchModifier</a></li>
             
                 <li><a href="../classes/ArrayMod.ArraySortGroup.html">ArrayMod.ArraySortGroup</a></li>
@@ -406,13 +408,13 @@ var TimerObj = Ember.Object.extend({
   ticks : 1,
 
   /**
-   * Number of times to execute the job.
+   * Number of times to execute the job. -1 to execute indefinitely.
    *
    * @property count
    * @type Number
-   * @default 0
+   * @default -1
    */
-  count : 0,
+  count : -1,
 
   /**
    * Callback executed every period. The job goes here.
@@ -434,6 +436,15 @@ var TimerObj = Ember.Object.extend({
   promise : null,
   resolve : null,
   reject : null,
+
+  /**
+   * Stop the timer if not already competed.
+   *
+   * @method stopTimer
+   */
+  stopTimer : function() {
+    this.set(&quot;count&quot;, 0);
+  },
 });
 
 var timerFunction = function() {
@@ -446,12 +457,14 @@ var timerFunction = function() {
       for(var i = 0; i &lt; timers.length;) {
         var timer = timers[i];
         timer.decrementProperty(&quot;ticks&quot;);
-        if(timer.get(&quot;ticks&quot;) === 0) {
+        if(timer.get(&quot;count&quot;) !== 0 &amp;&amp; timer.get(&quot;ticks&quot;) === 0) {
           timer.set(&quot;ticks&quot;, Math.ceil(timer.get(&quot;timeout&quot;) / TimerConsts.TIMERTIMEOUT));
           timer.timerCallback();
-          timer.decrementProperty(&quot;count&quot;);
+          if(timer.get(&quot;count&quot;) &gt; 0) {
+            timer.decrementProperty(&quot;count&quot;);
+          }
         }
-        if(timer.get(&quot;count&quot;) &lt;= 0) {
+        if(timer.get(&quot;count&quot;) === 0) {
           timers.removeAt(i);
           timer.endCallback();
           timer.get(&quot;resolve&quot;)();

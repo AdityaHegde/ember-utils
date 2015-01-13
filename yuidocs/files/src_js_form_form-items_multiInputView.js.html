@@ -61,6 +61,8 @@
             
                 <li><a href="../classes/ArrayMod.ArrayModifier.html">ArrayMod.ArrayModifier</a></li>
             
+                <li><a href="../classes/ArrayMod.ArrayModMixin.html">ArrayMod.ArrayModMixin</a></li>
+            
                 <li><a href="../classes/ArrayMod.ArraySearchModifier.html">ArrayMod.ArraySearchModifier</a></li>
             
                 <li><a href="../classes/ArrayMod.ArraySortGroup.html">ArrayMod.ArraySortGroup</a></li>
@@ -381,7 +383,7 @@ var MultiInputView = Ember.View.extend(MultiColumnMixin.MultiColumnMixin, Column
     }
   }.property(),
 
-  columnDataGroup : Ember.computed.alias(&quot;columnData.childColumnDataGroup&quot;),
+  columnDataGroup : Ember.computed.alias(&quot;columnData.childColGroup&quot;),
 });
 
 return {

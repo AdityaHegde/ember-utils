@@ -73,7 +73,7 @@ var ColumnDataChangeCollectorMixin = Ember.Mixin.create({
       }
       else {
         for(var i = 0; i < existingViews.length; i++) {
-          existingViews[i].colValueChanged(Ember.Object.create({name : listenColName, key : listenColName}), null, null);
+          existingViews[i].listenedColumnChanged(Ember.Object.create({name : listenColName, key : listenColName}), null, null);
         }
       }
     }

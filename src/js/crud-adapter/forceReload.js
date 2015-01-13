@@ -2,8 +2,10 @@ define([
   "ember",
   "ember_data",
   "./backupData",
-], function(Ember, DS, backupData) {
+  "./findRecordWrapper",
+], function(Ember, DS, backupData, findRecordWrapper) {
 backupData = backupData.backupData;
+findRecordWrapper = findRecordWrapper.findRecordWrapper;
 
 /**
  * Method to reload a record.
@@ -22,7 +24,7 @@ var forceReload = function(store, type, id) {
     return record.reload();
   }
   else {
-    return store.find(type, id);
+    return findRecordWrapper(store, type, id);
   }
 };
 

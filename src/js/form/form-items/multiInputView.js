@@ -25,7 +25,7 @@ var MultiInputView = Ember.View.extend(MultiColumnMixin.MultiColumnMixin, Column
     }
   }.property(),
 
-  columnDataGroup : Ember.computed.alias("columnData.childColumnDataGroup"),
+  columnDataGroup : Ember.computed.alias("columnData.childColGroup"),
 });
 
 return {

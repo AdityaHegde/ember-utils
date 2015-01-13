@@ -61,6 +61,8 @@
             
                 <li><a href="../classes/ArrayMod.ArrayModifier.html">ArrayMod.ArrayModifier</a></li>
             
+                <li><a href="../classes/ArrayMod.ArrayModMixin.html">ArrayMod.ArrayModMixin</a></li>
+            
                 <li><a href="../classes/ArrayMod.ArraySearchModifier.html">ArrayMod.ArraySearchModifier</a></li>
             
                 <li><a href="../classes/ArrayMod.ArraySortGroup.html">ArrayMod.ArraySortGroup</a></li>
@@ -369,8 +371,15 @@ define([
  * @submodule form-items
  */
 var GroupCheckBoxView = TextInputView.TextInputView.extend({
-  template : Ember.Handlebars.compile(&#x27;{{#each view.newCheckList}}&lt;div {{bind-attr class=&quot;checkbox col-md-4 view.columnData.form.displayInline:checkbox-inline&quot;}}&gt;&#x27;
-    + &#x27;&lt;label&gt;{{view &quot;checkbox&quot; checked=this.checked disabled=view.isDisabled}}&lt;label&gt;&lt;/label&gt; {{this.checkboxLabel}}&lt;/label&gt;&lt;/div&gt;{{/each}}&#x27;),
+  template : Ember.Handlebars.compile(&#x27;&#x27; +
+    &#x27;{{#each view.newCheckList}}&#x27; +
+      &#x27;&lt;div {{bind-attr class=&quot;:checkbox view.columnData.form.checkBoxClass view.columnData.form.displayInline:checkbox-inline&quot;}}&gt;&#x27; +
+        &#x27;&lt;label&gt;&#x27; +
+          &#x27;{{view &quot;checkbox&quot; checked=this.checked disabled=view.isDisabled}} {{this.checkboxLabel}}&#x27; +
+        &#x27;&lt;/label&gt;&#x27; +
+      &#x27;&lt;/div&gt;&#x27; +
+    &#x27;{{/each}}&#x27; +
+  &#x27;&#x27;),
 
   checkBoxDidChange : function (){
     var checkList = this.get(&quot;newCheckList&quot;);
@@ -379,7 +388,8 @@ var GroupCheckBoxView = TextInputView.TextInputView.extend({
 
   newCheckList : function() {
     var ncl = Ember.A(), ocl = this.get(&quot;columnData.form.checkList&quot;),
-        list = this.get(&quot;record&quot;).get(this.get(&quot;columnData&quot;).name).split(&quot;,&quot;);
+        val = this.get(&quot;record&quot;).get(this.get(&quot;columnData.key&quot;))
+        list = (val &amp;&amp; val.split(&quot;,&quot;)) || [];
     for(var i = 0; i &lt; ocl.get(&quot;length&quot;) ; i++) {
       var op = JSON.parse(JSON.stringify(ocl[i], [&quot;checkboxLabel&quot;, &quot;id&quot;]));
       if(list.indexOf(op.id+&quot;&quot;) == -1) {

@@ -2,6 +2,7 @@ define([
   "ember",
   "lib/ember-utils-core",
   "./fileUploadView",
+  "jquery_ui",
 ], function(Ember, Utils, FileUploadView) {
 
 /**
@@ -13,7 +14,9 @@ define([
  * @submodule form-items
  */
 var ImageUploadView = FileUploadView.FileUploadView.extend({
-  template : Ember.Handlebars.compile('<p><button class="btn btn-default btn-sm" {{action "loadFile" target="view"}} {{bind-attr disabled="view.disableBtn"}}>{{view.columnData.form.btnLabel}}</button>' +
+  template : Ember.Handlebars.compile('<p><button class="btn btn-default btn-sm" {{action "loadFile" target="view"}} {{bind-attr disabled="view.disableBtn"}}>' +
+                                        '{{view.columnData.form.btnLabel}}' +
+                                      '</button>' +
                                       '<input class="hidden" type="file" name="files[]" {{bind-attr accept="view.columnData.form.accept"}}></p>' +
                                       '<canvas class="hidden"></canvas>' +
                                       '<div {{bind-attr class="view.hasImage::hidden"}}>' +
@@ -23,7 +26,7 @@ var ImageUploadView = FileUploadView.FileUploadView.extend({
                                             '<div class="image-cropper"></div>' +
                                           '</div>' +
                                         '</div>' +
-                                        '<button class="btn btn-default btn-sm" {{action "cropImage" target="view"}}>Crop</button>' +
+                                        '<button class="btn btn-default btn-sm btn-crop" {{action "cropImage" target="view"}}>Crop</button>' +
                                       '</div>' +
                                       '<div class="clearfix"></div>'),
 
@@ -55,11 +58,12 @@ var ImageUploadView = FileUploadView.FileUploadView.extend({
     cropImage : function() {
       var cropper = $(this.get("element")).find(".image-cropper"),
           x = cropper.css("left"), y = cropper.css("top"),
+          xM = x.match(/^(\d+)px$/), yM = y.match(/^(\d+)px$/),
           h = cropper.height(), w = cropper.width(),
           canvas = $(this.get("element")).find("canvas")[0],
           context = canvas.getContext("2d");
-      x = Number(x.match(/^(\d+)px$/)[1]);
-      y = Number(y.match(/^(\d+)px$/)[1]);
+      x = (xM && Number(xM[1])) || 0;
+      y = (yM && Number(yM[1])) || 0;
       context.drawImage($(this.get("element")).find(".the-image")[0], x, y, h, w, 0, 0, h, w);
       this.set("value", canvas.toDataURL());
       this.set("hasImage", false);
@@ -73,6 +77,7 @@ var ImageUploadView = FileUploadView.FileUploadView.extend({
 });
 
 return {
+  ImageUploadView : ImageUploadView,
 };
 
 });

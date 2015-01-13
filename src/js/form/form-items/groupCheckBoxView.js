@@ -13,8 +13,15 @@ define([
  * @submodule form-items
  */
 var GroupCheckBoxView = TextInputView.TextInputView.extend({
-  template : Ember.Handlebars.compile('{{#each view.newCheckList}}<div {{bind-attr class="checkbox col-md-4 view.columnData.form.displayInline:checkbox-inline"}}>'
-    + '<label>{{view "checkbox" checked=this.checked disabled=view.isDisabled}}<label></label> {{this.checkboxLabel}}</label></div>{{/each}}'),
+  template : Ember.Handlebars.compile('' +
+    '{{#each view.newCheckList}}' +
+      '<div {{bind-attr class=":checkbox view.columnData.form.checkBoxClass view.columnData.form.displayInline:checkbox-inline"}}>' +
+        '<label>' +
+          '{{view "checkbox" checked=this.checked disabled=view.isDisabled}} {{this.checkboxLabel}}' +
+        '</label>' +
+      '</div>' +
+    '{{/each}}' +
+  ''),
 
   checkBoxDidChange : function (){
     var checkList = this.get("newCheckList");
@@ -23,7 +30,8 @@ var GroupCheckBoxView = TextInputView.TextInputView.extend({
 
   newCheckList : function() {
     var ncl = Ember.A(), ocl = this.get("columnData.form.checkList"),
-        list = this.get("record").get(this.get("columnData").name).split(",");
+        val = this.get("record").get(this.get("columnData.key"))
+        list = (val && val.split(",")) || [];
     for(var i = 0; i < ocl.get("length") ; i++) {
       var op = JSON.parse(JSON.stringify(ocl[i], ["checkboxLabel", "id"]));
       if(list.indexOf(op.id+"") == -1) {

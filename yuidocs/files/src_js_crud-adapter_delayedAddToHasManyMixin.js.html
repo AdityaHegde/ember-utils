@@ -61,6 +61,8 @@
             
                 <li><a href="../classes/ArrayMod.ArrayModifier.html">ArrayMod.ArrayModifier</a></li>
             
+                <li><a href="../classes/ArrayMod.ArrayModMixin.html">ArrayMod.ArrayModMixin</a></li>
+            
                 <li><a href="../classes/ArrayMod.ArraySearchModifier.html">ArrayMod.ArraySearchModifier</a></li>
             
                 <li><a href="../classes/ArrayMod.ArraySortGroup.html">ArrayMod.ArraySortGroup</a></li>
@@ -414,7 +416,7 @@ var DelayedAddToHasManyMixin = Ember.Mixin.create(Utils.ObjectWithArrayMixin, {
         propArray.pushObject(propObj);
       }
     }
-    else {
+    else if(arrayPropDelayedObjs) {
       arrayPropDelayedObjs[prop] = arrayPropDelayedObjs[prop] || [];
       if(!arrayPropDelayedObjs[prop].contains(propObj)) {
         arrayPropDelayedObjs[prop].push(propObj);
@@ -435,7 +437,7 @@ var DelayedAddToHasManyMixin = Ember.Mixin.create(Utils.ObjectWithArrayMixin, {
 
   addToContent : function(prop) {
     var arrayPropDelayedObjs = this.get(&quot;arrayPropDelayedObjs&quot;), propArray = this.get(prop);
-    if(propArray &amp;&amp; propArray.get(&quot;canAddObjects&quot;) &amp;&amp; arrayPropDelayedObjs[prop]) {
+    if(propArray &amp;&amp; propArray.get(&quot;canAddObjects&quot;) &amp;&amp; arrayPropDelayedObjs &amp;&amp; arrayPropDelayedObjs[prop]) {
       arrayPropDelayedObjs[prop].forEach(function(propObj) {
         if(!propArray.contains(propObj)) {
           propArray.pushObject(propObj);

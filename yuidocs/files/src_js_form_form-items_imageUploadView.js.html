@@ -61,6 +61,8 @@
             
                 <li><a href="../classes/ArrayMod.ArrayModifier.html">ArrayMod.ArrayModifier</a></li>
             
+                <li><a href="../classes/ArrayMod.ArrayModMixin.html">ArrayMod.ArrayModMixin</a></li>
+            
                 <li><a href="../classes/ArrayMod.ArraySearchModifier.html">ArrayMod.ArraySearchModifier</a></li>
             
                 <li><a href="../classes/ArrayMod.ArraySortGroup.html">ArrayMod.ArraySortGroup</a></li>
@@ -358,6 +360,7 @@ define([
   &quot;ember&quot;,
   &quot;lib/ember-utils-core&quot;,
   &quot;./fileUploadView&quot;,
+  &quot;jquery_ui&quot;,
 ], function(Ember, Utils, FileUploadView) {
 
 /**
@@ -369,7 +372,9 @@ define([
  * @submodule form-items
  */
 var ImageUploadView = FileUploadView.FileUploadView.extend({
-  template : Ember.Handlebars.compile(&#x27;&lt;p&gt;&lt;button class=&quot;btn btn-default btn-sm&quot; {{action &quot;loadFile&quot; target=&quot;view&quot;}} {{bind-attr disabled=&quot;view.disableBtn&quot;}}&gt;{{view.columnData.form.btnLabel}}&lt;/button&gt;&#x27; +
+  template : Ember.Handlebars.compile(&#x27;&lt;p&gt;&lt;button class=&quot;btn btn-default btn-sm&quot; {{action &quot;loadFile&quot; target=&quot;view&quot;}} {{bind-attr disabled=&quot;view.disableBtn&quot;}}&gt;&#x27; +
+                                        &#x27;{{view.columnData.form.btnLabel}}&#x27; +
+                                      &#x27;&lt;/button&gt;&#x27; +
                                       &#x27;&lt;input class=&quot;hidden&quot; type=&quot;file&quot; name=&quot;files[]&quot; {{bind-attr accept=&quot;view.columnData.form.accept&quot;}}&gt;&lt;/p&gt;&#x27; +
                                       &#x27;&lt;canvas class=&quot;hidden&quot;&gt;&lt;/canvas&gt;&#x27; +
                                       &#x27;&lt;div {{bind-attr class=&quot;view.hasImage::hidden&quot;}}&gt;&#x27; +
@@ -379,7 +384,7 @@ var ImageUploadView = FileUploadView.FileUploadView.extend({
                                             &#x27;&lt;div class=&quot;image-cropper&quot;&gt;&lt;/div&gt;&#x27; +
                                           &#x27;&lt;/div&gt;&#x27; +
                                         &#x27;&lt;/div&gt;&#x27; +
-                                        &#x27;&lt;button class=&quot;btn btn-default btn-sm&quot; {{action &quot;cropImage&quot; target=&quot;view&quot;}}&gt;Crop&lt;/button&gt;&#x27; +
+                                        &#x27;&lt;button class=&quot;btn btn-default btn-sm btn-crop&quot; {{action &quot;cropImage&quot; target=&quot;view&quot;}}&gt;Crop&lt;/button&gt;&#x27; +
                                       &#x27;&lt;/div&gt;&#x27; +
                                       &#x27;&lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;&#x27;),
 
@@ -411,11 +416,12 @@ var ImageUploadView = FileUploadView.FileUploadView.extend({
     cropImage : function() {
       var cropper = $(this.get(&quot;element&quot;)).find(&quot;.image-cropper&quot;),
           x = cropper.css(&quot;left&quot;), y = cropper.css(&quot;top&quot;),
+          xM = x.match(/^(\d+)px$/), yM = y.match(/^(\d+)px$/),
           h = cropper.height(), w = cropper.width(),
           canvas = $(this.get(&quot;element&quot;)).find(&quot;canvas&quot;)[0],
           context = canvas.getContext(&quot;2d&quot;);
-      x = Number(x.match(/^(\d+)px$/)[1]);
-      y = Number(y.match(/^(\d+)px$/)[1]);
+      x = (xM &amp;&amp; Number(xM[1])) || 0;
+      y = (yM &amp;&amp; Number(yM[1])) || 0;
       context.drawImage($(this.get(&quot;element&quot;)).find(&quot;.the-image&quot;)[0], x, y, h, w, 0, 0, h, w);
       this.set(&quot;value&quot;, canvas.toDataURL());
       this.set(&quot;hasImage&quot;, false);
@@ -429,6 +435,7 @@ var ImageUploadView = FileUploadView.FileUploadView.extend({
 });
 
 return {
+  ImageUploadView : ImageUploadView,
 };
 
 });

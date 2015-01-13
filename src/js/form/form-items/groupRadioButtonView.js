@@ -16,7 +16,7 @@ var GroupRadioButtonView = TextInputView.TextInputView.extend({
   template : Ember.Handlebars.compile('' +
     '{{#each view.columnData.form.options}}' +
       '<div {{bind-attr class="radio view.columnData.form.displayInline:radio-inline"}}>' +
-        '<label>{{view "form/radioInput" name=view.groupName value=this.value selection=view.value}}<span></span>{{{this.label}}}</label>' +
+        '<label>{{view "form/radioInput" name=view.groupName value=this.val selection=view.value}}<span></span>{{{this.label}}}</label>' +
       '</div>' +
     '{{/each}}' +
   ''),
